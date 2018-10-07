@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.rmp</groupId>
+		<artifactId>rmp</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<groupId>rmp-info</groupId>
+	<artifactId>rmp-info</artifactId>
+	
+	<dependencies>
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.35</version>
+		</dependency>
+		
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<finalName>rmp-info</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

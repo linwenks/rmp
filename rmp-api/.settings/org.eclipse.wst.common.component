@@ -6,6 +6,12 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="rmp-common-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/rmp-common/rmp-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="rmp-info-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/rmp-info/rmp-info">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="rmp-api"/>
         <property name="java-output-path" value="/rmp-api/target/classes"/>
     </wb-module>

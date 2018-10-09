@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 09/10/2018 17:46:14
+ Date: 09/10/2018 17:54:30
 */
 
 SET NAMES utf8mb4;
@@ -3719,6 +3719,45 @@ CREATE TABLE `t_customer_relation`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for t_gift
+-- ----------------------------
+DROP TABLE IF EXISTS `t_gift`;
+CREATE TABLE `t_gift`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `customer_id` bigint(20) NOT NULL COMMENT '客户ID',
+  `customer_phone` bigint(11) NOT NULL COMMENT '客户手机',
+  `type` int(1) NOT NULL DEFAULT 0 COMMENT '类型（0:自动 1:手动）',
+  `cause` int(1) NOT NULL COMMENT '事由（0:生日 1:家人生日 2:节日 3:特殊事件日子）',
+  `message` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '赠言',
+  `receive_state` int(1) NOT NULL DEFAULT 0 COMMENT '接收状态（0:未接收 1:已接收）',
+  `receive_user_id` bigint(20) NULL DEFAULT NULL COMMENT '接收人用户ID（通过手机号关联）',
+  `state` int(1) NOT NULL DEFAULT 0 COMMENT '状态',
+  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
+  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
+  `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 礼品赠送' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for t_gift_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `t_gift_detail`;
+CREATE TABLE `t_gift_detail`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `gift_id` bigint(20) NOT NULL COMMENT '用户 礼品赠送ID',
+  `goods_id` bigint(20) NOT NULL COMMENT '商品ID',
+  `sales_volume` int(11) NOT NULL COMMENT '销量',
+  `price` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '价格',
+  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
+  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
+  `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 礼品赠送' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for t_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `t_goods`;
@@ -3919,45 +3958,6 @@ CREATE TABLE `t_user_customer`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_id`(`user_id`, `customer_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 客户 关联' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for t_user_gift
--- ----------------------------
-DROP TABLE IF EXISTS `t_user_gift`;
-CREATE TABLE `t_user_gift`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `customer_id` bigint(20) NOT NULL COMMENT '客户ID',
-  `customer_phone` bigint(11) NOT NULL COMMENT '客户手机',
-  `type` int(1) NOT NULL DEFAULT 0 COMMENT '类型（0:自动 1:手动）',
-  `cause` int(1) NOT NULL COMMENT '事由（0:生日 1:家人生日 2:节日 3:特殊事件日子）',
-  `message` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '赠言',
-  `receive_state` int(1) NOT NULL DEFAULT 0 COMMENT '接收状态（0:未接收 1:已接收）',
-  `receive_user_id` bigint(20) NULL DEFAULT NULL COMMENT '接收人用户ID（通过手机号关联）',
-  `state` int(1) NOT NULL DEFAULT 0 COMMENT '状态',
-  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
-  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
-  `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 礼品赠送' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for t_user_gift_detail
--- ----------------------------
-DROP TABLE IF EXISTS `t_user_gift_detail`;
-CREATE TABLE `t_user_gift_detail`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `user_gift_id` bigint(20) NOT NULL COMMENT '用户 礼品赠送ID',
-  `goods_id` bigint(20) NOT NULL COMMENT '商品ID',
-  `sales_volume` int(11) NOT NULL,
-  `price` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '价格',
-  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
-  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
-  `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 礼品赠送' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_user_hobby

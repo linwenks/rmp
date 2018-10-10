@@ -2,8 +2,8 @@ package com.rmp.api.base.service;
 
 import java.util.List;
 
+import com.rmp.common.page.QueryPage;
 import com.rmp.info.base.model.Model;
-import com.yx.bztt.common.page.QueryPage;
 
 public interface BaseService {
 	

@@ -35,15 +35,15 @@
 	<context:annotation-config />
 	
 	<!-- 配置扫描包路径选项 -->
-	<context:component-scan base-package="com.yx" />
+	<context:component-scan base-package="com.rmp" />
 	
 	<!-- 加载配置文件 -->
 	<context:property-placeholder ignore-resource-not-found="true" 
 			location="classpath*:/mysql.properties
 					,classpath*:/redis.properties" />
-	
+	<!-- 
 	<bean id="es" class="java.util.concurrent.Executors" factory-method="newCachedThreadPool"></bean> 
-	
+	 -->
 	
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
@@ -80,14 +80,14 @@
 	<!-- mybatis config -->
 	<bean id="sqlSessionFactoryRmp" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSourceRmp" />
-		<property name="typeAliasesPackage" value="com.rmp.info,com.rmp.api" />
+		<property name="typeAliasesPackage" value="com.rmp.info.model,com.rmp.api.model" />
 	</bean>
 	
 	
 	<!-- 自动组装数据层 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryRmp"/> 
-		<property name="basePackage" value="com.rmp.info,com.rmp.api" />
+		<property name="basePackage" value="com.rmp.info.mapper,com.rmp.api.mapper" />
 	</bean>
 	
 	

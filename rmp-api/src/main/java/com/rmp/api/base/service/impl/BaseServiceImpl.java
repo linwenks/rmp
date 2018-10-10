@@ -1,6 +1,6 @@
 package com.rmp.api.base.service.impl;
 
-import static com.yx.bztt.api.util.constant.Constant.Msg.Api.*;
+import static com.rmp.api.util.constant.Constant.Msg.Api.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,18 +8,17 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
 import com.google.gson.internal.Primitives;
-import com.yx.bztt.api.base.exception.AppException;
-import com.yx.bztt.api.base.service.BaseService;
-import com.yx.bztt.common.page.QueryPage;
-import com.yx.bztt.common.util.BeanUtil;
-import com.yx.bztt.info.base.model.Model;
+import com.rmp.api.base.exception.AppException;
+import com.rmp.api.base.service.BaseService;
+import com.rmp.common.page.QueryPage;
+import com.rmp.info.base.model.Model;
 
 public abstract class BaseServiceImpl implements BaseService {
 	
-//	protected static Log log = LogFactory.getLog(BaseServiceImpl.class);
 	protected static Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
 	
 	private static final String orderBy = " id desc ";
@@ -35,7 +34,7 @@ public abstract class BaseServiceImpl implements BaseService {
 				log.error(e.getMessage(), e);
 			}
 			if (objBean != null) {
-				BeanUtil.copyProperties(objBean, obj);
+				BeanUtils.copyProperties(obj, objBean);
 				return Primitives.wrap(classOfT).cast(objBean);
 			}
 		}

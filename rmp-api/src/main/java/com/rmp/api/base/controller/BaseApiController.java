@@ -2,50 +2,22 @@ package com.rmp.api.base.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yx.bztt.api.base.dao.redis.BaseShardedJedisPoolDao;
-import com.yx.bztt.api.base.exception.AppException;
-import com.yx.bztt.api.base.model.HeaderJsonBean;
-import com.yx.bztt.api.base.model.MsgBean;
-import com.yx.bztt.api.base.model.RespJsonBean;
-import com.yx.bztt.api.model.mybatis.model.GridUserBean;
-import com.yx.bztt.api.model.mybatis.model.MemberBean;
-import com.yx.bztt.api.model.mybatis.model.MemberCategoryBean;
-import com.yx.bztt.api.service.member.MemberCategoryService;
-import com.yx.bztt.api.service.member.MemberService;
-import com.yx.bztt.api.util.MemberUtil;
-import com.yx.bztt.api.util.constant.Constant;
-import com.yx.bztt.common.util.BeanUtil;
-import com.yx.bztt.common.util.JsonUtil;
-import com.yx.bztt.info.model.mybatis.model.Member;
-import com.yx.bztt.info.model.mybatis.model.MemberCategory;
+import com.rmp.api.base.exception.AppException;
+import com.rmp.api.base.model.HeaderBean;
+import com.rmp.api.base.model.MsgBean;
+import com.rmp.api.base.model.RespBean;
+import com.rmp.api.util.constant.Constant;
+import com.rmp.common.util.JsonUtil;
 
-public class BaseJsonController extends BaseController {
-	
-	protected RespJsonBean respJsonBean = new RespJsonBean();
-	
-	protected void data(Object data) {
-		addDataMap("data", data);
-	}
-	
-	protected void addDataMap(String key, Object value) {
-		respJsonBean.getDataMap().put(key, value);
-	}
-	
-	protected String returnJson() {
-		respJsonBean.setState(Constant.Msg.SUCCESS);
-		respJsonBean.setHeader((HeaderJsonBean) request.getAttribute(Constant.CURRENT_REQUEST_HEADER));
-		return JsonUtil.toJson(respJsonBean);
-	}
+public class BaseApiController extends BaseController {
 	
 	/**
 	 * 通用异常处理
@@ -73,65 +45,51 @@ public class BaseJsonController extends BaseController {
 		} else {
 			log.error(msgList.get(0).getCode() + " " + msgList.get(0).getDes());
 		}
-		
+		/*
 		respJsonBean.setMsgList(msgList);
 		respJsonBean.setMsg(msgList.get(0));
 		respJsonBean.setState(Constant.Msg.ERROR);
 		return JsonUtil.toJson(respJsonBean);
+		*/
+		return null;
 	}
-	
-	/**
+	/*
+	*//**
 	 * 当前用户ID
 	 * @return
-	 */
+	 *//*
 	protected Long getCurrentUserId() {
 		MemberBean memberBean = (MemberBean) request.getAttribute(Constant.CURRENT_LOGIN_USER);
 		return memberBean.getId();
 	}
 	
-	/**
+	*//**
 	 * 当前用户
 	 * @return
-	 */
+	 *//*
 	protected MemberBean getCurrentUser() {
 		MemberBean memberBean = (MemberBean) request.getAttribute(Constant.CURRENT_LOGIN_USER);
 		return memberBean;
 	}
-	
-	/**
-	 * 当前用户ID
-	 * @return
-	 */
-	protected Long getGridCurrentUserId() {
-		GridUserBean gridUserBean = (GridUserBean) request.getAttribute(Constant.CURRENT_LOGIN_USER);
-		return gridUserBean.getId();
-	}
-	
-	/**
-	 * 当前用户
-	 * @return
-	 */
-	protected GridUserBean getGridCurrentUser() {
-		GridUserBean gridUserBean = (GridUserBean) request.getAttribute(Constant.CURRENT_LOGIN_USER);
-		return gridUserBean;
-	}
-	
-	/**
+	*/
+	/*
+	*//**
 	 * get Header
 	 * @return
-	 */
+	 *//*
 	protected HeaderJsonBean getHeader() {
 		return (HeaderJsonBean) request.getAttribute(Constant.CURRENT_REQUEST_HEADER);
 	}
 	
-	/**
+	*//**
 	 * set Header
 	 * @return
-	 */
+	 *//*
 	protected void setHeader(HeaderJsonBean headerJsonBean) {
 		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerJsonBean);
 	}
-	
+	*/
+	/*
 	protected void checkFromLogin(String token
 			, BaseShardedJedisPoolDao baseShardedJedisPoolDao
 			, MemberService memberService
@@ -176,4 +134,5 @@ public class BaseJsonController extends BaseController {
 		request.setAttribute(Constant.CURRENT_LOGIN_USER, MemberUtil.get(member2Map));
 		
 	}
+	*/
 }

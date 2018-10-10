@@ -24,25 +24,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
 
-import com.yx.bztt.api.base.dao.redis.BaseShardedJedisPoolDao;
-import com.yx.bztt.api.base.exception.AppException;
-import com.yx.bztt.api.base.model.ApiReqJsonBean;
-import com.yx.bztt.api.base.model.HeaderJsonBean;
-import com.yx.bztt.api.base.model.MsgBean;
-import com.yx.bztt.api.base.model.RespJsonBean;
-import com.yx.bztt.api.base.service.BaseService;
-import com.yx.bztt.api.base.spring.ApplicationContextUtil;
-import com.yx.bztt.api.model.mybatis.model.MemberBean;
-import com.yx.bztt.api.model.mybatis.model.MemberLoginLogBean;
-import com.yx.bztt.api.service.member.MemberLoginLogService;
-import com.yx.bztt.api.service.member.MemberService;
-import com.yx.bztt.api.util.MemberLikeUtil;
-import com.yx.bztt.api.util.MemberUtil;
-import com.yx.bztt.api.util.constant.Constant;
-import com.yx.bztt.common.util.DateUtil;
-import com.yx.bztt.common.util.IpUtil;
-import com.yx.bztt.common.util.JsonUtil;
-import com.yx.bztt.info.model.mybatis.model.Member;
+import com.rmp.api.base.dao.redis.BaseShardedJedisPoolDao;
+import com.rmp.api.base.spring.ApplicationContextUtil;
+
 
 /**
  * 登录 拦截器
@@ -53,14 +37,8 @@ public class ApiLoginFilter implements Filter {
 	
 	protected static Logger log = LoggerFactory.getLogger(ApiLoginFilter.class);
 	
-	/*
-	private DiskFileItemFactory factory = new DiskFileItemFactory();  
-	private ServletFileUpload sfu = new ServletFileUpload(factory);
-	*/
 	private BaseShardedJedisPoolDao baseShardedJedisPoolDao;
-	private MemberService memberService;
-	private MemberLoginLogService memberLoginLogService;
-//	private MemberCategoryService memberCategoryService;
+//	private MemberService memberService;
 	
 	/**
 	 * 需要排除的页面   
@@ -93,9 +71,7 @@ public class ApiLoginFilter implements Filter {
 		if (baseShardedJedisPoolDao == null) {
 			ApplicationContext applicationContext = ApplicationContextUtil.getContext();
 			baseShardedJedisPoolDao = applicationContext.getBean(BaseShardedJedisPoolDao.class);
-			memberService = applicationContext.getBean(MemberService.class);
-			memberLoginLogService = applicationContext.getBean(MemberLoginLogService.class);
-//			memberCategoryService = applicationContext.getBean(MemberCategoryService.class);
+//			memberService = applicationContext.getBean(MemberService.class);
 		}
 		
 		Boolean isJson = false;
@@ -133,7 +109,7 @@ public class ApiLoginFilter implements Filter {
 //		if (excludedPageSet.contains(url)) isExcludedPage = true;
         
 		if (!isExcludedPage) {
-			
+			/*
 			try {
 				
 				ApiReqJsonBean apiReqJsonBean = null;
@@ -173,14 +149,14 @@ public class ApiLoginFilter implements Filter {
 						Member member = memberService.selectOne(member2);
 						if (member == null) throw new AppException(Constant.Msg.Api._00007);
 						memberId = member.getId();
-						/*
+						
 						String readTimeJson = null;
 						MemberCategoryBean memberCategoryBean = new MemberCategoryBean();
 						memberCategoryBean.setMemberId(memberId);
 						MemberCategory memberCategory = memberCategoryService.selectOne(memberCategoryBean);
 						if (memberCategory != null) {
 							readTimeJson = memberCategory.getReadTimeJson();
-						}*/
+						}
 						
 						MemberBean member2Tmp = new MemberBean();
 						BeanUtils.copyProperties(member, member2Tmp);
@@ -226,7 +202,7 @@ public class ApiLoginFilter implements Filter {
 					httpRequestWrapper.setAttribute(Constant.CURRENT_LOGIN_USER, MemberUtil.get(member2Map));
 					
 				} else {
-					/*
+					
 					String token = httpRequestWrapper.getParameter("token");
 					
 					apiReqJsonBean = new ApiReqJsonBean();
@@ -235,7 +211,7 @@ public class ApiLoginFilter implements Filter {
 					headerJsonBean.setToken(token);
 					
 					apiReqJsonBean.setHeader(headerJsonBean);
-					*/
+					
 				}
 			} catch (Exception e) {
 				List<MsgBean> msgList = new ArrayList<>();
@@ -255,6 +231,7 @@ public class ApiLoginFilter implements Filter {
 				response.getWriter().write(JsonUtil.toJson(respJsonBean));
 				return;
 			}
+			*/
 		}     
         
         chain.doFilter(httpRequestWrapper, response);    

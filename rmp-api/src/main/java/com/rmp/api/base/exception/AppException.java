@@ -3,7 +3,7 @@ package com.rmp.api.base.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yx.bztt.api.base.model.MsgBean;
+import com.rmp.api.base.model.MsgBean;
 
 /**
  * 应用异常

@@ -65,8 +65,8 @@ public class AreaServiceImpl extends BaseServiceImpl implements AreaService {
 		if (beanTmp.getId() != null) {
 			criteriaTmp.andIdEqualTo(beanTmp.getId());
 		}
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (beanTmp.getStartId() != null) {
+			criteriaTmp.andIdGreaterThan(beanTmp.getStartId());
 		}
 	}
 }

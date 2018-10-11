@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.CollectionUtils;
+
 import com.rmp.api.util.constant.Constant;
 
 import lombok.AllArgsConstructor;
@@ -32,14 +34,29 @@ public class RespBean {
 	private Map<String, Object> data = new HashMap<>();
 	
 	public MsgBean getMsg() {
-		if (msgs != null) {
+		if (!CollectionUtils.isEmpty(msgs)) {
 			msg = msgs.get(0);
 		}
 		return msg;
 	}
 	
+	public RespBean putMsg(MsgBean msgBean) {
+		msgs.add(msgBean);
+		return this;
+	}
+	
+	public RespBean putMsgs(List<MsgBean> msgBeans) {
+		msgs.addAll(msgBeans);
+		return this;
+	}
+	
 	public RespBean putData(String key, Object value) {
 		data.put(key, value);
+		return this;
+	}
+	
+	public RespBean setState(String state) {
+		this.state = state;
 		return this;
 	}
 }

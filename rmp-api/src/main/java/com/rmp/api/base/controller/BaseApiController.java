@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rmp.api.base.exception.AppException;
-import com.rmp.api.base.model.HeaderBean;
 import com.rmp.api.base.model.MsgBean;
 import com.rmp.api.base.model.RespBean;
+import com.rmp.api.base.util.RespUtil;
 import com.rmp.api.util.constant.Constant;
-import com.rmp.common.util.JsonUtil;
 
 public class BaseApiController extends BaseController {
 	
@@ -27,31 +27,30 @@ public class BaseApiController extends BaseController {
 	 */
 	@ExceptionHandler(value = Throwable.class)
 	@ResponseBody
-	public String exceptionHandler(Throwable t, HttpServletRequest request, HttpServletResponse response) {
+	public RespBean exceptionHandler(Throwable t, HttpServletRequest request, HttpServletResponse response) {
 		
-		List<MsgBean> msgList = new ArrayList<>();
+		List<MsgBean> msgs = new ArrayList<>();
 		
 		if (t instanceof HttpMessageNotReadableException) {
-			msgList.add(new MsgBean(Constant.Msg.Api._00003));
+			msgs.add(new MsgBean(Constant.Msg.Api._00003));
 		} else if (t instanceof AppException) {
 			AppException appException = (AppException) t;
-			msgList = appException.getMsgList();
+			msgs = appException.getMsgList();
 		} else {
 			log.error(t.getMessage(), t);
 		}
 		
-		if (msgList.isEmpty()) {
-			msgList.add(new MsgBean(Constant.Msg.Api._00002));
+		if (CollectionUtils.isEmpty(msgs)) {
+			msgs.add(new MsgBean(Constant.Msg.Api._00002));
 		} else {
-			log.error(msgList.get(0).getCode() + " " + msgList.get(0).getDes());
+			msgs.forEach(msg -> {
+				if (msg != null) {
+					log.error(msg.getCode() + " " + msg.getDes());
+				}
+			});
 		}
-		/*
-		respJsonBean.setMsgList(msgList);
-		respJsonBean.setMsg(msgList.get(0));
-		respJsonBean.setState(Constant.Msg.ERROR);
-		return JsonUtil.toJson(respJsonBean);
-		*/
-		return null;
+		
+		return RespUtil.buildError(request).putMsgs(msgs);
 	}
 	/*
 	*//**

@@ -14,4 +14,8 @@ public class RespUtil {
 		respBean.setHeader((HeaderBean) request.getAttribute(Constant.CURRENT_REQUEST_HEADER));
 		return respBean;
 	}
+	
+	public static RespBean buildError(HttpServletRequest request) {
+		return build(request).setState(Constant.Msg.ERROR);
+	}
 }

@@ -19,6 +19,7 @@ import com.rmp.api.base.util.ReqUtil;
 import com.rmp.api.base.util.RespUtil;
 import com.rmp.api.model.AreaBean;
 import com.rmp.api.service.area.AreaService;
+import com.rmp.api.util.AreaUtil;
 
 /**
  * 地域 json controller
@@ -26,7 +27,6 @@ import com.rmp.api.service.area.AreaService;
  *
  */
 @Controller("api_area_AreaController")
-//@Scope("prototype")
 @RequestMapping(value = "/api/area/area", method = RequestMethod.POST, produces="application/json;charset=utf-8")
 public class AreaController extends BaseApiController {
 
@@ -41,8 +41,7 @@ public class AreaController extends BaseApiController {
 	public RespBean list(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.build(body, request);
 		
-		List<AreaBean> areaBeanList = areaService.selectList(null, null);
-		
-		return RespUtil.build(request).putData("areas", areaBeanList);
+		List<AreaBean> areaBeanList = AreaUtil.getListTreeSimple();
+		return RespUtil.build(request).putData("areaList", areaBeanList);
 	}
 }

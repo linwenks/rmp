@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 12/10/2018 15:46:17
+ Date: 12/10/2018 16:47:02
 */
 
 SET NAMES utf8mb4;
@@ -3602,6 +3602,7 @@ CREATE TABLE `t_customer`  (
   `area_id` int(11) NULL DEFAULT NULL COMMENT '区域ID',
   `address` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '地址',
   `vip` int(2) NOT NULL DEFAULT 0 COMMENT 'vip等级',
+  `tag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标签',
   `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
   `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
   `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
@@ -3653,10 +3654,10 @@ DROP TABLE IF EXISTS `t_customer_job`;
 CREATE TABLE `t_customer_job`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `customer_id` bigint(20) NOT NULL COMMENT '客户ID',
-  `industry_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '行业名称',
+  `industry` int(3) NULL DEFAULT NULL COMMENT '行业',
   `company_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '公司名称',
   `department_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '部门名称',
-  `position_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '职位名称',
+  `position` int(3) NULL DEFAULT NULL COMMENT '职位名称',
   `phone` bigint(11) NULL DEFAULT NULL COMMENT '工作电话',
   `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
   `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
@@ -3951,6 +3952,7 @@ CREATE TABLE `t_user_customer`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL COMMENT '用户ID',
   `customer_id` bigint(20) NOT NULL COMMENT '客户ID',
+  `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
   `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
   `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
   `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',

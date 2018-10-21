@@ -1,5 +1,10 @@
 package com.rmp.api.base.config;
 
+/**
+ * apidoc -i D:\git-linw\rmp\rmp-api -o D:\apidoc\rmp-api-doc
+ * @author linw
+ *
+ */
 public class ApidocConfig {
 	
 	/**

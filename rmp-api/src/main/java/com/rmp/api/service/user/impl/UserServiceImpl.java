@@ -66,6 +66,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		return userMapper;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object exe(String cmd, Object obj) {
 		try {
@@ -313,11 +314,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 		if (userBean == null) throw AppException.build(MSG_00003);
 		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
-		String token = StringUtils.trim(userBean.getToken());
 		String loginName = StringUtils.trim(userBean.getLoginName());
 		String loginPwd = StringUtils.trim(userBean.getLoginPwd());
 		
-		UserUtil.checkToken(token);
 		UserUtil.checkLoginName(loginName);
 		UserUtil.checkLoginPwd(loginPwd);
 		
@@ -326,8 +325,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		else if (code.length() != Constant.PhoneMsg.LENGTH) throw AppException.build(MSG_01012);
 		
 		Date nowDate = DateUtil.now();
-		Long nowDateLong = DateUtil.nowLong2(nowDate);
-		Long craeteTimeStart = DateUtil.nowLong2(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.SEND_INTERVAL_TIME));
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		Long craeteTimeStart = DateUtil.nowLong2(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.EFFECTIVE_TIME));
 
 
 		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();

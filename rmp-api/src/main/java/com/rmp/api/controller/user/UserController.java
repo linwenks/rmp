@@ -2,7 +2,6 @@ package com.rmp.api.controller.user;
 
 import static com.rmp.api.util.MsgEnum.*;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.rmp.api.base.controller.BaseApiController;
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.model.HeaderBean;
@@ -25,14 +23,11 @@ import com.rmp.api.base.model.ReqBean;
 import com.rmp.api.base.model.RespBean;
 import com.rmp.api.base.util.ReqUtil;
 import com.rmp.api.base.util.RespUtil;
-import com.rmp.api.model.AreaBean;
 import com.rmp.api.model.UserBean;
 import com.rmp.api.service.user.UserService;
-import com.rmp.api.util.AreaUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.http.HttpUtil;
 import com.rmp.common.util.JsonUtil;
-import com.rmp.info.model.User;
 
 /**
  * 地域 json controller
@@ -63,9 +58,9 @@ public class UserController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
 	 *		{"userBean":{"nickName":"哈哈","headPic":"http://wx.com/tx.jpg","jsCode":"aaaaaa"}}
 	 * 
-	 * @apiSuccess (UserBean) {Object} userBean 用户 bean
-	 * @apiSuccess (UserBean) {String} userBean.token token
-	 * @apiSuccess (UserBean) {Integer} userBean.status 状态<br/>0:未注册<br/>1:已注册
+	 * @apiSuccess (data) {Object} userBean 用户 bean
+	 * @apiSuccess (data) {String} userBean.token token
+	 * @apiSuccess (data) {Integer=0,1} userBean.status 状态<br/>0:未注册<br/>1:已注册
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
 	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"token":"b1e00042ab8a4296aa62c09b28a3c547","status":0}}}
@@ -140,10 +135,10 @@ public class UserController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
 	 *		{"userBean":{"loginName":"15123815032","loginPwd":"123456"}}
 	 * 
-	 * @apiSuccess (UserBean) {Object} userBean 用户 bean
-	 * @apiSuccess (UserBean) {String} userBean.token token
-	 * @apiSuccess (UserBean) {String} userBean.nickName 昵称
-     * @apiSuccess (UserBean) {String} userBean.headPic 头像
+	 * @apiSuccess (data) {Object} userBean 用户 bean
+	 * @apiSuccess (data) {String} userBean.token token
+	 * @apiSuccess (data) {String} userBean.nickName 昵称
+     * @apiSuccess (data) {String} userBean.headPic 头像
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
 	 *		{"header":{"token":"a074f3b898d24b5285b96a93f85d9edf"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"nickName":"ttt","headPic":"http://wx.com/tx.jpg","token":"a074f3b898d24b5285b96a93f85d9edf"}}}
@@ -172,7 +167,7 @@ public class UserController extends BaseApiController {
 	}
 	
 	/**
-	 * 登录
+	 * 注册
 	 * 
      * @api {post} /api/user/user/register 注册
      * @apiDescription 注册
@@ -190,10 +185,10 @@ public class UserController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
 	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"userBean":{"loginName":"15123815032","loginPwd":"123456"},"phoneMsgBean":{"code":"666666"}}
 	 * 
-	 * @apiSuccess (UserBean) {Object} userBean 用户 bean
-	 * @apiSuccess (UserBean) {String} userBean.token token
-	 * @apiSuccess (UserBean) {String} userBean.nickName 昵称
-     * @apiSuccess (UserBean) {String} userBean.headPic 头像
+	 * @apiSuccess (data) {Object} userBean 用户 bean
+	 * @apiSuccess (data) {String} userBean.token token
+	 * @apiSuccess (data) {String} userBean.nickName 昵称
+     * @apiSuccess (data) {String} userBean.headPic 头像
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
 	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"nickName":"ttt","headPic":"http://wx.com/tx.jpg","token":"b1e00042ab8a4296aa62c09b28a3c547"}}}
@@ -221,33 +216,30 @@ public class UserController extends BaseApiController {
 	 * 
      * @api {post} /api/user/user/retrievePwd 找回密码
      * @apiDescription 找回密码
-     * @apiName user_retrievePwd
+     * @apiName user_user_retrievePwd
      * @apiGroup group_user
      * @apiVersion 1.0.0
      * 
-     * @apiParam (userBean) {Object} userBean 用户 bean
-     * @apiParam (userBean) {String} userBean.loginName 登录账号
-     * @apiParam (userBean) {String} userBean.loginPwd 登录密码
+     * @apiParam (UserBean) {Object} userBean 用户 bean
+     * @apiParam (UserBean) {String} userBean.loginName 登录账号
+     * @apiParam (UserBean) {String} userBean.loginPwd 登录密码
      * 
      * @apiParam (PhoneMsgBean) {Object} phoneMsgBean 手机短信 bean
      * @apiParam (PhoneMsgBean) {String} phoneMsgBean.code 随机码
      * 
      * @apiParamExample {json} 请求-示例: 
-			{"header":{"token":"aaaaa"},"userBean":{"loginName":"15123815032","loginPwd":"123456"},"phoneMsgBean": {"code":"4985"}}
+			{"userBean":{"loginName":"15123815032","loginPwd":"123456"},"phoneMsgBean": {"code":"777777"}}
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
-			{"msgList":[],"state":"0","dataMap":{}}
+			{"msgs":[],"msg":{},"state":"0","data":{}}
      *
      */
 	@RequestMapping(value = "/retrievePwd")
 	@ResponseBody
 	public RespBean retrievePwd(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
-
-		UserBean userBean = reqBean.getUserBean();
-		userBean.setToken(reqBean.getHeader().getToken());
+		ReqBean reqBean = ReqUtil.build(body, request);
 		
-		Map<String, Object> param = ImmutableMap.of("userBean", userBean, "phoneMsgBean", reqBean.getPhoneMsgBean());
+		Map<String, Object> param = ImmutableMap.of("userBean", reqBean.getUserBean(), "phoneMsgBean", reqBean.getPhoneMsgBean());
 		userService.exe("retrievePwd", param);
 		return RespUtil.build(request);
 	}

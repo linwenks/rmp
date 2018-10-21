@@ -38,8 +38,8 @@ public class PhoneMsgController extends BaseApiController {
 	/**
 	 * 发送短信 注册
 	 * 
-     * @api {post} /api/msg/phoneMsgJson/sendRegister 发送短信 注册
-     * @apiDescription 发送短信 注册
+     * @api {post} /api/msg/phoneMsg/sendRegister 注册 发送短信
+     * @apiDescription 注册 发送短信
      * @apiName msg_phoneMsg_sendRegister
      * @apiGroup group_user
      * @apiVersion 1.0.0
@@ -48,10 +48,12 @@ public class PhoneMsgController extends BaseApiController {
      * @apiParam (PhoneMsgBean) {Long} phoneMsgBean.phone 手机号
      * 
      * @apiParamExample {json} 请求-示例: 
-			{"header":{"token":"aaaaa"},"phoneMsgBean":{"phone":15123815000}}
+	 *		{"phoneMsgBean":{"phone":15123815000}}
+	 * 
+	 * @apiSuccess (data) {Integer} sendIntervalTime 发送间隔时间（秒）
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
-     *		{"header":{"token":"aaaaa"},"msgs":[],"msg":{}}
+     *		{"msgs":[],"msg":{},"state":"0","data":{"sendIntervalTime":60}}
      */
 	@RequestMapping(value = "/sendRegister")
 	@ResponseBody
@@ -62,14 +64,14 @@ public class PhoneMsgController extends BaseApiController {
 		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
 		phoneMsgBean.setType(Constant.PhoneMsg.Type._1);
 		phoneMsgService.exe("send", phoneMsgBean);
-		return RespUtil.build(request);
+		return RespUtil.build(request).putData("sendIntervalTime", Constant.PhoneMsg.SEND_INTERVAL_TIME);
 	}
 	
 	/**
 	 * 发送短信 找回密码
 	 * 
-     * @api {post} /api/msg/phoneMsgJson/sendRetrievePwd 发送短信 找回密码
-     * @apiDescription 发送短信 注找回密码
+     * @api {post} /api/msg/phoneMsg/sendRetrievePwd 找回密码 发送短信 
+     * @apiDescription 找回密码 发送短信
      * @apiName msg_phoneMsg_sendRetrievePwd
      * @apiGroup group_user
      * @apiVersion 1.0.0
@@ -78,10 +80,12 @@ public class PhoneMsgController extends BaseApiController {
      * @apiParam (PhoneMsgBean) {Long} phoneMsgBean.phone 手机号
      * 
      * @apiParamExample {json} 请求-示例: 
-			{"header":{"token":"aaaaa"},"phoneMsgBean":{"phone":15123815000}}
+	 *		{"phoneMsgBean":{"phone":15123815000}}
+	 * 
+	 * @apiSuccess (data) {Integer} sendIntervalTime 发送间隔时间（秒）
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
-     *		{"header":{"token":"aaaaa"},"msgs":[],"msg":{}}
+     *		{"msgs":[],"msg":{},"state":"0","data":{"sendIntervalTime":60}}
      */
 	@RequestMapping(value = "/sendRetrievePwd")
 	@ResponseBody
@@ -92,6 +96,6 @@ public class PhoneMsgController extends BaseApiController {
 		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
 		phoneMsgBean.setType(Constant.PhoneMsg.Type._2);
 		phoneMsgService.exe("send", phoneMsgBean);
-		return RespUtil.build(request);
+		return RespUtil.build(request).putData("sendIntervalTime", Constant.PhoneMsg.SEND_INTERVAL_TIME);
 	}
 }

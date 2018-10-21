@@ -92,7 +92,7 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 		phoneMsgBeanTmp.setType(type);
 		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
 		phoneMsgBeanTmp = this.selectOne(phoneMsgBeanTmp);
-		if (phoneMsgBeanTmp != null) throw AppException.build(MSG_01007);
+		if (phoneMsgBeanTmp != null) throw AppException.build(MSG_01013);
 		
 		// 验证账号
 		UserBean userBean = new UserBean();

@@ -486,6 +486,15 @@ public class DateUtil {
     }
     
     /**
+     * 得到现在的时间 秒 yyyyMMddHHmmss
+     *
+     * @return Long
+     */
+    public static Long nowSecondFormat() {
+        return formatDate2Long(now());
+    }
+    
+    /**
      * 时间戳 毫秒 转 Date
      * @param millis
      * @return

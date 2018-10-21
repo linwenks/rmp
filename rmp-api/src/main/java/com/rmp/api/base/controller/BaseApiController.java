@@ -15,7 +15,7 @@ import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.model.MsgBean;
 import com.rmp.api.base.model.RespBean;
 import com.rmp.api.base.util.RespUtil;
-import com.rmp.api.util.constant.Constant;
+import com.rmp.api.util.MsgEnum;
 
 public class BaseApiController extends BaseController {
 	
@@ -32,7 +32,7 @@ public class BaseApiController extends BaseController {
 		List<MsgBean> msgs = new ArrayList<>();
 		
 		if (t instanceof HttpMessageNotReadableException) {
-			msgs.add(new MsgBean(Constant.Msg.Api._00003));
+			msgs.add(new MsgBean(MsgEnum.MSG_00003));
 		} else if (t instanceof AppException) {
 			AppException appException = (AppException) t;
 			msgs = appException.getMsgList();
@@ -41,7 +41,7 @@ public class BaseApiController extends BaseController {
 		}
 		
 		if (CollectionUtils.isEmpty(msgs)) {
-			msgs.add(new MsgBean(Constant.Msg.Api._00002));
+			msgs.add(new MsgBean(MsgEnum.MSG_00002));
 		} else {
 			msgs.forEach(msg -> {
 				if (msg != null) {

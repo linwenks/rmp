@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rmp.api.base.model.MsgBean;
+import com.rmp.api.util.MsgEnum;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 应用异常
  * @author linw
  *
  */
+@Getter
+@Setter
 public class AppException extends RuntimeException {
 
 	/**
@@ -20,6 +26,8 @@ public class AppException extends RuntimeException {
 	// 消息 map
 	protected List<MsgBean> msgList = new ArrayList<>();
 	
+	protected MsgEnum msgEnum;
+	
 	public AppException() {
 		super();
 	}
@@ -28,9 +36,9 @@ public class AppException extends RuntimeException {
 		super(throwable);
 	}
 	
-	public AppException(Throwable throwable, String code) {
+	public AppException(Throwable throwable, MsgEnum msgEnum) {
 		super(throwable);
-		msgList.add(new MsgBean(code));
+		msgList.add(new MsgBean(msgEnum));
 	}
 	
 	public AppException(Throwable throwable, List<MsgBean> msgList) {
@@ -38,20 +46,20 @@ public class AppException extends RuntimeException {
 		this.msgList.addAll(msgList);
 	}
 	
-	public AppException(Throwable throwable, String code, String[] params) {
+	public AppException(Throwable throwable, MsgEnum msgEnum, String[] params) {
 		super(throwable);
-		msgList.add(new MsgBean(code, params));
+		msgList.add(new MsgBean(msgEnum, params));
 	}
 	
-	public AppException(Throwable throwable, String code, String[] params, String field) {
+	public AppException(Throwable throwable, MsgEnum msgEnum, String[] params, String field) {
 		super(throwable);
-		msgList.add(new MsgBean(code, params, field));
+		msgList.add(new MsgBean(msgEnum, params, field));
 	}
 	
 	
-	public AppException(String code) {
+	public AppException(MsgEnum msgEnum) {
 		super();
-		msgList.add(new MsgBean(code));
+		msgList.add(new MsgBean(msgEnum));
 	}
 	
 	public AppException(List<MsgBean> msgList) {
@@ -59,24 +67,24 @@ public class AppException extends RuntimeException {
 		this.msgList.addAll(msgList);
 	}
 	
-	public AppException(String code, String[] params) {
+	public AppException(MsgEnum msgEnum, String[] params) {
 		super();
-		msgList.add(new MsgBean(code, params));
+		msgList.add(new MsgBean(msgEnum, params));
 	}
 	
-	public AppException(String code, String[] params, String field) {
+	public AppException(MsgEnum msgEnum, String[] params, String field) {
 		super();
-		msgList.add(new MsgBean(code, params, field));
+		msgList.add(new MsgBean(msgEnum, params, field));
 	}
 	
 	
-	public AppException addMsg(String code) {
-		msgList.add(new MsgBean(code));
+	public AppException addMsg(MsgEnum msgEnum) {
+		msgList.add(new MsgBean(msgEnum));
 		return this;
 	}
 	
-	public AppException addMsg(String code, String[] params) {
-		msgList.add(new MsgBean(code, params));
+	public AppException addMsg(MsgEnum msgEnum, String[] params) {
+		msgList.add(new MsgBean(msgEnum, params));
 		return this;
 	}
 	
@@ -92,5 +100,25 @@ public class AppException extends RuntimeException {
 
 	public List<MsgBean> getMsgList() {
 		return msgList;
+	}
+	
+	
+	// build
+	public static AppException build() {
+		return new AppException();
+	}
+	
+	public static AppException build(Throwable throwable) {
+		return new AppException(throwable);
+	}
+	
+	public static AppException build(MsgEnum msgEnum) {
+		return new AppException(msgEnum);
+	}
+	
+	
+	public AppException msgEnum(MsgEnum msgEnum) {
+		msgList.add(new MsgBean(msgEnum));
+		return this;
 	}
 }

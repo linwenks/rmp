@@ -42,9 +42,9 @@ public class Mybatis3PluginByLombok extends BaseMybatis3Plugin {
 //        topLevelClass.addAnnotation("@Data");
         topLevelClass.addAnnotation("@Getter");
         topLevelClass.addAnnotation("@Setter");
-        topLevelClass.addAnnotation("@Builder");
-        topLevelClass.addAnnotation("@NoArgsConstructor");
-        topLevelClass.addAnnotation("@AllArgsConstructor");
+//        topLevelClass.addAnnotation("@Builder");
+//        topLevelClass.addAnnotation("@NoArgsConstructor");
+//        topLevelClass.addAnnotation("@AllArgsConstructor");
         
         return true;
     }

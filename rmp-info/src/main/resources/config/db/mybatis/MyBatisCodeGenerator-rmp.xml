@@ -48,7 +48,7 @@
 		</commentGenerator>
 		 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.7.124:3306/rmp?tinyInt1isBit=false&amp;serverTimezone=UTC&amp;useSSL=false&amp;characterEncoding=utf-8"
+			connectionURL="jdbc:mysql://localhost:3306/rmp?tinyInt1isBit=false&amp;serverTimezone=UTC&amp;useSSL=false&amp;characterEncoding=utf-8"
 			userId="root" password="root">
 			<!-- 针对oracle数据库 -->
 		    <property name="remarksReporting" value="true"></property>
@@ -76,10 +76,19 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		
-		
+		<!-- 
 		<table tableName="t_area" domainObjectName="Area" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
+		
+		<table tableName="t_user" domainObjectName="User" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		
+		<table tableName="t_phone_msg" domainObjectName="PhoneMsg" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		 -->
 		
 		
 	</context>

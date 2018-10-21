@@ -1,6 +1,6 @@
 package com.rmp.api.base.service.impl;
 
-import static com.rmp.api.util.constant.Constant.Msg.Api.*;
+import static com.rmp.api.util.MsgEnum.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -179,7 +179,7 @@ public abstract class BaseServiceImpl implements BaseService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
@@ -193,7 +193,7 @@ public abstract class BaseServiceImpl implements BaseService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
@@ -201,14 +201,14 @@ public abstract class BaseServiceImpl implements BaseService {
 		Class<?> model = getModelClass();
 		Object mapper = getMapper();
 		
-		if (obj == null) throw new AppException(_00003);
+		if (obj == null) throw new AppException(MSG_00003);
 		int row = 0;
 		try {
 			row = (int) mapper.getClass().getMethod("updateByPrimaryKey", new Class[]{model}).invoke(mapper, new Object[]{obj});
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
@@ -216,14 +216,14 @@ public abstract class BaseServiceImpl implements BaseService {
 		Class<?> model = getModelClass();
 		Object mapper = getMapper();
 		
-		if (obj == null) throw new AppException(_00003);
+		if (obj == null) throw new AppException(MSG_00003);
 		int row = 0;
 		try {
 			row = (int) mapper.getClass().getMethod("updateByPrimaryKeySelective", new Class[]{model}).invoke(mapper, new Object[]{obj});
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
@@ -231,14 +231,14 @@ public abstract class BaseServiceImpl implements BaseService {
 		Class<?> model = getModelClass();
 		Object mapper = getMapper();
 		
-		if (obj == null) throw new AppException(_00003);
+		if (obj == null) throw new AppException(MSG_00003);
 		int row = 0;
 		try {
 			row = (int) mapper.getClass().getMethod("updateByPrimaryKeyVer", new Class[]{model}).invoke(mapper, new Object[]{obj});
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
@@ -246,14 +246,14 @@ public abstract class BaseServiceImpl implements BaseService {
 		Class<?> model = getModelClass();
 		Object mapper = getMapper();
 		
-		if (obj == null) throw new AppException(_00003);
+		if (obj == null) throw new AppException(MSG_00003);
 		int row = 0;
 		try {
 			row = (int) mapper.getClass().getMethod("updateByPrimaryKeySelectiveVer", new Class[]{model}).invoke(mapper, new Object[]{obj});
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
@@ -261,7 +261,7 @@ public abstract class BaseServiceImpl implements BaseService {
 		Class<?> criteriaClass = getCriteriaClass();
 		Object mapper = getMapper();
 		
-		if (obj == null) throw new AppException(_00003);
+		if (obj == null) throw new AppException(MSG_00003);
 		int row = 0;
 		try {
 			Object criteria = criteriaClass.newInstance();
@@ -271,21 +271,21 @@ public abstract class BaseServiceImpl implements BaseService {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 	
 	protected int deletePk(Long id) {
 		Object mapper = getMapper();
 		
-		if (id == null) throw new AppException(_00003);
+		if (id == null) throw new AppException(MSG_00003);
 		int row = 0;
 		try {
 			row = (int) mapper.getClass().getMethod("deleteByPrimaryKey", new Class[]{id.getClass()}).invoke(mapper, new Object[]{id});
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-		if (row == 0) throw new AppException(_00010);
+		if (row == 0) throw new AppException(MSG_00010);
 		return row;
 	}
 }

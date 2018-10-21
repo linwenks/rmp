@@ -2,6 +2,8 @@ package com.rmp.api.base.model;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rmp.api.model.PhoneMsgBean;
+import com.rmp.api.model.UserBean;
 import com.rmp.common.page.QueryPage;
 
 import lombok.AllArgsConstructor;
@@ -20,10 +22,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ReqBean {
 	
-	private HeaderBean headerBean;
+	private HeaderBean header;
 
 	private HttpServletRequest request;
 	
 	private QueryPage queryPage;
+	
+	
+	private UserBean userBean;
+	
+	private PhoneMsgBean phoneMsgBean;
 	
 }

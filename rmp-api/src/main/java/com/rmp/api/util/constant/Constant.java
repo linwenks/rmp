@@ -21,6 +21,17 @@ public final class Constant {
 		
 	}
 	
+	// redis
+	public static final class Redis {
+		public static final class Sharded1 {
+			public static final String NAME1 = "redis1";
+		}
+		public static final class User {
+			public static final int INDEX = 1;
+			public static final String KEY = "rmp_";
+			public static final int SECONDS = 24 * 60 * 60;
+		}
+	}
 
 	// 当前登录用户
 	public static final String CURRENT_LOGIN_USER = "CURRENT_LOGIN_USER";
@@ -28,31 +39,46 @@ public final class Constant {
 	// 当前请求header
 	public static final String CURRENT_REQUEST_HEADER = "CURRENT_REQUEST_HEADER";
 	
+	// 是否删除
+	public final static Integer DELETE_N = 0;    // 否
+	public final static Integer DELETE_Y = 1;    // 是
+	
 	// 消息
 	public static final class Msg {
 		
 		public static final String SUCCESS = "0";
 		public static final String ERROR = "1";
+	}
+	
+	// 手机短信
+	public static final class PhoneMsg {
 		
-		public static final class Api {
+		public static final int SEND_INTERVAL_TIME = 1 * 60;    // 发送短信间隔时间（秒）
+		public static final int EFFECTIVE_TIME = 10 * 60;    // 短信有效时间（秒）
+		public static final int LENGTH = 6;    // 验证码长度
+		
+		public static final class Type {
 			
-			public final static String 
-				  _00002 = "00002"    // 系统繁忙，请稍后再试
-				, _00003 = "00003"    // 数据为空
-				, _00004 = "00004"    // 数据异常
-				, _00005 = "00005"    // 数据转换JSON异常
+			public static final int _1 = 1    // 注册
+								, _2 = 2    // 找回密码
+								;
+		}
 		
-				, _00006 = "00006"    // token为空
-				, _00007 = "00007"    // token不存在
-				
-				, _00008 = "00008"    // redis事务失败
-				
-				, _00009 = "00009"    // 版本号为空
-				, _00010 = "00010"    // 数据已跟新
-				
-				
-				, _01000 = "01000"    // 登录账号为空
-				
+		public static final class Status {
+			
+			public static final int _0 = 0    // 未使用
+								, _1 = 1;    // 已使用
+		}
+	}
+	
+	
+	// 用户
+	public static final class User {
+		// 状态
+		public static final class Status {
+			public final static Integer 
+				  _0 = 0    // 未注册
+				, _1 = 1    // 已注册
 				;
 				
 		}

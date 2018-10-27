@@ -14,4 +14,5 @@ public class CustomerMaintainBean extends CustomerMaintain {
 	 */
 	private static final long serialVersionUID = 2088956218423446207L;
 	
+	private Long userId;
 }

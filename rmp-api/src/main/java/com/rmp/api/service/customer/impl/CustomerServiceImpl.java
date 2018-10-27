@@ -181,5 +181,7 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		customerBeanTmp.setIsDelete(Constant.DELETE_Y);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerBeanTmp);
+		
+		// 删除全部
 	}
 }

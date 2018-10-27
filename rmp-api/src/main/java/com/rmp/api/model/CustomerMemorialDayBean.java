@@ -14,4 +14,5 @@ public class CustomerMemorialDayBean extends CustomerMemorialDay {
 	 */
 	private static final long serialVersionUID = 2088956218423446207L;
 	
+	private Long userId;
 }

@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import com.rmp.api.base.dao.redis.BaseShardedJedisPoolDao;
 import com.rmp.api.base.spring.ApplicationContextUtil;
 import com.rmp.api.service.area.AreaService;
+import com.rmp.api.service.sys.SysCodeService;
 import com.rmp.api.service.user.UserService;
 
 
@@ -22,6 +23,7 @@ public class BaseUtil {
 	protected static BaseShardedJedisPoolDao jedisDao;
 	protected static UserService userService;
 	protected static AreaService areaService;
+	protected static SysCodeService sysCodeService;
 	
 	public BaseUtil() {
 		load();
@@ -33,6 +35,7 @@ public class BaseUtil {
 			jedisDao = ac.getBean(BaseShardedJedisPoolDao.class);
 			userService = ac.getBean(UserService.class);
 			areaService = ac.getBean(AreaService.class);
+			sysCodeService = ac.getBean(SysCodeService.class);
 		}
 	}
 	

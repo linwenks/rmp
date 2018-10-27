@@ -86,6 +86,11 @@
 		</table>
 		
 		
+		<table tableName="t_sys_code" domainObjectName="SysCode" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		
+		
 		<table tableName="t_user" domainObjectName="User" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
@@ -120,7 +125,7 @@
 		</table>
 		
 		 -->
-		 
+		
 		
 		
 	</context>

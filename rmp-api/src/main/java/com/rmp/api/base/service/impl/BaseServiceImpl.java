@@ -50,7 +50,7 @@ public abstract class BaseServiceImpl implements BaseService {
 	@Override
 	public <T> T selectById(Long id) {
 		Object mapper = getMapper();
-		Class<?> modelBeanClass = getModelBeanClass();
+		Class<?> modelBeanClass = getBeanClass();
 		
 		Object obj = null;
 		try {
@@ -64,7 +64,7 @@ public abstract class BaseServiceImpl implements BaseService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T selectOne(Model bean) {
-		Class<?> modelBeanClass = getModelBeanClass();
+		Class<?> modelBeanClass = getBeanClass();
 		Class<?> criteriaClass = getCriteriaClass();
 		Object mapper = getMapper();
 		
@@ -100,7 +100,7 @@ public abstract class BaseServiceImpl implements BaseService {
 	@SuppressWarnings({ "unchecked" })
 	@Override
 	public <T> List<T> selectList(QueryPage queryPage, Model bean) {
-		Class<?> modelBeanClass = getModelBeanClass();
+		Class<?> modelBeanClass = getBeanClass();
 		Class<?> criteriaClass = getCriteriaClass();
 		Object mapper = getMapper();
 		

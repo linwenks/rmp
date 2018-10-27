@@ -83,4 +83,10 @@ public final class Constant {
 				
 		}
 	}
+	
+	// 用户 客户
+	public static final class Customer {
+		
+		public static final String HEAD_PIC = "/img/head_pic/default.jpg";    // 头像 默认
+	}
 }

@@ -41,7 +41,7 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 	}
 
 	@Override
-	public Class<?> getModelBeanClass() {
+	public Class<?> getBeanClass() {
 		return PhoneMsgBean.class;
 	}
 
@@ -75,33 +75,33 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 	 * @param phoneMsgBean
 	 */
 	private void send(PhoneMsgBean phoneMsgBean) {
-		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		Long craeteTimeStart = DateUtil.formatDate2Long(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.SEND_INTERVAL_TIME));
 		
 		Integer type = phoneMsgBean.getType();
-		if (type == null) throw AppException.build(MSG_00003);
+		if (type == null) AppException.toThrow(MSG_00003);
 		Long phone = phoneMsgBean.getPhone();
-		if (phone == null) throw AppException.build(MSG_01014);
-		if (!PatternUtil.matchesMobilePhone(phone.toString())) throw AppException.build(MSG_01015);
+		if (phone == null) AppException.toThrow(MSG_01014);
+		if (!PatternUtil.matchesMobilePhone(phone.toString())) AppException.toThrow(MSG_01015);
 		
 		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();
 		phoneMsgBeanTmp.setPhone(phone);
 		phoneMsgBeanTmp.setType(type);
 		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
 		phoneMsgBeanTmp = this.selectOne(phoneMsgBeanTmp);
-		if (phoneMsgBeanTmp != null) throw AppException.build(MSG_01013);
+		if (phoneMsgBeanTmp != null) AppException.toThrow(MSG_01013);
 		
 		// 验证账号
 		UserBean userBean = new UserBean();
 		userBean.setLoginName(phone.toString());
 		userBean = userService.selectOne(userBean);
 		if (Constant.PhoneMsg.Type._1 == type.intValue()) {
-			if (userBean != null) throw AppException.build(MSG_01009);
+			if (userBean != null) AppException.toThrow(MSG_01009);
 		} else if (Constant.PhoneMsg.Type._2 == type.intValue()) {
-			if (userBean == null) throw AppException.build(MSG_01002);
+			if (userBean == null) AppException.toThrow(MSG_01002);
 			UserUtil.checkUser(userBean);
 		}
 		
@@ -118,20 +118,20 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 		result.put("statusCode", 200);
 		result.put("responseContent", "{\"ret\":0,\"msg\":\"Success\"}");
 		log.info(" sms send result : " + result);
-		if (CollectionUtils.isEmpty(result)) throw AppException.build(MSG_00002);
+		if (CollectionUtils.isEmpty(result)) AppException.toThrow(MSG_00002);
 		Integer statusCode = (Integer) result.get("statusCode");
-		if (statusCode == null || statusCode.intValue() != 200) throw AppException.build(MSG_00002);
+		if (statusCode == null || statusCode.intValue() != 200) AppException.toThrow(MSG_00002);
 		String responseContent = (String) result.get("responseContent");
-		if (StringUtils.isEmpty(responseContent)) throw AppException.build(MSG_00002);
+		if (StringUtils.isEmpty(responseContent)) AppException.toThrow(MSG_00002);
 		Map<String, String> resMap = JsonUtil.fromJson(responseContent, Map.class);
-		if (CollectionUtils.isEmpty(resMap)) throw AppException.build(MSG_00002);
+		if (CollectionUtils.isEmpty(resMap)) AppException.toThrow(MSG_00002);
 		Object ret = resMap.get("ret");
 		if (ret == null) {
 			log.error(" sms send result : " + result);
-			throw AppException.build(MSG_00002);
+			AppException.toThrow(MSG_00002);
 		} else if (0 != Double.valueOf(ret.toString()).intValue()) {
 			log.error(" sms send result : " + result);
-			throw AppException.build(MSG_00002);
+			AppException.toThrow(MSG_00002);
 		}
 		*/
 	}

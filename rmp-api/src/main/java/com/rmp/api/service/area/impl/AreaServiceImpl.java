@@ -28,7 +28,7 @@ public class AreaServiceImpl extends BaseServiceImpl implements AreaService {
 	}
 
 	@Override
-	public Class<?> getModelBeanClass() {
+	public Class<?> getBeanClass() {
 		return AreaBean.class;
 	}
 

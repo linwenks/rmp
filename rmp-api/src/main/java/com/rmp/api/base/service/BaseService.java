@@ -60,7 +60,7 @@ public interface BaseService {
 
 	public Class<?> getModelClass();
 	
-	public Class<?> getModelBeanClass();
+	public Class<?> getBeanClass();
 
 	public Class<?> getCriteriaClass();
 

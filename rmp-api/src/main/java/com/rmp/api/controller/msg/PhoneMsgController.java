@@ -61,7 +61,7 @@ public class PhoneMsgController extends BaseApiController {
 		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
 		
 		PhoneMsgBean phoneMsgBean = reqBean.getPhoneMsgBean();
-		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
 		phoneMsgBean.setType(Constant.PhoneMsg.Type._1);
 		phoneMsgService.exe("send", phoneMsgBean);
 		return RespUtil.build(request).putData("sendIntervalTime", Constant.PhoneMsg.SEND_INTERVAL_TIME);
@@ -93,7 +93,7 @@ public class PhoneMsgController extends BaseApiController {
 		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
 		
 		PhoneMsgBean phoneMsgBean = reqBean.getPhoneMsgBean();
-		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
 		phoneMsgBean.setType(Constant.PhoneMsg.Type._2);
 		phoneMsgService.exe("send", phoneMsgBean);
 		return RespUtil.build(request).putData("sendIntervalTime", Constant.PhoneMsg.SEND_INTERVAL_TIME);

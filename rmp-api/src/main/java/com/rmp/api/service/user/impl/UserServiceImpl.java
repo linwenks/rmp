@@ -52,7 +52,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public Class<?> getModelBeanClass() {
+	public Class<?> getBeanClass() {
 		return UserBean.class;
 	}
 
@@ -80,7 +80,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw AppException.build(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
@@ -157,7 +157,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	private void login(UserBean userBean) throws Exception {
 		Long nowDateLong = DateUtil.nowSecondFormat();
 		
-		if (userBean == null) throw AppException.build(MSG_00003);
+		if (userBean == null) AppException.toThrow(MSG_00003);
 		String loginName = StringUtils.trim(userBean.getLoginName());
 		String loginPwd = StringUtils.trim(userBean.getLoginPwd());
 		
@@ -170,7 +170,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		UserUtil.checkUser(userBeanTmp);
 		
 		String loginPwdOld = userBeanTmp.getLoginPwd();
-		if (!DigestUtils.sha1Hex(loginPwd).equals(loginPwdOld)) throw AppException.build(MSG_01006);
+		if (!DigestUtils.sha1Hex(loginPwd).equals(loginPwdOld)) AppException.toThrow(MSG_01006);
 		
 		String token = UuidUtil.generateUUID();
 		String tokenOld = userBeanTmp.getToken();
@@ -208,7 +208,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 					tx.hmset(key, UserUtil.rMap(userBeanTmp));
 				}
 				tx.expire(key, Constant.Redis.User.SECONDS);
-				if (CollectionUtils.isEmpty(tx.exec())) throw AppException.build(MSG_00008);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
 			} catch (Exception e) {
 				throw e;
 			}
@@ -223,12 +223,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	 * @throws Exception 
 	 */
 	private void register(Map<String, Object> param) throws Exception {
-		if (CollectionUtils.isEmpty(param)) throw AppException.build(MSG_00003);
+		if (CollectionUtils.isEmpty(param)) AppException.toThrow(MSG_00003);
 		UserBean userBean = (UserBean) param.get("userBean");
 		PhoneMsgBean phoneMsgBean = (PhoneMsgBean) param.get("phoneMsgBean");
 		
-		if (userBean == null) throw AppException.build(MSG_00003);
-		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
 		String token = StringUtils.trim(userBean.getToken());
 		String loginName = StringUtils.trim(userBean.getLoginName());
 		String loginPwd = StringUtils.trim(userBean.getLoginPwd());
@@ -238,8 +238,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		UserUtil.checkLoginPwd(loginPwd);
 		
 		String code = StringUtils.trim(phoneMsgBean.getCode());
-		if (StringUtils.isEmpty(code)) throw AppException.build(MSG_01011);
-		else if (code.length() != Constant.PhoneMsg.LENGTH) throw AppException.build(MSG_01012);
+		if (StringUtils.isEmpty(code)) AppException.toThrow(MSG_01011);
+		else if (code.length() != Constant.PhoneMsg.LENGTH) AppException.toThrow(MSG_01012);
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
@@ -252,7 +252,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._0);
 		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
 		phoneMsgBeanTmp = phoneMsgService.selectOne(phoneMsgBeanTmp);
-		if (phoneMsgBeanTmp == null) throw AppException.build(MSG_01012);
+		if (phoneMsgBeanTmp == null) AppException.toThrow(MSG_01012);
 		// 修改验证码状态
 		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._1);
 		phoneMsgBeanTmp.setUpdateTime(nowDateLong);
@@ -262,14 +262,14 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		UserBean userBeanTmp = new UserBean();
 		userBeanTmp.setLoginName(loginName);
 		userBeanTmp = selectOne(userBeanTmp);
-		if (userBeanTmp != null) throw AppException.build(MSG_01009);
+		if (userBeanTmp != null) AppException.toThrow(MSG_01009);
 		
 		userBeanTmp = new UserBean();
 		userBeanTmp.setToken(token);
 		userBeanTmp = selectOne(userBeanTmp);
-		if (userBeanTmp == null) throw AppException.build(MSG_00007);
-		if (!Constant.User.Status._0.equals(userBeanTmp.getStatus())) throw AppException.build(MSG_01009);
-		if (Constant.DELETE_Y.equals(userBeanTmp.getIsDelete())) throw AppException.build(MSG_01017);
+		if (userBeanTmp == null) AppException.toThrow(MSG_00007);
+		if (!Constant.User.Status._0.equals(userBeanTmp.getStatus())) AppException.toThrow(MSG_01009);
+		if (Constant.DELETE_Y.equals(userBeanTmp.getIsDelete())) AppException.toThrow(MSG_01017);
 		
 		userBeanTmp.setLoginName(loginName);
 		userBeanTmp.setLoginPwd(DigestUtils.sha1Hex(loginPwd));
@@ -292,7 +292,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			try (Transaction tx = jedis.multi();) {
 				tx.hmset(key, UserUtil.rMap(userBeanTmp));
 				tx.expire(key, Constant.Redis.User.SECONDS);
-				if (CollectionUtils.isEmpty(tx.exec())) throw AppException.build(MSG_00008);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
 			} catch (Exception e) {
 				throw e;
 			}
@@ -308,12 +308,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	 * @return
 	 */
 	private void retrievePwd(Map<String, Object> param) {
-		if (CollectionUtils.isEmpty(param)) throw AppException.build(MSG_00003);
+		if (CollectionUtils.isEmpty(param)) AppException.toThrow(MSG_00003);
 		UserBean userBean = (UserBean) param.get("userBean");
 		PhoneMsgBean phoneMsgBean = (PhoneMsgBean) param.get("phoneMsgBean");
 
-		if (userBean == null) throw AppException.build(MSG_00003);
-		if (phoneMsgBean == null) throw AppException.build(MSG_00003);
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
 		String loginName = StringUtils.trim(userBean.getLoginName());
 		String loginPwd = StringUtils.trim(userBean.getLoginPwd());
 		
@@ -321,8 +321,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		UserUtil.checkLoginPwd(loginPwd);
 		
 		String code = StringUtils.trim(phoneMsgBean.getCode());
-		if (StringUtils.isEmpty(code)) throw AppException.build(MSG_01011);
-		else if (code.length() != Constant.PhoneMsg.LENGTH) throw AppException.build(MSG_01012);
+		if (StringUtils.isEmpty(code)) AppException.toThrow(MSG_01011);
+		else if (code.length() != Constant.PhoneMsg.LENGTH) AppException.toThrow(MSG_01012);
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
@@ -336,7 +336,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._0);
 		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
 		phoneMsgBeanTmp = phoneMsgService.selectOne(phoneMsgBeanTmp);
-		if (phoneMsgBeanTmp == null) throw AppException.build(MSG_01012);
+		if (phoneMsgBeanTmp == null) AppException.toThrow(MSG_01012);
 		// 修改验证码状态
 		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._1);
 		phoneMsgBeanTmp.setUpdateTime(nowDateLong);

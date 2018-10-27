@@ -5,7 +5,10 @@ import static com.rmp.api.util.MsgEnum.*;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 import com.google.common.collect.Maps;
 import com.rmp.api.base.exception.AppException;
@@ -50,9 +53,9 @@ public class UserUtil extends BaseUtil {
 	 * @param loginName
 	 */
 	public static void checkUser(UserBean userBean) {
-		if (userBean == null) throw AppException.build(MSG_01002);
-		if (Constant.User.Status._0.equals(userBean.getStatus())) throw AppException.build(MSG_01006);
-		if (Constant.DELETE_Y.equals(userBean.getIsDelete())) throw AppException.build(MSG_01017);
+		if (userBean == null) AppException.toThrow(MSG_01002);
+		if (Constant.User.Status._0.equals(userBean.getStatus())) AppException.toThrow(MSG_01006);
+		if (Constant.DELETE_Y.equals(userBean.getIsDelete())) AppException.toThrow(MSG_01017);
 	}
 	
 	// ================================================== redis ==================================================
@@ -80,5 +83,52 @@ public class UserUtil extends BaseUtil {
 			beanMap.put("headPic", userBean.getHeadPic() == null ? "" : userBean.getHeadPic());
 		}
 		return beanMap;
+	}
+	
+	/**
+	 * 用户 bean
+	 * @param userMap
+	 * @return
+	 */
+	public static UserBean rBean(Map<String, String> userMap) {
+		UserBean userBean = null;
+		if (!CollectionUtils.isEmpty(userMap)) {
+			userBean = new UserBean();
+			userBean.setId(userMap.get("id") != null ? Long.valueOf(userMap.get("id")) : null);
+			userBean.setLoginName(userMap.get("loginName") != null ? userMap.get("loginName") : null);
+			userBean.setNickName(userMap.get("nickName") != null ? userMap.get("nickName") : null);
+			userBean.setHeadPic(userMap.get("headPic") != null ? userMap.get("headPic") : null);
+			
+		}
+		return userBean;
+	}
+	
+	/**
+	 * 设置 当前用户
+	 * @param userBean
+	 * @param request
+	 */
+	public static void setCurrentUser(UserBean userBean, HttpServletRequest request) {
+		request.setAttribute(Constant.CURRENT_LOGIN_USER, userBean);
+	}
+	
+	/**
+	 * 获取 当前用户
+	 * @param request
+	 */
+	public static UserBean getCurrentUser(HttpServletRequest request) {
+		return (UserBean) request.getAttribute(Constant.CURRENT_LOGIN_USER);
+	}
+	
+	/**
+	 * 获取 当前用户 ID
+	 * @param request
+	 */
+	public static Long getCurrentUserId(HttpServletRequest request) {
+		UserBean userBean = getCurrentUser(request);
+		if (userBean != null) {
+			return userBean.getId();
+		}
+		return null;
 	}
 }

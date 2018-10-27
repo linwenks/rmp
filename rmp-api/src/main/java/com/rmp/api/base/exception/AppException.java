@@ -104,17 +104,26 @@ public class AppException extends RuntimeException {
 	
 	
 	// build
-	public static AppException build() {
-		return new AppException();
+	public static AppException toThrow() {
+		throw new AppException();
 	}
 	
-	public static AppException build(Throwable throwable) {
-		return new AppException(throwable);
+	public static AppException toThrow(Throwable throwable) {
+		throw new AppException(throwable);
 	}
 	
-	public static AppException build(MsgEnum msgEnum) {
-		return new AppException(msgEnum);
+	public static AppException toThrow(MsgEnum msgEnum) {
+		throw new AppException(msgEnum);
 	}
+	
+	public static AppException toThrow(MsgEnum msgEnum, String param) {
+		throw new AppException(msgEnum, new String[] {param});
+	}
+	
+	public static AppException toThrow(MsgEnum msgEnum, String[] params) {
+		throw new AppException(msgEnum, params);
+	}
+	
 	
 	
 	public AppException msgEnum(MsgEnum msgEnum) {

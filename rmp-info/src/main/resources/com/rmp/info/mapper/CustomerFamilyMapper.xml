@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rmp.info.mapper.CustomerFamilyMapper">
+  <resultMap id="BaseResultMap" type="com.rmp.info.model.CustomerFamily">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="relationship" jdbcType="INTEGER" property="relationship" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="birthday" jdbcType="INTEGER" property="birthday" />
+    <result column="phone" jdbcType="BIGINT" property="phone" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, relationship, real_name, birthday, phone, area_id, address, is_delete, 
+    version, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.rmp.info.model.CustomerFamilyCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_customer_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_customer_family
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_customer_family
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rmp.info.model.CustomerFamilyCriteria">
+    delete from t_customer_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rmp.info.model.CustomerFamily">
+    insert into t_customer_family (id, customer_id, relationship, 
+      real_name, birthday, phone, 
+      area_id, address, is_delete, 
+      version, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{relationship,jdbcType=INTEGER}, 
+      #{realName,jdbcType=VARCHAR}, #{birthday,jdbcType=INTEGER}, #{phone,jdbcType=BIGINT}, 
+      #{areaId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      )
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.rmp.info.model.CustomerFamily">
+    insert into t_customer_family
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="relationship != null">
+        relationship,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.rmp.info.model.CustomerFamilyCriteria" resultType="java.lang.Long">
+    select count(*) from t_customer_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_customer_family
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.relationship != null">
+        relationship = #{record.relationship,jdbcType=INTEGER},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=BIGINT},
+      </if>
+      <if test="record.areaId != null">
+        area_id = #{record.areaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_customer_family
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      relationship = #{record.relationship,jdbcType=INTEGER},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=BIGINT},
+      area_id = #{record.areaId,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      version = #{record.version,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rmp.info.model.CustomerFamily">
+    update t_customer_family
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="relationship != null">
+        relationship = #{relationship,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rmp.info.model.CustomerFamily">
+    update t_customer_family
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      relationship = #{relationship,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=BIGINT},
+      area_id = #{areaId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertBatch">
+    insert into t_customer_family ( 
+    id,
+    customer_id,
+    relationship,
+    real_name,
+    birthday,
+    phone,
+    area_id,
+    address,
+    is_delete,
+    version,
+    create_time,
+    update_time
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.id,jdbcType=BIGINT}, 
+         #{record.customerId,jdbcType=BIGINT}, 
+         #{record.relationship,jdbcType=INTEGER}, 
+         #{record.realName,jdbcType=VARCHAR}, 
+         #{record.birthday,jdbcType=INTEGER}, 
+         #{record.phone,jdbcType=BIGINT}, 
+         #{record.areaId,jdbcType=INTEGER}, 
+         #{record.address,jdbcType=VARCHAR}, 
+         #{record.isDelete,jdbcType=INTEGER}, 
+         #{record.version,jdbcType=INTEGER}, 
+         #{record.createTime,jdbcType=BIGINT}, 
+         #{record.updateTime,jdbcType=BIGINT}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into t_customer_family ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].id != null">
+        id,
+      </if>
+      <if test="recordColl[0].customerId != null">
+        customer_id,
+      </if>
+      <if test="recordColl[0].relationship != null">
+        relationship,
+      </if>
+      <if test="recordColl[0].realName != null">
+        real_name,
+      </if>
+      <if test="recordColl[0].birthday != null">
+        birthday,
+      </if>
+      <if test="recordColl[0].phone != null">
+        phone,
+      </if>
+      <if test="recordColl[0].areaId != null">
+        area_id,
+      </if>
+      <if test="recordColl[0].address != null">
+        address,
+      </if>
+      <if test="recordColl[0].isDelete != null">
+        is_delete,
+      </if>
+      <if test="recordColl[0].version != null">
+        version,
+      </if>
+      <if test="recordColl[0].createTime != null">
+        create_time,
+      </if>
+      <if test="recordColl[0].updateTime != null">
+        update_time,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.id != null">
+           #{record.id,jdbcType=BIGINT}, 
+        </if>
+        <if test="record.customerId != null">
+           #{record.customerId,jdbcType=BIGINT}, 
+        </if>
+        <if test="record.relationship != null">
+           #{record.relationship,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.realName != null">
+           #{record.realName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.birthday != null">
+           #{record.birthday,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.phone != null">
+           #{record.phone,jdbcType=BIGINT}, 
+        </if>
+        <if test="record.areaId != null">
+           #{record.areaId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.address != null">
+           #{record.address,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.isDelete != null">
+           #{record.isDelete,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.version != null">
+           #{record.version,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.createTime != null">
+           #{record.createTime,jdbcType=BIGINT}, 
+        </if>
+        <if test="record.updateTime != null">
+           #{record.updateTime,jdbcType=BIGINT}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_customer_family
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelectiveVer" parameterType="com.rmp.info.model.CustomerFamily">
+    update t_customer_family
+    <set>
+      <if test="customerId != null">
+          customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="relationship != null">
+          relationship = #{relationship,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null">
+          real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+          birthday = #{birthday,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+          phone = #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+          area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+          address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+          is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+          create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+          update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+        version = version + 1
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+    and version = #{version,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyVer" parameterType="com.rmp.info.model.CustomerFamily">
+    update t_customer_family
+    set 
+      customer_id = #{customerId,jdbcType=BIGINT},
+      relationship = #{relationship,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=BIGINT},
+      area_id = #{areaId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      version = version + 1
+    where id = #{id,jdbcType=BIGINT}
+    and version = #{version,jdbcType=INTEGER}
+  </update>
+</mapper>

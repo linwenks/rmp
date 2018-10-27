@@ -81,14 +81,46 @@
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
 		
-		<table tableName="t_user" domainObjectName="User" >
-			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
-		</table>
-		
 		<table tableName="t_phone_msg" domainObjectName="PhoneMsg" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
+		
+		
+		<table tableName="t_user" domainObjectName="User" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_user_customer" domainObjectName="UserCustomer" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		
+		
+		<table tableName="t_customer" domainObjectName="Customer" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_family" domainObjectName="CustomerFamily" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_hobby" domainObjectName="CustomerHobby" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_job" domainObjectName="CustomerJob" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_maintain" domainObjectName="CustomerMaintain" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_memorial_day" domainObjectName="CustomerMemorialDay" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_problem" domainObjectName="CustomerProblem" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_customer_relation" domainObjectName="CustomerRelation" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		
 		 -->
+		 
 		
 		
 	</context>

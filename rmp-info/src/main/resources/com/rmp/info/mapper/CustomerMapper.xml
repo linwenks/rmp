@@ -10,7 +10,7 @@
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="birthday" jdbcType="INTEGER" property="birthday" />
     <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
-    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="vip" jdbcType="INTEGER" property="vip" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
@@ -123,7 +123,7 @@
       update_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
       #{pinyin,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, #{sex,jdbcType=INTEGER}, 
-      #{birthday,jdbcType=INTEGER}, #{headPic,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=INTEGER}, #{headPic,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, 
       #{address,jdbcType=VARCHAR}, #{vip,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=BIGINT})
@@ -209,7 +209,7 @@
         #{headPic,jdbcType=VARCHAR},
       </if>
       <if test="areaId != null">
-        #{areaId,jdbcType=INTEGER},
+        #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -271,7 +271,7 @@
         head_pic = #{record.headPic,jdbcType=VARCHAR},
       </if>
       <if test="record.areaId != null">
-        area_id = #{record.areaId,jdbcType=INTEGER},
+        area_id = #{record.areaId,jdbcType=BIGINT},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -309,7 +309,7 @@
       sex = #{record.sex,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=INTEGER},
       head_pic = #{record.headPic,jdbcType=VARCHAR},
-      area_id = #{record.areaId,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=BIGINT},
       address = #{record.address,jdbcType=VARCHAR},
       vip = #{record.vip,jdbcType=INTEGER},
       tag = #{record.tag,jdbcType=VARCHAR},
@@ -346,7 +346,7 @@
         head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
       <if test="areaId != null">
-        area_id = #{areaId,jdbcType=INTEGER},
+        area_id = #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -381,7 +381,7 @@
       sex = #{sex,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=INTEGER},
       head_pic = #{headPic,jdbcType=VARCHAR},
-      area_id = #{areaId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       vip = #{vip,jdbcType=INTEGER},
       tag = #{tag,jdbcType=VARCHAR},
@@ -421,7 +421,7 @@
          #{record.sex,jdbcType=INTEGER}, 
          #{record.birthday,jdbcType=INTEGER}, 
          #{record.headPic,jdbcType=VARCHAR}, 
-         #{record.areaId,jdbcType=INTEGER}, 
+         #{record.areaId,jdbcType=BIGINT}, 
          #{record.address,jdbcType=VARCHAR}, 
          #{record.vip,jdbcType=INTEGER}, 
          #{record.tag,jdbcType=VARCHAR}, 
@@ -514,7 +514,7 @@
            #{record.headPic,jdbcType=VARCHAR}, 
         </if>
         <if test="record.areaId != null">
-           #{record.areaId,jdbcType=INTEGER}, 
+           #{record.areaId,jdbcType=BIGINT}, 
         </if>
         <if test="record.address != null">
            #{record.address,jdbcType=VARCHAR}, 
@@ -580,7 +580,7 @@
           head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
       <if test="areaId != null">
-          area_id = #{areaId,jdbcType=INTEGER},
+          area_id = #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
           address = #{address,jdbcType=VARCHAR},
@@ -615,7 +615,7 @@
       sex = #{sex,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=INTEGER},
       head_pic = #{headPic,jdbcType=VARCHAR},
-      area_id = #{areaId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       vip = #{vip,jdbcType=INTEGER},
       tag = #{tag,jdbcType=VARCHAR},

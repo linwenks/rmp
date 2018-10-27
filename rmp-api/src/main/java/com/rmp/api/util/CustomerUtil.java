@@ -28,4 +28,14 @@ public class CustomerUtil extends BaseUtil {
 		if (phone == null) AppException.toThrow(MSG_02002);
 		if (!PatternUtil.matchesMobilePhone(phone.toString())) AppException.toThrow(MSG_02003);
 	}
+	
+	/**
+	 * 检查 地址
+	 * @param address
+	 */
+	public static void checkAddress(String address) {
+		if (address == null) AppException.toThrow(MSG_02002);
+		int addressMaxLength = 100;
+		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02003, String.valueOf(addressMaxLength));
+	}
 }

@@ -8,7 +8,7 @@
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="birthday" jdbcType="INTEGER" property="birthday" />
     <result column="phone" jdbcType="BIGINT" property="phone" />
-    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -118,7 +118,7 @@
       )
     values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{relationship,jdbcType=INTEGER}, 
       #{realName,jdbcType=VARCHAR}, #{birthday,jdbcType=INTEGER}, #{phone,jdbcType=BIGINT}, 
-      #{areaId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{areaId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
       #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
       )
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -185,7 +185,7 @@
         #{phone,jdbcType=BIGINT},
       </if>
       <if test="areaId != null">
-        #{areaId,jdbcType=INTEGER},
+        #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -235,7 +235,7 @@
         phone = #{record.phone,jdbcType=BIGINT},
       </if>
       <if test="record.areaId != null">
-        area_id = #{record.areaId,jdbcType=INTEGER},
+        area_id = #{record.areaId,jdbcType=BIGINT},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -265,7 +265,7 @@
       real_name = #{record.realName,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=INTEGER},
       phone = #{record.phone,jdbcType=BIGINT},
-      area_id = #{record.areaId,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=BIGINT},
       address = #{record.address,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=INTEGER},
       version = #{record.version,jdbcType=INTEGER},
@@ -294,7 +294,7 @@
         phone = #{phone,jdbcType=BIGINT},
       </if>
       <if test="areaId != null">
-        area_id = #{areaId,jdbcType=INTEGER},
+        area_id = #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -321,7 +321,7 @@
       real_name = #{realName,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=INTEGER},
       phone = #{phone,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},
@@ -353,7 +353,7 @@
          #{record.realName,jdbcType=VARCHAR}, 
          #{record.birthday,jdbcType=INTEGER}, 
          #{record.phone,jdbcType=BIGINT}, 
-         #{record.areaId,jdbcType=INTEGER}, 
+         #{record.areaId,jdbcType=BIGINT}, 
          #{record.address,jdbcType=VARCHAR}, 
          #{record.isDelete,jdbcType=INTEGER}, 
          #{record.version,jdbcType=INTEGER}, 
@@ -426,7 +426,7 @@
            #{record.phone,jdbcType=BIGINT}, 
         </if>
         <if test="record.areaId != null">
-           #{record.areaId,jdbcType=INTEGER}, 
+           #{record.areaId,jdbcType=BIGINT}, 
         </if>
         <if test="record.address != null">
            #{record.address,jdbcType=VARCHAR}, 
@@ -480,7 +480,7 @@
           phone = #{phone,jdbcType=BIGINT},
       </if>
       <if test="areaId != null">
-          area_id = #{areaId,jdbcType=INTEGER},
+          area_id = #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
           address = #{address,jdbcType=VARCHAR},
@@ -507,7 +507,7 @@
       real_name = #{realName,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=INTEGER},
       phone = #{phone,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},

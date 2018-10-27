@@ -53,6 +53,16 @@ public class CustomerJob extends Model implements Serializable {
     private Long phone;
 
     /**
+     * 区域ID
+     */
+    private Long areaId;
+
+    /**
+     * 地址
+     */
+    private String address;
+
+    /**
      * 是否删除（0:未删除 1:已删除）
      */
     private Integer isDelete;

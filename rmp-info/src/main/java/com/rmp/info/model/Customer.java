@@ -60,7 +60,7 @@ public class Customer extends Model implements Serializable {
     /**
      * 区域ID
      */
-    private Integer areaId;
+    private Long areaId;
 
     /**
      * 地址

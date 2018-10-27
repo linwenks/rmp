@@ -58,7 +58,9 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		try {
 			switch (cmd) {
 			case "save": save((CustomerBean) obj);break;
+			case "saveAll": saveAll((CustomerBean) obj);break;
 			case "update": update((CustomerBean) obj);break;
+			case "updateAll": updateAll((CustomerBean) obj);break;
 			case "delete": delete((CustomerBean) obj);break;
 			default: return super.exe(cmd, obj);
 			}
@@ -95,6 +97,11 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		}
 	}
 	
+	/**
+	 * 添加
+	 * 姓名、手机号
+	 * @param customerBean
+	 */
 	private void save(CustomerBean customerBean) {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long userId = customerBean.getUserId();
@@ -125,6 +132,57 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		insertSel(customerBeanTmp);
 	}
 	
+	/**
+	 * 添加 全部
+	 * @param customerBean
+	 */
+	private void saveAll(CustomerBean customerBean) {
+		if (customerBean == null) AppException.toThrow(MSG_00003);
+		Long userId = customerBean.getUserId();
+		String realName = StringUtils.trim(customerBean.getRealName());
+		Long phone = customerBean.getPhone();
+		
+		Integer birthday = customerBean.getBirthday();
+		Integer sex = customerBean.getSex();
+		Long areaId = customerBean.getAreaId();
+		String address = StringUtils.trim(customerBean.getAddress());
+		String headPic = StringUtils.trim(customerBean.getHeadPic());
+		
+		if (userId == null) AppException.toThrow(MSG_00003);
+		CustomerUtil.checkRealName(realName);
+		CustomerUtil.checkPhone(phone);
+		CustomerUtil.checkAddress(address);
+		if (StringUtils.isEmpty(headPic)) headPic = Constant.Customer.HEAD_PIC;
+		
+		CustomerBean customerBeanTmp = new CustomerBean();
+		customerBeanTmp.setUserId(userId);
+		customerBeanTmp.setPhone(phone);
+		List<CustomerBean> customerBeanTmpList = selectList(null, customerBeanTmp);
+		if (!CollectionUtils.isEmpty(customerBeanTmpList)) AppException.toThrow(MSG_02004);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		// 添加
+		customerBeanTmp = new CustomerBean();
+		customerBeanTmp.setUserId(userId);
+		customerBeanTmp.setRealName(realName);
+		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
+		customerBeanTmp.setPhone(phone);
+		customerBeanTmp.setHeadPic(headPic);
+		customerBeanTmp.setBirthday(birthday);
+		customerBeanTmp.setSex(sex);
+		customerBeanTmp.setAreaId(areaId);
+		customerBeanTmp.setAddress(address);
+		customerBeanTmp.setCreateTime(nowDateLong);
+		insert(customerBeanTmp);
+	}
+	
+	/**
+	 * 修改
+	 * 姓名，手机号
+	 * @param customerBean
+	 */
 	private void update(CustomerBean customerBean) {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();
@@ -160,6 +218,61 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		updatePkSelVer(customerBeanTmp);
 	}
 	
+	/**
+	 * 修改 全部
+	 * @param customerBean
+	 */
+	private void updateAll(CustomerBean customerBean) {
+		if (customerBean == null) AppException.toThrow(MSG_00003);
+		Long id = customerBean.getId();
+		Long userId = customerBean.getUserId();
+		String realName = StringUtils.trim(customerBean.getRealName());
+		Long phone = customerBean.getPhone();
+
+		Integer birthday = customerBean.getBirthday();
+		Integer sex = customerBean.getSex();
+		Long areaId = customerBean.getAreaId();
+		String address = StringUtils.trim(customerBean.getAddress());
+		String headPic = StringUtils.trim(customerBean.getHeadPic());
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		if (userId == null) AppException.toThrow(MSG_00003);
+		CustomerUtil.checkRealName(realName);
+		CustomerUtil.checkPhone(phone);
+		CustomerUtil.checkAddress(address);
+		
+		CustomerBean customerBeanTmp = new CustomerBean();
+		customerBeanTmp.setId(id);
+		customerBeanTmp = selectOne(customerBeanTmp);
+		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
+		
+		CustomerBean customerBeanTmp2 = new CustomerBean();
+		customerBeanTmp2.setIdNot(id);
+		customerBeanTmp2.setUserId(userId);
+		customerBeanTmp2.setPhone(phone);
+		List<CustomerBean> customerBeanTmp2List = selectList(null, customerBeanTmp2);
+		if (!CollectionUtils.isEmpty(customerBeanTmp2List)) AppException.toThrow(MSG_02004);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		// 修改
+		customerBeanTmp.setRealName(realName);
+		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
+		customerBeanTmp.setPhone(phone);
+		customerBeanTmp.setHeadPic(headPic);
+		customerBeanTmp.setBirthday(birthday);
+		customerBeanTmp.setSex(sex);
+		customerBeanTmp.setAreaId(areaId);
+		customerBeanTmp.setAddress(address);
+		customerBeanTmp.setUpdateTime(nowDateLong);
+		updatePkSelVer(customerBeanTmp);
+	}
+	
+	/**
+	 * 删除
+	 * @param customerBean
+	 */
 	private void delete(CustomerBean customerBean) {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();

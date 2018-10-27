@@ -15,4 +15,9 @@ public class CustomerBean extends Customer {
 	private static final long serialVersionUID = 2088956218423446207L;
 	
 	private Long idNot;
+	
+	/**
+     * 区域 名称 all
+     */
+    private String areaNameAll;
 }

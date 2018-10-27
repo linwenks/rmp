@@ -644,52 +644,52 @@ public class CustomerCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdEqualTo(Integer value) {
+        public Criteria andAreaIdEqualTo(Long value) {
             addCriterion("area_id =", value, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdNotEqualTo(Integer value) {
+        public Criteria andAreaIdNotEqualTo(Long value) {
             addCriterion("area_id <>", value, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdGreaterThan(Integer value) {
+        public Criteria andAreaIdGreaterThan(Long value) {
             addCriterion("area_id >", value, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAreaIdGreaterThanOrEqualTo(Long value) {
             addCriterion("area_id >=", value, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdLessThan(Integer value) {
+        public Criteria andAreaIdLessThan(Long value) {
             addCriterion("area_id <", value, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdLessThanOrEqualTo(Integer value) {
+        public Criteria andAreaIdLessThanOrEqualTo(Long value) {
             addCriterion("area_id <=", value, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdIn(List<Integer> values) {
+        public Criteria andAreaIdIn(List<Long> values) {
             addCriterion("area_id in", values, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdNotIn(List<Integer> values) {
+        public Criteria andAreaIdNotIn(List<Long> values) {
             addCriterion("area_id not in", values, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdBetween(Integer value1, Integer value2) {
+        public Criteria andAreaIdBetween(Long value1, Long value2) {
             addCriterion("area_id between", value1, value2, "areaId");
             return (Criteria) this;
         }
 
-        public Criteria andAreaIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andAreaIdNotBetween(Long value1, Long value2) {
             addCriterion("area_id not between", value1, value2, "areaId");
             return (Criteria) this;
         }

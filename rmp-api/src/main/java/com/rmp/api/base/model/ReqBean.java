@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerHobbyBean;
+import com.rmp.api.model.CustomerProblemBean;
 import com.rmp.api.model.CustomerRelationBean;
 import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.model.UserBean;
@@ -41,4 +42,6 @@ public class ReqBean {
 	private CustomerRelationBean customerRelationBean;
 	
 	private CustomerHobbyBean customerHobbyBean;
+	
+	private CustomerProblemBean customerProblemBean;
 }

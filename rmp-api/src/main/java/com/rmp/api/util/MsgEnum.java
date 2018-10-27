@@ -48,6 +48,8 @@ public enum MsgEnum {
 	MSG_02006("02006", "亲密为空"),
 	MSG_02007("02007", "重要为空"),
 	
+	MSG_02008("02008", "备注大于{0}字"),
+	
 	;
 	
 	private String key;

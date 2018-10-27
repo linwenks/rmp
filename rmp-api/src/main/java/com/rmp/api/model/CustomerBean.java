@@ -14,7 +14,5 @@ public class CustomerBean extends Customer {
 	 */
 	private static final long serialVersionUID = 2088956218423446207L;
 	
-	private Long userId;
-	
 	private Long idNot;
 }

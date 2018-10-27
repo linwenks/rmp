@@ -1,6 +1,6 @@
 package com.rmp.api.controller.customer;
 
-import static com.rmp.api.util.MsgEnum.MSG_00003;
+import static com.rmp.api.util.MsgEnum.*;
 
 import java.util.List;
 
@@ -8,11 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rmp.api.base.controller.BaseApiController;
@@ -52,7 +50,7 @@ public class CustomerController extends BaseApiController {
 	public RespBean list(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
-		if (customerBean == null) throw new AppException(MSG_00003);
+		if (customerBean == null) AppException.toThrow(MSG_00003);
 		
 		QueryPage queryPage = reqBean.getQueryPage();
 		if (queryPage == null) queryPage = new QueryPage();
@@ -77,9 +75,9 @@ public class CustomerController extends BaseApiController {
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
-		if (customerBean == null) throw new AppException(MSG_00003);
+		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();
-		if (id == null) throw new AppException(MSG_00003);
+		if (id == null) AppException.toThrow(MSG_00003);
 		
 		CustomerBean customerBeanTmp = customerService.selectById(id);
 		return RespUtil.build(request).putData("customerBean", customerBeanTmp);
@@ -94,12 +92,15 @@ public class CustomerController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParamExample {json} 请求-示例: 
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ss","phone":"15111111111"}}
+     *
      */
 	@RequestMapping(value = "/save")
 	public RespBean save(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
-		if (customerBean == null) throw new AppException(MSG_00003);
+		if (customerBean == null) AppException.toThrow(MSG_00003);
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerService.exe("save", customerBean);
 		return RespUtil.build(request);
@@ -114,14 +115,40 @@ public class CustomerController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParamExample {json} 请求-示例: 
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":1,"realName":"aa","phone":"15111111116"}}
+     * 
      */
 	@RequestMapping(value = "/update")
 	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
-		if (customerBean == null) throw new AppException(MSG_00003);
+		if (customerBean == null) AppException.toThrow(MSG_00003);
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerService.exe("update", customerBean);
+		return RespUtil.build(request);
+	}
+	
+	/**
+	 * 客户 删除
+	 * 
+     * @api {post} /api/customer/customer/delete 客户 删除
+     * @apiDescription 客户 删除
+     * @apiName customer_customer_delete
+     * @apiGroup group_customer
+     * @apiVersion 1.0.0
+     * 
+     * @apiParamExample {json} 请求-示例: 
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":1}}
+     * 
+     */
+	@RequestMapping(value = "/delete")
+	public RespBean delete(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		CustomerBean customerBean = reqBean.getCustomerBean();
+		if (customerBean == null) AppException.toThrow(MSG_00003);
+		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		customerService.exe("delete", customerBean);
 		return RespUtil.build(request);
 	}
 }

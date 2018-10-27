@@ -17,7 +17,6 @@ import com.rmp.api.service.customer.CustomerService;
 import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.util.DateUtil;
-import com.rmp.common.util.PatternUtil;
 import com.rmp.common.util.PinYinUtil;
 import com.rmp.info.mapper.CustomerMapper;
 import com.rmp.info.model.Customer;
@@ -60,6 +59,7 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 			switch (cmd) {
 			case "save": save((CustomerBean) obj);break;
 			case "update": update((CustomerBean) obj);break;
+			case "delete": delete((CustomerBean) obj);break;
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {
@@ -138,7 +138,7 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		CustomerUtil.checkPhone(phone);
 		
 		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(userId);
+		customerBeanTmp.setId(id);
 		customerBeanTmp = selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 		
@@ -156,6 +156,29 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		customerBeanTmp.setRealName(realName);
 		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
 		customerBeanTmp.setPhone(phone);
+		customerBeanTmp.setUpdateTime(nowDateLong);
+		updatePkSelVer(customerBeanTmp);
+	}
+	
+	private void delete(CustomerBean customerBean) {
+		if (customerBean == null) AppException.toThrow(MSG_00003);
+		Long id = customerBean.getId();
+		Long userId = customerBean.getUserId();
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		if (userId == null) AppException.toThrow(MSG_00003);
+		
+		CustomerBean customerBeanTmp = new CustomerBean();
+		customerBeanTmp.setId(id);
+		customerBeanTmp.setUserId(userId);
+		customerBeanTmp = selectOne(customerBeanTmp);
+		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		// 修改
+		customerBeanTmp.setIsDelete(Constant.DELETE_Y);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerBeanTmp);
 	}

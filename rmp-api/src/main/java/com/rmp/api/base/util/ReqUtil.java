@@ -48,16 +48,12 @@ public class ReqUtil extends BaseUtil {
 						
 						userMap = UserUtil.rMap(userBeanTmp);
 						jedisDao.hmset(index, key, userMap);
-						
-						// 存入 request
-						UserUtil.setCurrentUser(userBeanTmp, request);
-					} else {
-						// 存入 request
-						UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
 					}
+
+					// 存入 request
+					UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
+					
 					jedisDao.expire(index, key, Constant.Redis.User.SECONDS);
-					
-					
 				}
 			}
 			request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerBean);

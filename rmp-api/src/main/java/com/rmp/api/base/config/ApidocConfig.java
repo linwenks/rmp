@@ -17,6 +17,9 @@ public class ApidocConfig {
 	/**
 	 * @apiDefine group_user 用户
 	 */
+	/**
+	 * @apiDefine group_customer 客户
+	 */
 	
 	/**
 	 * @apiDefine defaultHeader

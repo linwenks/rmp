@@ -56,6 +56,10 @@ public class CustomerFamilyController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"}}
      * 
+     * @apiSuccess (data) {List} relationshipCodeList 关系 code list
+	 * @apiSuccess (data) {String} relationshipCodeList.key 键
+	 * @apiSuccess (data) {String} relationshipCodeList.value 值
+     * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"relationshipCodeList":[{"id":145,"key":"1","value":"父亲","pid":144,"sort":0},{"id":146,"key":"2","value":"母亲","pid":144,"sort":0},{"id":147,"key":"3","value":"老公","pid":144,"sort":0},{"id":148,"key":"4","value":"老婆","pid":144,"sort":0},{"id":149,"key":"5","value":"儿子","pid":144,"sort":0},{"id":150,"key":"6","value":"女儿","pid":144,"sort":0}]}}
      */
@@ -75,9 +79,23 @@ public class CustomerFamilyController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerFamilyBean) {Object} customerFamilyBean 家庭 bean
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.customerId 客户ID
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"customerId":2}}
      * 
+     * @apiSuccess (data) {List} customerFamilyBeanList 家庭 bean list
+	 * @apiSuccess (data) {Long} customerFamilyBeanList.id ID
+	 * @apiSuccess (data) {Integer} customerFamilyBeanList.relationship 关系
+	 * @apiSuccess (data) {String} customerFamilyBeanList.relationshipValue 关系 值
+	 * @apiSuccess (data) {String} customerFamilyBeanList.realName 真实姓名
+	 * @apiSuccess (data) {Integer} customerFamilyBeanList.birthday 生日
+	 * @apiSuccess (data) {Long} customerFamilyBeanList.phone 手机
+	 * @apiSuccess (data) {Long} customerFamilyBeanList.areaId 区域
+	 * @apiSuccess (data) {String} customerFamilyBeanList.areaNameAll 区域全名 
+	 * @apiSuccess (data) {String} customerFamilyBeanList.address 地址 
+	 * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBeanList":[{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200,"address":"ttt"},{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":1,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200}]}}
      */
@@ -124,8 +142,23 @@ public class CustomerFamilyController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerFamilyBean) {Object} customerFamilyBean 家庭 bean
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.id ID
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.customerId 客户ID
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"id":1,"customerId":2}}
+     * 
+     * @apiSuccess (data) {Object} customerFamilyBean 家庭 bean
+	 * @apiSuccess (data) {Long} customerFamilyBean.id ID
+	 * @apiSuccess (data) {Integer} customerFamilyBean.relationship 关系
+	 * @apiSuccess (data) {String} customerFamilyBean.relationshipValue 关系 值
+	 * @apiSuccess (data) {String} customerFamilyBean.realName 真实姓名
+	 * @apiSuccess (data) {Integer} customerFamilyBean.birthday 生日
+	 * @apiSuccess (data) {Long} customerFamilyBean.phone 手机
+	 * @apiSuccess (data) {Long} customerFamilyBean.areaId 区域
+	 * @apiSuccess (data) {String} customerFamilyBean.areaNameAll 区域全名 
+	 * @apiSuccess (data) {String} customerFamilyBean.address 地址 
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBean":{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":1,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200}}}
@@ -169,8 +202,28 @@ public class CustomerFamilyController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerFamilyBean) {Object} customerFamilyBean 家庭 bean
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.customerId 客户ID
+	 * @apiParam (CustomerFamilyBean) {Integer} customerFamilyBean.relationship 关系
+	 * @apiParam (CustomerFamilyBean) {String} customerFamilyBean.realName 真实姓名
+	 * @apiParam (CustomerFamilyBean) {Integer} [customerFamilyBean.birthday] 生日
+	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.phone] 手机
+	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.areaId] 区域
+	 * @apiParam (CustomerFamilyBean) {String} [customerFamilyBean.address] 地址 
+     * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"customerId":2,"familyship":0,"intimacy":0,"importance":0}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"customerId":2,"realName":"xxx","phone":15111111111,"relationship":2,"birthday":20100101,"areaId":321200,"address":"ttt"}}
+     * 
+     * @apiSuccess (data) {Object} customerFamilyBean 家庭 bean
+	 * @apiSuccess (data) {Long} customerFamilyBeanList.id ID
+	 * @apiSuccess (data) {Integer} customerFamilyBeanList.relationship 关系
+	 * @apiSuccess (data) {String} customerFamilyBeanList.relationshipValue 关系 值
+	 * @apiSuccess (data) {String} customerFamilyBeanList.realName 真实姓名
+	 * @apiSuccess (data) {Integer} customerFamilyBeanList.birthday 生日 yyyyMMdd
+	 * @apiSuccess (data) {Long} customerFamilyBeanList.phone 手机
+	 * @apiSuccess (data) {Long} customerFamilyBeanList.areaId 区域
+	 * @apiSuccess (data) {String} customerFamilyBeanList.areaNameAll 区域全名 
+	 * @apiSuccess (data) {String} customerFamilyBeanList.address 地址 
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBean":{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200,"address":"ttt"}}}
@@ -206,6 +259,16 @@ public class CustomerFamilyController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerFamilyBean) {Object} customerFamilyBean 家庭 bean
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.id ID
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.customerId 客户ID
+	 * @apiParam (CustomerFamilyBean) {Integer} customerFamilyBean.relationship 关系
+	 * @apiParam (CustomerFamilyBean) {String} customerFamilyBean.realName 真实姓名
+	 * @apiParam (CustomerFamilyBean) {Integer} [customerFamilyBean.birthday] 生日 yyyyMMdd
+	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.phone] 手机
+	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.areaId] 区域
+	 * @apiParam (CustomerFamilyBean) {String} [customerFamilyBean.address] 地址 
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"id":1,"customerId":2,"realName":"xxx","phone":15111111111,"relationship":2,"birthday":20100101,"areaId":321200,"address":"ttt"}}
      * 
@@ -228,6 +291,10 @@ public class CustomerFamilyController extends BaseApiController {
      * @apiName customer_family_delete
      * @apiGroup group_customer
      * @apiVersion 1.0.0
+     * 
+     * @apiParam (CustomerFamilyBean) {Object} customerFamilyBean 家庭 bean
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.id ID
+     * @apiParam (CustomerFamilyBean) {Long} customerFamilyBean.customerId 客户ID
      * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"id":1,"customerId":2}}

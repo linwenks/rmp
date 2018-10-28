@@ -52,6 +52,10 @@ public class CustomerRelationController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"}}
      * 
+     * @apiSuccess (data) {List} importanceCodeList 关系 code list
+     * @apiSuccess (data) {List} intimacyCodeList 亲密 code list
+     * @apiSuccess (data) {List} relationshipCodeList 重要 code list
+     * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"intimacyCodeList":[{"id":14,"key":"0","value":"不详","pid":13,"sort":0},{"id":15,"key":"1","value":"很亲近","pid":13,"sort":1},{"id":16,"key":"2","value":"一般亲近","pid":13,"sort":2},{"id":17,"key":"3","value":"正常交往","pid":13,"sort":3},{"id":18,"key":"4","value":"点头之交","pid":13,"sort":4}],"relationshipCodeList":[{"id":4,"key":"0","value":"其他","pid":3,"sort":0},{"id":5,"key":"1","value":"家人","pid":3,"sort":1},{"id":6,"key":"2","value":"亲戚","pid":3,"sort":2},{"id":7,"key":"3","value":"朋友","pid":3,"sort":3},{"id":8,"key":"4","value":"同学","pid":3,"sort":4},{"id":9,"key":"5","value":"同事","pid":3,"sort":5},{"id":10,"key":"6","value":"客户","pid":3,"sort":6},{"id":11,"key":"7","value":"熟人","pid":3,"sort":7},{"id":12,"key":"8","value":"陌生人","pid":3,"sort":8}],"importanceCodeList":[{"id":20,"key":"0","value":"不重要","pid":19,"sort":0},{"id":21,"key":"1","value":"重要","pid":19,"sort":1},{"id":22,"key":"2","value":"非常重要（vip）","pid":19,"sort":2}]}}
      */
@@ -73,8 +77,19 @@ public class CustomerRelationController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerRelationBean) {Object} customerRelationBean 工作 bean
+     * @apiParam (CustomerRelationBean) {Long} customerRelationBean.customerId 客户ID
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerRelationBean":{"customerId":2}}
+     * 
+     * @apiSuccess (data) {Object} customerRelationBean 客户 bean
+	 * @apiSuccess (data) {Integer} customerRelationBean.importance 关系
+	 * @apiSuccess (data) {String} customerRelationBean.importanceValue 关系 值
+	 * @apiSuccess (data) {Integer} customerRelationBean.intimacy 亲密
+	 * @apiSuccess (data) {String} customerRelationBean.intimacyValue 亲密 值
+	 * @apiSuccess (data) {Integer} customerRelationBean.relationship 重要
+	 * @apiSuccess (data) {String} customerRelationBean.relationshipValue 重要 值
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerRelationBean":{"relationshipValue":"其他","intimacyValue":"不详","importanceValue":"不重要","relationship":0,"intimacy":0,"importance":0}}}
@@ -115,6 +130,12 @@ public class CustomerRelationController extends BaseApiController {
      * @apiName customer_relation_update
      * @apiGroup group_customer
      * @apiVersion 1.0.0
+     * 
+     * @apiParam (CustomerRelationBean) {Object} customerRelationBean 工作 bean
+     * @apiParam (CustomerRelationBean) {Long} customerRelationBean.customerId 客户ID
+	 * @apiParam (CustomerRelationBean) {Integer} customerRelationBean.importance 关系
+	 * @apiParam (CustomerRelationBean) {Integer} customerRelationBean.intimacy 亲密
+	 * @apiParam (CustomerRelationBean) {Integer} customerRelationBean.relationship 重要
      * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerRelationBean":{"customerId":2,"relationship":0,"intimacy":0,"importance":0}}

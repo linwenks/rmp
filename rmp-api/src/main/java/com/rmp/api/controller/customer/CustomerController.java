@@ -39,7 +39,7 @@ public class CustomerController extends BaseApiController {
 	/**
 	 * 客户 查询列表
 	 * 
-     * @api {post} /api/customer/customer/list 客户 列表查询
+     * @api {post} /api/customer/customer/list 客户 列表查询 未完成
      * @apiDescription 客户 列表查询 
      * @apiName customer_customer_list
      * @apiGroup group_customer
@@ -64,7 +64,7 @@ public class CustomerController extends BaseApiController {
 	/**
 	 * 客户 查询
 	 * 
-     * @api {post} /api/customer/customer/get 客户 查询
+     * @api {post} /api/customer/customer/get 客户 查询 未完成
      * @apiDescription 客户 查询
      * @apiName customer_customer_get
      * @apiGroup group_customer
@@ -92,6 +92,10 @@ public class CustomerController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerBean) {Object} customerBean 客户 bean
+     * @apiParam (CustomerBean) {String} customerBean.realName 真实姓名
+     * @apiParam (CustomerBean) {Long} customerBean.phone 手机
+     * 
      * @apiParamExample {json} 请求-示例: 
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ss","phone":"15111111111"}}
      *
@@ -115,6 +119,11 @@ public class CustomerController extends BaseApiController {
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerBean) {Object} customerBean 客户 bean
+     * @apiParam (CustomerBean) {Long} customerBean.id ID
+     * @apiParam (CustomerBean) {String} customerBean.realName 真实姓名
+     * @apiParam (CustomerBean) {Long} customerBean.phone 手机
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":1,"realName":"aa","phone":"15111111116"}}
      * 
@@ -137,6 +146,9 @@ public class CustomerController extends BaseApiController {
      * @apiName customer_customer_delete
      * @apiGroup group_customer
      * @apiVersion 1.0.0
+     * 
+     * @apiParam (CustomerBean) {Object} customerBean 客户 bean
+     * @apiParam (CustomerBean) {Long} customerBean.id ID
      * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":1}}

@@ -31,7 +31,7 @@ import com.rmp.api.util.SysCodeUtil;
 import com.rmp.api.util.UserUtil;
 
 /**
- * 客户 家庭 json controller
+ * 客户 纪念日 json controller
  * @author linw
  *
  */
@@ -45,16 +45,19 @@ public class CustomerMemorialDayController extends BaseApiController {
 	private CustomerMemorialDayService customerMemorialDayService;
 	
 	/**
-	 * 客户 家庭 配置
+	 * 客户 纪念日 配置
 	 * 
-     * @api {post} /api/customer/memorialDay/config 客户 家庭 配置
-     * @apiDescription 客户 家庭 配置
+     * @api {post} /api/customer/memorialDay/config 客户 纪念日 配置
+     * @apiDescription 客户 纪念日 配置
      * @apiName customer_memorialDay_config
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"}}
+     * 
+     * @apiSuccess (data) {List} occurTypeCodeList 发生类型 code list
+     * @apiSuccess (data) {List} advanceTypeCodeList 提前类型 code list
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"advanceTypeCodeList":[{"id":159,"key":"1","value":"1天","pid":158,"sort":0},{"id":160,"key":"2","value":"2天","pid":158,"sort":0},{"id":161,"key":"3","value":"3天","pid":158,"sort":0},{"id":162,"key":"4","value":"5天","pid":158,"sort":0},{"id":163,"key":"5","value":"1周","pid":158,"sort":0},{"id":164,"key":"6","value":"2周","pid":158,"sort":0},{"id":165,"key":"7","value":"1月","pid":158,"sort":0}],"occurTypeCodeList":[{"id":153,"key":"1","value":"1次","pid":152,"sort":0},{"id":154,"key":"2","value":"每年","pid":152,"sort":0},{"id":155,"key":"3","value":"每月","pid":152,"sort":0},{"id":157,"key":"4","value":"每周","pid":152,"sort":0}]}}
@@ -68,16 +71,28 @@ public class CustomerMemorialDayController extends BaseApiController {
 	}
 	
 	/**
-	 * 客户 家庭 列表 查询
+	 * 客户 纪念日 列表 查询
 	 * 
-     * @api {post} /api/customer/memorialDay/list 客户 家庭 列表 查询
-     * @apiDescription 客户 家庭 查询
+     * @api {post} /api/customer/memorialDay/list 客户 纪念日 列表 查询
+     * @apiDescription 客户 纪念日 查询
      * @apiName customer_memorialDay_list
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerMemorialDayBean) {Object} customerMemorialDayBean 纪念日 bean
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.customerId 客户ID
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerMemorialDayBean":{"customerId":2}}
+     * 
+     * @apiSuccess (data) {List} customerMemorialDayBeanList 家庭 bean list
+	 * @apiSuccess (data) {Long} customerMemorialDayBeanList.id ID
+	 * @apiSuccess (data) {String} customerMemorialDayBeanList.name 名称
+	 * @apiSuccess (data) {Integer} customerMemorialDayBeanList.occurType 发生类型
+	 * @apiSuccess (data) {String} customerMemorialDayBeanList.occurTypeValue 发生类型 值
+	 * @apiSuccess (data) {Integer} customerMemorialDayBeanList.occurDate 关系日期<br/>occurType=1 yyyyMMdd 年月日<br/>occurType=2 MMdd 月日<br/>occurType=3 {1-31}天<br/>occurType=4 {1-7}周
+	 * @apiSuccess (data) {Integer} customerMemorialDayBeanList.advanceType 提前类型
+	 * @apiSuccess (data) {String} customerMemorialDayBeanList.advanceTypeValue 提前类型 值
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerMemorialDayBeanList":[{"occurTypeValue":"1次","advanceTypeValue":"1天","id":2,"name":"ttttt2","occurType":1,"occurDate":20181030,"advanceType":1},{"occurTypeValue":"1次","advanceTypeValue":"1天","id":1,"name":"ttttt2","occurType":1,"occurDate":20181030,"advanceType":1}]}}
@@ -115,16 +130,29 @@ public class CustomerMemorialDayController extends BaseApiController {
 	}
 	
 	/**
-	 * 客户 家庭 查询
+	 * 客户 纪念日 查询
 	 * 
-     * @api {post} /api/customer/memorialDay/get 客户 家庭 查询
-     * @apiDescription 客户 家庭 查询
+     * @api {post} /api/customer/memorialDay/get 客户 纪念日 查询
+     * @apiDescription 客户 纪念日 查询
      * @apiName customer_memorialDay_get
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerMemorialDayBean) {Object} customerMemorialDayBean 家庭 bean
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.id ID
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.customerId 客户ID
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerMemorialDayBean":{"id":1,"customerId":2}}
+     * 
+     * @apiSuccess (data) {Object} customerMemorialDayBean 家庭 bean
+	 * @apiSuccess (data) {Long} customerMemorialDayBean.id ID
+	 * @apiSuccess (data) {String} customerMemorialDayBean.name 名称
+	 * @apiSuccess (data) {Integer} customerMemorialDayBean.occurType 发生类型
+	 * @apiSuccess (data) {String} customerMemorialDayBean.occurTypeValue 发生类型 值
+	 * @apiSuccess (data) {Integer} customerMemorialDayBean.occurDate 关系日期
+	 * @apiSuccess (data) {Integer} customerMemorialDayBean.advanceType 提前类型
+	 * @apiSuccess (data) {String} customerMemorialDayBean.advanceTypeValue 提前类型 值
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerMemorialDayBean":{"occurTypeValue":"1次","advanceTypeValue":"1天","id":1,"name":"ttttt2","occurType":1,"occurDate":20181030,"advanceType":1}}}
@@ -158,16 +186,32 @@ public class CustomerMemorialDayController extends BaseApiController {
 	}
 	
 	/**
-	 * 客户 家庭 添加
+	 * 客户 纪念日 添加
 	 * 
-     * @api {post} /api/customer/memorialDay/save 客户 家庭 添加
-     * @apiDescription 客户 家庭 添加
+     * @api {post} /api/customer/memorialDay/save 客户 纪念日 添加
+     * @apiDescription 客户 纪念日 添加
      * @apiName customer_memorialDay_save
      * @apiGroup group_customer
      * @apiVersion 1.0.0
      * 
+     * @apiParam (CustomerMemorialDayBean) {Object} customerMemorialDayBean 家庭 bean
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.customerId 客户ID
+	 * @apiParam (CustomerMemorialDayBean) {String} customerMemorialDayBean.name 名称
+	 * @apiParam (CustomerMemorialDayBean) {Integer} customerMemorialDayBean.occurType 发生类型
+	 * @apiParam (CustomerMemorialDayBean) {Integer} customerMemorialDayBean.occurDate 关系日期
+	 * @apiParam (CustomerMemorialDayBean) {Integer} customerMemorialDayBean.advanceType 提前类型
+     * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerMemorialDayBean":{"customerId":2,"name":"ttttt","occurType":1,"occurDate":20181030,"advanceType":1}}
+     * 
+     * @apiSuccess (data) {Object} customerMemorialDayBean 家庭 bean
+	 * @apiSuccess (data) {Long} customerMemorialDayBean.id ID
+	 * @apiSuccess (data) {String} customerMemorialDayBean.name 名称
+	 * @apiSuccess (data) {Integer} customerMemorialDayBean.occurType 发生类型
+	 * @apiSuccess (data) {String} customerMemorialDayBean.occurTypeValue 发生类型 值
+	 * @apiSuccess (data) {Integer} customerMemorialDayBean.occurDate 关系日期
+	 * @apiSuccess (data) {Integer} customerMemorialDayBean.advanceType 提前类型
+	 * @apiSuccess (data) {String} customerMemorialDayBean.advanceTypeValue 提前类型 值
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerMemorialDayBean":{"occurTypeValue":"1次","advanceTypeValue":"1天","id":1,"name":"ttttt","occurType":1,"occurDate":20181030,"advanceType":1}}}
@@ -193,13 +237,21 @@ public class CustomerMemorialDayController extends BaseApiController {
 	}
 	
 	/**
-	 * 客户 家庭 修改
+	 * 客户 纪念日 修改
 	 * 
-     * @api {post} /api/customer/memorialDay/update 客户 家庭 修改
-     * @apiDescription 客户 家庭 修改
+     * @api {post} /api/customer/memorialDay/update 客户 纪念日 修改
+     * @apiDescription 客户 纪念日 修改
      * @apiName customer_memorialDay_update
      * @apiGroup group_customer
      * @apiVersion 1.0.0
+     * 
+     * @apiParam (CustomerMemorialDayBean) {Object} customerMemorialDayBean 家庭 bean
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.id ID
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.customerId 客户ID
+	 * @apiParam (CustomerMemorialDayBean) {String} customerMemorialDayBean.name 名称
+	 * @apiParam (CustomerMemorialDayBean) {Integer} customerMemorialDayBean.occurType 发生类型
+	 * @apiParam (CustomerMemorialDayBean) {Integer} customerMemorialDayBean.occurDate 关系日期
+	 * @apiParam (CustomerMemorialDayBean) {Integer} customerMemorialDayBean.advanceType 提前类型
      * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerMemorialDayBean":{"id":1,"customerId":2,"name":"ttttt","occurType":1,"occurDate":20181030,"advanceType":1}}
@@ -216,13 +268,17 @@ public class CustomerMemorialDayController extends BaseApiController {
 	}
 	
 	/**
-	 * 客户 家庭 删除
+	 * 客户 纪念日 删除
 	 * 
-     * @api {post} /api/customer/memorialDay/delete 客户 家庭 删除
-     * @apiDescription 客户 家庭 删除
+     * @api {post} /api/customer/memorialDay/delete 客户 纪念日 删除
+     * @apiDescription 客户 纪念日 删除
      * @apiName customer_memorialDay_delete
      * @apiGroup group_customer
      * @apiVersion 1.0.0
+     * 
+     * @apiParam (CustomerMemorialDayBean) {Object} customerMemorialDayBean 家庭 bean
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.id ID
+     * @apiParam (CustomerMemorialDayBean) {Long} customerMemorialDayBean.customerId 客户ID
      * 
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerMemorialDayBean":{"id":1,"customerId":2}}

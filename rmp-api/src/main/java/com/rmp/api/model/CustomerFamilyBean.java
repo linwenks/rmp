@@ -20,4 +20,14 @@ public class CustomerFamilyBean extends CustomerFamily {
      * 区域 名称 all
      */
     private String areaNameAll;
+    
+    /**
+     * 关系 value
+     */
+    private String relationshipValue;
+    
+    /**
+     * 年龄
+     */
+    private Integer age;
 }

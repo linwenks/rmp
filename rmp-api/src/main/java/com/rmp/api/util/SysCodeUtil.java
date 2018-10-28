@@ -60,6 +60,7 @@ public class SysCodeUtil extends BaseUtil {
 			sysCodeBeanMap.put(CUSTOMER_JOB_INDUSTRY, getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_INDUSTRY));
 			sysCodeBeanMap.put(CUSTOMER_JOB_POSITION, getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_POSITION));
 			
+			sysCodeBeanMap.put(CUSTOMER_FAMILY_RELATIONSHIP, getChildSimple(CUSTOMER, CUSTOMER_FAMILY, CUSTOMER_FAMILY_RELATIONSHIP));
 			
 			
 		} else {

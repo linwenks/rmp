@@ -34,7 +34,6 @@ public class CustomerUtil extends BaseUtil {
 	 * @param address
 	 */
 	public static void checkAddress(String address) {
-		if (address == null) AppException.toThrow(MSG_02002);
 		int addressMaxLength = 100;
 		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02003, String.valueOf(addressMaxLength));
 	}

@@ -72,6 +72,10 @@ public final class Constant {
 		public static final String CUSTOMER_JOB = "JOB";    // 工作
 		public static final String CUSTOMER_JOB_INDUSTRY = "INDUSTRY";    // 行业
 		public static final String CUSTOMER_JOB_POSITION = "POSITION";    // 职位
+		
+		public static final String CUSTOMER_FAMILY = "FAMILY";    // 家庭
+		public static final String CUSTOMER_FAMILY_RELATIONSHIP = "RELATIONSHIP";    // 关系
+		
 
 		
 	}

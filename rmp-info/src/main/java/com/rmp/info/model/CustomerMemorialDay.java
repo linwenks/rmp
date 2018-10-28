@@ -33,9 +33,19 @@ public class CustomerMemorialDay extends Model implements Serializable {
     private String name;
 
     /**
-     * 日期
+     * 类型（1:1次 2:每年 2:每月 3:每周）
      */
-    private Long memorialDay;
+    private Integer occurType;
+
+    /**
+     * 发生日期
+     */
+    private Integer occurDate;
+
+    /**
+     * 提前类型（1:1天 2:2天 3:3天 4:5天 5:1周 6:2周 7:1月）
+     */
+    private Integer advanceType;
 
     /**
      * 备注

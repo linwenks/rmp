@@ -314,63 +314,183 @@ public class CustomerMemorialDayCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayIsNull() {
-            addCriterion("memorial_day is null");
+        public Criteria andOccurTypeIsNull() {
+            addCriterion("occur_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayIsNotNull() {
-            addCriterion("memorial_day is not null");
+        public Criteria andOccurTypeIsNotNull() {
+            addCriterion("occur_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayEqualTo(Long value) {
-            addCriterion("memorial_day =", value, "memorialDay");
+        public Criteria andOccurTypeEqualTo(Integer value) {
+            addCriterion("occur_type =", value, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayNotEqualTo(Long value) {
-            addCriterion("memorial_day <>", value, "memorialDay");
+        public Criteria andOccurTypeNotEqualTo(Integer value) {
+            addCriterion("occur_type <>", value, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayGreaterThan(Long value) {
-            addCriterion("memorial_day >", value, "memorialDay");
+        public Criteria andOccurTypeGreaterThan(Integer value) {
+            addCriterion("occur_type >", value, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayGreaterThanOrEqualTo(Long value) {
-            addCriterion("memorial_day >=", value, "memorialDay");
+        public Criteria andOccurTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("occur_type >=", value, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayLessThan(Long value) {
-            addCriterion("memorial_day <", value, "memorialDay");
+        public Criteria andOccurTypeLessThan(Integer value) {
+            addCriterion("occur_type <", value, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayLessThanOrEqualTo(Long value) {
-            addCriterion("memorial_day <=", value, "memorialDay");
+        public Criteria andOccurTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("occur_type <=", value, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayIn(List<Long> values) {
-            addCriterion("memorial_day in", values, "memorialDay");
+        public Criteria andOccurTypeIn(List<Integer> values) {
+            addCriterion("occur_type in", values, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayNotIn(List<Long> values) {
-            addCriterion("memorial_day not in", values, "memorialDay");
+        public Criteria andOccurTypeNotIn(List<Integer> values) {
+            addCriterion("occur_type not in", values, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayBetween(Long value1, Long value2) {
-            addCriterion("memorial_day between", value1, value2, "memorialDay");
+        public Criteria andOccurTypeBetween(Integer value1, Integer value2) {
+            addCriterion("occur_type between", value1, value2, "occurType");
             return (Criteria) this;
         }
 
-        public Criteria andMemorialDayNotBetween(Long value1, Long value2) {
-            addCriterion("memorial_day not between", value1, value2, "memorialDay");
+        public Criteria andOccurTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("occur_type not between", value1, value2, "occurType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateIsNull() {
+            addCriterion("occur_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateIsNotNull() {
+            addCriterion("occur_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateEqualTo(Integer value) {
+            addCriterion("occur_date =", value, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateNotEqualTo(Integer value) {
+            addCriterion("occur_date <>", value, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateGreaterThan(Integer value) {
+            addCriterion("occur_date >", value, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("occur_date >=", value, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateLessThan(Integer value) {
+            addCriterion("occur_date <", value, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateLessThanOrEqualTo(Integer value) {
+            addCriterion("occur_date <=", value, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateIn(List<Integer> values) {
+            addCriterion("occur_date in", values, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateNotIn(List<Integer> values) {
+            addCriterion("occur_date not in", values, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateBetween(Integer value1, Integer value2) {
+            addCriterion("occur_date between", value1, value2, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccurDateNotBetween(Integer value1, Integer value2) {
+            addCriterion("occur_date not between", value1, value2, "occurDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeIsNull() {
+            addCriterion("advance_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeIsNotNull() {
+            addCriterion("advance_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeEqualTo(Integer value) {
+            addCriterion("advance_type =", value, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeNotEqualTo(Integer value) {
+            addCriterion("advance_type <>", value, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeGreaterThan(Integer value) {
+            addCriterion("advance_type >", value, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("advance_type >=", value, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeLessThan(Integer value) {
+            addCriterion("advance_type <", value, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("advance_type <=", value, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeIn(List<Integer> values) {
+            addCriterion("advance_type in", values, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeNotIn(List<Integer> values) {
+            addCriterion("advance_type not in", values, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeBetween(Integer value1, Integer value2) {
+            addCriterion("advance_type between", value1, value2, "advanceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdvanceTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("advance_type not between", value1, value2, "advanceType");
             return (Criteria) this;
         }
 

@@ -76,7 +76,9 @@ public final class Constant {
 		public static final String CUSTOMER_FAMILY = "FAMILY";    // 家庭
 		public static final String CUSTOMER_FAMILY_RELATIONSHIP = "RELATIONSHIP";    // 关系
 		
-
+		public static final String CUSTOMER_MEMORIAL_DAY = "MEMORIAL_DAY";    // 纪念日
+		public static final String CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE = "OCCUR_TYPE";    // 发生类型
+		public static final String CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE = "ADVANCE_TYPE";    // 提前类型
 		
 	}
 	

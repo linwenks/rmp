@@ -5,7 +5,9 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="customer_id" jdbcType="BIGINT" property="customerId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="memorial_day" jdbcType="BIGINT" property="memorialDay" />
+    <result column="occur_type" jdbcType="INTEGER" property="occurType" />
+    <result column="occur_date" jdbcType="INTEGER" property="occurDate" />
+    <result column="advance_type" jdbcType="INTEGER" property="advanceType" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, customer_id, `name`, memorial_day, remark, is_delete, version, create_time, update_time
+    id, customer_id, `name`, occur_type, occur_date, advance_type, remark, is_delete, 
+    version, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.rmp.info.model.CustomerMemorialDayCriteria" resultMap="BaseResultMap">
     select
@@ -108,13 +111,13 @@
   </delete>
   <insert id="insert" parameterType="com.rmp.info.model.CustomerMemorialDay">
     insert into t_customer_memorial_day (id, customer_id, `name`, 
-      memorial_day, remark, is_delete, 
-      version, create_time, update_time
-      )
+      occur_type, occur_date, advance_type, 
+      remark, is_delete, version, 
+      create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{memorialDay,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
-      #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
-      )
+      #{occurType,jdbcType=INTEGER}, #{occurDate,jdbcType=INTEGER}, #{advanceType,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -131,8 +134,14 @@
       <if test="name != null">
         `name`,
       </if>
-      <if test="memorialDay != null">
-        memorial_day,
+      <if test="occurType != null">
+        occur_type,
+      </if>
+      <if test="occurDate != null">
+        occur_date,
+      </if>
+      <if test="advanceType != null">
+        advance_type,
       </if>
       <if test="remark != null">
         remark,
@@ -160,8 +169,14 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="memorialDay != null">
-        #{memorialDay,jdbcType=BIGINT},
+      <if test="occurType != null">
+        #{occurType,jdbcType=INTEGER},
+      </if>
+      <if test="occurDate != null">
+        #{occurDate,jdbcType=INTEGER},
+      </if>
+      <if test="advanceType != null">
+        #{advanceType,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -201,8 +216,14 @@
       <if test="record.name != null">
         `name` = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.memorialDay != null">
-        memorial_day = #{record.memorialDay,jdbcType=BIGINT},
+      <if test="record.occurType != null">
+        occur_type = #{record.occurType,jdbcType=INTEGER},
+      </if>
+      <if test="record.occurDate != null">
+        occur_date = #{record.occurDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.advanceType != null">
+        advance_type = #{record.advanceType,jdbcType=INTEGER},
       </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
@@ -229,7 +250,9 @@
     set id = #{record.id,jdbcType=BIGINT},
       customer_id = #{record.customerId,jdbcType=BIGINT},
       `name` = #{record.name,jdbcType=VARCHAR},
-      memorial_day = #{record.memorialDay,jdbcType=BIGINT},
+      occur_type = #{record.occurType,jdbcType=INTEGER},
+      occur_date = #{record.occurDate,jdbcType=INTEGER},
+      advance_type = #{record.advanceType,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=INTEGER},
       version = #{record.version,jdbcType=INTEGER},
@@ -248,8 +271,14 @@
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="memorialDay != null">
-        memorial_day = #{memorialDay,jdbcType=BIGINT},
+      <if test="occurType != null">
+        occur_type = #{occurType,jdbcType=INTEGER},
+      </if>
+      <if test="occurDate != null">
+        occur_date = #{occurDate,jdbcType=INTEGER},
+      </if>
+      <if test="advanceType != null">
+        advance_type = #{advanceType,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -273,7 +302,9 @@
     update t_customer_memorial_day
     set customer_id = #{customerId,jdbcType=BIGINT},
       `name` = #{name,jdbcType=VARCHAR},
-      memorial_day = #{memorialDay,jdbcType=BIGINT},
+      occur_type = #{occurType,jdbcType=INTEGER},
+      occur_date = #{occurDate,jdbcType=INTEGER},
+      advance_type = #{advanceType,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},
@@ -286,7 +317,9 @@
     id,
     customer_id,
     name,
-    memorial_day,
+    occur_type,
+    occur_date,
+    advance_type,
     remark,
     is_delete,
     version,
@@ -299,7 +332,9 @@
          #{record.id,jdbcType=BIGINT}, 
          #{record.customerId,jdbcType=BIGINT}, 
          #{record.name,jdbcType=VARCHAR}, 
-         #{record.memorialDay,jdbcType=BIGINT}, 
+         #{record.occurType,jdbcType=INTEGER}, 
+         #{record.occurDate,jdbcType=INTEGER}, 
+         #{record.advanceType,jdbcType=INTEGER}, 
          #{record.remark,jdbcType=VARCHAR}, 
          #{record.isDelete,jdbcType=INTEGER}, 
          #{record.version,jdbcType=INTEGER}, 
@@ -321,8 +356,14 @@
       <if test="recordColl[0].name != null">
         name,
       </if>
-      <if test="recordColl[0].memorialDay != null">
-        memorial_day,
+      <if test="recordColl[0].occurType != null">
+        occur_type,
+      </if>
+      <if test="recordColl[0].occurDate != null">
+        occur_date,
+      </if>
+      <if test="recordColl[0].advanceType != null">
+        advance_type,
       </if>
       <if test="recordColl[0].remark != null">
         remark,
@@ -353,8 +394,14 @@
         <if test="record.name != null">
            #{record.name,jdbcType=VARCHAR}, 
         </if>
-        <if test="record.memorialDay != null">
-           #{record.memorialDay,jdbcType=BIGINT}, 
+        <if test="record.occurType != null">
+           #{record.occurType,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.occurDate != null">
+           #{record.occurDate,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.advanceType != null">
+           #{record.advanceType,jdbcType=INTEGER}, 
         </if>
         <if test="record.remark != null">
            #{record.remark,jdbcType=VARCHAR}, 
@@ -398,8 +445,14 @@
       <if test="name != null">
           name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="memorialDay != null">
-          memorial_day = #{memorialDay,jdbcType=BIGINT},
+      <if test="occurType != null">
+          occur_type = #{occurType,jdbcType=INTEGER},
+      </if>
+      <if test="occurDate != null">
+          occur_date = #{occurDate,jdbcType=INTEGER},
+      </if>
+      <if test="advanceType != null">
+          advance_type = #{advanceType,jdbcType=INTEGER},
       </if>
       <if test="remark != null">
           remark = #{remark,jdbcType=VARCHAR},
@@ -423,7 +476,9 @@
     set 
       customer_id = #{customerId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
-      memorial_day = #{memorialDay,jdbcType=BIGINT},
+      occur_type = #{occurType,jdbcType=INTEGER},
+      occur_date = #{occurDate,jdbcType=INTEGER},
+      advance_type = #{advanceType,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},

@@ -53,7 +53,7 @@ public class CustomerJobController extends BaseApiController {
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerJobBean":{"customerId":2}}
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerJobBean":{"interest":"1","diet":"1,3","taste":"5"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerJobBean":{"areaNameAll":"江苏省泰州市","industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":15111111111,"areaId":321200,"address":"aaaaaaaaaaaaaa"},"customerBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -76,15 +76,15 @@ public class CustomerJobController extends BaseApiController {
 			if (customerBean == null) AppException.toThrow(MSG_00003);
 			
 			customerBeanResult = new CustomerBean();
-			customerBean.setRealName(customerBean.getRealName());
-			customerBean.setPhone(customerBean.getPhone());
-			customerBean.setBirthday(customerBean.getBirthday());
-			customerBean.setSex(customerBean.getSex());
+			customerBeanResult.setRealName(customerBean.getRealName());
+			customerBeanResult.setPhone(customerBean.getPhone());
+			customerBeanResult.setBirthday(customerBean.getBirthday());
+			customerBeanResult.setSex(customerBean.getSex());
 			Long areaId = customerBean.getAreaId();
-			customerBean.setAreaId(areaId);
-			customerBean.setAreaNameAll(AreaUtil.getNameAll(areaId));
-			customerBean.setAddress(customerBean.getAddress());
-			customerBean.setHeadPic(customerBean.getHeadPic());    // 获取图片域名
+			customerBeanResult.setAreaId(areaId);
+			customerBeanResult.setAreaNameAll(AreaUtil.getNameAll(areaId));
+			customerBeanResult.setAddress(customerBean.getAddress());
+			customerBeanResult.setHeadPic(customerBean.getHeadPic());    // 获取图片域名
 			
 			CustomerJobBean customerJobBeanTmp = customerJobService.selectOne(customerJobBean);
 			if (customerJobBeanTmp != null) {
@@ -113,20 +113,24 @@ public class CustomerJobController extends BaseApiController {
      * @apiVersion 1.0.0
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerJobBean":{"customerId":2,"interest":"1","diet":"1,3","taste":null}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ttt","phone":15111111111,"sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"},"customerJobBean":{"customerId":4,"industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","areaId":321200,"address":"aaaaaaaaaaaaaa"}}
      * 
+     * @apiSuccessExample {json} 成功返回-示例:
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":4}}}
      */
 	@RequestMapping(value = "/update")
 	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
 		CustomerJobBean customerJobBean = reqBean.getCustomerJobBean();
-		if (customerBean == null) AppException.toThrow(MSG_00003);
+		if (customerBean == null) customerBean = new CustomerBean();
 		if (customerJobBean == null) customerJobBean = new CustomerJobBean();
 		Long currentUserId = UserUtil.getCurrentUserId(request);
 		customerBean.setUserId(currentUserId);
 		customerJobBean.setUserId(currentUserId);
 		customerJobService.exe("update", ImmutableMap.of("customerBean", customerBean, "customerJobBean", customerJobBean));
-		return RespUtil.build(request);
+		CustomerBean customerBeanResult = new CustomerBean();
+		customerBeanResult.setId(customerBean.getId());
+		return RespUtil.build(request).putData("customerBean", customerBeanResult);
 	}
 }

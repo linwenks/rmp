@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -130,6 +131,8 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		customerBeanTmp.setHeadPic(Constant.Customer.HEAD_PIC);
 		customerBeanTmp.setCreateTime(nowDateLong);
 		insertSel(customerBeanTmp);
+		
+		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 	}
 	
 	/**
@@ -175,7 +178,9 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		customerBeanTmp.setAreaId(areaId);
 		customerBeanTmp.setAddress(address);
 		customerBeanTmp.setCreateTime(nowDateLong);
-		insert(customerBeanTmp);
+		insertSel(customerBeanTmp);
+		
+		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 	}
 	
 	/**
@@ -216,6 +221,8 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		customerBeanTmp.setPhone(phone);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerBeanTmp);
+		
+		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 	}
 	
 	/**
@@ -266,7 +273,9 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 		customerBeanTmp.setAreaId(areaId);
 		customerBeanTmp.setAddress(address);
 		customerBeanTmp.setUpdateTime(nowDateLong);
-		updatePkSelVer(customerBeanTmp);
+		updatePkVer(customerBeanTmp);
+		
+		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 	}
 	
 	/**

@@ -132,7 +132,6 @@ public class CustomerJobServiceImpl extends BaseServiceImpl implements CustomerJ
 			customerJobBeanTmp.setCustomerId(customerId);
 			customerJobBeanTmp = selectOne(customerJobBeanTmp);
 			if (customerJobBeanTmp != null) {
-				customerJobBeanTmp.setCustomerId(customerId);
 				customerJobBeanTmp.setIndustry(industry);
 				customerJobBeanTmp.setCompanyName(companyName);
 				customerJobBeanTmp.setDepartmentName(departmentName);
@@ -157,6 +156,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl implements CustomerJ
 			}
 			
 			// 修改
+			customerBean.setId(customerId);
 			customerService.exe("updateAll", customerBean);
 			
 		} else {

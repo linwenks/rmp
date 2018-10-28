@@ -20,4 +20,14 @@ public class CustomerJobBean extends CustomerJob {
      * 区域 名称 all
      */
     private String areaNameAll;
+    
+    /**
+     * 行业 value
+     */
+    private String industryValue;
+    
+    /**
+     * 职位 value
+     */
+    private String positionValue;
 }

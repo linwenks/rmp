@@ -15,4 +15,19 @@ public class CustomerRelationBean extends CustomerRelation {
 	private static final long serialVersionUID = 2088956218423446207L;
 	
 	private Long userId;
+	
+	 /**
+     * 关系 value
+     */
+    private String relationshipValue;
+
+    /**
+     * 亲密
+     */
+    private String intimacyValue;
+
+    /**
+     * 重要
+     */
+    private String importanceValue;
 }

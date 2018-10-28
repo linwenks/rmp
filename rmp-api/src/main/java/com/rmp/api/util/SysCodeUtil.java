@@ -1,18 +1,20 @@
 package com.rmp.api.util;
 
+import static com.rmp.api.util.constant.Constant.SysCode.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import com.google.common.collect.Maps;
 import com.rmp.api.base.util.BaseUtil;
 import com.rmp.api.model.SysCodeBean;
+
 
 @Component
 public class SysCodeUtil extends BaseUtil {
@@ -24,45 +26,47 @@ public class SysCodeUtil extends BaseUtil {
 	private static List<SysCodeBean> sysCodeBeanListTree;
 	private static List<SysCodeBean> sysCodeBeanListTreeSimple;
 	
-	private static Map<String, SysCodeBean> sysCodeBeanMap;
-	private static Map<String, SysCodeBean> sysCodeBeanMapSimple;
+	private static Map<String, List<SysCodeBean>> sysCodeBeanMap;
 	
 	public static void load() {
 		SysCodeBean sysCodeBean = new SysCodeBean();
+		sysCodeBean.setOrderBy(" sort, id ");
 		List<SysCodeBean> sysCodeBeanList = sysCodeService.selectList(null, sysCodeBean);
 		
 		if (!CollectionUtils.isEmpty(sysCodeBeanList)) {
+			
+			sysCodeBeanList.forEach(o -> {
+				o.setIsDelete(null);
+				o.setVersion(null);
+				o.setCreateTime(null);
+				o.setUpdateTime(null);
+			});
+			
 			sysCodeBeanListTree = assemblyTreeList(sysCodeBeanList);
 			sysCodeBeanListTreeSimple = assemblyTreeListSimple(sysCodeBeanListTree);
-			sysCodeBeanMap = sysCodeBeanListTree.stream().collect(Collectors.toMap(SysCodeBean::getKey, Function.identity()));
-			sysCodeBeanMapSimple = sysCodeBeanListTreeSimple.stream().collect(Collectors.toMap(SysCodeBean::getKey, Function.identity()));
 			
-			for (Map.Entry<String, SysCodeBean> entry : sysCodeBeanMap.entrySet()) {
-				SysCodeBean value = entry.getValue();
-				List<SysCodeBean> childSysCodeBeanList = value.getChildList();
-				if (!CollectionUtils.isEmpty(childSysCodeBeanList)) {
-					Map<String, SysCodeBean> childSysCodeBeanMap = childSysCodeBeanList.stream().collect(Collectors.toMap(SysCodeBean::getKey, Function.identity()));
-					value.setChildMap(childSysCodeBeanMap);
-				}
-			}
+			sysCodeBeanMap = Maps.newHashMap();
+			sysCodeBeanMap.put(CUSTOMER_RELATION_IMPORTANCE, getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_IMPORTANCE));
+			sysCodeBeanMap.put(CUSTOMER_RELATION_INTIMACY, getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_INTIMACY));
+			sysCodeBeanMap.put(CUSTOMER_RELATION_RELATIONSHIP, getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_RELATIONSHIP));
+					
+			sysCodeBeanMap.put(CUSTOMER_PROBLEM_HEALTH, getChildSimple(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_HEALTH));
+			sysCodeBeanMap.put(CUSTOMER_PROBLEM_LIFE, getChildSimple(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_LIFE));
+					
+			sysCodeBeanMap.put(CUSTOMER_HOBBY_DIET, getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_DIET));
+			sysCodeBeanMap.put(CUSTOMER_HOBBY_INTEREST, getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_INTEREST));
+			sysCodeBeanMap.put(CUSTOMER_HOBBY_TASTE, getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_TASTE));
+					
+			sysCodeBeanMap.put(CUSTOMER_JOB_INDUSTRY, getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_INDUSTRY));
+			sysCodeBeanMap.put(CUSTOMER_JOB_POSITION, getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_POSITION));
 			
-			for (Map.Entry<String, SysCodeBean> entry : sysCodeBeanMapSimple.entrySet()) {
-				SysCodeBean value = entry.getValue();
-				List<SysCodeBean> childSysCodeBeanList = value.getChildList();
-				if (!CollectionUtils.isEmpty(childSysCodeBeanList)) {
-					Map<String, SysCodeBean> childSysCodeBeanMap = childSysCodeBeanList.stream().collect(Collectors.toMap(SysCodeBean::getKey, Function.identity()));
-					value.setChildMap(childSysCodeBeanMap);
-				}
-			}
+			
+			
 		} else {
 			sysCodeBeanListTree = null;
 			sysCodeBeanListTreeSimple = null;
-			sysCodeBeanMap = null;
-			sysCodeBeanMapSimple = null;
-		}
-		
-		if (!CollectionUtils.isEmpty(sysCodeBeanMap)) {
 			
+			sysCodeBeanMap = null;
 		}
 	}
 	
@@ -97,7 +101,7 @@ public class SysCodeUtil extends BaseUtil {
 	 * @param bean
 	 */
 	private static void addToTree(List<SysCodeBean> beanList, SysCodeBean bean) {
-		if (beanList != null && !beanList.isEmpty()) {
+		if (!CollectionUtils.isEmpty(beanList)) {
 			for (SysCodeBean beanTmp : beanList) {
 				if (beanTmp != null && bean != null) {
 					if (beanTmp.getId().longValue() == bean.getPid().longValue()) {
@@ -132,94 +136,69 @@ public class SysCodeUtil extends BaseUtil {
 		return newBeanList;
 	}
 	
-	public static SysCodeBean getBean(String codeKey) {
-		SysCodeBean sysCodeBean = null;
-		if (!CollectionUtils.isEmpty(sysCodeBeanMap) && !StringUtils.isEmpty(codeKey)) {
-			sysCodeBean = sysCodeBeanMap.get(codeKey);
-		}
-		return sysCodeBean;
-	}
 	
-	public static SysCodeBean getBeanSimple(String codeKey) {
-		SysCodeBean sysCodeBean = null;
-		if (!CollectionUtils.isEmpty(sysCodeBeanMapSimple) && !StringUtils.isEmpty(codeKey)) {
-			sysCodeBean = sysCodeBeanMapSimple.get(codeKey);
-		}
-		return sysCodeBean;
-	}
-	
-	public static SysCodeBean getBean(String pCodeKey, String codeKey) {
-		SysCodeBean sysCodeBean = null;
-		SysCodeBean pSysCodeBean = getBean(pCodeKey);
-		if (pSysCodeBean != null && !StringUtils.isEmpty(codeKey)) {
-			Map<String, SysCodeBean> sysCodeBeanMap = pSysCodeBean.getChildMap();
-			if (!CollectionUtils.isEmpty(sysCodeBeanMap)) {
-				sysCodeBean = sysCodeBeanMap.get(codeKey);
+	public static SysCodeBean getSimple(String... keys) {
+		SysCodeBean bean = null;
+		
+		List<SysCodeBean> beanList = sysCodeBeanListTreeSimple;
+		
+		if (keys != null && keys.length > 0) {
+			for (String key : keys) {
+				if (StringUtils.isEmpty(key)) {
+					continue;
+				}
+				SysCodeBean beanTmp = new SysCodeBean();
+				beanTmp.setKey(key);
+				
+				bean = getSimple(beanList, beanTmp);
+				if (bean != null) {
+					beanList = bean.getChildList();
+				}
 			}
 		}
-		return sysCodeBean;
+		return bean;
 	}
 	
-	public static SysCodeBean getBeanSimple(String pCodeKey, String codeKey) {
-		SysCodeBean sysCodeBean = null;
-		SysCodeBean pSysCodeBean = getBeanSimple(pCodeKey);
-		if (pSysCodeBean != null && !StringUtils.isEmpty(codeKey)) {
-			Map<String, SysCodeBean> sysCodeBeanMap = pSysCodeBean.getChildMap();
-			if (!CollectionUtils.isEmpty(sysCodeBeanMap)) {
-				sysCodeBean = sysCodeBeanMap.get(codeKey);
+	public static SysCodeBean getSimple(List<SysCodeBean> beanList, SysCodeBean bean) {
+		SysCodeBean beanTmp = null;
+		if (!CollectionUtils.isEmpty(beanList)) {
+			int index = beanList.indexOf(bean);
+			if (index >= 0) {
+				beanTmp = beanList.get(index);
 			}
 		}
-		return sysCodeBean;
+		return beanTmp;
 	}
 	
-	public static String getValue(String codeKey) {
-		String codeValue = null;
-		SysCodeBean sysCodeBean = getBean(codeKey);
-		if (sysCodeBean != null) {
-			codeValue = sysCodeBean.getValue();
-		}
-		return codeValue;
-	}
-	
-	public static String getValueSimple(String codeKey) {
-		String codeValue = null;
-		SysCodeBean sysCodeBean = getBeanSimple(codeKey);
-		if (sysCodeBean != null) {
-			codeValue = sysCodeBean.getValue();
-		}
-		return codeValue;
-	}
-	
-	public static String getValue(String pCodeKey, String codeKey) {
-		String codeValue = null;
-		SysCodeBean sysCodeBean = getBean(pCodeKey, codeKey);
-		if (sysCodeBean != null) {
-			codeValue = sysCodeBean.getValue();
-		}
-		return codeValue;
-	}
-	
-	public static String getValueSimple(String pCodeKey, String codeKey) {
-		String codeValue = null;
-		SysCodeBean sysCodeBean = getBeanSimple(pCodeKey, codeKey);
-		if (sysCodeBean != null) {
-			codeValue = sysCodeBean.getValue();
-		}
-		return codeValue;
-	}
-	
-	public static List<SysCodeBean> getChildList(String codeKey) {
-		SysCodeBean sysCodeBean = getBean(codeKey);
-		if (sysCodeBean != null) {
-			return sysCodeBean.getChildList();
+	public static List<SysCodeBean> getChildSimple(String... keys) {
+		SysCodeBean bean = getSimple(keys);
+		if (bean != null) {
+			return bean.getChildList();
 		}
 		return null;
 	}
 	
-	public static List<SysCodeBean> getChildListSimple(String codeKey) {
-		SysCodeBean sysCodeBean = getBeanSimple(codeKey);
-		if (sysCodeBean != null) {
-			return sysCodeBean.getChildList();
+	public static String getValue(String... keys)	{
+		SysCodeBean bean = getSimple(keys);
+		if (bean != null) {
+			return bean.getValue();
+		}
+		return null;
+	}
+	
+	public static String getValue(String key1, String key2)	{
+		SysCodeBean beanTmp = new SysCodeBean();
+		beanTmp.setKey(key2);
+		SysCodeBean bean = getSimple(getListSimple(key1), beanTmp);
+		if (bean != null) {
+			return bean.getValue();
+		}
+		return null;
+	}
+	
+	public static List<SysCodeBean> getListSimple(String key) {
+		if (!CollectionUtils.isEmpty(sysCodeBeanMap)) {
+			return sysCodeBeanMap.get(key);
 		}
 		return null;
 	}

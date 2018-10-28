@@ -50,6 +50,32 @@ public final class Constant {
 		public static final String ERROR = "1";
 	}
 	
+	// 系统 code
+	public static final class SysCode {
+		
+		public static final String CUSTOMER	= "CUSTOMER";    // 客户
+
+		public static final String CUSTOMER_RELATION = "RELATION";    // 关系
+		public static final String CUSTOMER_RELATION_RELATIONSHIP = "RELATIONSHIP";    // 关系
+		public static final String CUSTOMER_RELATION_INTIMACY = "INTIMACY";    // 亲密
+		public static final String CUSTOMER_RELATION_IMPORTANCE = "IMPORTANCE";    // 重要
+
+		public static final String CUSTOMER_PROBLEM	= "PROBLEM";    // 问题
+		public static final String CUSTOMER_PROBLEM_HEALTH = "HEALTH";    // 健康
+		public static final String CUSTOMER_PROBLEM_LIFE = "LIFE";    // 生活
+
+		public static final String CUSTOMER_HOBBY = "HOBBY";    // 兴趣爱好
+		public static final String CUSTOMER_HOBBY_INTEREST = "INTEREST";    // 兴趣
+		public static final String CUSTOMER_HOBBY_DIET = "DIET";    // 	饮食
+		public static final String CUSTOMER_HOBBY_TASTE = "TASTE";    // 口味
+
+		public static final String CUSTOMER_JOB = "JOB";    // 工作
+		public static final String CUSTOMER_JOB_INDUSTRY = "INDUSTRY";    // 行业
+		public static final String CUSTOMER_JOB_POSITION = "POSITION";    // 职位
+
+		
+	}
+	
 	// 手机短信
 	public static final class PhoneMsg {
 		

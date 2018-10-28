@@ -1,6 +1,7 @@
 package com.rmp.api.controller.customer;
 
 import static com.rmp.api.util.MsgEnum.*;
+import static com.rmp.api.util.constant.Constant.SysCode.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerProblemBean;
 import com.rmp.api.service.customer.CustomerProblemService;
 import com.rmp.api.service.customer.CustomerService;
+import com.rmp.api.util.CustomerProblemUtil;
+import com.rmp.api.util.SysCodeUtil;
 import com.rmp.api.util.UserUtil;
 
 /**
@@ -38,6 +41,29 @@ public class CustomerProblemController extends BaseApiController {
 	private CustomerProblemService customerProblemService;
 	
 	/**
+	 * 客户 可能问题 配置
+	 * 
+     * @api {post} /api/customer/problem/config 客户 可能问题 配置
+     * @apiDescription 客户 可能问题 配置
+     * @apiName customer_problem_config
+     * @apiGroup group_customer
+     * @apiVersion 1.0.0
+     * 
+     * @apiParamExample {json} 请求-示例: 
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"}}
+     * 
+     * @apiSuccessExample {json} 成功返回-示例:
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"healthCodeList":[{"id":25,"key":"1","value":"心脏病","pid":24,"sort":1},{"id":26,"key":"2","value":"动脉硬化","pid":24,"sort":2},{"id":27,"key":"3","value":"高血压","pid":24,"sort":3},{"id":28,"key":"4","value":"高血脂","pid":24,"sort":4},{"id":29,"key":"5","value":"肠胃病","pid":24,"sort":5},{"id":30,"key":"6","value":"糖尿病","pid":24,"sort":6},{"id":31,"key":"7","value":"关节炎","pid":24,"sort":7},{"id":32,"key":"8","value":"肥胖症","pid":24,"sort":8},{"id":33,"key":"9","value":"胆结石","pid":24,"sort":9},{"id":34,"key":"10","value":"肾病","pid":24,"sort":10},{"id":35,"key":"11","value":"精神问题","pid":24,"sort":11},{"id":36,"key":"12","value":"脸部痘痕","pid":24,"sort":12},{"id":37,"key":"13","value":"五官瑕疵","pid":24,"sort":13}],"lifeCodeList":[{"id":39,"key":"1","value":"资金缺乏","pid":38,"sort":1},{"id":40,"key":"2","value":"寻找工作","pid":38,"sort":2},{"id":41,"key":"3","value":"事业发展","pid":38,"sort":3},{"id":42,"key":"4","value":"感情困扰","pid":38,"sort":4},{"id":43,"key":"5","value":"子女学习","pid":38,"sort":5},{"id":44,"key":"6","value":"法律问题","pid":38,"sort":6},{"id":45,"key":"7","value":"税务","pid":38,"sort":7}]}}
+     */
+	@RequestMapping(value = "/config")
+	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqUtil.buildCheckLogin(body, request);
+		return RespUtil.build(request)
+				.putData("healthCodeList", SysCodeUtil.getListSimple(CUSTOMER_PROBLEM_HEALTH))
+				.putData("lifeCodeList", SysCodeUtil.getListSimple(CUSTOMER_PROBLEM_LIFE));
+	}
+	
+	/**
 	 * 客户 可能问题 查询
 	 * 
      * @api {post} /api/customer/problem/get 客户 可能问题 查询
@@ -50,7 +76,7 @@ public class CustomerProblemController extends BaseApiController {
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerProblemBean":{"customerId":2}}
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerProblemBean":{"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerProblemBean":{"healthKeyList":["1"],"lifeKeyList":["1","3"],"healthValueList":["美食"],"lifeValueList":["川湘菜","粤菜"],"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -73,6 +99,7 @@ public class CustomerProblemController extends BaseApiController {
 			customerProblemBeanResult.setHealth(customerProblemBeanTmp.getHealth());
 			customerProblemBeanResult.setLife(customerProblemBeanTmp.getLife());
 			customerProblemBeanResult.setRemark(customerProblemBeanTmp.getRemark());
+			CustomerProblemUtil.assembly(customerProblemBeanResult);
 		}
 		return RespUtil.build(request).putData("customerProblemBean", customerProblemBeanResult);
 	}

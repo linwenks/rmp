@@ -55,30 +55,33 @@ public final class Constant {
 		
 		public static final String CUSTOMER	= "CUSTOMER";    // 客户
 
-		public static final String CUSTOMER_RELATION = "RELATION";    // 关系
-		public static final String CUSTOMER_RELATION_RELATIONSHIP = "RELATIONSHIP";    // 关系
-		public static final String CUSTOMER_RELATION_INTIMACY = "INTIMACY";    // 亲密
-		public static final String CUSTOMER_RELATION_IMPORTANCE = "IMPORTANCE";    // 重要
+		public static final String CUSTOMER_RELATION = "CUSTOMER_RELATION";    // 关系
+		public static final String CUSTOMER_RELATION_RELATIONSHIP = "CUSTOMER_RELATION_RELATIONSHIP";    // 关系
+		public static final String CUSTOMER_RELATION_INTIMACY = "CUSTOMER_RELATION_INTIMACY";    // 亲密
+		public static final String CUSTOMER_RELATION_IMPORTANCE = "CUSTOMER_RELATION_IMPORTANCE";    // 重要
 
-		public static final String CUSTOMER_PROBLEM	= "PROBLEM";    // 问题
-		public static final String CUSTOMER_PROBLEM_HEALTH = "HEALTH";    // 健康
-		public static final String CUSTOMER_PROBLEM_LIFE = "LIFE";    // 生活
+		public static final String CUSTOMER_PROBLEM	= "CUSTOMER_PROBLEM";    // 问题
+		public static final String CUSTOMER_PROBLEM_HEALTH = "CUSTOMER_PROBLEM_HEALTH";    // 健康
+		public static final String CUSTOMER_PROBLEM_LIFE = "CUSTOMER_PROBLEM_LIFE";    // 生活
 
-		public static final String CUSTOMER_HOBBY = "HOBBY";    // 兴趣爱好
-		public static final String CUSTOMER_HOBBY_INTEREST = "INTEREST";    // 兴趣
-		public static final String CUSTOMER_HOBBY_DIET = "DIET";    // 	饮食
-		public static final String CUSTOMER_HOBBY_TASTE = "TASTE";    // 口味
+		public static final String CUSTOMER_HOBBY = "CUSTOMER_HOBBY";    // 兴趣爱好
+		public static final String CUSTOMER_HOBBY_INTEREST = "CUSTOMER_HOBBY_INTEREST";    // 兴趣
+		public static final String CUSTOMER_HOBBY_DIET = "CUSTOMER_HOBBY_DIET";    // 	饮食
+		public static final String CUSTOMER_HOBBY_TASTE = "CUSTOMER_HOBBY_TASTE";    // 口味
 
-		public static final String CUSTOMER_JOB = "JOB";    // 工作
-		public static final String CUSTOMER_JOB_INDUSTRY = "INDUSTRY";    // 行业
-		public static final String CUSTOMER_JOB_POSITION = "POSITION";    // 职位
+		public static final String CUSTOMER_JOB = "CUSTOMER_JOB";    // 工作
+		public static final String CUSTOMER_JOB_INDUSTRY = "CUSTOMER_JOB_INDUSTRY";    // 行业
+		public static final String CUSTOMER_JOB_POSITION = "CUSTOMER_JOB_POSITION";    // 职位
 		
-		public static final String CUSTOMER_FAMILY = "FAMILY";    // 家庭
-		public static final String CUSTOMER_FAMILY_RELATIONSHIP = "RELATIONSHIP";    // 关系
+		public static final String CUSTOMER_FAMILY = "CUSTOMER_FAMILY";    // 家庭
+		public static final String CUSTOMER_FAMILY_RELATIONSHIP = "CUSTOMER_FAMILY_RELATIONSHIP";    // 关系
 		
-		public static final String CUSTOMER_MEMORIAL_DAY = "MEMORIAL_DAY";    // 纪念日
-		public static final String CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE = "OCCUR_TYPE";    // 发生类型
-		public static final String CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE = "ADVANCE_TYPE";    // 提前类型
+		public static final String CUSTOMER_MEMORIAL_DAY = "CUSTOMER_MEMORIAL_DAY";    // 纪念日
+		public static final String CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE = "CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE";    // 发生类型
+		public static final String CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE = "CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE";    // 提前类型
+		
+		public static final String CUSTOMER_MAINTAIN = "CUSTOMER_MAINTAIN";    // 维护设置
+		public static final String CUSTOMER_MAINTAIN_MAINTAIN = "CUSTOMER_MAINTAIN_MAINTAIN";    // 维护
 		
 	}
 	

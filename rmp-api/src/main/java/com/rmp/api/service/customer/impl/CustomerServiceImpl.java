@@ -13,10 +13,12 @@ import org.springframework.util.CollectionUtils;
 
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
+import com.rmp.api.mapper.CustomerMapperCustom;
 import com.rmp.api.model.CustomerBean;
 import com.rmp.api.service.customer.CustomerService;
 import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.constant.Constant;
+import com.rmp.common.page.QueryPage;
 import com.rmp.common.util.DateUtil;
 import com.rmp.common.util.PinYinUtil;
 import com.rmp.info.mapper.CustomerMapper;
@@ -33,6 +35,8 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 	
 	@Autowired
 	private CustomerMapper customerMapper;
+	@Autowired
+	private CustomerMapperCustom customerMapperCustom;
 
 	@Override
 	public Class<?> getModelClass() {
@@ -97,6 +101,11 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 			criteriaTmp.andPhoneEqualTo(beanTmp.getPhone());
 		}
 	}
+	
+	public List<CustomerBean> selectListCustom(QueryPage queryPage, CustomerBean customerBean) {
+		return customerMapperCustom.selectList(queryPage, customerBean);
+	}
+	
 	
 	/**
 	 * 添加

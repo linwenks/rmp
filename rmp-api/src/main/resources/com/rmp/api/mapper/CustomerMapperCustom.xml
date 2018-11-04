@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rmp.api.mapper.CustomerMapperCustom">
+	<resultMap id="CustomerBean" type="com.rmp.api.model.CustomerBean">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
+		<result column="phone" jdbcType="BIGINT" property="phone" />
+		<result column="sex" jdbcType="INTEGER" property="sex" />
+		<result column="birthday" jdbcType="INTEGER" property="birthday" />
+		<result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+		<result column="area_id" jdbcType="BIGINT" property="areaId" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="vip" jdbcType="INTEGER" property="vip" />
+		<result column="tag" jdbcType="VARCHAR" property="tag" />
+		<result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+		<result column="version" jdbcType="INTEGER" property="version" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
+		
+		<association property="customerRelationBean" resultMap="CustomerRelationBean" columnPrefix="cr_"/>
+	</resultMap>
+	
+	<resultMap id="CustomerRelationBean" type="com.rmp.api.model.CustomerRelationBean">
+    <id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+	    <result column="relationship" jdbcType="INTEGER" property="relationship" />
+	    <result column="intimacy" jdbcType="INTEGER" property="intimacy" />
+	    <result column="importance" jdbcType="INTEGER" property="importance" />
+	    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+	    <result column="version" jdbcType="INTEGER" property="version" />
+	    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+	    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+	
+	<sql id="limit">
+		<if test="queryPage != null" >
+			limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+	    </if>
+	</sql>
+	
+	<select id="selectList" resultMap="CustomerBean">
+		select
+		
+		c.id, c.user_id, c.real_name, c.pinyin, c.phone, c.sex, c.birthday, c.head_pic, c.area_id, c.address, c.vip, c.tag, c.is_delete, c.version, c.create_time, c.update_time
+		
+		, cr.id cr_id, cr.customer_id cr_customer_id, cr.relationship cr_relationship, cr.intimacy cr_intimacy, cr.importance cr_importance, cr.is_delete cr_is_delete
+		, cr.version cr_version, cr.create_time cr_create_time, cr.update_time cr_update_time
+		
+		from t_customer c
+		
+		left join t_customer_relation cr 
+		on c.id = cr.customer_id
+		and cr.is_delete = 0
+		
+		<where>
+			c.is_delete = 0
+			<if test="customerBean != null" >
+				<if test="customerBean.userId != null" >
+					and c.user_id = #{customerBean.userId}
+			    </if>
+			    <if test="customerBean.realName != null" >
+					and locate(#{customerBean.realName}, c.real_name) > 0
+			    </if>
+			    <if test="customerBean.phone != null" >
+					and c.phone = #{customerBean.phone}
+			    </if>
+			    
+			    <if test="customerBean.customerRelationBean != null" >
+					<if test="customerBean.customerRelationBean.relationship != null" >
+						and cr.relationship = #{customerBean.customerRelationBean.relationship}
+				    </if>
+				    <if test="customerBean.customerRelationBean.intimacy != null" >
+						and cr.intimacy = #{customerBean.customerRelationBean.intimacy}
+				    </if>
+				    <if test="customerBean.customerRelationBean.importance != null" >
+						and cr.importance = #{customerBean.customerRelationBean.importance}
+				    </if>
+			    </if>
+		    </if>
+		</where>
+		order by c.pinyin, c.id desc
+		<include refid="limit" />
+	</select>
+	
+</mapper>

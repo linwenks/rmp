@@ -20,4 +20,6 @@ public class CustomerBean extends Customer {
      * 区域 名称 all
      */
     private String areaNameAll;
+    
+    private CustomerRelationBean customerRelationBean;
 }

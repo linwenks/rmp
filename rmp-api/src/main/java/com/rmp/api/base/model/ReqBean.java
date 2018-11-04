@@ -6,6 +6,7 @@ import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerFamilyBean;
 import com.rmp.api.model.CustomerHobbyBean;
 import com.rmp.api.model.CustomerJobBean;
+import com.rmp.api.model.CustomerMaintainBean;
 import com.rmp.api.model.CustomerMemorialDayBean;
 import com.rmp.api.model.CustomerProblemBean;
 import com.rmp.api.model.CustomerRelationBean;
@@ -53,4 +54,6 @@ public class ReqBean {
 	private CustomerFamilyBean customerFamilyBean;
 	
 	private CustomerMemorialDayBean customerMemorialDayBean;
+	
+	private CustomerMaintainBean customerMaintainBean;
 }

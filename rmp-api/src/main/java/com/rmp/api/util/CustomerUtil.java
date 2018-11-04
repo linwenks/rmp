@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.util.BaseUtil;
+import com.rmp.api.model.CustomerBean;
 import com.rmp.common.util.PatternUtil;
 
 public class CustomerUtil extends BaseUtil {
@@ -36,5 +37,17 @@ public class CustomerUtil extends BaseUtil {
 	public static void checkAddress(String address) {
 		int addressMaxLength = 100;
 		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02003, String.valueOf(addressMaxLength));
+	}
+	
+	public static void assembly(CustomerBean bean) {
+		if (bean != null) {
+			if (bean.getAreaId() != null) {
+				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+			}
+			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
+				bean.setHeadPic("https://img.rmp.com" + bean.getHeadPic());    // 获取图片域名
+			}
+			
+		}
 	}
 }

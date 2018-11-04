@@ -18,6 +18,7 @@
     "msg_phoneMsg_sendRetrievePwd",
     "user_user_retrievePwd",
     
+    "customer_customer_config",
   	"customer_customer_list",
   	"customer_customer_get",
   	"customer_customer_save",
@@ -52,6 +53,10 @@
   	
   	"customer_relation_config",
   	"customer_relation_get",
-  	"customer_relation_update"
+  	"customer_relation_update",
+  	
+  	"customer_maintain_config",
+  	"customer_maintain_get",
+  	"customer_maintain_update"
   ]
 }

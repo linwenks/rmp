@@ -23,8 +23,8 @@ import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerJobBean;
 import com.rmp.api.service.customer.CustomerJobService;
 import com.rmp.api.service.customer.CustomerService;
-import com.rmp.api.util.AreaUtil;
 import com.rmp.api.util.CustomerJobUtil;
+import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.SysCodeUtil;
 import com.rmp.api.util.UserUtil;
 
@@ -132,11 +132,10 @@ public class CustomerJobController extends BaseApiController {
 			customerBeanResult.setPhone(customerBean.getPhone());
 			customerBeanResult.setBirthday(customerBean.getBirthday());
 			customerBeanResult.setSex(customerBean.getSex());
-			Long areaId = customerBean.getAreaId();
-			customerBeanResult.setAreaId(areaId);
-			customerBeanResult.setAreaNameAll(AreaUtil.getNameAll(areaId));
+			customerBeanResult.setAreaId(customerBean.getAreaId());
 			customerBeanResult.setAddress(customerBean.getAddress());
-			customerBeanResult.setHeadPic(customerBean.getHeadPic());    // 获取图片域名
+			customerBeanResult.setHeadPic(customerBean.getHeadPic());
+			CustomerUtil.assembly(customerBeanResult);
 			
 			CustomerJobBean customerJobBeanTmp = customerJobService.selectOne(customerJobBean);
 			if (customerJobBeanTmp != null) {

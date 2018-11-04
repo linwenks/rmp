@@ -17,6 +17,11 @@
     "user_user_register",
     "msg_phoneMsg_sendRetrievePwd",
     "user_user_retrievePwd",
+    "user_user_updateHeadPic",
+    "user_user_updateNickName",
+    "user_user_updatePhone",
+    "user_user_update",
+    
     
     "customer_customer_config",
   	"customer_customer_list",

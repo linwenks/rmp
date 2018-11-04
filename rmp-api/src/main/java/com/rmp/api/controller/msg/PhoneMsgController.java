@@ -58,7 +58,7 @@ public class PhoneMsgController extends BaseApiController {
 	@RequestMapping(value = "/sendRegister")
 	@ResponseBody
 	public RespBean sendRegister(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
+		ReqBean reqBean = ReqUtil.build(body, request);
 		
 		PhoneMsgBean phoneMsgBean = reqBean.getPhoneMsgBean();
 		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
@@ -90,11 +90,43 @@ public class PhoneMsgController extends BaseApiController {
 	@RequestMapping(value = "/sendRetrievePwd")
 	@ResponseBody
 	public RespBean sendRetrievePwd(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
+		ReqBean reqBean = ReqUtil.build(body, request);
 		
 		PhoneMsgBean phoneMsgBean = reqBean.getPhoneMsgBean();
 		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
 		phoneMsgBean.setType(Constant.PhoneMsg.Type._2);
+		phoneMsgService.exe("send", phoneMsgBean);
+		return RespUtil.build(request).putData("sendIntervalTime", Constant.PhoneMsg.SEND_INTERVAL_TIME);
+	}
+	
+	/**
+	 * 用户 修改 手机 发送短信 
+	 * 
+     * @api {post} /api/msg/phoneMsg/sendUpdatePhone 用户 修改 手机 发送短信 
+     * @apiDescription 用户 修改 手机 发送短信 
+     * @apiName msg_phoneMsg_sendUpdatePhone
+     * @apiGroup group_user
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (PhoneMsgBean) {Object} phoneMsgBean 手机短信 bean
+     * @apiParam (PhoneMsgBean) {Long} phoneMsgBean.phone 手机号
+     * 
+     * @apiParamExample {json} 请求-示例: 
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"phoneMsgBean":{"phone":15123815000}}
+	 * 
+	 * @apiSuccess (data) {Integer} sendIntervalTime 发送间隔时间（秒）
+	 * 
+     * @apiSuccessExample {json} 成功返回-示例:
+     *		{"msgs":[],"msg":{},"state":"0","data":{"sendIntervalTime":60}}
+     */
+	@RequestMapping(value = "/sendUpdatePhone")
+	@ResponseBody
+	public RespBean sendUpdatePhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		
+		PhoneMsgBean phoneMsgBean = reqBean.getPhoneMsgBean();
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
+		phoneMsgBean.setType(Constant.PhoneMsg.Type._3);
 		phoneMsgService.exe("send", phoneMsgBean);
 		return RespUtil.build(request).putData("sendIntervalTime", Constant.PhoneMsg.SEND_INTERVAL_TIME);
 	}

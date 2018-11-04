@@ -103,6 +103,17 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 		} else if (Constant.PhoneMsg.Type._2 == type.intValue()) {
 			if (userBean == null) AppException.toThrow(MSG_01002);
 			UserUtil.checkUser(userBean);
+		} else if (Constant.PhoneMsg.Type._3 == type.intValue()) {
+			if (userBean == null) AppException.toThrow(MSG_00003);
+			UserUtil.checkUser(userBean);
+			
+			if (userBean.getLoginName().equals(phone.toString())) AppException.toThrow(MSG_01023);
+			
+			UserBean userBeanTmp = new UserBean();
+			userBeanTmp.setLoginName(phone.toString());
+			userBeanTmp.setIsDelete(Constant.DELETE_N);
+			userBeanTmp = selectOne(userBeanTmp);
+			if (userBeanTmp != null) AppException.toThrow(MSG_01023);
 		}
 		
 		String code = RandomUtil.getRandomCode(Constant.PhoneMsg.LENGTH);

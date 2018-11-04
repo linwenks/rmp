@@ -96,6 +96,7 @@ public final class Constant {
 			
 			public static final int _1 = 1    // 注册
 								, _2 = 2    // 找回密码
+								, _3 = 3    // 修改手机号
 								;
 		}
 		

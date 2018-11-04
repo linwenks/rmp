@@ -75,6 +75,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			case "login": login((UserBean) obj);break;
 			case "register": register((Map<String, Object>) obj);break;
 			case "retrievePwd": retrievePwd((Map<String, Object>) obj);break;
+			case "updateNickName": updateNickName((UserBean) obj);break;
+			case "updateHeadPic": updateHeadPic((UserBean) obj);break;
+			case "updatePhone": updatePhone((Map<String, Object>) obj);break;
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {
@@ -301,7 +304,6 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		}
 	}
 	
-
 	/**
 	 * 找回密码
 	 * @param param
@@ -351,5 +353,175 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		userBeanTmp.setLoginPwd(DigestUtils.sha1Hex(loginPwd));
 		userBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(userBeanTmp);
+	}
+	
+	/**
+	 * 修改 昵称
+	 * @param userBean
+	 * @throws Exception 
+	 */
+	private void updateNickName(UserBean userBean) throws Exception {
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		Long id = userBean.getId();
+		String nickName = StringUtils.trim(userBean.getNickName());
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		UserUtil.checkNickName(nickName);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		UserBean userBeanTmp = selectById(id);
+		UserUtil.checkUser(userBeanTmp);
+		
+		userBeanTmp.setNickName(nickName);
+		userBeanTmp.setUpdateTime(nowDateLong);
+		updatePkSelVer(userBeanTmp);
+		
+		// redis
+		BeanUtils.copyProperties(userBeanTmp, userBean);
+		
+		// 加入redis
+		String token = userBeanTmp.getToken();
+		String key = UserUtil.rKey(token);
+		int index = Constant.Redis.User.INDEX;
+		try (ShardedJedis shardedJedis = baseShardedJedisPoolDao.getShardedJedis();
+				Jedis jedis = shardedJedis.getShard(Constant.Redis.Sharded1.NAME1);) {
+			jedis.select(index);
+			jedis.watch(key);
+			try (Transaction tx = jedis.multi();) {
+				tx.hset(key, "nickName", nickName);
+				tx.expire(key, Constant.Redis.User.SECONDS);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/**
+	 * 修改 头像
+	 * @param userBean
+	 * @throws Exception 
+	 */
+	private void updateHeadPic(UserBean userBean) throws Exception {
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		Long id = userBean.getId();
+		String headPic = StringUtils.trim(userBean.getHeadPic());
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		UserUtil.checkHeadPic(headPic);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		UserBean userBeanTmp = selectById(id);
+		UserUtil.checkUser(userBeanTmp);
+		
+		userBeanTmp.setHeadPic(headPic);
+		userBeanTmp.setUpdateTime(nowDateLong);
+		updatePkSelVer(userBeanTmp);
+		
+		// redis
+		BeanUtils.copyProperties(userBeanTmp, userBean);
+		
+		// 加入redis
+		String token = userBeanTmp.getToken();
+		String key = UserUtil.rKey(token);
+		int index = Constant.Redis.User.INDEX;
+		try (ShardedJedis shardedJedis = baseShardedJedisPoolDao.getShardedJedis();
+				Jedis jedis = shardedJedis.getShard(Constant.Redis.Sharded1.NAME1);) {
+			jedis.select(index);
+			jedis.watch(key);
+			try (Transaction tx = jedis.multi();) {
+				tx.hset(key, "headPic", headPic);
+				tx.expire(key, Constant.Redis.User.SECONDS);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/**
+	 * 修改 手机
+	 * @param param
+	 * @throws Exception 
+	 */
+	private void updatePhone(Map<String, Object> param) throws Exception {
+		if (CollectionUtils.isEmpty(param)) AppException.toThrow(MSG_00003);
+		UserBean userBean = (UserBean) param.get("userBean");
+		PhoneMsgBean phoneMsgBean = (PhoneMsgBean) param.get("phoneMsgBean");
+		
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		if (phoneMsgBean == null) AppException.toThrow(MSG_00003);
+		Long id = userBean.getId();
+		Long phone = userBean.getPhone();
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		UserUtil.checkPhone(phone);
+		
+		String code = StringUtils.trim(phoneMsgBean.getCode());
+		if (StringUtils.isEmpty(code)) AppException.toThrow(MSG_01011);
+		else if (code.length() != Constant.PhoneMsg.LENGTH) AppException.toThrow(MSG_01012);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		Long craeteTimeStart = DateUtil.formatDate2Long(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.EFFECTIVE_TIME));
+		
+		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();
+		phoneMsgBeanTmp.setCode(code);
+		phoneMsgBeanTmp.setPhone(phone);
+		phoneMsgBeanTmp.setType(Constant.PhoneMsg.Type._3);
+		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._0);
+		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
+		phoneMsgBeanTmp = phoneMsgService.selectOne(phoneMsgBeanTmp);
+		if (phoneMsgBeanTmp == null) AppException.toThrow(MSG_01012);
+		// 修改验证码状态
+		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._1);
+		phoneMsgBeanTmp.setUpdateTime(nowDateLong);
+		phoneMsgService.exe(UPDATE_PK_SEl_VER, phoneMsgBeanTmp);
+		
+		// 查询用户是否注册
+		UserBean userBeanTmp = selectById(id);
+		UserUtil.checkUser(userBeanTmp);
+		if (userBeanTmp.getLoginName().equals(phone.toString())) AppException.toThrow(MSG_01023);
+		
+		UserBean userBeanTmp2 = new UserBean();
+		userBeanTmp2.setLoginName(phone.toString());
+		userBeanTmp2.setIsDelete(Constant.DELETE_N);
+		userBeanTmp2 = selectOne(userBeanTmp2);
+		if (userBeanTmp != null) AppException.toThrow(MSG_01023);
+		
+		userBeanTmp.setLoginName(phone.toString());
+		userBeanTmp.setPhone(phone);
+		userBeanTmp.setUpdateTime(nowDateLong);
+		updatePkSelVer(userBeanTmp);
+		
+		// redis
+		BeanUtils.copyProperties(userBeanTmp, userBean);
+		
+		// 加入redis
+		String token = userBeanTmp.getToken();
+		String key = UserUtil.rKey(token);
+		int index = Constant.Redis.User.INDEX;
+		try (ShardedJedis shardedJedis = baseShardedJedisPoolDao.getShardedJedis();
+				Jedis jedis = shardedJedis.getShard(Constant.Redis.Sharded1.NAME1);) {
+			jedis.select(index);
+			jedis.watch(key);
+			try (Transaction tx = jedis.multi();) {
+				tx.hset(key, "loginName", phone.toString());
+				tx.expire(key, Constant.Redis.User.SECONDS);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 }

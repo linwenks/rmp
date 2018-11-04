@@ -38,8 +38,18 @@ public class UserUtil extends BaseUtil {
 	}
 	
 	/**
+	 * 检查 手机
+	 * @param phone
+	 */
+	public static void checkPhone(Long phone) {
+		if (phone == null) throw new AppException(MSG_01021);
+		String phoneStr = phone.toString();
+		if (!PatternUtil.matchesMobilePhone(phoneStr)) throw new AppException(MSG_01022);
+	}
+	
+	/**
 	 * 检查 密码
-	 * @param loginName
+	 * @param loginPwd
 	 */
 	public static void checkLoginPwd(String loginPwd) {
 		if (StringUtils.isEmpty(loginPwd)) throw new AppException(MSG_01003);
@@ -49,13 +59,36 @@ public class UserUtil extends BaseUtil {
 	
 	/**
 	 * 检查 用户
-	 * @param loginName
+	 * @param userBean
 	 */
 	public static void checkUser(UserBean userBean) {
 		if (userBean == null) AppException.toThrow(MSG_01002);
 		if (Constant.User.Status._0.equals(userBean.getStatus())) AppException.toThrow(MSG_01006);
 		if (Constant.DELETE_Y.equals(userBean.getIsDelete())) AppException.toThrow(MSG_01017);
 	}
+	
+	/**
+	 * 检查 昵称
+	 * @param nickName
+	 */
+	public static void checkNickName(String nickName) {
+		nickName = StringUtils.trim(nickName);
+		if (StringUtils.isEmpty(nickName)) throw new AppException(MSG_01018);
+		int nickNameLengthMin = 2;
+		int nickNameLengthMax = 10;
+		if (nickName.length() < nickNameLengthMin || nickName.length() > 10) throw new AppException(MSG_01019, new String[]{String.valueOf(nickNameLengthMin), String.valueOf(nickNameLengthMax)});
+	}
+	
+	/**
+	 * 检查 头像
+	 * @param nickName
+	 */
+	public static void checkHeadPic(String nickName) {
+		nickName = StringUtils.trim(nickName);
+		if (StringUtils.isEmpty(nickName)) throw new AppException(MSG_01020);
+	}
+	
+	
 	
 	// ================================================== redis ==================================================
 	/**

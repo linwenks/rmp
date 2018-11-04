@@ -243,4 +243,108 @@ public class UserController extends BaseApiController {
 		userService.exe("retrievePwd", param);
 		return RespUtil.build(request);
 	}
+	
+	
+	/**
+	 * 修改 头像
+	 * 
+     * @api {post} /api/user/user/updateHeadPic 修改 头像
+     * @apiDescription 修改 头像
+     * @apiName user_user_updateHeadPic
+     * @apiGroup group_user
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (UserBean) {Object} userBean 用户 bean
+     * @apiParam (UserBean) {String} userBean.headPic 头像
+     * 
+     * @apiParamExample {json} 请求-示例: 
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"/xxx/xxx.jpg"}}
+	 * 
+     */
+	@RequestMapping(value = "/updateHeadPic")
+	@ResponseBody
+	public RespBean updateHeadPic(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		UserBean userBean = reqBean.getUserBean();
+		userService.exe("updateHeadPic", userBean);
+		return RespUtil.build(request);
+	}
+	
+	/**
+	 * 修改 昵称
+	 * 
+     * @api {post} /api/user/user/updateNickName 修改 昵称
+     * @apiDescription 修改 昵称
+     * @apiName user_user_updateNickName
+     * @apiGroup group_user
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (UserBean) {Object} userBean 用户 bean
+     * @apiParam (UserBean) {String} userBean.nickName 昵称
+     * 
+     * @apiParamExample {json} 请求-示例: 
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"nickName":"xxx"}}
+	 * 
+     */
+	@RequestMapping(value = "/updateNickName")
+	@ResponseBody
+	public RespBean updateNickName(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		UserBean userBean = reqBean.getUserBean();
+		userService.exe("updateNickName", userBean);
+		return RespUtil.build(request);
+	}
+	
+	/**
+	 * 修改 手机
+	 * 
+     * @api {post} /api/user/user/updatePhone 修改 手机
+     * @apiDescription 修改 昵称
+     * @apiName user_user_updatePhone
+     * @apiGroup group_user
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (UserBean) {Object} userBean 用户 bean
+     * @apiParam (UserBean) {Long} userBean.phone 手机
+     * 
+     * @apiParam (PhoneMsgBean) {Object} phoneMsgBean 手机短信 bean
+     * @apiParam (PhoneMsgBean) {String{6}} phoneMsgBean.code 随机码
+     * 
+     * @apiParamExample {json} 请求-示例: 
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"phone":15111111111},"phoneMsgBean":{"code":"666666"}}
+	 * 
+     */
+	@RequestMapping(value = "/updatePhone")
+	@ResponseBody
+	public RespBean updatePhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		UserBean userBean = reqBean.getUserBean();
+		userService.exe("updatePhone", userBean);
+		return RespUtil.build(request);
+	}
+	
+	/**
+	 * 修改 基本信息
+	 * 
+     * @api {post} /api/user/user/update 修改 基本信息
+     * @apiDescription 修改 基本信息
+     * @apiName user_user_update
+     * @apiGroup group_user
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (UserBean) {Object} userBean 用户 bean
+     * @apiParam (UserBean) {String} userBean.headPic 头像
+     * 
+     * @apiParamExample {json} 请求-示例: 
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"/xxx/xxx.jpg"}}
+	 * 
+     */
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		UserBean userBean = reqBean.getUserBean();
+		userService.exe("update", userBean);
+		return RespUtil.build(request);
+	}
 }

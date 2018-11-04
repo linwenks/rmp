@@ -15,6 +15,7 @@
     "user_user_register",
     "msg_phoneMsg_sendRetrievePwd",
     "user_user_retrievePwd",
+    "customer_customer_config",
     "customer_customer_list",
     "customer_customer_get",
     "customer_customer_save",
@@ -43,14 +44,17 @@
     "customer_problem_update",
     "customer_relation_config",
     "customer_relation_get",
-    "customer_relation_update"
+    "customer_relation_update",
+    "customer_maintain_config",
+    "customer_maintain_get",
+    "customer_maintain_update"
   ],
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-10-28T13:40:08.547Z",
+    "time": "2018-11-04T10:33:34.520Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }

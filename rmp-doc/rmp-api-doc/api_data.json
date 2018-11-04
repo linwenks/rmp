@@ -1,6 +1,67 @@
 [
   {
     "type": "post",
+    "url": "/api/customer/customer/config",
+    "title": "客户 配置",
+    "description": "<p>客户 配置</p>",
+    "name": "customer_customer_config",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "importanceCodeList",
+            "description": "<p>关系 code list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "intimacyCodeList",
+            "description": "<p>亲密 code list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "relationshipCodeList",
+            "description": "<p>重要 code list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "tagCodeList",
+            "description": "<p>标签 code list 暂无</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"intimacyCodeList\":[{\"id\":14,\"key\":\"0\",\"value\":\"不详\",\"pid\":13,\"sort\":0},{\"id\":15,\"key\":\"1\",\"value\":\"很亲近\",\"pid\":13,\"sort\":1},{\"id\":16,\"key\":\"2\",\"value\":\"一般亲近\",\"pid\":13,\"sort\":2},{\"id\":17,\"key\":\"3\",\"value\":\"正常交往\",\"pid\":13,\"sort\":3},{\"id\":18,\"key\":\"4\",\"value\":\"点头之交\",\"pid\":13,\"sort\":4}],\"relationshipCodeList\":[{\"id\":4,\"key\":\"0\",\"value\":\"其他\",\"pid\":3,\"sort\":0},{\"id\":5,\"key\":\"1\",\"value\":\"家人\",\"pid\":3,\"sort\":1},{\"id\":6,\"key\":\"2\",\"value\":\"亲戚\",\"pid\":3,\"sort\":2},{\"id\":7,\"key\":\"3\",\"value\":\"朋友\",\"pid\":3,\"sort\":3},{\"id\":8,\"key\":\"4\",\"value\":\"同学\",\"pid\":3,\"sort\":4},{\"id\":9,\"key\":\"5\",\"value\":\"同事\",\"pid\":3,\"sort\":5},{\"id\":10,\"key\":\"6\",\"value\":\"客户\",\"pid\":3,\"sort\":6},{\"id\":11,\"key\":\"7\",\"value\":\"熟人\",\"pid\":3,\"sort\":7},{\"id\":12,\"key\":\"8\",\"value\":\"陌生人\",\"pid\":3,\"sort\":8}],\"importanceCodeList\":[{\"id\":20,\"key\":\"0\",\"value\":\"不重要\",\"pid\":19,\"sort\":0},{\"id\":21,\"key\":\"1\",\"value\":\"重要\",\"pid\":19,\"sort\":1},{\"id\":22,\"key\":\"2\",\"value\":\"非常重要（vip）\",\"pid\":19,\"sort\":2}]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
     "url": "/api/customer/customer/delete",
     "title": "客户 删除",
     "description": "<p>客户 删除</p>",
@@ -40,22 +101,307 @@
   {
     "type": "post",
     "url": "/api/customer/customer/get",
-    "title": "客户 查询 未完成",
+    "title": "客户 查询",
     "description": "<p>客户 查询</p>",
     "name": "customer_customer_get",
     "group": "group_customer",
     "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "CustomerBean": [
+          {
+            "group": "CustomerBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "CustomerBean",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBean.id",
+            "description": "<p>ID</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"id\":2}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerJobBean",
+            "description": "<p>客户 工作 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "customerFamilyBeanList",
+            "description": "<p>客户 家庭 bean list</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerHobbyBean",
+            "description": "<p>客户 兴趣爱好 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerMaintainBean",
+            "description": "<p>客户 维护设置 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "customerMemorialDayBeanList",
+            "description": "<p>客户 纪念日 bean list</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerProblemBean",
+            "description": "<p>客户 可能问题 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerRelationBean",
+            "description": "<p>客户 关系 bean</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"areaId\":321200,\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":15111111111,\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"areaId\":321200,\"address\":\"ttt\",\"vip\":0}}}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
     "type": "post",
     "url": "/api/customer/customer/list",
-    "title": "客户 列表查询 未完成",
+    "title": "客户 列表查询",
     "description": "<p>客户 列表查询</p>",
     "name": "customer_customer_list",
     "group": "group_customer",
     "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "CustomerBean": [
+          {
+            "group": "CustomerBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "CustomerBean",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "CustomerBean",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.phone",
+            "description": "<p>手机</p>"
+          }
+        ],
+        "CustomerRelationBean": [
+          {
+            "group": "CustomerRelationBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean.customerRelationBean",
+            "description": "<p>客户 关系 bean</p>"
+          },
+          {
+            "group": "CustomerRelationBean",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBean.customerRelationBean.relationship",
+            "description": "<p>重要</p>"
+          },
+          {
+            "group": "CustomerRelationBean",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBean.customerRelationBean.intimacy",
+            "description": "<p>亲密</p>"
+          },
+          {
+            "group": "CustomerRelationBean",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBean.customerRelationBean.importance",
+            "description": "<p>关系</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"realName\":\"s\",\"phone\":15111111112,\"customerRelationBean\":{\"relationship\":0,\"intimacy\":0,\"importance\":0}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBeanList",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBeanList.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBeanList.sex",
+            "description": "<p>性别<br/>0:女<br/>1:男</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.headPic",
+            "description": "<p>头像</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBeanList.areaId",
+            "description": "<p>区域ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.areaNameAll",
+            "description": "<p>区域全称</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.address",
+            "description": "<p>地址</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.pinyin",
+            "description": "<p>拼音</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean",
+            "description": "<p>客户 关系 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean.importance",
+            "description": "<p>关系</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean.importanceValue",
+            "description": "<p>关系 值</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean.intimacy",
+            "description": "<p>亲密</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean.intimacyValue",
+            "description": "<p>亲密 值</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean.relationship",
+            "description": "<p>重要</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBeanList.customerRelationBean.relationshipValue",
+            "description": "<p>重要 值</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBeanList\":[{\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111112,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"},{\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111113,\"sex\":0,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"},{\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"}]}}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
@@ -1384,6 +1730,163 @@
   },
   {
     "type": "post",
+    "url": "/api/customer/maintain/config",
+    "title": "客户 维护设置 配置",
+    "description": "<p>客户 维护设置 配置</p>",
+    "name": "customer_maintain_config",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "maintainCodeList",
+            "description": "<p>维护设置 code list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"maintainCodeList\":[{\"id\":168,\"key\":\"0\",\"value\":\"手动\",\"pid\":167,\"sort\":0},{\"id\":169,\"key\":\"1\",\"value\":\"自动\",\"pid\":167,\"sort\":1}]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
+    "url": "/api/customer/maintain/get",
+    "title": "客户 维护设置 查询",
+    "description": "<p>客户 维护设置 查询</p>",
+    "name": "customer_maintain_get",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "CustomerMaintainBean": [
+          {
+            "group": "CustomerMaintainBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerMaintainBean",
+            "description": "<p>工作 bean</p>"
+          },
+          {
+            "group": "CustomerMaintainBean",
+            "type": "Long",
+            "optional": false,
+            "field": "customerMaintainBean.customerId",
+            "description": "<p>客户ID</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerMaintainBean\":{\"customerId\":2}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerMaintainBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerMaintainBean.maintain",
+            "description": "<p>维护设置</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerMaintainBean.maintainValue",
+            "description": "<p>维护设置 值</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerMaintainBean\":{\"maintainValue\":\"手动\",\"maintain\":0}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
+    "url": "/api/customer/maintain/update",
+    "title": "客户 维护设置 修改",
+    "description": "<p>客户 维护设置 修改</p>",
+    "name": "customer_maintain_update",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "CustomerMaintainBean": [
+          {
+            "group": "CustomerMaintainBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerMaintainBean",
+            "description": "<p>工作 bean</p>"
+          },
+          {
+            "group": "CustomerMaintainBean",
+            "type": "Long",
+            "optional": false,
+            "field": "customerMaintainBean.customerId",
+            "description": "<p>客户ID</p>"
+          },
+          {
+            "group": "CustomerMaintainBean",
+            "type": "Integer",
+            "optional": false,
+            "field": "customerMaintainBean.maintain",
+            "description": "<p>维护</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerMaintainBean\":{\"maintain\":0}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
     "url": "/api/customer/memorialDay/config",
     "title": "客户 纪念日 配置",
     "description": "<p>客户 纪念日 配置</p>",
@@ -2049,7 +2552,7 @@
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"美食\"],\"lifeValueList\":[\"川湘菜\",\"粤菜\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"}}}",
           "type": "json"
         }
       ]

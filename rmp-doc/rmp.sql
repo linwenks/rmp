@@ -11,7 +11,7 @@
  Target Server Version : 50712
  File Encoding         : 65001
 
- Date: 28/10/2018 19:33:27
+ Date: 04/11/2018 20:49:51
 */
 
 SET NAMES utf8mb4;
@@ -3610,14 +3610,14 @@ CREATE TABLE `t_customer`  (
   `create_time` bigint(14) DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `is_delete`(`is_delete`, `user_id`, `phone`, `pinyin`) USING BTREE
+  INDEX `is_delete`(`is_delete`, `user_id`, `phone`, `real_name`, `pinyin`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 基础' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_customer
 -- ----------------------------
 INSERT INTO `t_customer` VALUES (1, 1, 'aa', 'aa', 15111111116, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 4, 20181027183019, 20181027204213);
-INSERT INTO `t_customer` VALUES (2, 1, 'ss', 'ss', 15111111112, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 14, 20181027183458, 20181028193057);
+INSERT INTO `t_customer` VALUES (2, 1, 'ss', 'ss', 15111111112, 1, 20100101, '/img/head_pic/default.jpg', 321200, 'ttt', 0, NULL, 0, 14, 20181027183458, 20181028193057);
 INSERT INTO `t_customer` VALUES (4, 1, 'ttt', 'ttt', 15111111111, 0, NULL, '/xxx/pic.jpg', 321200, 'aaaaaaaaaaaaaa', 0, NULL, 0, 3, 20181028134438, 20181028135351);
 INSERT INTO `t_customer` VALUES (5, 1, 'ttt', 'ttt', 15111111113, 0, 20100101, '/xxx/pic.jpg', 321200, 'aaaaaaaaaaaaaa', 0, NULL, 0, 0, 20181028135135, NULL);
 
@@ -3695,7 +3695,7 @@ CREATE TABLE `t_customer_job`  (
 -- ----------------------------
 -- Records of t_customer_job
 -- ----------------------------
-INSERT INTO `t_customer_job` VALUES (1, 4, 2, 'aaaa', 'bbb', 3, 15111111111, 321200, 'aaaaaaaaaaaaaa', 0, 3, 20181028134438, 20181028135348);
+INSERT INTO `t_customer_job` VALUES (1, 2, 2, 'aaaa', 'bbb', 3, 15111111111, 321200, 'aaaaaaaaaaaaaa', 0, 3, 20181028134438, 20181028135348);
 INSERT INTO `t_customer_job` VALUES (2, 5, 2, 'aaaa', 'bbb', 3, 15111111111, 321200, 'aaaaaaaaaaaaaa', 0, 0, 20181028135135, NULL);
 
 -- ----------------------------
@@ -3714,7 +3714,7 @@ CREATE TABLE `t_customer_maintain`  (
   `create_time` bigint(14) DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `customer_id`(`customer_id`) USING BTREE
+  INDEX `customer_id`(`is_delete`, `customer_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 维护设置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -3954,7 +3954,7 @@ CREATE TABLE `t_site_msg_detail`  (
 DROP TABLE IF EXISTS `t_sys_code`;
 CREATE TABLE `t_sys_code`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `key` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `pid` bigint(20) NOT NULL DEFAULT 0,
   `sort` int(11) NOT NULL DEFAULT 0 COMMENT '序号',
@@ -3965,14 +3965,14 @@ CREATE TABLE `t_sys_code`  (
   `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `code_key`(`pid`, `key`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 166 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 170 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_sys_code
 -- ----------------------------
 INSERT INTO `t_sys_code` VALUES (1, 'CUSTOMER', '客户', 0, 0, '', 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (2, 'RELATION', '关系', 1, 0, '', 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (3, 'RELATIONSHIP', '关系', 2, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (2, 'CUSTOMER_RELATION', '关系', 1, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (3, 'CUSTOMER_RELATION_RELATIONSHIP', '关系', 2, 0, '', 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (4, '0', '其他', 3, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (5, '1', '家人', 3, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (6, '2', '亲戚', 3, 2, NULL, 0, 0, NULL, NULL);
@@ -3982,18 +3982,18 @@ INSERT INTO `t_sys_code` VALUES (9, '5', '同事', 3, 5, NULL, 0, 0, NULL, NULL)
 INSERT INTO `t_sys_code` VALUES (10, '6', '客户', 3, 6, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (11, '7', '熟人', 3, 7, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (12, '8', '陌生人', 3, 8, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (13, 'INTIMACY', '亲密', 2, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (13, 'CUSTOMER_RELATION_INTIMACY', '亲密', 2, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (14, '0', '不详', 13, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (15, '1', '很亲近', 13, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (16, '2', '一般亲近', 13, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (17, '3', '正常交往', 13, 3, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (18, '4', '点头之交', 13, 4, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (19, 'IMPORTANCE', '重要', 2, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (19, 'CUSTOMER_RELATION_IMPORTANCE', '重要', 2, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (20, '0', '不重要', 19, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (21, '1', '重要', 19, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (22, '2', '非常重要（vip）', 19, 2, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (23, 'PROBLEM', '问题', 1, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (24, 'HEALTH', '健康', 23, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (23, 'CUSTOMER_PROBLEM', '问题', 1, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (24, 'CUSTOMER_PROBLEM_HEALTH', '健康', 23, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (25, '1', '心脏病', 24, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (26, '2', '动脉硬化', 24, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (27, '3', '高血压', 24, 3, NULL, 0, 0, NULL, NULL);
@@ -4007,7 +4007,7 @@ INSERT INTO `t_sys_code` VALUES (34, '10', '肾病', 24, 10, NULL, 0, 0, NULL, N
 INSERT INTO `t_sys_code` VALUES (35, '11', '精神问题', 24, 11, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (36, '12', '脸部痘痕', 24, 12, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (37, '13', '五官瑕疵', 24, 13, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (38, 'LIFE', '生活', 23, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (38, 'CUSTOMER_PROBLEM_LIFE', '生活', 23, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (39, '1', '资金缺乏', 38, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (40, '2', '寻找工作', 38, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (41, '3', '事业发展', 38, 3, NULL, 0, 0, NULL, NULL);
@@ -4015,8 +4015,8 @@ INSERT INTO `t_sys_code` VALUES (42, '4', '感情困扰', 38, 4, NULL, 0, 0, NUL
 INSERT INTO `t_sys_code` VALUES (43, '5', '子女学习', 38, 5, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (44, '6', '法律问题', 38, 6, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (45, '7', '税务', 38, 7, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (46, 'HOBBY', '兴趣爱好', 1, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (47, 'INTEREST', '兴趣', 46, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (46, 'CUSTOMER_HOBBY', '兴趣爱好', 1, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (47, 'CUSTOMER_HOBBY_INTEREST', '兴趣', 46, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (48, '1', '美食', 47, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (49, '2', '旅游', 47, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (50, '3', '美容美发', 47, 3, NULL, 0, 0, NULL, NULL);
@@ -4037,7 +4037,7 @@ INSERT INTO `t_sys_code` VALUES (64, '17', '演出', 47, 17, NULL, 0, 0, NULL, N
 INSERT INTO `t_sys_code` VALUES (65, '18', '外语学习', 47, 18, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (66, '19', '体验游戏', 47, 19, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (67, '20', '网络游戏', 47, 20, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (68, 'DIET', '饮食', 46, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (68, 'CUSTOMER_HOBBY_DIET', '饮食', 46, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (69, '1', '川湘菜', 68, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (70, '2', '江浙菜', 68, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (71, '3', '粤菜', 68, 3, NULL, 0, 0, NULL, NULL);
@@ -4050,13 +4050,13 @@ INSERT INTO `t_sys_code` VALUES (77, '9', '海鲜', 68, 9, NULL, 0, 0, NULL, NUL
 INSERT INTO `t_sys_code` VALUES (78, '10', '素食', 68, 10, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (79, '11', '烧烤', 68, 11, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (80, '12', '甜点', 68, 12, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (81, 'TASTE', '口味', 46, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (81, 'CUSTOMER_HOBBY_TASTE', '口味', 46, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (82, '1', '甜', 81, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (83, '2', '辣', 81, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (84, '3', '酸', 81, 3, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (85, '4', '苦', 81, 4, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (86, 'JOB', '工作', 1, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (87, 'INDUSTRY', '行业', 86, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (86, 'CUSTOMER_JOB', '工作', 1, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (87, 'CUSTOMER_JOB_INDUSTRY', '行业', 86, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (88, '1', '计算机硬软件', 87, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (89, '2', '互联网/电子商务/网游', 87, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (90, '3', 'IT管理', 87, 3, NULL, 0, 0, NULL, NULL);
@@ -4104,7 +4104,7 @@ INSERT INTO `t_sys_code` VALUES (131, '44', '印刷包装', 87, 44, NULL, 0, 0, 
 INSERT INTO `t_sys_code` VALUES (132, '45', '运动健身', 87, 45, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (133, '46', '休闲娱乐', 87, 46, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (134, '47', '其他', 87, 47, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (135, 'POSITION', '职位', 86, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (135, 'CUSTOMER_JOB_POSITION', '职位', 86, 0, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (136, '1', '工薪族', 135, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (137, '2', '个体户', 135, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (138, '3', '企业主', 135, 3, NULL, 0, 0, NULL, NULL);
@@ -4112,28 +4112,32 @@ INSERT INTO `t_sys_code` VALUES (139, '4', '学生', 135, 4, NULL, 0, 0, NULL, N
 INSERT INTO `t_sys_code` VALUES (140, '5', '公务员', 135, 5, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (141, '6', '自由职业', 135, 6, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (142, '7', '无业', 135, 7, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (143, 'FAMILY', '家庭', 1, 0, '', 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (144, 'RELATIONSHIP', '关系', 143, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (145, '1', '父亲', 144, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (146, '2', '母亲', 144, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (147, '3', '老公', 144, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (148, '4', '老婆', 144, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (149, '5', '儿子', 144, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (150, '6', '女儿', 144, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (151, 'MEMORIAL_DAY', '纪念日', 1, 0, '', 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (152, 'OCCUR_TYPE', '发生类型', 151, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (153, '1', '1次', 152, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (154, '2', '每年', 152, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (155, '3', '每月', 152, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (157, '4', '每周', 152, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (158, 'ADVANCE_TYPE', '提前类型', 151, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (159, '1', '1天', 158, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (160, '2', '2天', 158, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (161, '3', '3天', 158, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (162, '4', '5天', 158, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (163, '5', '1周', 158, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (164, '6', '2周', 158, 0, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (165, '7', '1月', 158, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (143, 'CUSTOMER_FAMILY', '家庭', 1, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (144, 'CUSTOMER_FAMILY_RELATIONSHIP', '关系', 143, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (145, '1', '父亲', 144, 1, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (146, '2', '母亲', 144, 2, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (147, '3', '老公', 144, 3, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (148, '4', '老婆', 144, 4, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (149, '5', '儿子', 144, 5, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (150, '6', '女儿', 144, 6, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (151, 'CUSTOMER_MEMORIAL_DAY', '纪念日', 1, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (152, 'CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE', '发生类型', 151, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (153, '1', '1次', 152, 1, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (154, '2', '每年', 152, 2, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (155, '3', '每月', 152, 3, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (157, '4', '每周', 152, 4, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (158, 'CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE', '提前类型', 151, 0, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (159, '1', '1天', 158, 1, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (160, '2', '2天', 158, 2, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (161, '3', '3天', 158, 3, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (162, '4', '5天', 158, 4, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (163, '5', '1周', 158, 5, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (164, '6', '2周', 158, 6, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (165, '7', '1月', 158, 7, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (166, 'CUSTOMER_MAINTAIN', '维护设置', 1, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (167, 'CUSTOMER_MAINTAIN_MAINTAIN', '维护', 166, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (168, '0', '手动', 167, 0, '', 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (169, '1', '自动', 167, 1, '', 0, 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for t_sys_menu
@@ -4222,17 +4226,19 @@ DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `login_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '登录名称',
-  `login_pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '登录密码',
+  `login_pwd` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '登录密码',
   `phone` bigint(11) DEFAULT NULL COMMENT '手机号',
   `real_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '真实姓名',
   `nick_name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '昵称',
   `head_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
+  `sex` int(1) DEFAULT NULL COMMENT '性别（0:女 1:男）',
+  `birthday` int(8) DEFAULT NULL COMMENT '生日',
   `pay_pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '支付密码',
   `account` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '账户余额',
   `last_login_time` bigint(14) DEFAULT NULL COMMENT '上次登录时间',
-  `area_id` int(11) DEFAULT NULL COMMENT '区域ID',
+  `area_id` bigint(11) DEFAULT NULL COMMENT '区域ID',
   `address` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '地址',
-  `wx_id` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信ID',
+  `wx_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信ID',
   `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '标记',
   `status` int(1) DEFAULT 0 COMMENT '状态（0:未注册 1:已注册）',
   `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
@@ -4248,24 +4254,7 @@ CREATE TABLE `t_user`  (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, '15123815032', '7c4a8d09ca3762af61e59520943dc26494f8941b', 15123815032, NULL, 'ttt', 'http://wx.com/tx.jpg', NULL, 0.00, 20181021175641, NULL, NULL, 'wx_id', '2661f2cac9754c98873aa9ce431b8012', 1, 0, 10, 20181021155201, 1540116915);
-
--- ----------------------------
--- Table structure for t_user_customer
--- ----------------------------
-DROP TABLE IF EXISTS `t_user_customer`;
-CREATE TABLE `t_user_customer`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `customer_id` bigint(20) NOT NULL COMMENT '客户ID',
-  `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
-  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
-  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
-  `create_time` bigint(14) DEFAULT NULL COMMENT '创建时间',
-  `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `user_id`(`user_id`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 客户 关联' ROW_FORMAT = Dynamic;
+INSERT INTO `t_user` VALUES (1, '15123815032', '7c4a8d09ca3762af61e59520943dc26494f8941b', 15123815032, NULL, 'ttt', 'http://wx.com/tx.jpg', NULL, NULL, NULL, 0.00, 20181021175641, NULL, NULL, 'wx_id', '2661f2cac9754c98873aa9ce431b8012', 1, 0, 10, 20181021155201, 1540116915);
 
 -- ----------------------------
 -- Table structure for t_user_hobby
@@ -4273,8 +4262,8 @@ CREATE TABLE `t_user_customer`  (
 DROP TABLE IF EXISTS `t_user_hobby`;
 CREATE TABLE `t_user_hobby`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `user_id` bigint(20) NOT NULL COMMENT '客户ID',
-  `interest` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '兴趣（1:美食、2:旅游、3:美容美发、4:购物、5:按摩温泉、6:影视、7:运动、8:汽车、9:家居装饰、10:宠物、11:KTV、12:艺术、13:社交）',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `interest` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '兴趣（美食、旅游、美容美发、购物、按摩温泉、影视、运动、汽车、家居装饰、宠物、KTV、社交、养生、投资理财、营销、IT互联网、演出、外语学习、体验游戏、网络游戏）',
   `diet` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '饮食（1:川湘菜、2:江浙菜、3:粤菜、4:北方菜、5:日韩料理、6:西餐、7:东南亚菜、8:火锅、9:海鲜、10:素食、11:烧烤、12:甜点）',
   `taste` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '口味（1:甜、2:辣、3:酸、4:苦）',
   `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
@@ -4282,7 +4271,7 @@ CREATE TABLE `t_user_hobby`  (
   `create_time` bigint(14) DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 兴趣爱好' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 兴趣爱好' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_user_job
@@ -4290,36 +4279,20 @@ CREATE TABLE `t_user_hobby`  (
 DROP TABLE IF EXISTS `t_user_job`;
 CREATE TABLE `t_user_job`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `industry_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '行业名称',
+  `user_id` bigint(20) NOT NULL COMMENT '用户 ID',
+  `industry` int(3) DEFAULT NULL COMMENT '行业（计算机硬软件、互联网/电子商务/网游、IT管理、通信、电子/电器/半导体、\r\n财务/审计/税务、金融/投资、银行/保险、工程/机械、能源/原材料、汽车及零配件制造、汽车销售服务、服装/纺织、轻工产品制造、食品生产、贸易、物流/仓储、生物/制药、化工、医院/医疗/护理、广告媒体、市场/营销、影视、编辑出版、艺术/设计、建筑与装潢、房地产开发、房地产销售与中介、物业、人力资源、咨询/顾问、律师/法务、教师/培训、科研、餐饮服务、酒店旅游、美容保健、百货零售、交通运输、家政/生活服务、政府/公务员、翻译、农林牧渔、印刷包装、运动健身、休闲娱乐、其他\r\n）',
   `company_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '公司名称',
-  `department_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '部门名称',
-  `position_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '职位名称',
+  `department_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '部门名称',
+  `position` int(3) DEFAULT NULL COMMENT '职位（工薪族、个体户、企业主、学生、公务员、自由职业、无业）',
   `phone` bigint(11) DEFAULT NULL COMMENT '工作电话',
-  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
-  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
-  `create_time` bigint(14) DEFAULT NULL COMMENT '创建时间',
-  `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 工作' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for t_user_maintain
--- ----------------------------
-DROP TABLE IF EXISTS `t_user_maintain`;
-CREATE TABLE `t_user_maintain`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `user_id` bigint(20) NOT NULL COMMENT '客户ID',
-  `maintain` int(1) NOT NULL COMMENT '维护（0:手动 1:自动）',
-  `frequency` int(1) NOT NULL COMMENT '频率',
-  `count` int(3) NOT NULL COMMENT '次数',
-  `budget` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '预算',
+  `area_id` bigint(20) DEFAULT NULL COMMENT '区域ID',
+  `address` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '地址',
   `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
   `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
   `create_time` bigint(14) DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 维护设置' ROW_FORMAT = Dynamic;
+  INDEX `is_delete`(`is_delete`, `user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 工作' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

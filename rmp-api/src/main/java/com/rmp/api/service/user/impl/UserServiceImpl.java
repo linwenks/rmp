@@ -15,8 +15,8 @@ import org.springframework.util.CollectionUtils;
 import com.rmp.api.base.dao.redis.BaseShardedJedisPoolDao;
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
-import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.model.UserBean;
+import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.service.msg.PhoneMsgService;
 import com.rmp.api.service.user.UserService;
 import com.rmp.api.util.UserUtil;
@@ -78,6 +78,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			case "updateNickName": updateNickName((UserBean) obj);break;
 			case "updateHeadPic": updateHeadPic((UserBean) obj);break;
 			case "updatePhone": updatePhone((Map<String, Object>) obj);break;
+			case "updateAll": updateAll((UserBean) obj);break;
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {
@@ -523,5 +524,45 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	/**
+	 * 修改 全部
+	 * @param userBean
+	 */
+	private void updateAll(UserBean userBean) {
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		Long id = userBean.getId();
+		String realName = StringUtils.trim(userBean.getRealName());
+
+		Integer birthday = userBean.getBirthday();
+		Integer sex = userBean.getSex();
+		Long areaId = userBean.getAreaId();
+		String address = StringUtils.trim(userBean.getAddress());
+		String headPic = StringUtils.trim(userBean.getHeadPic());
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		UserUtil.checkRealName(realName);
+		UserUtil.checkAddress(address);
+		
+		UserBean userBeanTmp = new UserBean();
+		userBeanTmp.setId(id);
+		userBeanTmp = selectOne(userBeanTmp);
+		if (userBeanTmp == null) AppException.toThrow(MSG_00003);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		// 修改
+		userBeanTmp.setRealName(realName);
+		userBeanTmp.setHeadPic(headPic);
+		userBeanTmp.setBirthday(birthday);
+		userBeanTmp.setSex(sex);
+		userBeanTmp.setAreaId(areaId);
+		userBeanTmp.setAddress(address);
+		userBeanTmp.setUpdateTime(nowDateLong);
+		updatePkVer(userBeanTmp);
+		
+		BeanUtils.copyProperties(userBeanTmp, userBean);
 	}
 }

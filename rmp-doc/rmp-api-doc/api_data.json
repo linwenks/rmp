@@ -3105,6 +3105,679 @@
   },
   {
     "type": "post",
+    "url": "/api/msg/phoneMsg/sendUpdatePhone",
+    "title": "修改 手机 发送短信",
+    "description": "<p>修改 手机 发送短信</p>",
+    "name": "msg_phoneMsg_sendUpdatePhone",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "PhoneMsgBean": [
+          {
+            "group": "PhoneMsgBean",
+            "type": "Object",
+            "optional": false,
+            "field": "phoneMsgBean",
+            "description": "<p>手机短信 bean</p>"
+          },
+          {
+            "group": "PhoneMsgBean",
+            "type": "Long",
+            "optional": false,
+            "field": "phoneMsgBean.phone",
+            "description": "<p>手机号</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"phoneMsgBean\":{\"phone\":15123815000}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "sendIntervalTime",
+            "description": "<p>发送间隔时间（秒）</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"sendIntervalTime\":60}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/hobby/config",
+    "title": "兴趣爱好 配置",
+    "description": "<p>兴趣爱好 配置</p>",
+    "name": "user_hobby_config",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "interestCodeList",
+            "description": "<p>兴趣 code list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "dietCodeList",
+            "description": "<p>饮食 code list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "tasteCodeList",
+            "description": "<p>口味 code list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"dietCodeList\":[{\"id\":69,\"key\":\"1\",\"value\":\"川湘菜\",\"pid\":68,\"sort\":1},{\"id\":70,\"key\":\"2\",\"value\":\"江浙菜\",\"pid\":68,\"sort\":2},{\"id\":71,\"key\":\"3\",\"value\":\"粤菜\",\"pid\":68,\"sort\":3},{\"id\":72,\"key\":\"4\",\"value\":\"北方菜\",\"pid\":68,\"sort\":4},{\"id\":73,\"key\":\"5\",\"value\":\"日韩料理\",\"pid\":68,\"sort\":5},{\"id\":74,\"key\":\"6\",\"value\":\"西餐\",\"pid\":68,\"sort\":6},{\"id\":75,\"key\":\"7\",\"value\":\"东南亚菜\",\"pid\":68,\"sort\":7},{\"id\":76,\"key\":\"8\",\"value\":\"火锅\",\"pid\":68,\"sort\":8},{\"id\":77,\"key\":\"9\",\"value\":\"海鲜\",\"pid\":68,\"sort\":9},{\"id\":78,\"key\":\"10\",\"value\":\"素食\",\"pid\":68,\"sort\":10},{\"id\":79,\"key\":\"11\",\"value\":\"烧烤\",\"pid\":68,\"sort\":11},{\"id\":80,\"key\":\"12\",\"value\":\"甜点\",\"pid\":68,\"sort\":12}],\"interestCodeList\":[{\"id\":48,\"key\":\"1\",\"value\":\"美食\",\"pid\":47,\"sort\":1},{\"id\":49,\"key\":\"2\",\"value\":\"旅游\",\"pid\":47,\"sort\":2},{\"id\":50,\"key\":\"3\",\"value\":\"美容美发\",\"pid\":47,\"sort\":3},{\"id\":51,\"key\":\"4\",\"value\":\"购物\",\"pid\":47,\"sort\":4},{\"id\":52,\"key\":\"5\",\"value\":\"按摩温泉\",\"pid\":47,\"sort\":5},{\"id\":53,\"key\":\"6\",\"value\":\"影视\",\"pid\":47,\"sort\":6},{\"id\":54,\"key\":\"7\",\"value\":\"运动\",\"pid\":47,\"sort\":7},{\"id\":55,\"key\":\"8\",\"value\":\"汽车\",\"pid\":47,\"sort\":8},{\"id\":56,\"key\":\"9\",\"value\":\"家居装饰\",\"pid\":47,\"sort\":9},{\"id\":57,\"key\":\"10\",\"value\":\"宠物\",\"pid\":47,\"sort\":10},{\"id\":58,\"key\":\"11\",\"value\":\"KTV\",\"pid\":47,\"sort\":11},{\"id\":59,\"key\":\"12\",\"value\":\"社交\",\"pid\":47,\"sort\":12},{\"id\":60,\"key\":\"13\",\"value\":\"养生\",\"pid\":47,\"sort\":13},{\"id\":61,\"key\":\"14\",\"value\":\"投资理财\",\"pid\":47,\"sort\":14},{\"id\":62,\"key\":\"15\",\"value\":\"营销\",\"pid\":47,\"sort\":15},{\"id\":63,\"key\":\"16\",\"value\":\"IT互联网\",\"pid\":47,\"sort\":16},{\"id\":64,\"key\":\"17\",\"value\":\"演出\",\"pid\":47,\"sort\":17},{\"id\":65,\"key\":\"18\",\"value\":\"外语学习\",\"pid\":47,\"sort\":18},{\"id\":66,\"key\":\"19\",\"value\":\"体验游戏\",\"pid\":47,\"sort\":19},{\"id\":67,\"key\":\"20\",\"value\":\"网络游戏\",\"pid\":47,\"sort\":20}],\"tasteCodeList\":[{\"id\":82,\"key\":\"1\",\"value\":\"甜\",\"pid\":81,\"sort\":1},{\"id\":83,\"key\":\"2\",\"value\":\"辣\",\"pid\":81,\"sort\":2},{\"id\":84,\"key\":\"3\",\"value\":\"酸\",\"pid\":81,\"sort\":3},{\"id\":85,\"key\":\"4\",\"value\":\"苦\",\"pid\":81,\"sort\":4}]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/hobby/get",
+    "title": "兴趣爱好 查询",
+    "description": "<p>兴趣爱好 查询</p>",
+    "name": "user_hobby_get",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userHobbyBean",
+            "description": "<p>兴趣爱好 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userFamilyBean.interest",
+            "description": "<p>兴趣</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "userFamilyBean.interestKeyList",
+            "description": "<p>兴趣 键 list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "userFamilyBean.interestValueList",
+            "description": "<p>兴趣 值 list</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userFamilyBean.diet",
+            "description": "<p>饮食</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "userFamilyBean.dietKeyList",
+            "description": "<p>饮食 键 list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "userFamilyBean.dietValueList",
+            "description": "<p>饮食 值 list</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userFamilyBean.taste",
+            "description": "<p>口味</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "userFamilyBean.tasteKeyList",
+            "description": "<p>口味 键 list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "userFamilyBean.tasteValueList",
+            "description": "<p>口味 值 list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/hobby/update",
+    "title": "兴趣爱好 修改",
+    "description": "<p>兴趣爱好 修改</p>",
+    "name": "user_hobby_update",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userHobbyBean",
+            "description": "<p>兴趣爱好 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": true,
+            "field": "userFamilyBean.interest",
+            "description": "<p>兴趣</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": true,
+            "field": "userFamilyBean.diet",
+            "description": "<p>饮食</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": true,
+            "field": "userFamilyBean.taste",
+            "description": "<p>口味</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userHobbyBean\":{\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/job/config",
+    "title": "工作 配置",
+    "description": "<p>客户 工作 配置</p>",
+    "name": "user_job_config",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "industryCodeList",
+            "description": "<p>行业 code list</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "positionCodeList",
+            "description": "<p>职位 code list</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"industryCodeList\":[{\"id\":88,\"key\":\"1\",\"value\":\"计算机硬软件\",\"pid\":87,\"sort\":1},{\"id\":89,\"key\":\"2\",\"value\":\"互联网/电子商务/网游\",\"pid\":87,\"sort\":2},{\"id\":90,\"key\":\"3\",\"value\":\"IT管理\",\"pid\":87,\"sort\":3},{\"id\":91,\"key\":\"4\",\"value\":\"通信\",\"pid\":87,\"sort\":4},{\"id\":92,\"key\":\"5\",\"value\":\"电子/电器/半导体\",\"pid\":87,\"sort\":5},{\"id\":93,\"key\":\"6\",\"value\":\"财务/审计/税务\",\"pid\":87,\"sort\":6},{\"id\":94,\"key\":\"7\",\"value\":\"金融/投资\",\"pid\":87,\"sort\":7},{\"id\":95,\"key\":\"8\",\"value\":\"银行/保险\",\"pid\":87,\"sort\":8},{\"id\":96,\"key\":\"9\",\"value\":\"工程/机械\",\"pid\":87,\"sort\":9},{\"id\":97,\"key\":\"10\",\"value\":\"能源/原材料\",\"pid\":87,\"sort\":10},{\"id\":98,\"key\":\"11\",\"value\":\"汽车及零配件制造\",\"pid\":87,\"sort\":11},{\"id\":99,\"key\":\"12\",\"value\":\"汽车销售服务\",\"pid\":87,\"sort\":12},{\"id\":100,\"key\":\"13\",\"value\":\"服装/纺织\",\"pid\":87,\"sort\":13},{\"id\":101,\"key\":\"14\",\"value\":\"轻工产品制造\",\"pid\":87,\"sort\":14},{\"id\":102,\"key\":\"15\",\"value\":\"食品生产\",\"pid\":87,\"sort\":15},{\"id\":103,\"key\":\"16\",\"value\":\"贸易\",\"pid\":87,\"sort\":16},{\"id\":104,\"key\":\"17\",\"value\":\"物流/仓储\",\"pid\":87,\"sort\":17},{\"id\":105,\"key\":\"18\",\"value\":\"生物/制药\",\"pid\":87,\"sort\":18},{\"id\":106,\"key\":\"19\",\"value\":\"化工\",\"pid\":87,\"sort\":19},{\"id\":107,\"key\":\"20\",\"value\":\"医院/医疗/护理\",\"pid\":87,\"sort\":20},{\"id\":108,\"key\":\"21\",\"value\":\"广告媒体\",\"pid\":87,\"sort\":21},{\"id\":109,\"key\":\"22\",\"value\":\"市场/营销\",\"pid\":87,\"sort\":22},{\"id\":110,\"key\":\"23\",\"value\":\"影视\",\"pid\":87,\"sort\":23},{\"id\":111,\"key\":\"24\",\"value\":\"编辑出版\",\"pid\":87,\"sort\":24},{\"id\":112,\"key\":\"25\",\"value\":\"艺术/设计\",\"pid\":87,\"sort\":25},{\"id\":113,\"key\":\"26\",\"value\":\"建筑与装潢\",\"pid\":87,\"sort\":26},{\"id\":114,\"key\":\"27\",\"value\":\"房地产开发\",\"pid\":87,\"sort\":27},{\"id\":115,\"key\":\"28\",\"value\":\"房地产销售与中介\",\"pid\":87,\"sort\":28},{\"id\":116,\"key\":\"29\",\"value\":\"物业\",\"pid\":87,\"sort\":29},{\"id\":117,\"key\":\"30\",\"value\":\"人力资源\",\"pid\":87,\"sort\":30},{\"id\":118,\"key\":\"31\",\"value\":\"咨询/顾问\",\"pid\":87,\"sort\":31},{\"id\":119,\"key\":\"32\",\"value\":\"律师/法务\",\"pid\":87,\"sort\":32},{\"id\":120,\"key\":\"33\",\"value\":\"教师/培训\",\"pid\":87,\"sort\":33},{\"id\":121,\"key\":\"34\",\"value\":\"科研\",\"pid\":87,\"sort\":34},{\"id\":122,\"key\":\"35\",\"value\":\"餐饮服务\",\"pid\":87,\"sort\":35},{\"id\":123,\"key\":\"36\",\"value\":\"酒店旅游\",\"pid\":87,\"sort\":36},{\"id\":124,\"key\":\"37\",\"value\":\"美容保健\",\"pid\":87,\"sort\":37},{\"id\":125,\"key\":\"38\",\"value\":\"百货零售\",\"pid\":87,\"sort\":38},{\"id\":126,\"key\":\"39\",\"value\":\"交通运输\",\"pid\":87,\"sort\":39},{\"id\":127,\"key\":\"40\",\"value\":\"家政/生活服务\",\"pid\":87,\"sort\":40},{\"id\":128,\"key\":\"41\",\"value\":\"政府/公务员\",\"pid\":87,\"sort\":41},{\"id\":129,\"key\":\"42\",\"value\":\"翻译\",\"pid\":87,\"sort\":42},{\"id\":130,\"key\":\"43\",\"value\":\"农林牧渔\",\"pid\":87,\"sort\":43},{\"id\":131,\"key\":\"44\",\"value\":\"印刷包装\",\"pid\":87,\"sort\":44},{\"id\":132,\"key\":\"45\",\"value\":\"运动健身\",\"pid\":87,\"sort\":45},{\"id\":133,\"key\":\"46\",\"value\":\"休闲娱乐\",\"pid\":87,\"sort\":46},{\"id\":134,\"key\":\"47\",\"value\":\"其他\",\"pid\":87,\"sort\":47}],\"positionCodeList\":[{\"id\":136,\"key\":\"1\",\"value\":\"工薪族\",\"pid\":135,\"sort\":1},{\"id\":137,\"key\":\"2\",\"value\":\"个体户\",\"pid\":135,\"sort\":2},{\"id\":138,\"key\":\"3\",\"value\":\"企业主\",\"pid\":135,\"sort\":3},{\"id\":139,\"key\":\"4\",\"value\":\"学生\",\"pid\":135,\"sort\":4},{\"id\":140,\"key\":\"5\",\"value\":\"公务员\",\"pid\":135,\"sort\":5},{\"id\":141,\"key\":\"6\",\"value\":\"自由职业\",\"pid\":135,\"sort\":6},{\"id\":142,\"key\":\"7\",\"value\":\"无业\",\"pid\":135,\"sort\":7}]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/job/get",
+    "title": "工作 查询",
+    "description": "<p>工作 查询</p>",
+    "name": "user_job_get",
+    "group": "group_user",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "userBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "userBean.sex",
+            "description": "<p>性别<br/>0:女<br/>1:男</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.headPic",
+            "description": "<p>头像</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "userBean.areaId",
+            "description": "<p>区域ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.areaNameAll",
+            "description": "<p>区域全称</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.address",
+            "description": "<p>地址</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userJobBean",
+            "description": "<p>工作 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "userJobBean.industry",
+            "description": "<p>行业</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.industryValue",
+            "description": "<p>行业 值</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.companyName",
+            "description": "<p>公司</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.departmentName",
+            "description": "<p>部门</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "userJobBean.position",
+            "description": "<p>职位</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.positionValue",
+            "description": "<p>职位 值</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "userJobBean.areaId",
+            "description": "<p>区域ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.areaNameAll",
+            "description": "<p>区域全称</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.address",
+            "description": "<p>地址</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":15111111111,\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/job/update",
+    "title": "工作 修改",
+    "description": "<p>工作 修改</p>",
+    "name": "user_job_update",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "UserJobBean": [
+          {
+            "group": "UserJobBean",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "Integer",
+            "optional": true,
+            "field": "userBean.sex",
+            "description": "<p>性别<br/>0:女<br/>1:男</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userBean.headPic",
+            "description": "<p>头像</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "Long",
+            "optional": true,
+            "field": "userBean.areaId",
+            "description": "<p>区域ID</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userBean.address",
+            "description": "<p>地址</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "Object",
+            "optional": false,
+            "field": "userJobBean",
+            "description": "<p>工作 bean</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "Integer",
+            "optional": true,
+            "field": "userJobBean.industry",
+            "description": "<p>行业</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userJobBean.companyName",
+            "description": "<p>公司</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userJobBean.departmentName",
+            "description": "<p>部门</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "Integer",
+            "optional": true,
+            "field": "userJobBean.position",
+            "description": "<p>职位</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userJobBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "Long",
+            "optional": true,
+            "field": "userJobBean.areaId",
+            "description": "<p>区域ID</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userJobBean.address",
+            "description": "<p>地址</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"realName\":\"ttt\",\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"userJobBean\":{\"userId\":4,\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/user/get",
+    "title": "查询",
+    "description": "<p>查询</p>",
+    "name": "user_user_get",
+    "group": "group_user",
+    "version": "1.0.0",
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "userBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "userBean.sex",
+            "description": "<p>性别<br/>0:女<br/>1:男</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.headPic",
+            "description": "<p>头像</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "userBean.areaId",
+            "description": "<p>区域ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.areaNameAll",
+            "description": "<p>区域全称</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.address",
+            "description": "<p>地址</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
     "url": "/api/user/user/initialize",
     "title": "初始化",
     "description": "<p>初始化</p>",
@@ -3447,6 +4120,137 @@
         {
           "title": "成功返回-示例:",
           "content": "{\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/user/updateHeadPic",
+    "title": "修改 头像",
+    "description": "<p>修改 头像</p>",
+    "name": "user_user_updateHeadPic",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "UserBean": [
+          {
+            "group": "UserBean",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>用户 bean</p>"
+          },
+          {
+            "group": "UserBean",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.headPic",
+            "description": "<p>头像</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"headPic\":\"/xxx/xxx.jpg\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/user/updateNickName",
+    "title": "修改 昵称",
+    "description": "<p>修改 昵称</p>",
+    "name": "user_user_updateNickName",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "UserBean": [
+          {
+            "group": "UserBean",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>用户 bean</p>"
+          },
+          {
+            "group": "UserBean",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.nickName",
+            "description": "<p>昵称</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"nickName\":\"xxx\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/user/updatePhone",
+    "title": "修改 手机",
+    "description": "<p>修改 昵称</p>",
+    "name": "user_user_updatePhone",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "UserBean": [
+          {
+            "group": "UserBean",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>用户 bean</p>"
+          },
+          {
+            "group": "UserBean",
+            "type": "Long",
+            "optional": false,
+            "field": "userBean.phone",
+            "description": "<p>手机</p>"
+          }
+        ],
+        "PhoneMsgBean": [
+          {
+            "group": "PhoneMsgBean",
+            "type": "Object",
+            "optional": false,
+            "field": "phoneMsgBean",
+            "description": "<p>手机短信 bean</p>"
+          },
+          {
+            "group": "PhoneMsgBean",
+            "type": "String",
+            "size": "6",
+            "optional": false,
+            "field": "phoneMsgBean.code",
+            "description": "<p>随机码</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"phone\":15111111111},\"phoneMsgBean\":{\"code\":\"666666\"}}",
           "type": "json"
         }
       ]

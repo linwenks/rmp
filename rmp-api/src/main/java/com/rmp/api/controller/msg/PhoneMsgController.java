@@ -100,10 +100,10 @@ public class PhoneMsgController extends BaseApiController {
 	}
 	
 	/**
-	 * 用户 修改 手机 发送短信 
+	 * 修改 手机 发送短信 
 	 * 
-     * @api {post} /api/msg/phoneMsg/sendUpdatePhone 用户 修改 手机 发送短信 
-     * @apiDescription 用户 修改 手机 发送短信 
+     * @api {post} /api/msg/phoneMsg/sendUpdatePhone 修改 手机 发送短信 
+     * @apiDescription 修改 手机 发送短信 
      * @apiName msg_phoneMsg_sendUpdatePhone
      * @apiGroup group_user
      * @apiVersion 1.0.0

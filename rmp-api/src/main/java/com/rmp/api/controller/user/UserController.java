@@ -24,7 +24,9 @@ import com.rmp.api.base.model.RespBean;
 import com.rmp.api.base.util.ReqUtil;
 import com.rmp.api.base.util.RespUtil;
 import com.rmp.api.model.UserBean;
+import com.rmp.api.model.UserJobBean;
 import com.rmp.api.service.user.UserService;
+import com.rmp.api.util.UserUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.http.HttpUtil;
 import com.rmp.common.util.JsonUtil;
@@ -324,27 +326,44 @@ public class UserController extends BaseApiController {
 	}
 	
 	/**
-	 * 修改 基本信息
+	 * 查询
 	 * 
-     * @api {post} /api/user/user/update 修改 基本信息
-     * @apiDescription 修改 基本信息
-     * @apiName user_user_update
+     * @api {post} /api/user/user/get 查询
+     * @apiDescription 查询
+     * @apiName user_user_get
      * @apiGroup group_user
      * @apiVersion 1.0.0
      * 
-     * @apiParam (UserBean) {Object} userBean 用户 bean
-     * @apiParam (UserBean) {String} userBean.headPic 头像
+     * @apiSuccess (data) {Object} userBean 客户 bean
+	 * @apiSuccess (data) {String} userBean.realName 真实姓名
+	 * @apiSuccess (data) {Long} userBean.phone 手机
+	 * @apiSuccess (data) {Integer} userBean.sex 性别<br/>0:女<br/>1:男
+	 * @apiSuccess (data) {String} userBean.headPic 头像
+	 * @apiSuccess (data) {Long} userBean.areaId 区域ID
+	 * @apiSuccess (data) {String} userBean.areaNameAll 区域全称
+     * @apiSuccess (data) {String} userBean.address 地址
      * 
-     * @apiParamExample {json} 请求-示例: 
-	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"/xxx/xxx.jpg"}}
-	 * 
+     * @apiSuccessExample {json} 成功返回-示例:
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
      */
-	@RequestMapping(value = "/update")
+	@RequestMapping(value = "/get")
 	@ResponseBody
-	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
-		UserBean userBean = reqBean.getUserBean();
-		userService.exe("update", userBean);
-		return RespUtil.build(request);
+	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqUtil.buildCheckLogin(body, request);
+		
+		UserBean userBean = new UserBean();
+		userBean.setId(UserUtil.getCurrentUserId(request));
+		userBean = userService.selectOne(userBean);
+		
+		UserBean userBeanResult = new UserBean();
+		userBeanResult.setRealName(userBean.getRealName());
+		userBeanResult.setPhone(userBean.getPhone());
+		userBeanResult.setBirthday(userBean.getBirthday());
+		userBeanResult.setSex(userBean.getSex());
+		userBeanResult.setAreaId(userBean.getAreaId());
+		userBeanResult.setAddress(userBean.getAddress());
+		userBeanResult.setHeadPic(userBean.getHeadPic());
+		UserUtil.assembly(userBeanResult);
+		return RespUtil.build(request).putData("userBean", userBeanResult);
 	}
 }

@@ -12,6 +12,8 @@ import com.rmp.api.model.CustomerProblemBean;
 import com.rmp.api.model.CustomerRelationBean;
 import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.model.UserBean;
+import com.rmp.api.model.UserHobbyBean;
+import com.rmp.api.model.UserJobBean;
 import com.rmp.common.page.QueryPage;
 
 import lombok.AllArgsConstructor;
@@ -37,9 +39,17 @@ public class ReqBean {
 	private QueryPage queryPage;
 	
 	
+	private PhoneMsgBean phoneMsgBean;
+	
+	
+	
 	private UserBean userBean;
 	
-	private PhoneMsgBean phoneMsgBean;
+	private UserHobbyBean userHobbyBean;
+	
+	private UserJobBean userJobBean;
+	
+	
 	
 	private CustomerBean customerBean;
 	

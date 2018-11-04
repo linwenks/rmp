@@ -9,10 +9,12 @@
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="birthday" jdbcType="INTEGER" property="birthday" />
     <result column="pay_pwd" jdbcType="VARCHAR" property="payPwd" />
     <result column="account" jdbcType="DECIMAL" property="account" />
     <result column="last_login_time" jdbcType="BIGINT" property="lastLoginTime" />
-    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="wx_id" jdbcType="VARCHAR" property="wxId" />
     <result column="token" jdbcType="VARCHAR" property="token" />
@@ -81,9 +83,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_name, login_pwd, phone, real_name, nick_name, head_pic, pay_pwd, account, 
-    last_login_time, area_id, address, wx_id, token, `status`, is_delete, version, create_time, 
-    update_time
+    id, login_name, login_pwd, phone, real_name, nick_name, head_pic, sex, birthday, 
+    pay_pwd, account, last_login_time, area_id, address, wx_id, token, `status`, is_delete, 
+    version, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.rmp.info.model.UserCriteria" resultMap="BaseResultMap">
     select
@@ -121,18 +123,20 @@
   <insert id="insert" parameterType="com.rmp.info.model.User">
     insert into t_user (id, login_name, login_pwd, 
       phone, real_name, nick_name, 
-      head_pic, pay_pwd, account, 
-      last_login_time, area_id, address, 
-      wx_id, token, `status`, 
-      is_delete, version, create_time, 
-      update_time)
+      head_pic, sex, birthday, 
+      pay_pwd, account, last_login_time, 
+      area_id, address, wx_id, 
+      token, `status`, is_delete, 
+      version, create_time, update_time
+      )
     values (#{id,jdbcType=BIGINT}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, 
       #{phone,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{headPic,jdbcType=VARCHAR}, #{payPwd,jdbcType=VARCHAR}, #{account,jdbcType=DECIMAL}, 
-      #{lastLoginTime,jdbcType=BIGINT}, #{areaId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
-      #{wxId,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=BIGINT})
+      #{headPic,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=INTEGER}, 
+      #{payPwd,jdbcType=VARCHAR}, #{account,jdbcType=DECIMAL}, #{lastLoginTime,jdbcType=BIGINT}, 
+      #{areaId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{wxId,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      )
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -160,6 +164,12 @@
       </if>
       <if test="headPic != null">
         head_pic,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
       </if>
       <if test="payPwd != null">
         pay_pwd,
@@ -220,6 +230,12 @@
       <if test="headPic != null">
         #{headPic,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=INTEGER},
+      </if>
       <if test="payPwd != null">
         #{payPwd,jdbcType=VARCHAR},
       </if>
@@ -230,7 +246,7 @@
         #{lastLoginTime,jdbcType=BIGINT},
       </if>
       <if test="areaId != null">
-        #{areaId,jdbcType=INTEGER},
+        #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -291,6 +307,12 @@
       <if test="record.headPic != null">
         head_pic = #{record.headPic,jdbcType=VARCHAR},
       </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=INTEGER},
+      </if>
       <if test="record.payPwd != null">
         pay_pwd = #{record.payPwd,jdbcType=VARCHAR},
       </if>
@@ -301,7 +323,7 @@
         last_login_time = #{record.lastLoginTime,jdbcType=BIGINT},
       </if>
       <if test="record.areaId != null">
-        area_id = #{record.areaId,jdbcType=INTEGER},
+        area_id = #{record.areaId,jdbcType=BIGINT},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -341,10 +363,12 @@
       real_name = #{record.realName,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       head_pic = #{record.headPic,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      birthday = #{record.birthday,jdbcType=INTEGER},
       pay_pwd = #{record.payPwd,jdbcType=VARCHAR},
       account = #{record.account,jdbcType=DECIMAL},
       last_login_time = #{record.lastLoginTime,jdbcType=BIGINT},
-      area_id = #{record.areaId,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=BIGINT},
       address = #{record.address,jdbcType=VARCHAR},
       wx_id = #{record.wxId,jdbcType=VARCHAR},
       token = #{record.token,jdbcType=VARCHAR},
@@ -378,6 +402,12 @@
       <if test="headPic != null">
         head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=INTEGER},
+      </if>
       <if test="payPwd != null">
         pay_pwd = #{payPwd,jdbcType=VARCHAR},
       </if>
@@ -388,7 +418,7 @@
         last_login_time = #{lastLoginTime,jdbcType=BIGINT},
       </if>
       <if test="areaId != null">
-        area_id = #{areaId,jdbcType=INTEGER},
+        area_id = #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -425,10 +455,12 @@
       real_name = #{realName,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
       head_pic = #{headPic,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=INTEGER},
       pay_pwd = #{payPwd,jdbcType=VARCHAR},
       account = #{account,jdbcType=DECIMAL},
       last_login_time = #{lastLoginTime,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       wx_id = #{wxId,jdbcType=VARCHAR},
       token = #{token,jdbcType=VARCHAR},
@@ -448,6 +480,8 @@
     real_name,
     nick_name,
     head_pic,
+    sex,
+    birthday,
     pay_pwd,
     account,
     last_login_time,
@@ -471,10 +505,12 @@
          #{record.realName,jdbcType=VARCHAR}, 
          #{record.nickName,jdbcType=VARCHAR}, 
          #{record.headPic,jdbcType=VARCHAR}, 
+         #{record.sex,jdbcType=INTEGER}, 
+         #{record.birthday,jdbcType=INTEGER}, 
          #{record.payPwd,jdbcType=VARCHAR}, 
          #{record.account,jdbcType=DECIMAL}, 
          #{record.lastLoginTime,jdbcType=BIGINT}, 
-         #{record.areaId,jdbcType=INTEGER}, 
+         #{record.areaId,jdbcType=BIGINT}, 
          #{record.address,jdbcType=VARCHAR}, 
          #{record.wxId,jdbcType=VARCHAR}, 
          #{record.token,jdbcType=VARCHAR}, 
@@ -510,6 +546,12 @@
       </if>
       <if test="recordColl[0].headPic != null">
         head_pic,
+      </if>
+      <if test="recordColl[0].sex != null">
+        sex,
+      </if>
+      <if test="recordColl[0].birthday != null">
+        birthday,
       </if>
       <if test="recordColl[0].payPwd != null">
         pay_pwd,
@@ -573,6 +615,12 @@
         <if test="record.headPic != null">
            #{record.headPic,jdbcType=VARCHAR}, 
         </if>
+        <if test="record.sex != null">
+           #{record.sex,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.birthday != null">
+           #{record.birthday,jdbcType=INTEGER}, 
+        </if>
         <if test="record.payPwd != null">
            #{record.payPwd,jdbcType=VARCHAR}, 
         </if>
@@ -583,7 +631,7 @@
            #{record.lastLoginTime,jdbcType=BIGINT}, 
         </if>
         <if test="record.areaId != null">
-           #{record.areaId,jdbcType=INTEGER}, 
+           #{record.areaId,jdbcType=BIGINT}, 
         </if>
         <if test="record.address != null">
            #{record.address,jdbcType=VARCHAR}, 
@@ -648,6 +696,12 @@
       <if test="headPic != null">
           head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null">
+          sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+          birthday = #{birthday,jdbcType=INTEGER},
+      </if>
       <if test="payPwd != null">
           pay_pwd = #{payPwd,jdbcType=VARCHAR},
       </if>
@@ -658,7 +712,7 @@
           last_login_time = #{lastLoginTime,jdbcType=BIGINT},
       </if>
       <if test="areaId != null">
-          area_id = #{areaId,jdbcType=INTEGER},
+          area_id = #{areaId,jdbcType=BIGINT},
       </if>
       <if test="address != null">
           address = #{address,jdbcType=VARCHAR},
@@ -695,10 +749,12 @@
       real_name = #{realName,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
       head_pic = #{headPic,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=INTEGER},
       pay_pwd = #{payPwd,jdbcType=VARCHAR},
       account = #{account,jdbcType=DECIMAL},
       last_login_time = #{lastLoginTime,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       wx_id = #{wxId,jdbcType=VARCHAR},
       token = #{token,jdbcType=VARCHAR},

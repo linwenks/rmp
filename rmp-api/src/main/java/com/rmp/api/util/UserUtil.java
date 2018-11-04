@@ -88,6 +88,25 @@ public class UserUtil extends BaseUtil {
 		if (StringUtils.isEmpty(nickName)) throw new AppException(MSG_01020);
 	}
 	
+	/**
+	 * 检查 真实姓名
+	 * @param realName
+	 */
+	public static void checkRealName(String realName) {
+		if (StringUtils.isEmpty(realName)) AppException.toThrow(MSG_01028);
+		int realNameMax = 10;
+		if (realName.length() > realNameMax) AppException.toThrow(MSG_01029, String.valueOf(realNameMax));
+	}
+	
+	/**
+	 * 检查 地址
+	 * @param address
+	 */
+	public static void checkAddress(String address) {
+		int addressMaxLength = 100;
+		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_01030, String.valueOf(addressMaxLength));
+	}
+	
 	
 	
 	// ================================================== redis ==================================================
@@ -162,5 +181,17 @@ public class UserUtil extends BaseUtil {
 			return userBean.getId();
 		}
 		return null;
+	}
+	
+	public static void assembly(UserBean bean) {
+		if (bean != null) {
+			if (bean.getAreaId() != null) {
+				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+			}
+			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
+				bean.setHeadPic("https://img.rmp.com" + bean.getHeadPic());    // 获取图片域名
+			}
+			
+		}
 	}
 }

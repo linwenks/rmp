@@ -36,7 +36,7 @@ public class CustomerUtil extends BaseUtil {
 	 */
 	public static void checkAddress(String address) {
 		int addressMaxLength = 100;
-		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02003, String.valueOf(addressMaxLength));
+		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02009, String.valueOf(addressMaxLength));
 	}
 	
 	public static void assembly(CustomerBean bean) {

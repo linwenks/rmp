@@ -54,6 +54,16 @@ public class User extends Model implements Serializable {
     private String headPic;
 
     /**
+     * 性别（0:女 1:男）
+     */
+    private Integer sex;
+
+    /**
+     * 生日
+     */
+    private Integer birthday;
+
+    /**
      * 支付密码
      */
     private String payPwd;
@@ -71,7 +81,7 @@ public class User extends Model implements Serializable {
     /**
      * 区域ID
      */
-    private Integer areaId;
+    private Long areaId;
 
     /**
      * 地址

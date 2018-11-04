@@ -3,7 +3,7 @@ package com.rmp.info.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserCustomerCriteria {
+public class UserHobbyCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class UserCustomerCriteria {
 
     protected Integer limitEnd;
 
-    public UserCustomerCriteria() {
+    public UserHobbyCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -244,123 +244,213 @@ public class UserCustomerCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdIsNull() {
-            addCriterion("customer_id is null");
+        public Criteria andInterestIsNull() {
+            addCriterion("interest is null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdIsNotNull() {
-            addCriterion("customer_id is not null");
+        public Criteria andInterestIsNotNull() {
+            addCriterion("interest is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdEqualTo(Long value) {
-            addCriterion("customer_id =", value, "customerId");
+        public Criteria andInterestEqualTo(String value) {
+            addCriterion("interest =", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdNotEqualTo(Long value) {
-            addCriterion("customer_id <>", value, "customerId");
+        public Criteria andInterestNotEqualTo(String value) {
+            addCriterion("interest <>", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdGreaterThan(Long value) {
-            addCriterion("customer_id >", value, "customerId");
+        public Criteria andInterestGreaterThan(String value) {
+            addCriterion("interest >", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("customer_id >=", value, "customerId");
+        public Criteria andInterestGreaterThanOrEqualTo(String value) {
+            addCriterion("interest >=", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdLessThan(Long value) {
-            addCriterion("customer_id <", value, "customerId");
+        public Criteria andInterestLessThan(String value) {
+            addCriterion("interest <", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdLessThanOrEqualTo(Long value) {
-            addCriterion("customer_id <=", value, "customerId");
+        public Criteria andInterestLessThanOrEqualTo(String value) {
+            addCriterion("interest <=", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdIn(List<Long> values) {
-            addCriterion("customer_id in", values, "customerId");
+        public Criteria andInterestLike(String value) {
+            addCriterion("interest like", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdNotIn(List<Long> values) {
-            addCriterion("customer_id not in", values, "customerId");
+        public Criteria andInterestNotLike(String value) {
+            addCriterion("interest not like", value, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdBetween(Long value1, Long value2) {
-            addCriterion("customer_id between", value1, value2, "customerId");
+        public Criteria andInterestIn(List<String> values) {
+            addCriterion("interest in", values, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerIdNotBetween(Long value1, Long value2) {
-            addCriterion("customer_id not between", value1, value2, "customerId");
+        public Criteria andInterestNotIn(List<String> values) {
+            addCriterion("interest not in", values, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andSortIsNull() {
-            addCriterion("sort is null");
+        public Criteria andInterestBetween(String value1, String value2) {
+            addCriterion("interest between", value1, value2, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andSortIsNotNull() {
-            addCriterion("sort is not null");
+        public Criteria andInterestNotBetween(String value1, String value2) {
+            addCriterion("interest not between", value1, value2, "interest");
             return (Criteria) this;
         }
 
-        public Criteria andSortEqualTo(Integer value) {
-            addCriterion("sort =", value, "sort");
+        public Criteria andDietIsNull() {
+            addCriterion("diet is null");
             return (Criteria) this;
         }
 
-        public Criteria andSortNotEqualTo(Integer value) {
-            addCriterion("sort <>", value, "sort");
+        public Criteria andDietIsNotNull() {
+            addCriterion("diet is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSortGreaterThan(Integer value) {
-            addCriterion("sort >", value, "sort");
+        public Criteria andDietEqualTo(String value) {
+            addCriterion("diet =", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sort >=", value, "sort");
+        public Criteria andDietNotEqualTo(String value) {
+            addCriterion("diet <>", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortLessThan(Integer value) {
-            addCriterion("sort <", value, "sort");
+        public Criteria andDietGreaterThan(String value) {
+            addCriterion("diet >", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortLessThanOrEqualTo(Integer value) {
-            addCriterion("sort <=", value, "sort");
+        public Criteria andDietGreaterThanOrEqualTo(String value) {
+            addCriterion("diet >=", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortIn(List<Integer> values) {
-            addCriterion("sort in", values, "sort");
+        public Criteria andDietLessThan(String value) {
+            addCriterion("diet <", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortNotIn(List<Integer> values) {
-            addCriterion("sort not in", values, "sort");
+        public Criteria andDietLessThanOrEqualTo(String value) {
+            addCriterion("diet <=", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortBetween(Integer value1, Integer value2) {
-            addCriterion("sort between", value1, value2, "sort");
+        public Criteria andDietLike(String value) {
+            addCriterion("diet like", value, "diet");
             return (Criteria) this;
         }
 
-        public Criteria andSortNotBetween(Integer value1, Integer value2) {
-            addCriterion("sort not between", value1, value2, "sort");
+        public Criteria andDietNotLike(String value) {
+            addCriterion("diet not like", value, "diet");
+            return (Criteria) this;
+        }
+
+        public Criteria andDietIn(List<String> values) {
+            addCriterion("diet in", values, "diet");
+            return (Criteria) this;
+        }
+
+        public Criteria andDietNotIn(List<String> values) {
+            addCriterion("diet not in", values, "diet");
+            return (Criteria) this;
+        }
+
+        public Criteria andDietBetween(String value1, String value2) {
+            addCriterion("diet between", value1, value2, "diet");
+            return (Criteria) this;
+        }
+
+        public Criteria andDietNotBetween(String value1, String value2) {
+            addCriterion("diet not between", value1, value2, "diet");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteIsNull() {
+            addCriterion("taste is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteIsNotNull() {
+            addCriterion("taste is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteEqualTo(String value) {
+            addCriterion("taste =", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteNotEqualTo(String value) {
+            addCriterion("taste <>", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteGreaterThan(String value) {
+            addCriterion("taste >", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteGreaterThanOrEqualTo(String value) {
+            addCriterion("taste >=", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteLessThan(String value) {
+            addCriterion("taste <", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteLessThanOrEqualTo(String value) {
+            addCriterion("taste <=", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteLike(String value) {
+            addCriterion("taste like", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteNotLike(String value) {
+            addCriterion("taste not like", value, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteIn(List<String> values) {
+            addCriterion("taste in", values, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteNotIn(List<String> values) {
+            addCriterion("taste not in", values, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteBetween(String value1, String value2) {
+            addCriterion("taste between", value1, value2, "taste");
+            return (Criteria) this;
+        }
+
+        public Criteria andTasteNotBetween(String value1, String value2) {
+            addCriterion("taste not between", value1, value2, "taste");
             return (Criteria) this;
         }
 

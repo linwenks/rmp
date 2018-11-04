@@ -94,7 +94,10 @@
 		<table tableName="t_user" domainObjectName="User" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
-		<table tableName="t_user_customer" domainObjectName="UserCustomer" >
+		<table tableName="t_user_job" domainObjectName="UserJob" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
+		<table tableName="t_user_hobby" domainObjectName="UserHobby" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
 		

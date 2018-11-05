@@ -24,7 +24,6 @@ import com.rmp.api.base.model.RespBean;
 import com.rmp.api.base.util.ReqUtil;
 import com.rmp.api.base.util.RespUtil;
 import com.rmp.api.model.UserBean;
-import com.rmp.api.model.UserJobBean;
 import com.rmp.api.service.user.UserService;
 import com.rmp.api.util.UserUtil;
 import com.rmp.api.util.constant.Constant;
@@ -268,6 +267,7 @@ public class UserController extends BaseApiController {
 	public RespBean updateHeadPic(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
+		userBean.setId(UserUtil.getCurrentUserId(request));
 		userService.exe("updateHeadPic", userBean);
 		return RespUtil.build(request);
 	}
@@ -293,6 +293,7 @@ public class UserController extends BaseApiController {
 	public RespBean updateNickName(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
+		userBean.setId(UserUtil.getCurrentUserId(request));
 		userService.exe("updateNickName", userBean);
 		return RespUtil.build(request);
 	}
@@ -321,7 +322,8 @@ public class UserController extends BaseApiController {
 	public RespBean updatePhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
-		userService.exe("updatePhone", userBean);
+		userBean.setId(UserUtil.getCurrentUserId(request));
+		userService.exe("updatePhone", ImmutableMap.of("userBean", userBean, "phoneMsgBean", reqBean.getPhoneMsgBean()));
 		return RespUtil.build(request);
 	}
 	

@@ -496,7 +496,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		userBeanTmp2.setLoginName(phone.toString());
 		userBeanTmp2.setIsDelete(Constant.DELETE_N);
 		userBeanTmp2 = selectOne(userBeanTmp2);
-		if (userBeanTmp != null) AppException.toThrow(MSG_01023);
+		if (userBeanTmp2 != null) AppException.toThrow(MSG_01023);
 		
 		userBeanTmp.setLoginName(phone.toString());
 		userBeanTmp.setPhone(phone);

@@ -100,14 +100,15 @@ public class UserJobController extends BaseApiController {
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
-		UserJobBean userJobBean = reqBean.getUserJobBean();
+		ReqUtil.buildCheckLogin(body, request);
+		
+		Long userId = UserUtil.getCurrentUserId(request);
 		
 		UserBean userBeanResult = null;
 		UserJobBean userJobBeanResult = null;
 		
 		UserBean userBean = new UserBean();
-		userBean.setId(UserUtil.getCurrentUserId(request));
+		userBean.setId(userId);
 		userBean = userService.selectOne(userBean);
 		
 		userBeanResult = new UserBean();
@@ -120,6 +121,8 @@ public class UserJobController extends BaseApiController {
 		userBeanResult.setHeadPic(userBean.getHeadPic());
 		UserUtil.assembly(userBeanResult);
 		
+		UserJobBean userJobBean = new UserJobBean();
+		userJobBean.setUserId(userId);
 		UserJobBean userJobBeanTmp = userJobService.selectOne(userJobBean);
 		if (userJobBeanTmp != null) {
 			userJobBeanResult = new UserJobBean();

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "api接口文档",
   "title": "关系维护-api接口文档",
-  "url" : "https://rmp.com",
+  "url" : "http://47.106.175.165",
   "order":[
   	"group_example",
 	"group_user",

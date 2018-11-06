@@ -21,6 +21,13 @@ public final class Constant {
 		
 	}
 	
+	public final static String WX_APPID = "wx89b9974ce60fa10e";
+	public final static String WX_SECRET = "fe60b1c7a0af2a3be99638b3a4910011";
+	
+	public static String urlJscode2session(String jsCode) {
+		return "https://api.weixin.qq.com/sns/jscode2session?appid=" + WX_APPID + "&secret=" + WX_SECRET + "&js_code=" + jsCode + "&grant_type=authorization_code";
+	}
+	
 	// redis
 	public static final class Redis {
 		public static final class Sharded1 {

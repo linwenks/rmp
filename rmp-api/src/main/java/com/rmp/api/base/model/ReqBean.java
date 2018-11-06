@@ -14,6 +14,7 @@ import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.model.UserBean;
 import com.rmp.api.model.UserHobbyBean;
 import com.rmp.api.model.UserJobBean;
+import com.rmp.api.model.WxPhoneNumberReqBean;
 import com.rmp.common.page.QueryPage;
 
 import lombok.AllArgsConstructor;
@@ -37,6 +38,9 @@ public class ReqBean {
 	private HttpServletRequest request;
 	
 	private QueryPage queryPage;
+	
+	
+	private WxPhoneNumberReqBean wxPhoneNumberReqBean;
 	
 	
 	private PhoneMsgBean phoneMsgBean;

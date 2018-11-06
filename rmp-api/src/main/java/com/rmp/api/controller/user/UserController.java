@@ -77,7 +77,7 @@ public class UserController extends BaseApiController {
 		String jsCode = userBean.getJsCode();
 		if (StringUtils.isEmpty(jsCode)) throw new AppException(MSG_00003);
 		
-		String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx8fea9abfd68d6cbf&secret=1b49f1a276222ace79c4c911b1395089&js_code=" + jsCode + "&grant_type=authorization_code";
+		String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx89b9974ce60fa10e&secret=fe60b1c7a0af2a3be99638b3a4910011&js_code=" + jsCode + "&grant_type=authorization_code";
 		HttpUtil httpUtil = new HttpUtil();
 		httpUtil.setConnectTimeout(5000);
 		httpUtil.setSocketTimeout(5000);

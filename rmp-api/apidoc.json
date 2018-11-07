@@ -12,6 +12,7 @@
   	"example",
   	
   	"user_user_initialize",
+  	"user_user_bindWxPhone",
     "user_user_login",
     "msg_phoneMsg_sendRegister",
     "user_user_register",

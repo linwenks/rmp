@@ -23,4 +23,6 @@ public class UserBean extends User {
      * 区域 名称 all
      */
     private String areaNameAll;
+    
+    private Long idNotEqualTo;
 }

@@ -16,10 +16,13 @@ import com.rmp.api.base.dao.redis.BaseShardedJedisPoolDao;
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.model.UserBean;
+import com.rmp.api.model.WxPhoneNumberReqBean;
+import com.rmp.api.model.WxPhoneNumberRespBean;
 import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.service.msg.PhoneMsgService;
 import com.rmp.api.service.user.UserService;
 import com.rmp.api.util.UserUtil;
+import com.rmp.api.util.WxUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.util.DateUtil;
 import com.rmp.common.util.UuidUtil;
@@ -72,6 +75,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		try {
 			switch (cmd) {
 			case "initialize": initialize((UserBean) obj);break;
+			case "bindWxPhone": bindWxPhone((Map<String, Object>) obj);break;
 			case "login": login((UserBean) obj);break;
 			case "register": register((Map<String, Object>) obj);break;
 			case "retrievePwd": retrievePwd((Map<String, Object>) obj);break;
@@ -114,6 +118,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		if (beanTmp.getIsDelete() != null) {
 			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
 		}
+		if (beanTmp.getIdNotEqualTo() != null) {
+			criteriaTmp.andIdNotEqualTo(beanTmp.getIdNotEqualTo());
+		}
 	}
 	
 	/**
@@ -126,6 +133,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		String wxId = userBean.getWxId();
 		String nickName = StringUtils.trim(userBean.getNickName());
 		String headPic = StringUtils.trim(userBean.getHeadPic());
+		String wxSessionKey = StringUtils.trim(userBean.getWxSessionKey());
 		
 		String token = UuidUtil.generateUUID();
 		
@@ -137,6 +145,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			userBeanTmp.setHeadPic(headPic);
 			userBeanTmp.setUpdateTime(nowDateLong);
 			userBeanTmp.setToken(token);
+			userBeanTmp.setWxSessionKey(wxSessionKey);
 			updatePkSelVer(userBeanTmp);
 		} else {
 			// 初始化用户
@@ -148,9 +157,85 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			userBeanTmp.setHeadPic(headPic);
 			userBeanTmp.setCreateTime(nowDateLong);
 			userBeanTmp.setToken(token);
+			userBeanTmp.setWxSessionKey(wxSessionKey);
 			insertSel(userBeanTmp);
 		}
 		BeanUtils.copyProperties(userBeanTmp, userBean);
+	}
+	
+	/**
+	 * 绑定 微信手机
+	 * @param param
+	 * @throws Exception 
+	 */
+	private void bindWxPhone(Map<String, Object> param) throws Exception {
+		if (CollectionUtils.isEmpty(param)) AppException.toThrow(MSG_00003);
+		UserBean userBean = (UserBean) param.get("userBean");
+		WxPhoneNumberReqBean wxPhoneNumberReqBean = (WxPhoneNumberReqBean) param.get("wxPhoneNumberReqBean");
+		
+		if (userBean == null) throw new AppException(MSG_00003);
+		if (wxPhoneNumberReqBean == null) throw new AppException(MSG_00003);
+		
+		String token = StringUtils.trim(userBean.getToken());
+		String encryptedData = StringUtils.trim(wxPhoneNumberReqBean.getEncryptedData());
+		String iv = StringUtils.trim(wxPhoneNumberReqBean.getIv());
+		if (StringUtils.isEmpty(token)) throw new AppException(MSG_00003);
+		if (StringUtils.isEmpty(encryptedData)) throw new AppException(MSG_00003);
+		if (StringUtils.isEmpty(iv)) throw new AppException(MSG_00003);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		UserBean userBeanTmp = new UserBean();
+		userBeanTmp.setToken(token);
+		userBeanTmp = selectOne(userBeanTmp);
+		if (userBeanTmp == null) AppException.toThrow(MSG_00007);
+		if (!Constant.User.Status._0.equals(userBeanTmp.getStatus())) AppException.toThrow(MSG_01009);
+		if (Constant.DELETE_Y.equals(userBeanTmp.getIsDelete())) AppException.toThrow(MSG_01017);
+		if (Constant.User.Status._1.equals(userBeanTmp.getStatus())) AppException.toThrow(MSG_01031);
+		
+		String wxSessionKey = userBeanTmp.getWxSessionKey();
+		if (StringUtils.isEmpty(wxSessionKey)) throw new AppException(MSG_01032);
+		
+		WxPhoneNumberRespBean wsxPhoneNumberRespBean = WxUtil.getData(encryptedData, wxSessionKey, iv);
+		if (wsxPhoneNumberRespBean == null) throw new AppException(MSG_01033);
+		String phoneNumber = wsxPhoneNumberRespBean.getPhoneNumber();
+		if (StringUtils.isEmpty(phoneNumber)) throw new AppException(MSG_01034);
+		
+		// 查询用户是否注册
+		UserBean userBeanTmp2 = new UserBean();
+		userBeanTmp2.setLoginName(phoneNumber);
+		userBeanTmp2.setIdNotEqualTo(userBeanTmp.getId());
+		userBeanTmp2 = selectOne(userBeanTmp2);
+		if (userBeanTmp != null) AppException.toThrow(MSG_01009);
+		
+		userBeanTmp.setLoginName(phoneNumber);
+		userBeanTmp.setStatus(Constant.User.Status._1);
+		userBeanTmp.setPhone(Long.valueOf(phoneNumber));
+		userBeanTmp.setUpdateTime(nowDateLong);
+		userBeanTmp.setLastLoginTime(nowDateLong);
+		updatePkSelVer(userBeanTmp);
+		
+		// redis
+		BeanUtils.copyProperties(userBeanTmp, userBean);
+		
+		// 加入redis
+		String key = UserUtil.rKey(token);
+		int index = Constant.Redis.User.INDEX;
+		try (ShardedJedis shardedJedis = baseShardedJedisPoolDao.getShardedJedis();
+				Jedis jedis = shardedJedis.getShard(Constant.Redis.Sharded1.NAME1);) {
+			jedis.select(index);
+			jedis.watch(key);
+			try (Transaction tx = jedis.multi();) {
+				tx.hmset(key, UserUtil.rMap(userBeanTmp));
+				tx.expire(key, Constant.Redis.User.SECONDS);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	/**

@@ -34,26 +34,28 @@ public class ReqUtil extends BaseUtil {
 					String token = StringUtils.trim(headerBean.getToken());
 					if (StringUtils.isEmpty(token)) AppException.toThrow(MSG_00006);
 					
-					String key = UserUtil.rKey(token);
-					Integer index = Constant.Redis.User.INDEX;
-					
-					Map<String, String> userMap = jedisDao.hgetAll(index, key);
-					if (CollectionUtils.isEmpty(userMap)) {
-
-						UserBean userBeanTmp = new UserBean();
-						userBeanTmp.setToken(token);
-						userBeanTmp = userService.selectOne(userBeanTmp);
-						if (userBeanTmp == null) AppException.toThrow(MSG_00007);
-						UserUtil.checkUser(userBeanTmp);
+					if (isCheckLogin) {
+						String key = UserUtil.rKey(token);
+						Integer index = Constant.Redis.User.INDEX;
 						
-						userMap = UserUtil.rMap(userBeanTmp);
-						jedisDao.hmset(index, key, userMap);
+						Map<String, String> userMap = jedisDao.hgetAll(index, key);
+						if (CollectionUtils.isEmpty(userMap)) {
+	
+							UserBean userBeanTmp = new UserBean();
+							userBeanTmp.setToken(token);
+							userBeanTmp = userService.selectOne(userBeanTmp);
+							if (userBeanTmp == null) AppException.toThrow(MSG_00007);
+							UserUtil.checkUser(userBeanTmp);
+							
+							userMap = UserUtil.rMap(userBeanTmp);
+							jedisDao.hmset(index, key, userMap);
+						}
+	
+						// 存入 request
+						UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
+						
+						jedisDao.expire(index, key, Constant.Redis.User.SECONDS);
 					}
-
-					// 存入 request
-					UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
-					
-					jedisDao.expire(index, key, Constant.Redis.User.SECONDS);
 				}
 			}
 			request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerBean);

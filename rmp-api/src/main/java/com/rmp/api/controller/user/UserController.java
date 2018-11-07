@@ -1,7 +1,6 @@
 package com.rmp.api.controller.user;
 
-import static com.rmp.api.util.MsgEnum.MSG_00002;
-import static com.rmp.api.util.MsgEnum.MSG_00003;
+import static com.rmp.api.util.MsgEnum.*;
 
 import java.util.Map;
 
@@ -25,11 +24,8 @@ import com.rmp.api.base.model.RespBean;
 import com.rmp.api.base.util.ReqUtil;
 import com.rmp.api.base.util.RespUtil;
 import com.rmp.api.model.UserBean;
-import com.rmp.api.model.WxPhoneNumberReqBean;
-import com.rmp.api.model.WxPhoneNumberRespBean;
 import com.rmp.api.service.user.UserService;
 import com.rmp.api.util.UserUtil;
-import com.rmp.api.util.WxUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.http.HttpUtil;
 import com.rmp.common.util.JsonUtil;
@@ -103,12 +99,17 @@ public class UserController extends BaseApiController {
 			log.error(" error UserController login : openid is null ");
 			throw new AppException(MSG_00002);
 		}
+		if (StringUtils.isEmpty(session_key)) {
+			log.error(" error UserController login : session_key is null ");
+			throw new AppException(MSG_00002);
+		}
 		
 		// 初始化
 		UserBean userBeanTmp = new UserBean();
 		userBeanTmp.setWxId(openid);
 		userBeanTmp.setNickName(userBean.getNickName());
 		userBeanTmp.setHeadPic(userBean.getHeadPic());
+		userBeanTmp.setWxSessionKey(session_key);
 		userService.exe("initialize", userBeanTmp);
 		
 		String token = userBeanTmp.getToken();
@@ -125,94 +126,41 @@ public class UserController extends BaseApiController {
 	}
 	
 	/**
-	 * 初始化 微信获取手机
+	 * 绑定 微信手机
 	 * 
-     * @api {post} /api/user/user/initialize2 初始化 微信获取手机
-     * @apiDescription 初始化 微信获取手机
-     * @apiName user_user_initialize2
+     * @api {post} /api/user/user/bindWxPhone 绑定 微信手机
+     * @apiDescription 绑定 微信手机
+     * @apiName user_user_bindWxPhone
      * @apiGroup group_user
      * @apiVersion 1.0.0
      * 
-     * @apiParam (UserBean) {Object} userBean 用户 bean
-     * @apiParam (UserBean) {String} userBean.jsCode 微信jsCode
-     * @apiParam (UserBean) {String} userBean.nickName 昵称
-     * @apiParam (UserBean) {String} userBean.headPic 头像
+     * @apiParam (WxPhoneNumberReqBean) {Object} userBean 微信手机 bean
+     * @apiParam (WxPhoneNumberReqBean) {String} userBean.encryptedData 
+     * @apiParam (WxPhoneNumberReqBean) {String} userBean.iv 
      * 
      * @apiParamExample {json} 请求-示例: 
-	 *		{"userBean":{"nickName":"哈哈","headPic":"http://wx.com/tx.jpg","jsCode":"aaaaaa"}}
+	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"wxPhoneNumberReqBean":{"encryptedData":"xxxxxxxxxxxxxxx","iv":"yyyyyyyyyyyy"}}
 	 * 
 	 * @apiSuccess (data) {Object} userBean 用户 bean
-	 * @apiSuccess (data) {String} userBean.token token
-	 * @apiSuccess (data) {Integer=0,1} userBean.status 状态<br/>0:未注册<br/>1:已注册
+	 * @apiSuccess (data) {Long} userBean.phone 手机号
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
-	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"token":"b1e00042ab8a4296aa62c09b28a3c547","status":0}}}
+	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"phone":"15100000000"}}}
      *
      */
-	@RequestMapping(value = "/initialize2")
+	@RequestMapping(value = "/bindWxPhone")
 	@ResponseBody
-	public RespBean initialize2(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.build(body, request);
+	public RespBean bindWxPhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
+		
+		String token = reqBean.getHeader().getToken();
+		
 		UserBean userBean = reqBean.getUserBean();
-		WxPhoneNumberReqBean wxPhoneNumberReqBean = reqBean.getWxPhoneNumberReqBean();
-		if (userBean == null) throw new AppException(MSG_00003);
-		if (wxPhoneNumberReqBean == null) throw new AppException(MSG_00003);
-		
-		String jsCode = userBean.getJsCode();
-		if (StringUtils.isEmpty(jsCode)) throw new AppException(MSG_00003);
-		
-		String encryptedData = wxPhoneNumberReqBean.getEncryptedData();
-		String iv = wxPhoneNumberReqBean.getIv();
-		if (StringUtils.isEmpty(jsCode)) throw new AppException(MSG_00003);
-		if (StringUtils.isEmpty(iv)) throw new AppException(MSG_00003);
-		/*
-		String url = Constant.urlJscode2session(jsCode);
-		HttpUtil httpUtil = new HttpUtil();
-		httpUtil.setConnectTimeout(5000);
-		httpUtil.setSocketTimeout(5000);
-		Map<String, Object> result = httpUtil.sendGetRequest(url);
-		Integer statusCode = (Integer) result.get("statusCode");
-		if (statusCode == null || statusCode.intValue() != 200) {
-			log.error(" error UserController login : statusCode[" + statusCode + "]");
-			throw new AppException(MSG_00002);
-		}
-		String responseContent = (String) result.get("responseContent");
-		if (responseContent == null) {
-			log.error(" error UserController login : responseContent[" + responseContent + "]");
-			throw new AppException(MSG_00002);
-		}
-		Map<String, Object> responseContentMap = JsonUtil.fromJson(responseContent, Map.class);
-		String session_key = (String) responseContentMap.get("session_key");
-		String openid = (String) responseContentMap.get("openid");
-		if (StringUtils.isEmpty(openid)) {
-			log.error(" error UserController login : openid is null ");
-			throw new AppException(MSG_00002);
-		}
-		if (StringUtils.isEmpty(session_key)) {
-			log.error(" error UserController login : session_key is null ");
-			throw new AppException(MSG_00002);
-		}
-		*/
-		WxPhoneNumberRespBean wsxPhoneNumberRespBean = WxUtil.getData(encryptedData, "xS/EiRLK3fFQ/8e1DxXxbA==", iv);
-		
-		
-		// 初始化
-		UserBean userBeanTmp = new UserBean();
-	//	userBeanTmp.setWxId(openid);
-		userBeanTmp.setNickName(userBean.getNickName());
-		userBeanTmp.setHeadPic(userBean.getHeadPic());
-		userService.exe("initialize", userBeanTmp);
-		
-		String token = userBeanTmp.getToken();
-		
-		HeaderBean headerBean = reqBean.getHeader();
-		if (headerBean == null) headerBean = new HeaderBean();
-		headerBean.setToken(token);
-		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerBean);
+		userBean.setToken(token);
+		userService.exe("bindWxPhone", ImmutableMap.of("userBean", userBean, "wxPhoneNumberReqBean", reqBean.getWxPhoneNumberReqBean()));
 		
 		UserBean userBeanTmp2 = new UserBean();
-		userBeanTmp2.setStatus(userBeanTmp.getStatus());
-		userBeanTmp2.setToken(token);
+		userBeanTmp2.setPhone(userBean.getPhone());
 		return RespUtil.build(request).putData("userBean", userBeanTmp2);
 	}
 	

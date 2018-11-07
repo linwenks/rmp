@@ -1235,6 +1235,76 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andWxSessionKeyIsNull() {
+            addCriterion("wx_session_key is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyIsNotNull() {
+            addCriterion("wx_session_key is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyEqualTo(String value) {
+            addCriterion("wx_session_key =", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyNotEqualTo(String value) {
+            addCriterion("wx_session_key <>", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyGreaterThan(String value) {
+            addCriterion("wx_session_key >", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("wx_session_key >=", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyLessThan(String value) {
+            addCriterion("wx_session_key <", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyLessThanOrEqualTo(String value) {
+            addCriterion("wx_session_key <=", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyLike(String value) {
+            addCriterion("wx_session_key like", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyNotLike(String value) {
+            addCriterion("wx_session_key not like", value, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyIn(List<String> values) {
+            addCriterion("wx_session_key in", values, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyNotIn(List<String> values) {
+            addCriterion("wx_session_key not in", values, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyBetween(String value1, String value2) {
+            addCriterion("wx_session_key between", value1, value2, "wxSessionKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andWxSessionKeyNotBetween(String value1, String value2) {
+            addCriterion("wx_session_key not between", value1, value2, "wxSessionKey");
+            return (Criteria) this;
+        }
+
         public Criteria andIsDeleteIsNull() {
             addCriterion("is_delete is null");
             return (Criteria) this;

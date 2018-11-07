@@ -104,6 +104,11 @@ public class User extends Model implements Serializable {
     private Integer status;
 
     /**
+     * 微信sessionKey
+     */
+    private String wxSessionKey;
+
+    /**
      * 是否删除（0:未删除 1:已删除）
      */
     private Integer isDelete;

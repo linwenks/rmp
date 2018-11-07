@@ -151,11 +151,11 @@ public class UserController extends BaseApiController {
 	@RequestMapping(value = "/bindWxPhone")
 	@ResponseBody
 	public RespBean bindWxPhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		
 		String token = reqBean.getHeader().getToken();
 		
-		UserBean userBean = reqBean.getUserBean();
+		UserBean userBean = new UserBean();
 		userBean.setToken(token);
 		userService.exe("bindWxPhone", ImmutableMap.of("userBean", userBean, "wxPhoneNumberReqBean", reqBean.getWxPhoneNumberReqBean()));
 		
@@ -242,7 +242,7 @@ public class UserController extends BaseApiController {
 	@RequestMapping(value = "/register")
 	@ResponseBody
 	public RespBean register(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
-		ReqBean reqBean = ReqUtil.buildCheckToken(body, request);
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		String token = reqBean.getHeader().getToken();
 		
 		UserBean userBean = reqBean.getUserBean();

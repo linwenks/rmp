@@ -126,8 +126,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	/**
 	 * 初始化
 	 * @param userBean
+	 * @throws Exception 
 	 */
-	private void initialize(UserBean userBean) {
+	private void initialize(UserBean userBean) throws Exception {
 		Long nowDateLong = DateUtil.nowSecondFormat();
 		
 		String wxId = userBean.getWxId();
@@ -135,12 +136,16 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		String headPic = StringUtils.trim(userBean.getHeadPic());
 		String wxSessionKey = StringUtils.trim(userBean.getWxSessionKey());
 		
+		String tokenOld = null;
 		String token = UuidUtil.generateUUID();
 		
 		UserBean userBeanTmp = new UserBean();
 		userBeanTmp.setWxId(wxId);
 		userBeanTmp = selectOne(userBeanTmp);
 		if (userBeanTmp != null) {
+			
+			tokenOld = userBeanTmp.getToken();
+			
 			userBeanTmp.setNickName(nickName);
 			userBeanTmp.setHeadPic(headPic);
 			userBeanTmp.setUpdateTime(nowDateLong);
@@ -161,6 +166,40 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			insertSel(userBeanTmp);
 		}
 		BeanUtils.copyProperties(userBeanTmp, userBean);
+		
+		// 加入redis
+		String key = UserUtil.rKey(token);
+		String keyOld = UserUtil.rKey(tokenOld);
+		
+		int index = Constant.Redis.User.INDEX;
+		try (ShardedJedis shardedJedis = baseShardedJedisPoolDao.getShardedJedis();
+				Jedis jedis = shardedJedis.getShard(Constant.Redis.Sharded1.NAME1);) {
+			jedis.select(index);
+			jedis.watch(key);
+			
+			Boolean existsOld = false;
+			if (!StringUtils.isEmpty(keyOld)) {
+				existsOld = jedis.exists(keyOld);
+			}
+			if (existsOld) {
+				jedis.watch(keyOld);
+			}
+			
+			try (Transaction tx = jedis.multi();) {
+				// 存在登陆信息
+				if (existsOld) {
+					tx.rename(keyOld, key);    // 替换之前的key
+				} else {
+					tx.hmset(key, UserUtil.rMap(userBeanTmp));
+				}
+				tx.expire(key, Constant.Redis.User.SECONDS);
+				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	/**
@@ -207,7 +246,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		userBeanTmp2.setLoginName(phoneNumber);
 		userBeanTmp2.setIdNotEqualTo(userBeanTmp.getId());
 		userBeanTmp2 = selectOne(userBeanTmp2);
-		if (userBeanTmp != null) AppException.toThrow(MSG_01009);
+		if (userBeanTmp2 != null) AppException.toThrow(MSG_01009);
 		
 		userBeanTmp.setLoginName(phoneNumber);
 		userBeanTmp.setStatus(Constant.User.Status._1);
@@ -216,7 +255,6 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		userBeanTmp.setLastLoginTime(nowDateLong);
 		updatePkSelVer(userBeanTmp);
 		
-		// redis
 		BeanUtils.copyProperties(userBeanTmp, userBean);
 		
 		// 加入redis
@@ -236,6 +274,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw e;
 		}
+		
 	}
 	
 	/**

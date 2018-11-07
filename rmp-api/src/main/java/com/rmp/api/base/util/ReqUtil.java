@@ -66,11 +66,11 @@ public class ReqUtil extends BaseUtil {
 	public static ReqBean build(String body, HttpServletRequest request) {
 		return build(body, request, false, false);
 	}
-	
+	/*
 	public static ReqBean buildCheckToken(String body, HttpServletRequest request) {
 		return build(body, request, true, false);
 	}
-	
+	*/
 	public static ReqBean buildCheckLogin(String body, HttpServletRequest request) {
 		return build(body, request, true, true);
 	}

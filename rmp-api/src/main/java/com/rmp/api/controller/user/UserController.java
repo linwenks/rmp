@@ -134,9 +134,9 @@ public class UserController extends BaseApiController {
      * @apiGroup group_user
      * @apiVersion 1.0.0
      * 
-     * @apiParam (WxPhoneNumberReqBean) {Object} userBean 微信手机 bean
-     * @apiParam (WxPhoneNumberReqBean) {String} userBean.encryptedData 
-     * @apiParam (WxPhoneNumberReqBean) {String} userBean.iv 
+     * @apiParam (WxPhoneNumberReqBean) {Object} wxPhoneNumberReqBean 微信手机 bean
+     * @apiParam (WxPhoneNumberReqBean) {String} wxPhoneNumberReqBean.encryptedData 
+     * @apiParam (WxPhoneNumberReqBean) {String} wxPhoneNumberReqBean.iv 
      * 
      * @apiParamExample {json} 请求-示例: 
 	 *		{"header":{"token":"b1e00042ab8a4296aa62c09b28a3c547"},"wxPhoneNumberReqBean":{"encryptedData":"xxxxxxxxxxxxxxx","iv":"yyyyyyyyyyyy"}}

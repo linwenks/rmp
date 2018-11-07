@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "api接口文档",
   "title": "关系维护-api接口文档",
-  "url": "https://rmp.com",
+  "url": "http://47.106.175.165",
   "order": [
     "group_example",
     "group_user",
     "group_customer",
     "example",
     "user_user_initialize",
+    "user_user_bindWxPhone",
     "user_user_login",
     "msg_phoneMsg_sendRegister",
     "user_user_register",
@@ -65,7 +66,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-11-04T12:48:30.607Z",
+    "time": "2018-11-07T12:58:29.715Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }

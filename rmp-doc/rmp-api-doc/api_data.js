@@ -3698,6 +3698,78 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/user/user/bindWxPhone",
+    "title": "绑定 微信手机",
+    "description": "<p>绑定 微信手机</p>",
+    "name": "user_user_bindWxPhone",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "WxPhoneNumberReqBean": [
+          {
+            "group": "WxPhoneNumberReqBean",
+            "type": "Object",
+            "optional": false,
+            "field": "wxPhoneNumberReqBean",
+            "description": "<p>微信手机 bean</p>"
+          },
+          {
+            "group": "WxPhoneNumberReqBean",
+            "type": "String",
+            "optional": false,
+            "field": "wxPhoneNumberReqBean.encryptedData",
+            "description": ""
+          },
+          {
+            "group": "WxPhoneNumberReqBean",
+            "type": "String",
+            "optional": false,
+            "field": "wxPhoneNumberReqBean.iv",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"b1e00042ab8a4296aa62c09b28a3c547\"},\"wxPhoneNumberReqBean\":{\"encryptedData\":\"xxxxxxxxxxxxxxx\",\"iv\":\"yyyyyyyyyyyy\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>用户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "userBean.phone",
+            "description": "<p>手机号</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"b1e00042ab8a4296aa62c09b28a3c547\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"phone\":\"15100000000\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
     "url": "/api/user/user/get",
     "title": "查询",
     "description": "<p>查询</p>",

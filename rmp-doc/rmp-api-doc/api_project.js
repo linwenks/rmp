@@ -3,7 +3,7 @@ define({
   "version": "1.0.0",
   "description": "api接口文档",
   "title": "关系维护-api接口文档",
-  "url": "http://47.106.175.165",
+  "url": "http://47.94.5.205",
   "order": [
     "group_example",
     "group_user",
@@ -66,7 +66,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-11-07T12:58:29.715Z",
+    "time": "2018-11-19T02:54:41.467Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }

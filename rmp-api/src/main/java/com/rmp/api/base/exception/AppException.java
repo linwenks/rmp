@@ -26,81 +26,55 @@ public class AppException extends RuntimeException {
 	// 消息 map
 	protected List<MsgBean> msgList = new ArrayList<>();
 	
-	protected MsgEnum msgEnum;
-	
-	public AppException() {
+	private AppException() {
 		super();
 	}
 	
-	public AppException(Throwable throwable) {
+	private AppException(Throwable throwable) {
 		super(throwable);
 	}
 	
-	public AppException(Throwable throwable, MsgEnum msgEnum) {
+	private AppException(Throwable throwable, MsgEnum msgEnum) {
 		super(throwable);
-		msgList.add(new MsgBean(msgEnum));
+		msgList.add(MsgBean.build(msgEnum));
 	}
 	
-	public AppException(Throwable throwable, List<MsgBean> msgList) {
+	private AppException(Throwable throwable, List<MsgBean> msgList) {
 		super(throwable);
-		this.msgList.addAll(msgList);
+		msgList.addAll(msgList);
 	}
 	
-	public AppException(Throwable throwable, MsgEnum msgEnum, String[] params) {
+	private AppException(Throwable throwable, MsgEnum msgEnum, String[] params) {
 		super(throwable);
-		msgList.add(new MsgBean(msgEnum, params));
+		msgList.add(MsgBean.build(msgEnum, params));
 	}
 	
-	public AppException(Throwable throwable, MsgEnum msgEnum, String[] params, String field) {
+	private AppException(Throwable throwable, MsgEnum msgEnum, String[] params, String field) {
 		super(throwable);
-		msgList.add(new MsgBean(msgEnum, params, field));
+		msgList.add(MsgBean.build(msgEnum, params, field));
 	}
 	
 	
-	public AppException(MsgEnum msgEnum) {
+	private AppException(MsgEnum msgEnum) {
 		super();
-		msgList.add(new MsgBean(msgEnum));
+		msgList.add(MsgBean.build(msgEnum));
 	}
 	
-	public AppException(List<MsgBean> msgList) {
+	private AppException(List<MsgBean> msgList) {
 		super();
-		this.msgList.addAll(msgList);
+		msgList.addAll(msgList);
 	}
 	
-	public AppException(MsgEnum msgEnum, String[] params) {
+	private AppException(MsgEnum msgEnum, String[] params) {
 		super();
-		msgList.add(new MsgBean(msgEnum, params));
+		msgList.add(MsgBean.build(msgEnum, params));
 	}
 	
-	public AppException(MsgEnum msgEnum, String[] params, String field) {
+	private AppException(MsgEnum msgEnum, String[] params, String field) {
 		super();
-		msgList.add(new MsgBean(msgEnum, params, field));
+		msgList.add(MsgBean.build(msgEnum, params, field));
 	}
 	
-	
-	public AppException addMsg(MsgEnum msgEnum) {
-		msgList.add(new MsgBean(msgEnum));
-		return this;
-	}
-	
-	public AppException addMsg(MsgEnum msgEnum, String[] params) {
-		msgList.add(new MsgBean(msgEnum, params));
-		return this;
-	}
-	
-	public AppException addMsg(List<MsgBean> msgList) {
-		this.msgList.addAll(msgList);
-		return this;
-	}
-	
-	public AppException setMsg(List<MsgBean> msgList) {
-		this.msgList.addAll(msgList);
-		return this;
-	}
-
-	public List<MsgBean> getMsgList() {
-		return msgList;
-	}
 	
 	
 	// build
@@ -125,9 +99,8 @@ public class AppException extends RuntimeException {
 	}
 	
 	
-	
 	public AppException msgEnum(MsgEnum msgEnum) {
-		msgList.add(new MsgBean(msgEnum));
+		msgList.add(MsgBean.build(msgEnum));
 		return this;
 	}
 }

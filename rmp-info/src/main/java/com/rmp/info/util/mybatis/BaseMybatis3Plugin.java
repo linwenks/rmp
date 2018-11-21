@@ -5,8 +5,13 @@ import java.util.List;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.api.dom.java.Interface;
+import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.logging.Log;
-import org.mybatis.generator.logging.LogFactory;  
+import org.mybatis.generator.logging.LogFactory;
+
+import com.rmp.info.base.mapper.BaseMapper;  
   
 /**
  * 
@@ -95,5 +100,33 @@ public abstract class BaseMybatis3Plugin extends PluginAdapter {
 	
 	protected String getJdbcType(String columnName, IntrospectedTable introspectedTable) {
     	return getColumn(columnName, introspectedTable).getJdbcTypeName();
+	}
+	
+	/**
+	 * 生成dao
+	 */
+	@Override
+	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
+			IntrospectedTable introspectedTable) {
+		/**
+		 * 主键默认采用java.lang.Integer
+		 */
+		FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("BaseMapper<" + introspectedTable.getBaseRecordType()
+				+ "," + introspectedTable.getExampleType() + ">");
+		FullyQualifiedJavaType imp = new FullyQualifiedJavaType(BaseMapper.class.getName());
+		/**
+		 * 添加 extends MybatisBaseMapper
+		 */
+		interfaze.addSuperInterface(fqjt);
+		/**
+		 * 添加import my.mabatis.example.base.MybatisBaseMapper;
+		 */
+		interfaze.addImportedType(imp);
+		/**
+		 * 方法不需要
+		 */
+		interfaze.getMethods().clear();
+		interfaze.getAnnotations().clear();
+		return true;
 	}
 }  

@@ -1,12 +1,12 @@
 package com.rmp.api.base.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.util.CollectionUtils;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.rmp.api.util.constant.Constant;
 
 import lombok.AllArgsConstructor;
@@ -23,15 +23,15 @@ public class RespBean {
 	private HeaderBean header;
 	
 	// 消息 list
-	private List<MsgBean> msgs = new ArrayList<>();
+	private List<MsgBean> msgs = Lists.newArrayList();
 	
-	private MsgBean msg = new MsgBean();
+	private MsgBean msg = MsgBean.build();
 	
 	// 消息状态
 	private String state = Constant.Msg.ERROR;
 	
 	// 数据 map
-	private Map<String, Object> data = new HashMap<>();
+	private Map<String, Object> data = Maps.newHashMap();
 	
 	public MsgBean getMsg() {
 		if (!CollectionUtils.isEmpty(msgs)) {

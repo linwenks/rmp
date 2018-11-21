@@ -25,30 +25,15 @@ import com.rmp.info.model.CustomerMaintainCriteria;
  *
  */
 @Service
-public class CustomerMaintainServiceImpl extends BaseServiceImpl implements CustomerMaintainService {
+public class CustomerMaintainServiceImpl extends BaseServiceImpl<CustomerMaintain, CustomerMaintainBean, CustomerMaintainCriteria> implements CustomerMaintainService {
 	
 	@Autowired
 	private CustomerMaintainMapper customerMaintainMapper;
 	@Autowired
 	private CustomerService customerService;
-
+	
 	@Override
-	public Class<?> getModelClass() {
-		return CustomerMaintain.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return CustomerMaintainBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return CustomerMaintainCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public CustomerMaintainMapper mapper() {
 		return customerMaintainMapper;
 	}
 	
@@ -62,27 +47,26 @@ public class CustomerMaintainServiceImpl extends BaseServiceImpl implements Cust
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, CustomerMaintainBean bean) {
 		if (bean == null) {
 			return;
 		}
 		CustomerMaintainCriteria.Criteria criteriaTmp = (CustomerMaintainCriteria.Criteria) criteria;
-		CustomerMaintainBean beanTmp = (CustomerMaintainBean) bean;
 		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getCustomerId() != null) {
-			criteriaTmp.andCustomerIdEqualTo(beanTmp.getCustomerId());
+		if (bean.getCustomerId() != null) {
+			criteriaTmp.andCustomerIdEqualTo(bean.getCustomerId());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
 	}
 	

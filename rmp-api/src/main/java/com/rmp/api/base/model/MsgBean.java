@@ -13,22 +13,13 @@ public class MsgBean {
 	
 	private String des;
 	
-	public MsgBean() {
+	private MsgBean() {
+		
 	}
 	
-	public MsgBean(MsgEnum msgEnum) {
-		this(msgEnum, null, null);
-	}
-	
-	public MsgBean(MsgEnum msgEnum, String field) {
-		this(msgEnum, null, field);
-	}
-	
-	public MsgBean(MsgEnum msgEnum, String[] params) {
-		this(msgEnum, params, null);
-	}
-	
-	public MsgBean(MsgEnum msgEnum, String[] params, String field) {
+	private MsgBean(MsgEnum msgEnum, String[] params, String field) {
+		if (msgEnum == null) return;
+		
 		this.code = msgEnum.getKey();
 		this.field = field;
 		
@@ -38,5 +29,26 @@ public class MsgBean {
 				des = des.replaceAll("\\{" + i + "\\}", params[i]);
 			}
 		}
+	}
+	
+	// build
+	public static MsgBean build() {
+		return new MsgBean();
+	}
+	
+	public static MsgBean build(MsgEnum msgEnum) {
+		return build(msgEnum, null, null);
+	}
+	
+	public static MsgBean build(MsgEnum msgEnum, String field) {
+		return build(msgEnum, null, field);
+	}
+	
+	public static MsgBean build(MsgEnum msgEnum, String[] params) {
+		return build(msgEnum, params, null);
+	}
+	
+	public static MsgBean build(MsgEnum msgEnum, String[] params, String field) {
+		return new MsgBean(msgEnum, params, field);
 	}
 }

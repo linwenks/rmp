@@ -28,7 +28,7 @@ import com.rmp.info.model.CustomerMemorialDayCriteria;
  *
  */
 @Service
-public class CustomerMemorialDayServiceImpl extends BaseServiceImpl implements CustomerMemorialDayService {
+public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemorialDay, CustomerMemorialDayBean, CustomerMemorialDayCriteria> implements CustomerMemorialDayService {
 	
 	@Autowired
 	private CustomerMemorialDayMapper customerMemorialDayMapper;
@@ -36,22 +36,7 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl implements C
 	private CustomerService customerService;
 	
 	@Override
-	public Class<?> getModelClass() {
-		return CustomerMemorialDay.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return CustomerMemorialDayBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return CustomerMemorialDayCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public CustomerMemorialDayMapper mapper() {
 		return customerMemorialDayMapper;
 	}
 	
@@ -61,33 +46,32 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl implements C
 			switch (cmd) {
 			case "save": save((CustomerMemorialDayBean) obj);break;
 			case "update": update((CustomerMemorialDayBean) obj);break;
-			case "delete": delete((CustomerMemorialDayBean) obj);break;
+			case "delete": deleteCustom((CustomerMemorialDayBean) obj);break;
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, CustomerMemorialDayBean bean) {
 		if (bean == null) {
 			return;
 		}
 		CustomerMemorialDayCriteria.Criteria criteriaTmp = (CustomerMemorialDayCriteria.Criteria) criteria;
-		CustomerMemorialDayBean beanTmp = (CustomerMemorialDayBean) bean;
 		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getCustomerId() != null) {
-			criteriaTmp.andCustomerIdEqualTo(beanTmp.getCustomerId());
+		if (bean.getCustomerId() != null) {
+			criteriaTmp.andCustomerIdEqualTo(bean.getCustomerId());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
 	}
 	
@@ -180,7 +164,7 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl implements C
 		BeanUtils.copyProperties(customerMemorialDayBeanTmp, customerMemorialDayBean);
 	}
 	
-	private void delete(CustomerMemorialDayBean customerMemorialDayBean) {
+	private void deleteCustom(CustomerMemorialDayBean customerMemorialDayBean) {
 		if (customerMemorialDayBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerMemorialDayBean.getId();
 		Long userId = customerMemorialDayBean.getUserId();

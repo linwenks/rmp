@@ -40,7 +40,7 @@ import redis.clients.jedis.Transaction;
  *
  */
 @Service
-public class UserServiceImpl extends BaseServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteria> implements UserService {
 	
 	@Autowired
 	private BaseShardedJedisPoolDao baseShardedJedisPoolDao;
@@ -48,24 +48,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	private UserMapper userMapper;
 	@Autowired
 	private PhoneMsgService phoneMsgService;
-	
-	@Override
-	public Class<?> getModelClass() {
-		return User.class;
-	}
 
 	@Override
-	public Class<?> getBeanClass() {
-		return UserBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return UserCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public UserMapper mapper() {
 		return userMapper;
 	}
 	
@@ -94,32 +79,31 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, UserBean bean) {
 		if (bean == null) {
 			return;
 		}
 		UserCriteria.Criteria criteriaTmp = (UserCriteria.Criteria) criteria;
-		UserBean beanTmp = (UserBean) bean;
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (!StringUtils.isEmpty(beanTmp.getLoginName())) {
-			criteriaTmp.andLoginNameEqualTo(beanTmp.getLoginName());
+		if (!StringUtils.isEmpty(bean.getLoginName())) {
+			criteriaTmp.andLoginNameEqualTo(bean.getLoginName());
 		}
-		if (!StringUtils.isEmpty(beanTmp.getToken())) {
-			criteriaTmp.andTokenEqualTo(beanTmp.getToken());
+		if (!StringUtils.isEmpty(bean.getToken())) {
+			criteriaTmp.andTokenEqualTo(bean.getToken());
 		}
-		if (!StringUtils.isEmpty(beanTmp.getWxId())) {
-			criteriaTmp.andWxIdEqualTo(beanTmp.getWxId());
+		if (!StringUtils.isEmpty(bean.getWxId())) {
+			criteriaTmp.andWxIdEqualTo(bean.getWxId());
 		}
-		if (beanTmp.getStatus() != null) {
-			criteriaTmp.andStatusEqualTo(beanTmp.getStatus());
+		if (bean.getStatus() != null) {
+			criteriaTmp.andStatusEqualTo(bean.getStatus());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
-		if (beanTmp.getIdNotEqualTo() != null) {
-			criteriaTmp.andIdNotEqualTo(beanTmp.getIdNotEqualTo());
+		if (bean.getIdNotEqualTo() != null) {
+			criteriaTmp.andIdNotEqualTo(bean.getIdNotEqualTo());
 		}
 	}
 	
@@ -212,15 +196,15 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		UserBean userBean = (UserBean) param.get("userBean");
 		WxPhoneNumberReqBean wxPhoneNumberReqBean = (WxPhoneNumberReqBean) param.get("wxPhoneNumberReqBean");
 		
-		if (userBean == null) throw new AppException(MSG_00003);
-		if (wxPhoneNumberReqBean == null) throw new AppException(MSG_00003);
+		if (userBean == null) AppException.toThrow(MSG_00003);
+		if (wxPhoneNumberReqBean == null) AppException.toThrow(MSG_00003);
 		
 		String token = StringUtils.trim(userBean.getToken());
 		String encryptedData = StringUtils.trim(wxPhoneNumberReqBean.getEncryptedData());
 		String iv = StringUtils.trim(wxPhoneNumberReqBean.getIv());
-		if (StringUtils.isEmpty(token)) throw new AppException(MSG_00003);
-		if (StringUtils.isEmpty(encryptedData)) throw new AppException(MSG_00003);
-		if (StringUtils.isEmpty(iv)) throw new AppException(MSG_00003);
+		if (StringUtils.isEmpty(token)) AppException.toThrow(MSG_00003);
+		if (StringUtils.isEmpty(encryptedData)) AppException.toThrow(MSG_00003);
+		if (StringUtils.isEmpty(iv)) AppException.toThrow(MSG_00003);
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
@@ -234,12 +218,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		if (Constant.User.Status._1.equals(userBeanTmp.getStatus())) AppException.toThrow(MSG_01031);
 		
 		String wxSessionKey = userBeanTmp.getWxSessionKey();
-		if (StringUtils.isEmpty(wxSessionKey)) throw new AppException(MSG_01032);
+		if (StringUtils.isEmpty(wxSessionKey)) AppException.toThrow(MSG_01032);
 		
 		WxPhoneNumberRespBean wsxPhoneNumberRespBean = WxUtil.getData(encryptedData, wxSessionKey, iv);
-		if (wsxPhoneNumberRespBean == null) throw new AppException(MSG_01033);
+		if (wsxPhoneNumberRespBean == null) AppException.toThrow(MSG_01033);
 		String phoneNumber = wsxPhoneNumberRespBean.getPhoneNumber();
-		if (StringUtils.isEmpty(phoneNumber)) throw new AppException(MSG_01034);
+		if (StringUtils.isEmpty(phoneNumber)) AppException.toThrow(MSG_01034);
 		
 		// 查询用户是否注册
 		UserBean userBeanTmp2 = new UserBean();

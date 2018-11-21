@@ -3,7 +3,6 @@ package com.rmp.api.service.sys.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.model.SysCodeBean;
 import com.rmp.api.service.sys.SysCodeService;
@@ -17,53 +16,24 @@ import com.rmp.info.model.SysCodeCriteria;
  *
  */
 @Service
-public class SysCodeServiceImpl extends BaseServiceImpl implements SysCodeService {
+public class SysCodeServiceImpl extends BaseServiceImpl<SysCode, SysCodeBean, SysCodeCriteria> implements SysCodeService {
 	
 	@Autowired
 	private SysCodeMapper sysCodeMapper;
 	
 	@Override
-	public Class<?> getModelClass() {
-		return SysCode.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return SysCodeBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return SysCodeCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public SysCodeMapper mapper() {
 		return sysCodeMapper;
 	}
 	
 	@Override
-	public Object exe(String cmd, Object obj) {
-		try {
-			switch (cmd) {
-			default: return super.exe(cmd, obj);
-			}
-		} catch (AppException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new AppException(e);
-		}
-	}
-	
-	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, SysCodeBean bean) {
 		if (bean == null) {
 			return;
 		}
 		SysCodeCriteria.Criteria criteriaTmp = (SysCodeCriteria.Criteria) criteria;
-		SysCodeBean beanTmp = (SysCodeBean) bean;
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
 	}
 }

@@ -26,30 +26,15 @@ import com.rmp.info.model.CustomerHobbyCriteria;
  *
  */
 @Service
-public class CustomerHobbyServiceImpl extends BaseServiceImpl implements CustomerHobbyService {
+public class CustomerHobbyServiceImpl extends BaseServiceImpl<CustomerHobby, CustomerHobbyBean, CustomerHobbyCriteria> implements CustomerHobbyService {
 	
 	@Autowired
 	private CustomerHobbyMapper customerHobbyMapper;
 	@Autowired
 	private CustomerService customerService;
-
+	
 	@Override
-	public Class<?> getModelClass() {
-		return CustomerHobby.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return CustomerHobbyBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return CustomerHobbyCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public CustomerHobbyMapper mapper() {
 		return customerHobbyMapper;
 	}
 	
@@ -63,27 +48,26 @@ public class CustomerHobbyServiceImpl extends BaseServiceImpl implements Custome
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, CustomerHobbyBean bean) {
 		if (bean == null) {
 			return;
 		}
 		CustomerHobbyCriteria.Criteria criteriaTmp = (CustomerHobbyCriteria.Criteria) criteria;
-		CustomerHobbyBean beanTmp = (CustomerHobbyBean) bean;
 		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getCustomerId() != null) {
-			criteriaTmp.andCustomerIdEqualTo(beanTmp.getCustomerId());
+		if (bean.getCustomerId() != null) {
+			criteriaTmp.andCustomerIdEqualTo(bean.getCustomerId());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
 	}
 	

@@ -12,7 +12,7 @@ import com.rmp.common.page.QueryPage;
  * @author linw
  *
  */
-public interface CustomerService extends BaseService {
+public interface CustomerService extends BaseService<CustomerBean> {
 	
 	public List<CustomerBean> selectListCustom(QueryPage queryPage, CustomerBean customerBean);
 }

@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.ImmutableMap;
 import com.rmp.api.base.controller.BaseApiController;
@@ -35,7 +34,7 @@ import com.rmp.common.util.JsonUtil;
  * @author linw
  *
  */
-@Controller("api_user_UserController")
+@RestController("api_user_UserController")
 @RequestMapping(value = "/api/user/user", method = RequestMethod.POST, produces="application/json;charset=utf-8")
 public class UserController extends BaseApiController {
 
@@ -68,14 +67,13 @@ public class UserController extends BaseApiController {
      *
      */
 	@RequestMapping(value = "/initialize")
-	@ResponseBody
 	public RespBean initialize(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.build(body, request);
 		UserBean userBean = reqBean.getUserBean();
-		if (userBean == null) throw new AppException(MSG_00003);
+		if (userBean == null) AppException.toThrow(MSG_00003);
 		
 		String jsCode = userBean.getJsCode();
-		if (StringUtils.isEmpty(jsCode)) throw new AppException(MSG_00003);
+		if (StringUtils.isEmpty(jsCode)) AppException.toThrow(MSG_00003);
 		
 		String url = Constant.urlJscode2session(jsCode);
 		HttpUtil httpUtil = new HttpUtil();
@@ -85,23 +83,23 @@ public class UserController extends BaseApiController {
 		Integer statusCode = (Integer) result.get("statusCode");
 		if (statusCode == null || statusCode.intValue() != 200) {
 			log.error(" error UserController login : statusCode[" + statusCode + "]");
-			throw new AppException(MSG_00002);
+			AppException.toThrow(MSG_00002);
 		}
 		String responseContent = (String) result.get("responseContent");
 		if (responseContent == null) {
 			log.error(" error UserController login : responseContent[" + responseContent + "]");
-			throw new AppException(MSG_00002);
+			AppException.toThrow(MSG_00002);
 		}
 		Map<String, Object> responseContentMap = JsonUtil.fromJson(responseContent, Map.class);
 		String session_key = (String) responseContentMap.get("session_key");
 		String openid = (String) responseContentMap.get("openid");
 		if (StringUtils.isEmpty(openid)) {
 			log.error(" error UserController login : openid is null ");
-			throw new AppException(MSG_00002);
+			AppException.toThrow(MSG_00002);
 		}
 		if (StringUtils.isEmpty(session_key)) {
 			log.error(" error UserController login : session_key is null ");
-			throw new AppException(MSG_00002);
+			AppException.toThrow(MSG_00002);
 		}
 		
 		// 初始化
@@ -149,7 +147,6 @@ public class UserController extends BaseApiController {
      *
      */
 	@RequestMapping(value = "/bindWxPhone")
-	@ResponseBody
 	public RespBean bindWxPhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		
@@ -190,7 +187,6 @@ public class UserController extends BaseApiController {
      *
      */
 	@RequestMapping(value = "/login")
-	@ResponseBody
 	public RespBean login(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.build(body, request);
 		
@@ -240,7 +236,6 @@ public class UserController extends BaseApiController {
      *
      */
 	@RequestMapping(value = "/register")
-	@ResponseBody
 	public RespBean register(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		String token = reqBean.getHeader().getToken();
@@ -280,7 +275,6 @@ public class UserController extends BaseApiController {
      *
      */
 	@RequestMapping(value = "/retrievePwd")
-	@ResponseBody
 	public RespBean retrievePwd(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.build(body, request);
 		
@@ -307,7 +301,6 @@ public class UserController extends BaseApiController {
 	 * 
      */
 	@RequestMapping(value = "/updateHeadPic")
-	@ResponseBody
 	public RespBean updateHeadPic(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
@@ -333,7 +326,6 @@ public class UserController extends BaseApiController {
 	 * 
      */
 	@RequestMapping(value = "/updateNickName")
-	@ResponseBody
 	public RespBean updateNickName(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
@@ -362,7 +354,6 @@ public class UserController extends BaseApiController {
 	 * 
      */
 	@RequestMapping(value = "/updatePhone")
-	@ResponseBody
 	public RespBean updatePhone(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
@@ -393,7 +384,6 @@ public class UserController extends BaseApiController {
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
-	@ResponseBody
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		

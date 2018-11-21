@@ -26,30 +26,15 @@ import com.rmp.info.model.UserHobbyCriteria;
  *
  */
 @Service
-public class UserHobbyServiceImpl extends BaseServiceImpl implements UserHobbyService {
+public class UserHobbyServiceImpl extends BaseServiceImpl<UserHobby, UserHobbyBean, UserHobbyCriteria> implements UserHobbyService {
 	
 	@Autowired
 	private UserHobbyMapper userHobbyMapper;
 	@Autowired
 	private UserService userService;
-
+	
 	@Override
-	public Class<?> getModelClass() {
-		return UserHobby.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return UserHobbyBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return UserHobbyCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public UserHobbyMapper mapper() {
 		return userHobbyMapper;
 	}
 	
@@ -63,27 +48,26 @@ public class UserHobbyServiceImpl extends BaseServiceImpl implements UserHobbySe
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, UserHobbyBean bean) {
 		if (bean == null) {
 			return;
 		}
 		UserHobbyCriteria.Criteria criteriaTmp = (UserHobbyCriteria.Criteria) criteria;
-		UserHobbyBean beanTmp = (UserHobbyBean) bean;
 		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getUserId() != null) {
-			criteriaTmp.andUserIdEqualTo(beanTmp.getUserId());
+		if (bean.getUserId() != null) {
+			criteriaTmp.andUserIdEqualTo(bean.getUserId());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
 	}
 	

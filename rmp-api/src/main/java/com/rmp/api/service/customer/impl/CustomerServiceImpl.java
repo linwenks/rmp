@@ -31,30 +31,15 @@ import com.rmp.info.model.CustomerCriteria;
  *
  */
 @Service
-public class CustomerServiceImpl extends BaseServiceImpl implements CustomerService {
+public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean, CustomerCriteria> implements CustomerService {
 	
 	@Autowired
 	private CustomerMapper customerMapper;
 	@Autowired
 	private CustomerMapperCustom customerMapperCustom;
-
+	
 	@Override
-	public Class<?> getModelClass() {
-		return Customer.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return CustomerBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return CustomerCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public CustomerMapper mapper() {
 		return customerMapper;
 	}
 	
@@ -66,39 +51,38 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 			case "saveAll": saveAll((CustomerBean) obj);break;
 			case "update": update((CustomerBean) obj);break;
 			case "updateAll": updateAll((CustomerBean) obj);break;
-			case "delete": delete((CustomerBean) obj);break;
+			case "delete": deleteCustom((CustomerBean) obj);break;
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, CustomerBean bean) {
 		if (bean == null) {
 			return;
 		}
 		CustomerCriteria.Criteria criteriaTmp = (CustomerCriteria.Criteria) criteria;
-		CustomerBean beanTmp = (CustomerBean) bean;
 		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getIdNot() != null) {
-			criteriaTmp.andIdNotEqualTo(beanTmp.getIdNot());
+		if (bean.getIdNot() != null) {
+			criteriaTmp.andIdNotEqualTo(bean.getIdNot());
 		}
-		if (beanTmp.getUserId() != null) {
-			criteriaTmp.andUserIdEqualTo(beanTmp.getUserId());
+		if (bean.getUserId() != null) {
+			criteriaTmp.andUserIdEqualTo(bean.getUserId());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
-		if (beanTmp.getPhone() != null) {
-			criteriaTmp.andPhoneEqualTo(beanTmp.getPhone());
+		if (bean.getPhone() != null) {
+			criteriaTmp.andPhoneEqualTo(bean.getPhone());
 		}
 	}
 	
@@ -291,7 +275,7 @@ public class CustomerServiceImpl extends BaseServiceImpl implements CustomerServ
 	 * 删除
 	 * @param customerBean
 	 */
-	private void delete(CustomerBean customerBean) {
+	private void deleteCustom(CustomerBean customerBean) {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();
 		Long userId = customerBean.getUserId();

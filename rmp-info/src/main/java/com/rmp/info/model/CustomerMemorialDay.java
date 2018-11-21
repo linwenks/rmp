@@ -33,7 +33,7 @@ public class CustomerMemorialDay extends Model implements Serializable {
     private String name;
 
     /**
-     * 类型（1:1次 2:每年 2:每月 3:每周）
+     * 发生类型（1:1次 2:每年 3:每月 4:每周）
      */
     private Integer occurType;
 

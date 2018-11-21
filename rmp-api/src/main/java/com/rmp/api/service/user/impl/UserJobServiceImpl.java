@@ -29,30 +29,15 @@ import com.rmp.info.model.UserJobCriteria;
  *
  */
 @Service
-public class UserJobServiceImpl extends BaseServiceImpl implements UserJobService {
+public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, UserJobCriteria> implements UserJobService {
 	
 	@Autowired
 	private UserJobMapper userJobMapper;
 	@Autowired
 	private UserService userService;
-
+	
 	@Override
-	public Class<?> getModelClass() {
-		return UserJob.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return UserJobBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return UserJobCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public UserJobMapper mapper() {
 		return userJobMapper;
 	}
 
@@ -67,27 +52,26 @@ public class UserJobServiceImpl extends BaseServiceImpl implements UserJobServic
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
 	
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, UserJobBean bean) {
 		if (bean == null) {
 			return;
 		}
 		UserJobCriteria.Criteria criteriaTmp = (UserJobCriteria.Criteria) criteria;
-		UserJobBean beanTmp = (UserJobBean) bean;
 		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getUserId() != null) {
-			criteriaTmp.andUserIdEqualTo(beanTmp.getUserId());
+		if (bean.getUserId() != null) {
+			criteriaTmp.andUserIdEqualTo(bean.getUserId());
 		}
-		if (beanTmp.getIsDelete() != null) {
-			criteriaTmp.andIsDeleteEqualTo(beanTmp.getIsDelete());
+		if (bean.getIsDelete() != null) {
+			criteriaTmp.andIsDeleteEqualTo(bean.getIsDelete());
 		}
 	}
 	

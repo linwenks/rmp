@@ -28,30 +28,15 @@ import com.rmp.info.model.PhoneMsgCriteria;
  *
  */
 @Service
-public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgService {
+public class PhoneMsgServiceImpl extends BaseServiceImpl<PhoneMsg, PhoneMsgBean, PhoneMsgCriteria> implements PhoneMsgService {
 	
 	@Autowired
 	private PhoneMsgMapper phoneMsgMapper;
 	@Autowired
 	private UserService userService;
-
+	
 	@Override
-	public Class<?> getModelClass() {
-		return PhoneMsg.class;
-	}
-
-	@Override
-	public Class<?> getBeanClass() {
-		return PhoneMsgBean.class;
-	}
-
-	@Override
-	public Class<?> getCriteriaClass() {
-		return PhoneMsgCriteria.class;
-	}
-
-	@Override
-	public Object getMapper() {
+	public PhoneMsgMapper mapper() {
 		return phoneMsgMapper;
 	}
 	
@@ -65,7 +50,7 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 		} catch (AppException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new AppException(e);
+			AppException.toThrow(e);
 		}
 		return null;
 	}
@@ -112,7 +97,7 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 			UserBean userBeanTmp = new UserBean();
 			userBeanTmp.setLoginName(phone.toString());
 			userBeanTmp.setIsDelete(Constant.DELETE_N);
-			userBeanTmp = selectOne(userBeanTmp);
+			userBeanTmp = userService.selectOne(userBeanTmp);
 			if (userBeanTmp != null) AppException.toThrow(MSG_01023);
 		}
 		
@@ -148,29 +133,28 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl implements PhoneMsgServ
 	}
 
 	@Override
-	protected void where(Object criteria, Object bean) {
+	protected void where(Object criteria, PhoneMsgBean bean) {
 		if (bean == null) {
 			return;
 		}
 		PhoneMsgCriteria.Criteria criteriaTmp = (PhoneMsgCriteria.Criteria) criteria;
-		PhoneMsgBean beanTmp = (PhoneMsgBean) bean;
-		if (beanTmp.getId() != null) {
-			criteriaTmp.andIdEqualTo(beanTmp.getId());
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
 		}
-		if (beanTmp.getType() != null) {
-			criteriaTmp.andTypeEqualTo(beanTmp.getType());
+		if (bean.getType() != null) {
+			criteriaTmp.andTypeEqualTo(bean.getType());
 		}
-		if (beanTmp.getStatus() != null) {
-			criteriaTmp.andStatusEqualTo(beanTmp.getStatus());
+		if (bean.getStatus() != null) {
+			criteriaTmp.andStatusEqualTo(bean.getStatus());
 		}
-		if (beanTmp.getPhone() != null) {
-			criteriaTmp.andPhoneEqualTo(beanTmp.getPhone());
+		if (bean.getPhone() != null) {
+			criteriaTmp.andPhoneEqualTo(bean.getPhone());
 		}
-		if (beanTmp.getCreateTimeStart() != null) {
-			criteriaTmp.andCreateTimeGreaterThan(beanTmp.getCreateTimeStart());
+		if (bean.getCreateTimeStart() != null) {
+			criteriaTmp.andCreateTimeGreaterThan(bean.getCreateTimeStart());
 		}
-		if (beanTmp.getCode() != null) {
-			criteriaTmp.andCodeEqualTo(beanTmp.getCode());
+		if (bean.getCode() != null) {
+			criteriaTmp.andCodeEqualTo(bean.getCode());
 		}
 	}
 }

@@ -3,11 +3,8 @@ package com.rmp.api.base.service;
 import java.util.List;
 
 import com.rmp.common.page.QueryPage;
-import com.rmp.info.base.model.Model;
 
-public interface BaseService {
-	
-	public final static String ERROR_MSG = "系统繁忙，请稍后再试！";
+public interface BaseService<B> {
 	
 	// 增加
 	public final static String INSERT = "base_insert";
@@ -57,14 +54,6 @@ public interface BaseService {
 	// 删除 根据主键 控制版本
 	public final static String DELETE_PK_VER = "base_delete_pk_ver";
 	
-
-	public Class<?> getModelClass();
-	
-	public Class<?> getBeanClass();
-
-	public Class<?> getCriteriaClass();
-
-	public Object getMapper();
 	
 	public Object exe(String cmd, Object obj);
 	
@@ -74,7 +63,7 @@ public interface BaseService {
 	 * @param classOfT
 	 * @return
 	 */
-	public <T> T selectById(Long id);
+	public B selectById(Long id);
 	
 	/**
 	 * 查询 one
@@ -82,7 +71,7 @@ public interface BaseService {
 	 * @param classOfT
 	 * @return
 	 */
-	public <T> T selectOne(Model bean);
+	public B selectOne(B bean);
 	
 	/**
 	 * 查询 数量
@@ -90,7 +79,7 @@ public interface BaseService {
 	 * @param classOfT
 	 * @return
 	 */
-	public Long selectCount(Model bean);
+	public Long selectCount(B bean);
 	
 	/**
 	 * 查询 list
@@ -99,5 +88,5 @@ public interface BaseService {
 	 * @param classOfT
 	 * @return
 	 */
-	public <T> List<T> selectList(QueryPage queryPage, Model bean);
+	public List<B> selectList(QueryPage queryPage, B bean);
 }

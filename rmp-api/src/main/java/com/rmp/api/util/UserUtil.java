@@ -24,7 +24,7 @@ public class UserUtil extends BaseUtil {
 	 */
 	public static void checkToken(String token) {
 		token = StringUtils.trim(token);
-		if (StringUtils.isEmpty(token)) throw new AppException(MSG_00006);
+		if (StringUtils.isEmpty(token)) AppException.toThrow(MSG_00006);
 	}
 
 	/**
@@ -33,8 +33,8 @@ public class UserUtil extends BaseUtil {
 	 */
 	public static void checkLoginName(String loginName) {
 		loginName = StringUtils.trim(loginName);
-		if (StringUtils.isEmpty(loginName)) throw new AppException(MSG_01000);
-		else if (!PatternUtil.matchesMobilePhone(loginName)) throw new AppException(MSG_01001);
+		if (StringUtils.isEmpty(loginName)) AppException.toThrow(MSG_01000);
+		else if (!PatternUtil.matchesMobilePhone(loginName)) AppException.toThrow(MSG_01001);
 	}
 	
 	/**
@@ -42,9 +42,9 @@ public class UserUtil extends BaseUtil {
 	 * @param phone
 	 */
 	public static void checkPhone(Long phone) {
-		if (phone == null) throw new AppException(MSG_01021);
+		if (phone == null) AppException.toThrow(MSG_01021);
 		String phoneStr = phone.toString();
-		if (!PatternUtil.matchesMobilePhone(phoneStr)) throw new AppException(MSG_01022);
+		if (!PatternUtil.matchesMobilePhone(phoneStr)) AppException.toThrow(MSG_01022);
 	}
 	
 	/**
@@ -52,9 +52,9 @@ public class UserUtil extends BaseUtil {
 	 * @param loginPwd
 	 */
 	public static void checkLoginPwd(String loginPwd) {
-		if (StringUtils.isEmpty(loginPwd)) throw new AppException(MSG_01003);
-		else if (loginPwd.length() < 6 || loginPwd.length() > 15) throw new AppException(MSG_01004, new String[]{"6", "15"});
-		else if (!PatternUtil.matchesEnAndNum(loginPwd)) throw new AppException(MSG_01005);
+		if (StringUtils.isEmpty(loginPwd)) AppException.toThrow(MSG_01003);
+		else if (loginPwd.length() < 6 || loginPwd.length() > 15) AppException.toThrow(MSG_01004, new String[]{"6", "15"});
+		else if (!PatternUtil.matchesEnAndNum(loginPwd)) AppException.toThrow(MSG_01005);
 	}
 	
 	/**
@@ -73,10 +73,10 @@ public class UserUtil extends BaseUtil {
 	 */
 	public static void checkNickName(String nickName) {
 		nickName = StringUtils.trim(nickName);
-		if (StringUtils.isEmpty(nickName)) throw new AppException(MSG_01018);
+		if (StringUtils.isEmpty(nickName)) AppException.toThrow(MSG_01018);
 		int nickNameLengthMin = 2;
 		int nickNameLengthMax = 10;
-		if (nickName.length() < nickNameLengthMin || nickName.length() > 10) throw new AppException(MSG_01019, new String[]{String.valueOf(nickNameLengthMin), String.valueOf(nickNameLengthMax)});
+		if (nickName.length() < nickNameLengthMin || nickName.length() > 10) AppException.toThrow(MSG_01019, new String[]{String.valueOf(nickNameLengthMin), String.valueOf(nickNameLengthMax)});
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class UserUtil extends BaseUtil {
 	 */
 	public static void checkHeadPic(String nickName) {
 		nickName = StringUtils.trim(nickName);
-		if (StringUtils.isEmpty(nickName)) throw new AppException(MSG_01020);
+		if (StringUtils.isEmpty(nickName)) AppException.toThrow(MSG_01020);
 	}
 	
 	/**

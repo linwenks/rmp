@@ -32,7 +32,7 @@ public class BaseApiController extends BaseController {
 		List<MsgBean> msgs = new ArrayList<>();
 		
 		if (t instanceof HttpMessageNotReadableException) {
-			msgs.add(new MsgBean(MsgEnum.MSG_00003));
+			msgs.add(MsgBean.build(MsgEnum.MSG_00003));
 		} else if (t instanceof AppException) {
 			AppException appException = (AppException) t;
 			msgs = appException.getMsgList();
@@ -41,7 +41,7 @@ public class BaseApiController extends BaseController {
 		}
 		
 		if (CollectionUtils.isEmpty(msgs)) {
-			msgs.add(new MsgBean(MsgEnum.MSG_00002));
+			msgs.add(MsgBean.build(MsgEnum.MSG_00002));
 		} else {
 			msgs.forEach(msg -> {
 				if (msg != null) {

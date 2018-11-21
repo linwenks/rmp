@@ -9,6 +9,7 @@
 		<module>rmp-info</module>
 		<module>rmp-common</module>
 		<module>rmp-api</module>
+		<module>rmp-auto</module>
 	</modules>
 	
 	<dependencyManagement>

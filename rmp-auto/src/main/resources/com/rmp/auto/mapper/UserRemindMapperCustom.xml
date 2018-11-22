@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rmp.auto.mapper.UserRemindMapperCustom">
+	
+	<sql id="advance_day">
+		(
+		CASE 
+			WHEN cmd.advance_type = 1 THEN 1 
+			WHEN cmd.advance_type = 2 THEN 2 
+			WHEN cmd.advance_type = 3 THEN 3 
+			WHEN cmd.advance_type = 4 THEN 5 
+			WHEN cmd.advance_type = 5 THEN 7 
+			WHEN cmd.advance_type = 6 THEN 14 
+			WHEN cmd.advance_type = 7 THEN 30 
+			ELSE 0 
+		END
+		)
+	</sql>
+	
+	<select id="insertBy1ToYmd" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, <include refid="advance_day" /> advance_day
+			, cmd.occur_date remind_date
+		FROM t_customer_memorial_day cmd 
+		
+		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cmd.is_delete = 0 
+		AND cmd.occur_type = 1 
+		AND cmd.occur_date = date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%Y%m%d')
+	</select>
+	
+	<select id="insertBy1ToMd" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, <include refid="advance_day" /> advance_day
+			, cmd.occur_date remind_date
+		FROM t_customer_memorial_day cmd 
+		
+		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cmd.is_delete = 0 
+		AND cmd.occur_type = 2
+		AND cmd.occur_date = date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%m%d')
+	</select>
+	
+	<select id="insertBy1ToD" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, <include refid="advance_day" /> advance_day
+			, cmd.occur_date remind_date
+		FROM t_customer_memorial_day cmd 
+		
+		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cmd.is_delete = 0 
+		AND cmd.occur_type = 4
+		AND cmd.occur_date = (
+			CASE 
+				WHEN date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w') = 0 THEN 7
+				ELSE date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w')
+			END)
+		
+	</select>
+</mapper>

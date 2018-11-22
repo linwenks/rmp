@@ -17,6 +17,17 @@
 		)
 	</sql>
 	
+	<sql id="table">
+		FROM t_customer_memorial_day cmd 
+		
+		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cmd.is_delete = 0 
+	</sql>
+	
+	
+	
 	<select id="insertBy1ToYmd" >
 		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
 		SELECT 
@@ -26,15 +37,25 @@
 			, 20181119 advance_date
 			, <include refid="advance_day" /> advance_day
 			, cmd.occur_date remind_date
-		FROM t_customer_memorial_day cmd 
-		
-		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
-		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
-		
-		WHERE cmd.is_delete = 0 
+		<include refid="table" />
 		AND cmd.occur_type = 1 
 		AND cmd.occur_date = date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%Y%m%d')
 	</select>
+	
+	<select id="insertBy1ToYmdNow" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, 0 advance_day
+			, cmd.occur_date remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 1 
+		AND cmd.occur_date = 20181119
+	</select>
+	
 	
 	<select id="insertBy1ToMd" >
 		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
@@ -45,15 +66,25 @@
 			, 20181119 advance_date
 			, <include refid="advance_day" /> advance_day
 			, cmd.occur_date remind_date
-		FROM t_customer_memorial_day cmd 
-		
-		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
-		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
-		
-		WHERE cmd.is_delete = 0 
+		<include refid="table" />
 		AND cmd.occur_type = 2
 		AND cmd.occur_date = date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%m%d')
 	</select>
+	
+	<select id="insertBy1ToMdNow" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, 0 advance_day
+			, cmd.occur_date remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 2
+		AND cmd.occur_date = 1119
+	</select>
+	
 	
 	<select id="insertBy1ToD" >
 		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
@@ -64,18 +95,56 @@
 			, 20181119 advance_date
 			, <include refid="advance_day" /> advance_day
 			, cmd.occur_date remind_date
-		FROM t_customer_memorial_day cmd 
-		
-		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
-		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
-		
-		WHERE cmd.is_delete = 0 
+		<include refid="table" />
+		AND cmd.occur_type = 2
+		AND cmd.occur_date = date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%d')
+	</select>
+	
+	<select id="insertBy1ToDNow" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, 0 advance_day
+			, cmd.occur_date remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 2
+		AND cmd.occur_date = 22
+	</select>
+	
+	
+	<select id="insertBy1ToW" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, <include refid="advance_day" /> advance_day
+			, cmd.occur_date remind_date
+		<include refid="table" />
 		AND cmd.occur_type = 4
 		AND cmd.occur_date = (
 			CASE 
 				WHEN date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w') = 0 THEN 7
 				ELSE date_format(date_add(str_to_date('20181119', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w')
 			END)
-		
 	</select>
+	
+	<select id="insertBy1ToWNow" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, 20181119 advance_date
+			, 0 advance_day
+			, cmd.occur_date remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 4
+		AND cmd.occur_date = 3
+	</select>
+	
 </mapper>

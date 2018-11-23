@@ -69,14 +69,14 @@
 	<!-- mybatis config -->
 	<bean id="sqlSessionFactoryRmp" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSourceRmp" />
-		<property name="typeAliasesPackage" value="com.rmp.auto.model,com.rmp.api.model" />
+		<property name="typeAliasesPackage" value="com.rmp.info.model,com.rmp.auto.model" />
 	</bean>
 	
 	
 	<!-- 自动组装数据层 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryRmp"/> 
-		<property name="basePackage" value="com.rmp.auto.mapper,com.rmp.api.mapper" />
+		<property name="basePackage" value="com.rmp.info.mapper,com.rmp.auto.mapper" />
 	</bean>
 	
 	

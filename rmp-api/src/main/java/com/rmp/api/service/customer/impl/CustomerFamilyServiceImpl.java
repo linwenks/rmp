@@ -110,15 +110,16 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 			birthday = CustomerFamilyUtil.getYear(age);
 		}
 		
-		CustomerFamilyBean customerFamilyBeanTmp = new CustomerFamilyBean();
-		customerFamilyBeanTmp.setCustomerId(customerId);
-		customerFamilyBeanTmp.setRealName(realName);
-		customerFamilyBeanTmp.setPhone(phone);
-		customerFamilyBeanTmp.setRelationship(relationship);
-		customerFamilyBeanTmp.setBirthday(birthday);
-		customerFamilyBeanTmp.setAreaId(areaId);
-		customerFamilyBeanTmp.setAddress(address);
-		customerFamilyBeanTmp.setCreateTime(nowDateLong);
+		CustomerFamilyBean customerFamilyBeanTmp = CustomerFamilyBean.builder()
+		.customerId(customerId)
+		.realName(realName)
+		.phone(phone)
+		.relationship(relationship)
+		.birthday(birthday)
+		.areaId(areaId)
+		.address(address)
+		.createTime(nowDateLong)
+		.build();
 		insertSel(customerFamilyBeanTmp);
 		
 		// 修改
@@ -165,9 +166,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 			birthday = CustomerFamilyUtil.getYear(age);
 		}
 		
-		CustomerFamilyBean customerFamilyBeanTmp = new CustomerFamilyBean();
-		customerFamilyBeanTmp.setId(id);
-		customerFamilyBeanTmp.setCustomerId(customerId);
+		CustomerFamilyBean customerFamilyBeanTmp = CustomerFamilyBean.builder().id(id).customerId(customerId).build();
 		customerFamilyBeanTmp = selectOne(customerFamilyBeanTmp);
 		if (customerFamilyBeanTmp == null) AppException.toThrow(MSG_00003);
 		customerFamilyBeanTmp.setRealName(realName);
@@ -205,9 +204,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerFamilyBean customerFamilyBeanTmp = new CustomerFamilyBean();
-		customerFamilyBeanTmp.setId(id);
-		customerFamilyBeanTmp.setCustomerId(customerId);
+		CustomerFamilyBean customerFamilyBeanTmp = CustomerFamilyBean.builder().id(id).customerId(customerId).build();
 		customerFamilyBeanTmp = selectOne(customerFamilyBeanTmp);
 		if (customerFamilyBeanTmp == null) AppException.toThrow(MSG_00003);
 		customerFamilyBeanTmp.setIsDelete(Constant.DELETE_Y);

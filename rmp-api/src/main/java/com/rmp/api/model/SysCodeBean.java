@@ -4,17 +4,24 @@ import java.util.List;
 
 import com.rmp.info.model.SysCode;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class SysCodeBean extends SysCode {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2088956218423446207L;
+	@Builder
+	public SysCodeBean(Long id, String key, String value, Long pid, Integer sort, String remark, Integer isDelete,
+			Integer version, Long createTime, Long updateTime, SysCodeBean parent, List<SysCodeBean> childList) {
+		super(id, key, value, pid, sort, remark, isDelete, version, createTime, updateTime);
+		this.parent = parent;
+		this.childList = childList;
+	}
 	
 	private SysCodeBean parent;
 	

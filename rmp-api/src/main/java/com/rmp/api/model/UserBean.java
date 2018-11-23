@@ -1,18 +1,32 @@
 package com.rmp.api.model;
 
+import java.math.BigDecimal;
+
 import com.rmp.info.model.User;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class UserBean extends User {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2088956218423446207L;
+	@Builder
+	public UserBean(Long id, String loginName, String loginPwd, Long phone, String realName, String nickName,
+			String headPic, Integer sex, Integer birthday, String payPwd, BigDecimal account, Long lastLoginTime,
+			Long areaId, String address, String wxId, String token, Integer status, String wxSessionKey,
+			Integer isDelete, Integer version, Long createTime, Long updateTime
+			, String jsCode, String areaNameAll, Long idNotEqualTo) {
+		super(id, loginName, loginPwd, phone, realName, nickName, headPic, sex, birthday, payPwd, account, lastLoginTime,
+				areaId, address, wxId, token, status, wxSessionKey, isDelete, version, createTime, updateTime);
+		this.jsCode = jsCode;
+		this.areaNameAll = areaNameAll;
+		this.idNotEqualTo = idNotEqualTo;
+	}
 	
 	/**
 	 * 微信 js code

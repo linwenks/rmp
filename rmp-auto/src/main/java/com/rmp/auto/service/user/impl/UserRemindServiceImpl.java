@@ -29,6 +29,7 @@ public class UserRemindServiceImpl extends BaseServiceImpl<UserRemind, UserRemin
 	public Object exe(String cmd, Object obj) {
 		try {
 			switch (cmd) {
+			case "truncate":          return userRemindMapperCustom.truncate();
 			case "insertBy1ToYmd":    return userRemindMapperCustom.insertBy1ToYmd((UserRemindBean) obj);
 			case "insertBy1ToYmdNow": return userRemindMapperCustom.insertBy1ToYmdNow((UserRemindBean) obj);
 			case "insertBy1ToMd":     return userRemindMapperCustom.insertBy1ToMd((UserRemindBean) obj);
@@ -38,11 +39,8 @@ public class UserRemindServiceImpl extends BaseServiceImpl<UserRemind, UserRemin
 			case "insertBy1ToW":      return userRemindMapperCustom.insertBy1ToW((UserRemindBean) obj);
 			case "insertBy1ToWNow":   return userRemindMapperCustom.insertBy1ToWNow((UserRemindBean) obj);
 			case "insertBy2":         return userRemindMapperCustom.insertBy2((UserRemindBean) obj);
-			case "insertBy2Now":      return userRemindMapperCustom.insertBy2Now((UserRemindBean) obj);
 			case "insertBy3":         return userRemindMapperCustom.insertBy3((UserRemindBean) obj);
-			case "insertBy3Now":      return userRemindMapperCustom.insertBy3Now((UserRemindBean) obj);
 			case "insertBy4":         return userRemindMapperCustom.insertBy4((UserRemindBean) obj);
-			case "insertBy4Now":      return userRemindMapperCustom.insertBy4Now((UserRemindBean) obj);
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {

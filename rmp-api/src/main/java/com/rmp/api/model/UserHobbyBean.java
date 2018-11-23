@@ -4,18 +4,30 @@ import java.util.List;
 
 import com.rmp.info.model.UserHobby;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class UserHobbyBean extends UserHobby {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2088956218423446207L;
 	
+	@Builder
+	public UserHobbyBean(Long id, Long userId, String interest, String diet, String taste, Integer isDelete,
+			Integer version, Long createTime, Long updateTime
+			, List<String> interestKeyList, List<String> dietKeyList, List<String> tasteKeyList, List<String> interestValueList, List<String> dietValueList, List<String> tasteValueList) {
+		super(id, userId, interest, diet, taste, isDelete, version, createTime, updateTime);
+		this.interestKeyList = interestKeyList;
+		this.dietKeyList = dietKeyList;
+		this.tasteKeyList = tasteKeyList;
+		this.interestValueList = interestValueList;
+		this.dietValueList = dietValueList;
+		this.tasteValueList = tasteValueList;
+	}
+
 	/**
      * 兴趣 key list
      */

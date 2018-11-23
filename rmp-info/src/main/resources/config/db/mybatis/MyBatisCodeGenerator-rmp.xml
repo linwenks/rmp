@@ -12,8 +12,9 @@
 		<property name="autoDelimitKeywords" value="true"/>
 		<property name="beginningDelimiter" value="`"/>
 		<property name="endingDelimiter" value="`"/>
-		
+		<!-- 
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		 -->
 		<!-- 
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
 		 -->

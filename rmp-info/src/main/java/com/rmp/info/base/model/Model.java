@@ -2,11 +2,9 @@ package com.rmp.info.base.model;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Model implements Serializable {
 
 	/**

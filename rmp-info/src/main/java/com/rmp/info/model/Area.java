@@ -1,12 +1,11 @@
 package com.rmp.info.model;
 
-import java.io.Serializable;
-
 import com.rmp.info.base.model.Model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 地区
@@ -14,10 +13,12 @@ import lombok.Setter;
  * t_area
  *
  */
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
-@Getter
-@Setter
-public class Area extends Model implements Serializable {
+@NoArgsConstructor
+public class Area extends Model {
     /**
      * 
      */
@@ -32,6 +33,4 @@ public class Area extends Model implements Serializable {
      * 
      */
     private String name;
-
-    private static final long serialVersionUID = 1L;
 }

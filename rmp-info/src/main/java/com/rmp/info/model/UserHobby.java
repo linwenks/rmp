@@ -1,12 +1,11 @@
 package com.rmp.info.model;
 
-import java.io.Serializable;
-
 import com.rmp.info.base.model.Model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户 兴趣爱好
@@ -14,10 +13,12 @@ import lombok.Setter;
  * t_user_hobby
  *
  */
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
-@Getter
-@Setter
-public class UserHobby extends Model implements Serializable {
+@NoArgsConstructor
+public class UserHobby extends Model {
     /**
      * ID
      */
@@ -62,6 +63,4 @@ public class UserHobby extends Model implements Serializable {
      * 修改时间
      */
     private Long updateTime;
-
-    private static final long serialVersionUID = 1L;
 }

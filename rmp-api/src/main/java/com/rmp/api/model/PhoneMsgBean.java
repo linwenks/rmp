@@ -2,17 +2,24 @@ package com.rmp.api.model;
 
 import com.rmp.info.model.PhoneMsg;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class PhoneMsgBean extends PhoneMsg {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7535944635335115332L;
+	@Builder
+	public PhoneMsgBean(Long id, Long phone, String code, Integer type, String content, Integer status,
+			Integer isDelete, Integer version, Long createTime, Long updateTime
+			, Long createTimeStart) {
+		super(id, phone, code, type, content, status, isDelete, version, createTime, updateTime);
+		this.createTimeStart = createTimeStart;
+	}
 
 	private Long createTimeStart;
 }

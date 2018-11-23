@@ -1,13 +1,13 @@
 package com.rmp.info.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.rmp.info.base.model.Model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 客户 维护设置
@@ -15,10 +15,12 @@ import lombok.Setter;
  * t_customer_maintain
  *
  */
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
-@Getter
-@Setter
-public class CustomerMaintain extends Model implements Serializable {
+@NoArgsConstructor
+public class CustomerMaintain extends Model {
     /**
      * ID
      */
@@ -68,6 +70,4 @@ public class CustomerMaintain extends Model implements Serializable {
      * 修改时间
      */
     private Long updateTime;
-
-    private static final long serialVersionUID = 1L;
 }

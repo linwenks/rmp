@@ -118,14 +118,15 @@ public class CustomerFamilyController extends BaseApiController {
 		if (!CollectionUtils.isEmpty(customerFamilyBeanListTmp)) {
 			customerFamilyBeanListResult = Lists.newArrayList();
 			for (CustomerFamilyBean customerFamilyBeanTmp : customerFamilyBeanListTmp) {
-				CustomerFamilyBean customerFamilyBeanResult = new CustomerFamilyBean();
-				customerFamilyBeanResult.setId(customerFamilyBeanTmp.getId());
-				customerFamilyBeanResult.setRelationship(customerFamilyBeanTmp.getRelationship());;
-				customerFamilyBeanResult.setRealName(customerFamilyBeanTmp.getRealName());
-				customerFamilyBeanResult.setBirthday(customerFamilyBeanTmp.getBirthday());
-				customerFamilyBeanResult.setPhone(customerFamilyBeanTmp.getPhone());
-				customerFamilyBeanResult.setAreaId(customerFamilyBeanTmp.getAreaId());
-				customerFamilyBeanResult.setAddress(customerFamilyBeanTmp.getAddress());
+				CustomerFamilyBean customerFamilyBeanResult = CustomerFamilyBean.builder()
+						.id(customerFamilyBeanTmp.getId())
+						.relationship(customerFamilyBeanTmp.getRelationship())
+						.realName(customerFamilyBeanTmp.getRealName())
+						.birthday(customerFamilyBeanTmp.getBirthday())
+						.phone(customerFamilyBeanTmp.getPhone())
+						.areaId(customerFamilyBeanTmp.getAreaId())
+						.address(customerFamilyBeanTmp.getAddress())
+						.build();
 				CustomerFamilyUtil.assembly(customerFamilyBeanResult);
 				customerFamilyBeanListResult.add(customerFamilyBeanResult);
 			}
@@ -180,14 +181,15 @@ public class CustomerFamilyController extends BaseApiController {
 		CustomerFamilyBean customerFamilyBeanResult = null;
 		CustomerFamilyBean customerFamilyBeanTmp = customerFamilyService.selectOne(customerFamilyBean);
 		if (customerFamilyBeanTmp != null) {
-			customerFamilyBeanResult = new CustomerFamilyBean();
-			customerFamilyBeanResult.setId(customerFamilyBeanTmp.getId());
-			customerFamilyBeanResult.setRelationship(customerFamilyBeanTmp.getRelationship());;
-			customerFamilyBeanResult.setRealName(customerFamilyBeanTmp.getRealName());
-			customerFamilyBeanResult.setBirthday(customerFamilyBeanTmp.getBirthday());
-			customerFamilyBeanResult.setPhone(customerFamilyBeanTmp.getPhone());
-			customerFamilyBeanResult.setAreaId(customerFamilyBeanTmp.getAreaId());
-			customerFamilyBeanResult.setAddress(customerFamilyBeanTmp.getAddress());
+			customerFamilyBeanResult = CustomerFamilyBean.builder()
+					.id(customerFamilyBeanTmp.getId())
+					.relationship(customerFamilyBeanTmp.getRelationship())
+					.realName(customerFamilyBeanTmp.getRealName())
+					.birthday(customerFamilyBeanTmp.getBirthday())
+					.phone(customerFamilyBeanTmp.getPhone())
+					.areaId(customerFamilyBeanTmp.getAreaId())
+					.address(customerFamilyBeanTmp.getAddress())
+					.build();
 			CustomerFamilyUtil.assembly(customerFamilyBeanResult);
 		}
 		return RespUtil.build(request).putData("customerFamilyBean", customerFamilyBeanResult);
@@ -236,15 +238,15 @@ public class CustomerFamilyController extends BaseApiController {
 		customerFamilyBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerFamilyService.exe("save", customerFamilyBean);
 		
-		CustomerFamilyBean customerFamilyBeanResult = new CustomerFamilyBean();
-		customerFamilyBeanResult = new CustomerFamilyBean();
-		customerFamilyBeanResult.setId(customerFamilyBean.getId());
-		customerFamilyBeanResult.setRelationship(customerFamilyBean.getRelationship());;
-		customerFamilyBeanResult.setRealName(customerFamilyBean.getRealName());
-		customerFamilyBeanResult.setBirthday(customerFamilyBean.getBirthday());
-		customerFamilyBeanResult.setPhone(customerFamilyBean.getPhone());
-		customerFamilyBeanResult.setAreaId(customerFamilyBean.getAreaId());
-		customerFamilyBeanResult.setAddress(customerFamilyBean.getAddress());
+		CustomerFamilyBean customerFamilyBeanResult = CustomerFamilyBean.builder()
+				.id(customerFamilyBean.getId())
+				.relationship(customerFamilyBean.getRelationship())
+				.realName(customerFamilyBean.getRealName())
+				.birthday(customerFamilyBean.getBirthday())
+				.phone(customerFamilyBean.getPhone())
+				.areaId(customerFamilyBean.getAreaId())
+				.address(customerFamilyBean.getAddress())
+				.build();
 		CustomerFamilyUtil.assembly(customerFamilyBeanResult);
 		
 		return RespUtil.build(request).putData("customerFamilyBean", customerFamilyBeanResult);

@@ -7,8 +7,11 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
+import com.rmp.info.model.CustomerFamily;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;  
@@ -29,22 +32,18 @@ public class Mybatis3PluginByLombok extends BaseMybatis3Plugin {
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
     	
         //添加domain的import
-//        topLevelClass.addImportedType(Data.class.getName());
-        topLevelClass.addImportedType(Getter.class.getName());
-        topLevelClass.addImportedType(Setter.class.getName());
-//        topLevelClass.addImportedType(Builder.class.getName());
-//        topLevelClass.addImportedType(NoArgsConstructor.class.getName());
+    	topLevelClass.addImportedType(SuppressWarnings.class.getName());
+        topLevelClass.addImportedType(Data.class.getName());
+        topLevelClass.addImportedType(EqualsAndHashCode.class.getName());
         topLevelClass.addImportedType(AllArgsConstructor.class.getName());
+        topLevelClass.addImportedType(NoArgsConstructor.class.getName());
         
-//        topLevelClass.addImportedType(ApiModelProperty.class.getName());
-
         //添加domain的注解
-//        topLevelClass.addAnnotation("@Data");
-        topLevelClass.addAnnotation("@Getter");
-        topLevelClass.addAnnotation("@Setter");
-//        topLevelClass.addAnnotation("@Builder");
-//        topLevelClass.addAnnotation("@NoArgsConstructor");
+        topLevelClass.addAnnotation("@SuppressWarnings(\"serial\")");
+        topLevelClass.addAnnotation("@Data");
+        topLevelClass.addAnnotation("@EqualsAndHashCode(callSuper=false)");
         topLevelClass.addAnnotation("@AllArgsConstructor");
+        topLevelClass.addAnnotation("@NoArgsConstructor");
         
         return true;
     }

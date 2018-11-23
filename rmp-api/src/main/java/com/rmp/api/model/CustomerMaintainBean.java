@@ -1,18 +1,28 @@
 package com.rmp.api.model;
 
+import java.math.BigDecimal;
+
 import com.rmp.info.model.CustomerMaintain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class CustomerMaintainBean extends CustomerMaintain {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2088956218423446207L;
+	
+	@Builder
+	public CustomerMaintainBean(Long id, Long customerId, Integer maintain, Integer frequency, Integer count,
+			BigDecimal budget, Integer isDelete, Integer version, Long createTime, Long updateTime
+			, Long userId, String maintainValue) {
+		super(id, customerId, maintain, frequency, count, budget, isDelete, version, createTime, updateTime);
+		this.userId = userId;
+		this.maintainValue = maintainValue;
+	}
 	
 	private Long userId;
 	

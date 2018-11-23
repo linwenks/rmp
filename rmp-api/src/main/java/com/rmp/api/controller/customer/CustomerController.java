@@ -267,20 +267,20 @@ public class CustomerController extends BaseApiController {
 		}
 		
 		// 家庭
-		CustomerFamilyBean customerFamilyBean = new CustomerFamilyBean();
-		customerFamilyBean.setCustomerId(id);
+		CustomerFamilyBean customerFamilyBean = CustomerFamilyBean.builder().customerId(id).build();
 		List<CustomerFamilyBean> customerFamilyBeanListTmp = customerFamilyService.selectList(null, customerFamilyBean);
 		if (!CollectionUtils.isEmpty(customerFamilyBeanListTmp)) {
 			customerFamilyBeanListResult = Lists.newArrayList();
 			for (CustomerFamilyBean customerFamilyBeanTmp : customerFamilyBeanListTmp) {
-				CustomerFamilyBean customerFamilyBeanResult = new CustomerFamilyBean();
-				customerFamilyBeanResult.setId(customerFamilyBeanTmp.getId());
-				customerFamilyBeanResult.setRelationship(customerFamilyBeanTmp.getRelationship());;
-				customerFamilyBeanResult.setRealName(customerFamilyBeanTmp.getRealName());
-				customerFamilyBeanResult.setBirthday(customerFamilyBeanTmp.getBirthday());
-				customerFamilyBeanResult.setPhone(customerFamilyBeanTmp.getPhone());
-				customerFamilyBeanResult.setAreaId(customerFamilyBeanTmp.getAreaId());
-				customerFamilyBeanResult.setAddress(customerFamilyBeanTmp.getAddress());
+				CustomerFamilyBean customerFamilyBeanResult = CustomerFamilyBean.builder()
+				.id(customerFamilyBeanTmp.getId())
+				.relationship(customerFamilyBeanTmp.getRelationship())
+				.realName(customerFamilyBeanTmp.getRealName())
+				.birthday(customerFamilyBeanTmp.getBirthday())
+				.phone(customerFamilyBeanTmp.getPhone())
+				.areaId(customerFamilyBeanTmp.getAreaId())
+				.address(customerFamilyBeanTmp.getAddress())
+				.build();
 				CustomerFamilyUtil.assembly(customerFamilyBeanResult);
 				customerFamilyBeanListResult.add(customerFamilyBeanResult);
 			}

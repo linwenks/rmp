@@ -4,17 +4,25 @@ import java.util.List;
 
 import com.rmp.info.model.Area;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class AreaBean extends Area {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2088956218423446207L;
+	@Builder
+	public AreaBean(Long id, Long pid, String name
+			, Long startId, AreaBean parent, List<AreaBean> childList) {
+		super(id, pid, name);
+		this.startId = startId;
+		this.parent = parent;
+		this.childList = childList;
+	}
 	
 	private Long startId;
 	

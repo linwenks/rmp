@@ -2,18 +2,28 @@ package com.rmp.api.model;
 
 import com.rmp.info.model.CustomerRelation;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@SuppressWarnings("serial")
+@Data
+@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class CustomerRelationBean extends CustomerRelation {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2088956218423446207L;
 	
+	@Builder
+	public CustomerRelationBean(Long id, Long customerId, Integer relationship, Integer intimacy, Integer importance,
+			Integer isDelete, Integer version, Long createTime, Long updateTime
+			, Long userId, String relationshipValue, String intimacyValue, String importanceValue) {
+		super(id, customerId, relationship, intimacy, importance, isDelete, version, createTime, updateTime);
+		this.userId = userId;
+		this.relationshipValue = relationshipValue;
+		this.intimacyValue = intimacyValue;
+		this.importanceValue = importanceValue;
+	}
+
 	private Long userId;
 	
 	 /**

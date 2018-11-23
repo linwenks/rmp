@@ -9,15 +9,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 客户 可能问题
+ * 用户 提醒
  * 
- * t_customer_problem
+ * t_user_remind
  *
  */
 @AllArgsConstructor
 @Getter
 @Setter
-public class CustomerProblem extends Model implements Serializable {
+public class UserRemind extends Model implements Serializable {
     /**
      * ID
      */
@@ -26,22 +26,32 @@ public class CustomerProblem extends Model implements Serializable {
     /**
      * 客户ID
      */
-    private Long customerId;
+    private Long userId;
 
     /**
-     * 健康问题（1:心脏病 2:动脉硬化 3:高血压 4:高血脂 5:肠胃病 6:糖尿病 7:关节炎 8:肥胖症 9:胆结石 10:肾病 11:精神问题 12:脸部痘痕 13:五官瑕疵）
+     * 分类（1:纪念日 2:客户生日 3:用户生日）
      */
-    private String health;
+    private Integer type;
 
     /**
-     * 生活问题（1:资金缺乏 2:寻找工作 3:事业发展 4:感情困扰 5:子女学习 6:法律问题 7:税务）
+     * 分类表ID
      */
-    private String life;
+    private Long typeId;
 
     /**
-     * 备注
+     * 提前提醒日期
      */
-    private String remark;
+    private Integer advanceDate;
+
+    /**
+     * 提前提醒天数
+     */
+    private Integer advanceDay;
+
+    /**
+     * 提醒日期
+     */
+    private Integer remindDate;
 
     /**
      * 是否删除（0:未删除 1:已删除）

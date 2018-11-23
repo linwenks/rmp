@@ -100,6 +100,9 @@
 		<table tableName="t_user_hobby" domainObjectName="UserHobby" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
+		<table tableName="t_user_remind" domainObjectName="UserRemind" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
 		
 		
 		<table tableName="t_customer" domainObjectName="Customer" >

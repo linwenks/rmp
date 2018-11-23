@@ -1,11 +1,11 @@
 package com.rmp.info.model;
 
-import com.rmp.info.base.model.Model;
 import java.io.Serializable;
+
+import com.rmp.info.base.model.Model;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -14,6 +14,7 @@ import lombok.Setter;
  * t_customer_relation
  *
  */
+@AllArgsConstructor
 @Getter
 @Setter
 public class CustomerRelation extends Model implements Serializable {

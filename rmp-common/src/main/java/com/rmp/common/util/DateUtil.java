@@ -30,12 +30,35 @@ public class DateUtil {
 	public static final String YYYY_MM_DD_HH_MM_SS = YYYY_MM_DD_HH_MM + ":" + ss;
 	public static final String YYYY_MM_DD_HH_MM_SS_SSS = YYYY_MM_DD_HH_MM_SS + ":" + sss;
 	
-	public static final String YYYYMM = yyyy + MM;
-	public static final String YYYYMMDD = YYYYMM + dd;
-	public static final String YYYYMMDDHH = YYYYMMDD + HH;
-	public static final String YYYYMMDDHHMM = YYYYMMDDHH + mm;
-	public static final String YYYYMMDDHHMMSS = YYYYMMDDHHMM + ss;
-	public static final String YYYYMMDDHHMMSSSSS = YYYYMMDDHHMMSS + sss;
+	public static final String sssss = ss + sss;
+	
+	public static final String mmss = mm + ss;
+	public static final String mmsssss = mm + sssss;
+
+	public static final String HHmm = HH + mm;
+	public static final String HHmmss = HH + mmss;
+	public static final String HHmmsssss = HH + mmsssss;
+	
+	public static final String ddHH = dd + HH;
+	public static final String ddHHMM = dd + HHmm;
+	public static final String ddHHMMSS = dd + HHmmss;
+	public static final String ddHHMMSSSSS = dd + HHmmsssss;
+	
+	public static final String MMdd = MM + dd;
+	public static final String MMddHH = MM + ddHH;
+	public static final String MMddHHMM = MM + ddHHMM;
+	public static final String MMddHHMMSS = MM + ddHHMMSS;
+	public static final String MMddHHMMSSSSS = MM + ddHHMMSSSSS;
+	
+	public static final String yyyyMM = yyyy + MM;
+	public static final String yyyyMMdd = yyyy + MMdd;
+	public static final String yyyyMMddHH = yyyy + MMddHH;
+	public static final String yyyyMMddHHMM = yyyy + MMddHHMM;
+	public static final String yyyyMMddHHMMSS = yyyy + MMddHHMMSS;
+	public static final String yyyyMMddHHMMSSSSS = yyyy + MMddHHMMSSSSS;
+	
+	
+	
 	
 	/**
 	 * date 格式化 str
@@ -74,7 +97,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Long formatDateLong(Date date) {
-		return Long.valueOf(formatDate(date, YYYYMMDD));
+		return Long.valueOf(formatDate(date, yyyyMMdd));
 	}
 	
 	/**
@@ -83,7 +106,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Long formatDate2Long(Date date) {
-		return Long.valueOf(formatDate(date, YYYYMMDDHHMMSS));
+		return Long.valueOf(formatDate(date, yyyyMMdd));
 	}
 	
 	/**

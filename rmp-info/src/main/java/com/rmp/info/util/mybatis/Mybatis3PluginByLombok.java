@@ -32,8 +32,8 @@ public class Mybatis3PluginByLombok extends BaseMybatis3Plugin {
 //        topLevelClass.addImportedType(Data.class.getName());
         topLevelClass.addImportedType(Getter.class.getName());
         topLevelClass.addImportedType(Setter.class.getName());
-        topLevelClass.addImportedType(Builder.class.getName());
-        topLevelClass.addImportedType(NoArgsConstructor.class.getName());
+//        topLevelClass.addImportedType(Builder.class.getName());
+//        topLevelClass.addImportedType(NoArgsConstructor.class.getName());
         topLevelClass.addImportedType(AllArgsConstructor.class.getName());
         
 //        topLevelClass.addImportedType(ApiModelProperty.class.getName());
@@ -44,7 +44,7 @@ public class Mybatis3PluginByLombok extends BaseMybatis3Plugin {
         topLevelClass.addAnnotation("@Setter");
 //        topLevelClass.addAnnotation("@Builder");
 //        topLevelClass.addAnnotation("@NoArgsConstructor");
-//        topLevelClass.addAnnotation("@AllArgsConstructor");
+        topLevelClass.addAnnotation("@AllArgsConstructor");
         
         return true;
     }

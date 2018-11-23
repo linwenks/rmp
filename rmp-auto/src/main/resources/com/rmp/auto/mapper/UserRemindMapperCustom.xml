@@ -191,19 +191,128 @@
 		SELECT 
 			u.id user_id
 			, 2 type
-			, cmd.id type_id
+			, cf.id type_id
 			, ${advanceDate} advance_date
-			, <include refid="advance_day" /> advance_day
-			, cmd.occur_date remind_date
+			, #{advanceDay} advance_day
+			, cf.birthday remind_date
 		FROM t_customer_family cf 
 		
 		INNER JOIN t_customer c ON cf.customer_id = c.id AND c.is_delete = 0
 		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
 		
 		WHERE cf.is_delete = 0 
-		AND cmd.birthday > 0
-		1
-		AND cmd.birthday = date_format(date_add(str_to_date('#{ymd}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%Y%m%d')
+		AND cf.birthday > 0
+		
+		AND cf.birthday = date_format(date_add(str_to_date('#{ymd}', '%Y%m%d'), INTERVAL +#{advanceDay} DAY),'%Y%m%d')
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<insert id="insertBy2" parameterType="com.rmp.auto.model.UserRemindBean" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 2 type
+			, cf.id type_id
+			, ${advanceDate} advance_date
+			, 0 advance_day
+			, cf.birthday remind_date
+		FROM t_customer_family cf 
+		
+		INNER JOIN t_customer c ON cf.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cf.is_delete = 0 
+		AND cf.birthday > 0
+		
+		AND cf.birthday = #{ymd}
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<insert id="insertBy3" parameterType="com.rmp.auto.model.UserRemindBean" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 3 type
+			, u.id type_id
+			, ${advanceDate} advance_date
+			, #{advanceDay} advance_day
+			, c.birthday remind_date
+		FROM t_customer c 
+		
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE c.is_delete = 0 
+		AND c.birthday > 0
+		
+		AND c.birthday = date_format(date_add(str_to_date('#{ymd}', '%Y%m%d'), INTERVAL +#{advanceDay} DAY),'%Y%m%d')
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<insert id="insertBy3" parameterType="com.rmp.auto.model.UserRemindBean" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 3 type
+			, c.id type_id
+			, ${advanceDate} advance_date
+			, 0 advance_day
+			, c.birthday remind_date
+		FROM t_customer c
+		
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE c.is_delete = 0 
+		AND c.birthday > 0
+		
+		AND c.birthday = #{ymd}
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<insert id="insertBy4" parameterType="com.rmp.auto.model.UserRemindBean" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 4 type
+			, u.id type_id
+			, ${advanceDate} advance_date
+			, #{advanceDay} advance_day
+			, u.birthday remind_date
+		FROM t_user u
+		
+		WHERE u.is_delete = 0 
+		AND u.birthday > 0
+		
+		AND u.birthday = date_format(date_add(str_to_date('#{ymd}', '%Y%m%d'), INTERVAL +#{advanceDay} DAY),'%Y%m%d')
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<insert id="insertBy4" parameterType="com.rmp.auto.model.UserRemindBean" >
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 4 type
+			, u.id type_id
+			, ${advanceDate} advance_date
+			, 0 advance_day
+			, u.birthday remind_date
+		FROM t_user u
+		
+		WHERE u.is_delete = 0 
+		AND u.birthday > 0
+		
+		AND u.birthday = #{ymd}
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>

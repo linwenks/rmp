@@ -37,5 +37,7 @@ public class UserRemindDayAction extends BaseAction {
 		userRemindService.exe("insertBy2Now", UserRemindBean.builder().advanceDate(ymd1).ymd(d1));
 		userRemindService.exe("insertBy3", UserRemindBean.builder().advanceDate(nowYmd).ymd(nowW));
 		userRemindService.exe("insertBy3Now", UserRemindBean.builder().advanceDate(ymd1).ymd(w1));
+		userRemindService.exe("insertBy4", UserRemindBean.builder().advanceDate(nowYmd).ymd(nowW));
+		userRemindService.exe("insertBy4Now", UserRemindBean.builder().advanceDate(ymd1).ymd(w1));
 	}
 }

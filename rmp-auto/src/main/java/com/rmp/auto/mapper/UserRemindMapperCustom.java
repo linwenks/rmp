@@ -27,4 +27,8 @@ public interface UserRemindMapperCustom {
 	public int insertBy3(UserRemindBean userRemindBean);
 	
 	public int insertBy3Now(UserRemindBean userRemindBean);
+	
+	public int insertBy4(UserRemindBean userRemindBean);
+	
+	public int insertBy4Now(UserRemindBean userRemindBean);
 }

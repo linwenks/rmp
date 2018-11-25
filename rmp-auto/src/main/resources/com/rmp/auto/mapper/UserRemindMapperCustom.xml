@@ -40,10 +40,10 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, <include refid="advance_day" /> advance_day
-			, cmd.occur_date remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 1 
-		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.ymd}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%Y%m%d')
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%Y%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -57,10 +57,10 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, 0 advance_day
-			, cmd.occur_date remind_date
+			, ${userRemindBean.advanceDate} remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 1 
-		AND cmd.occur_date = ${userRemindBean.ymd}
+		AND cmd.occur_date = date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%Y%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -75,10 +75,10 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, <include refid="advance_day" /> advance_day
-			, cmd.occur_date remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 2
-		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.md}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%m%d')
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -92,10 +92,10 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, 0 advance_day
-			, cmd.occur_date remind_date
+			, ${userRemindBean.advanceDate} remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 2
-		AND cmd.occur_date = ${userRemindBean.md}
+		AND cmd.occur_date = date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), '%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -108,12 +108,12 @@
 			u.id user_id
 			, 1 type
 			, cmd.id type_id
-			, 20181119 advance_date
+			, ${userRemindBean.advanceDate} advance_date
 			, <include refid="advance_day" /> advance_day
-			, cmd.occur_date remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
 		<include refid="table" />
-		AND cmd.occur_type = 2
-		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.d}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%d')
+		AND cmd.occur_type = 3
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -127,10 +127,10 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, 0 advance_day
-			, cmd.occur_date remind_date
+			, ${userRemindBean.advanceDate} remind_date
 		<include refid="table" />
-		AND cmd.occur_type = 2
-		AND cmd.occur_date = ${userRemindBean.d}
+		AND cmd.occur_type = 3
+		AND cmd.occur_date = date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -145,13 +145,13 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, <include refid="advance_day" /> advance_day
-			, cmd.occur_date remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 4
 		AND cmd.occur_date = (
 			CASE 
-				WHEN date_format(date_add(str_to_date('${userRemindBean.w}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w') = 0 THEN 7
-				ELSE date_format(date_add(str_to_date('${userRemindBean.w}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w')
+				WHEN date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w') = 0 THEN 7
+				ELSE date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w')
 			END)
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
@@ -166,10 +166,14 @@
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, 0 advance_day
-			, cmd.occur_date remind_date
+			, ${userRemindBean.advanceDate} remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 4
-		AND cmd.occur_date = ${userRemindBean.w}
+		AND cmd.occur_date = (
+			CASE 
+				WHEN date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%w') = 0 THEN 7
+				ELSE date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%w')
+			END)
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -184,7 +188,7 @@
 			, cf.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, ${userRemindBean.advanceDay} advance_day
-			, cf.birthday remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		FROM t_customer_family cf 
 		
 		INNER JOIN t_customer c ON cf.customer_id = c.id AND c.is_delete = 0
@@ -193,7 +197,7 @@
 		WHERE cf.is_delete = 0 
 		AND cf.birthday > 0
 		
-		AND cf.birthday = date_format(date_add(str_to_date('${userRemindBean.ymd}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
+		AND cf.birthday = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -204,10 +208,10 @@
 		SELECT 
 			u.id user_id
 			, 3 type
-			, u.id type_id
+			, c.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, ${userRemindBean.advanceDay} advance_day
-			, c.birthday remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		FROM t_customer c 
 		
 		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
@@ -215,7 +219,7 @@
 		WHERE c.is_delete = 0 
 		AND c.birthday > 0
 		
-		AND c.birthday = date_format(date_add(str_to_date('${userRemindBean.ymd}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
+		AND c.birthday = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -229,13 +233,13 @@
 			, u.id type_id
 			, ${userRemindBean.advanceDate} advance_date
 			, ${userRemindBean.advanceDay} advance_day
-			, u.birthday remind_date
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		FROM t_user u
 		
 		WHERE u.is_delete = 0 
 		AND u.birthday > 0
 		
-		AND u.birthday = date_format(date_add(str_to_date('${userRemindBean.ymd}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
+		AND u.birthday = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>

@@ -15,19 +15,19 @@ public class UserRemindBean extends UserRemind {
 	
 	@Builder
 	public UserRemindBean(Long id, Long userId, Integer type, Long typeId, Integer advanceDate, Integer advanceDay, Integer remindDate, Integer isDelete, Integer version, Long createTime, Long updateTime
-			, Integer ymd, Integer md, Integer d, Integer w) {
+			, String content, CustomerBean customerBean, CustomerRelationBean customerRelationBean, String advanceDayStr) {
 		super(id, userId, type, typeId, advanceDate, advanceDay, remindDate, isDelete, version, createTime, updateTime);
-		this.ymd = ymd;
-		this.md = md;
-		this.d = d;
-		this.w = w;
+		this.content = content;
+		this.customerBean = customerBean;
+		this.customerRelationBean = customerRelationBean;
+		this.advanceDayStr = advanceDayStr;
 	}
-
-	private Integer ymd;
 	
-	private Integer md;
+	private String content;
 	
-	private Integer d;
+	private CustomerBean customerBean;
 	
-	private Integer w;
+	private CustomerRelationBean customerRelationBean;
+	
+	private String advanceDayStr;
 }

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rmp.api.mapper.UserRemindMapperCustom">
+	
+	<resultMap id="UserRemindBean" type="com.rmp.api.model.UserRemindBean">
+	    <id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="user_id" jdbcType="BIGINT" property="userId" />
+	    <result column="type" jdbcType="INTEGER" property="type" />
+	    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+	    <result column="advance_date" jdbcType="INTEGER" property="advanceDate" />
+	    <result column="advance_day" jdbcType="INTEGER" property="advanceDay" />
+	    <result column="remind_date" jdbcType="INTEGER" property="remindDate" />
+	    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+	    <result column="version" jdbcType="INTEGER" property="version" />
+	    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+	    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	    <result column="content" jdbcType="VARCHAR" property="content" />
+	    
+	    <association property="customerBean" resultMap="CustomerBean" columnPrefix="c_"/>
+	    <association property="customerRelationBean" resultMap="CustomerRelationBean" columnPrefix="cr_"/>
+	</resultMap>
+	
+	<resultMap id="CustomerBean" type="com.rmp.api.model.CustomerBean">
+	    <id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="user_id" jdbcType="BIGINT" property="userId" />
+	    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+	    <result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
+	    <result column="phone" jdbcType="BIGINT" property="phone" />
+	    <result column="sex" jdbcType="INTEGER" property="sex" />
+	    <result column="birthday" jdbcType="INTEGER" property="birthday" />
+	    <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+	    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+	    <result column="address" jdbcType="VARCHAR" property="address" />
+	    <result column="vip" jdbcType="INTEGER" property="vip" />
+	    <result column="tag" jdbcType="VARCHAR" property="tag" />
+	    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+	    <result column="version" jdbcType="INTEGER" property="version" />
+	    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+	    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+	
+	<resultMap id="CustomerRelationBean" type="com.rmp.api.model.CustomerRelationBean">
+	    <id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+	    <result column="relationship" jdbcType="INTEGER" property="relationship" />
+	    <result column="intimacy" jdbcType="INTEGER" property="intimacy" />
+	    <result column="importance" jdbcType="INTEGER" property="importance" />
+	    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+	    <result column="version" jdbcType="INTEGER" property="version" />
+	    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+	    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+	</resultMap>
+
+	<sql id="limit">
+		<if test="queryPage != null" >
+			limit #{queryPage.limitStart} , #{queryPage.limitEnd}
+	    </if>
+	</sql>
+	
+	<sql id="where">
+		<if test="userRemindBean != null" >
+			<if test="userRemindBean.userId != null" >
+				and ur.user_id = #{userRemindBean.userId}
+		    </if>
+		    <if test="userRemindBean.advanceDate != null" >
+				and ur.advance_date = #{userRemindBean.advanceDate}
+		    </if>
+		    <if test="userRemindBean.customerRelationBean != null" >
+				<if test="userRemindBean.customerRelationBean.importance != null" >
+					and cr.importance = #{userRemindBean.customerRelationBean.importance}
+			    </if>
+		    </if>
+	    </if>
+	</sql>
+	
+	<select id="selectList" resultMap="UserRemindBean">
+		
+		select 
+			advance_date, advance_day, remind_date, c_id, c_real_name, c_sex, c_head_pic, cr_relationship, 
+			GROUP_CONCAT(content ORDER BY content DESC ) content
+			
+		from (
+		
+			select
+				advance_date, advance_day, remind_date,
+				c.id c_id, c.real_name c_real_name, c.sex c_sex, c.head_pic c_head_pic,
+				cr.relationship cr_relationship,
+				
+				cmd.`name` content
+			from t_user_remind ur
+			
+			inner join t_user u on ur.user_id = u.id
+			and u.is_delete = 0
+			INNER JOIN t_customer_memorial_day cmd ON ur.type_id = cmd.id 
+			AND cmd.is_delete = 0
+			INNER JOIN t_customer c ON cmd.customer_id = c.id 
+			AND c.is_delete = 0
+			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
+			AND cr.is_delete = 0 
+			
+			WHERE ur.is_delete = 0
+			AND ur.type = 1
+			<include refid="where" />
+			
+			UNION ALL
+			
+			SELECT
+				advance_date, advance_day, remind_date,
+				c.id c_id, c.real_name c_real_name, c.sex c_sex, c.head_pic c_head_pic,
+				cr.relationship cr_relationship,
+				CONCAT(
+					(CASE 
+						WHEN cf.relationship = 1 THEN '家人'
+						WHEN cf.relationship = 2 THEN '亲戚' 
+						WHEN cf.relationship = 3 THEN '朋友' 
+						WHEN cf.relationship = 4 THEN '同学'
+						WHEN cf.relationship = 5 THEN '同事'
+						WHEN cf.relationship = 6 THEN '客户'
+						WHEN cf.relationship = 7 THEN '熟人'
+						WHEN cf.relationship = 8 THEN '陌生人'
+						ELSE '其他'
+					END), '生日') content
+			FROM t_user_remind ur
+			INNER JOIN t_user u ON ur.user_id = u.id 
+			AND u.is_delete = 0
+			INNER JOIN t_customer_family cf ON ur.type_id = cf.id 
+			AND cf.is_delete = 0
+			INNER JOIN t_customer c ON cf.customer_id = c.id 
+			AND c.is_delete = 0
+			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
+			AND cr.is_delete = 0 
+			
+			WHERE ur.is_delete = 0 
+			AND ur.type = 2
+			<include refid="where" />
+			
+			UNION ALL
+			
+			SELECT
+				advance_date, advance_day, remind_date,
+				c.id c_id, c.real_name c_real_name, c.sex c_sex, c.head_pic c_head_pic,
+				cr.relationship cr_relationship,
+				
+				'客户生日' content
+			FROM t_user_remind ur
+			INNER JOIN t_user u ON ur.user_id = u.id 
+			AND u.is_delete = 0
+			INNER JOIN t_customer c ON ur.type_id = c.id 
+			AND c.is_delete = 0
+			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
+			AND cr.is_delete = 0 
+			
+			WHERE ur.is_delete = 0
+			AND ur.type = 3
+			<include refid="where" />
+		) t
+		group by advance_date, advance_day, remind_date, c_id, c_real_name, c_sex, c_head_pic, cr_relationship
+		
+		order by advance_date, advance_day, remind_date, c_id, c_real_name, c_sex, c_head_pic, cr_relationship
+		<include refid="limit" />
+	</select>
+</mapper>

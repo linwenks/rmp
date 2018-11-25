@@ -32,6 +32,8 @@
     "user_job_get",
     "user_job_update",
     
+    "user_remind_list",
+    
     
     "customer_customer_config",
   	"customer_customer_list",

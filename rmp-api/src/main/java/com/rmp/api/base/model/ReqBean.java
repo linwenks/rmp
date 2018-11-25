@@ -14,6 +14,7 @@ import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.model.UserBean;
 import com.rmp.api.model.UserHobbyBean;
 import com.rmp.api.model.UserJobBean;
+import com.rmp.api.model.UserRemindBean;
 import com.rmp.api.model.WxPhoneNumberReqBean;
 import com.rmp.common.page.QueryPage;
 
@@ -52,6 +53,8 @@ public class ReqBean {
 	private UserHobbyBean userHobbyBean;
 	
 	private UserJobBean userJobBean;
+	
+	private UserRemindBean userRemindBean;
 	
 	
 	

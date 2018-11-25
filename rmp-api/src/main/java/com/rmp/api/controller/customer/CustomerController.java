@@ -142,6 +142,7 @@ public class CustomerController extends BaseApiController {
      * @apiSuccess (data) {String} groups.users.address 地址
      * @apiSuccess (data) {Long} groups.users.areaId 区域ID
      * @apiSuccess (data) {String} groups.users.pinyin 拼音
+     * @apiSuccess (data) {String} groups.users.pinyinFirst 拼音 首字母
      * 
      * @apiSuccess (data) {Object} groups.users.customerRelationBean 客户 关系 bean
 	 * @apiSuccess (data) {Integer} groups.users.customerRelationBean.importance 关系

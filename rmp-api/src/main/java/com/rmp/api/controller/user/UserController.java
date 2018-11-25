@@ -30,7 +30,7 @@ import com.rmp.common.http.HttpUtil;
 import com.rmp.common.util.JsonUtil;
 
 /**
- * 地域 json controller
+ * 用户 json controller
  * @author linw
  *
  */

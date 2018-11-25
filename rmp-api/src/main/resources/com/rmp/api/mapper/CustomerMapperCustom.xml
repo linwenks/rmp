@@ -23,7 +23,7 @@
 	</resultMap>
 	
 	<resultMap id="CustomerRelationBean" type="com.rmp.api.model.CustomerRelationBean">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    	<id column="id" jdbcType="BIGINT" property="id" />
 	    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
 	    <result column="relationship" jdbcType="INTEGER" property="relationship" />
 	    <result column="intimacy" jdbcType="INTEGER" property="intimacy" />

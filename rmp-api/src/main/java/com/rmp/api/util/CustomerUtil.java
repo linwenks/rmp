@@ -47,7 +47,9 @@ public class CustomerUtil extends BaseUtil {
 			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
 				bean.setHeadPic("https://img.rmp.com" + bean.getHeadPic());    // 获取图片域名
 			}
-			
+			if (!StringUtils.isEmpty(bean.getPinyin())) {
+				bean.setPinyinFirst(bean.getPinyin().substring(0, 1));
+			}
 		}
 	}
 }

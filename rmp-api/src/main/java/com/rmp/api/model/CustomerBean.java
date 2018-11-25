@@ -17,12 +17,13 @@ public class CustomerBean extends Customer {
 	public CustomerBean(Long id, Long userId, String realName, String pinyin, Long phone, Integer sex, Integer birthday,
 			String headPic, Long areaId, String address, Integer vip, String tag, Integer isDelete, Integer version,
 			Long createTime, Long updateTime
-			, Long idNot, String areaNameAll, CustomerRelationBean customerRelationBean) {
+			, Long idNot, String areaNameAll, CustomerRelationBean customerRelationBean, String pinyinFirst) {
 		super(id, userId, realName, pinyin, phone, sex, birthday, headPic, areaId, address, vip, tag, isDelete, version,
 				createTime, updateTime);
 		this.idNot = idNot;
 		this.areaNameAll = areaNameAll;
 		this.customerRelationBean = customerRelationBean;
+		this.pinyinFirst = pinyinFirst;
 	}
 	
 	private Long idNot;
@@ -33,4 +34,6 @@ public class CustomerBean extends Customer {
     private String areaNameAll;
     
     private CustomerRelationBean customerRelationBean;
+    
+    private String pinyinFirst;
 }

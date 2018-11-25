@@ -1,11 +1,11 @@
 package com.rmp.api.controller.customer;
 
 import static com.rmp.api.util.MsgEnum.*;
-import static com.rmp.api.util.constant.Constant.SysCode.CUSTOMER_RELATION_IMPORTANCE;
-import static com.rmp.api.util.constant.Constant.SysCode.CUSTOMER_RELATION_INTIMACY;
-import static com.rmp.api.util.constant.Constant.SysCode.CUSTOMER_RELATION_RELATIONSHIP;
+import static com.rmp.api.util.constant.Constant.SysCode.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.rmp.api.base.controller.BaseApiController;
 import com.rmp.api.base.exception.AppException;
@@ -126,70 +127,86 @@ public class CustomerController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"s","phone":15111111112,"customerRelationBean":{"relationship":0,"intimacy":0,"importance":0}}}
      * 
-     * @apiSuccess (data) {Object} customerBeanList 客户 bean
-	 * @apiSuccess (data) {String} customerBeanList.realName 真实姓名
-	 * @apiSuccess (data) {Long} customerBeanList.phone 手机
-	 * @apiSuccess (data) {Integer} customerBeanList.sex 性别<br/>0:女<br/>1:男
-	 * @apiSuccess (data) {String} customerBeanList.headPic 头像
-	 * @apiSuccess (data) {Long} customerBeanList.areaId 区域ID
-	 * @apiSuccess (data) {String} customerBeanList.areaNameAll 区域全称
-     * @apiSuccess (data) {String} customerBeanList.address 地址
-     * @apiSuccess (data) {Long} customerBeanList.areaId 区域ID
-     * @apiSuccess (data) {String} customerBeanList.pinyin 拼音
+     * @apiSuccess (data) {List} letters 字母 list
      * 
-     * @apiSuccess (data) {Object} customerBeanList.customerRelationBean 客户 关系 bean
-	 * @apiSuccess (data) {Integer} customerBeanList.customerRelationBean.importance 关系
-	 * @apiSuccess (data) {String} customerBeanList.customerRelationBean.importanceValue 关系 值
-	 * @apiSuccess (data) {Integer} customerBeanList.customerRelationBean.intimacy 亲密
-	 * @apiSuccess (data) {String} customerBeanList.customerRelationBean.intimacyValue 亲密 值
-	 * @apiSuccess (data) {Integer} customerBeanList.customerRelationBean.relationship 重要
-	 * @apiSuccess (data) {String} customerBeanList.customerRelationBean.relationshipValue 重要 值
+     * @apiSuccess (data) {List} groups 客户 字母分组 list
+     * @apiSuccess (data) {String} groups.groupName 分组名称
+     * @apiSuccess (data) {List} groups.users 客户 bean list
+     * 
+	 * @apiSuccess (data) {String} groups.users.realName 真实姓名
+	 * @apiSuccess (data) {Long} groups.users.phone 手机
+	 * @apiSuccess (data) {Integer} groups.users.sex 性别<br/>0:女<br/>1:男
+	 * @apiSuccess (data) {String} groups.users.headPic 头像
+	 * @apiSuccess (data) {Long} groups.users.areaId 区域ID
+	 * @apiSuccess (data) {String} groups.users.areaNameAll 区域全称
+     * @apiSuccess (data) {String} groups.users.address 地址
+     * @apiSuccess (data) {Long} groups.users.areaId 区域ID
+     * @apiSuccess (data) {String} groups.users.pinyin 拼音
+     * 
+     * @apiSuccess (data) {Object} groups.users.customerRelationBean 客户 关系 bean
+	 * @apiSuccess (data) {Integer} groups.users.customerRelationBean.importance 关系
+	 * @apiSuccess (data) {String} groups.users.customerRelationBean.importanceValue 关系 值
+	 * @apiSuccess (data) {Integer} groups.users.customerRelationBean.intimacy 亲密
+	 * @apiSuccess (data) {String} groups.users.customerRelationBean.intimacyValue 亲密 值
+	 * @apiSuccess (data) {Integer} groups.users.customerRelationBean.relationship 重要
+	 * @apiSuccess (data) {String} groups.users.customerRelationBean.relationshipValue 重要 值
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBeanList":[{"customerRelationBean":{"relationshipValue":"其他","intimacyValue":"不详","importanceValue":"不重要","relationship":0,"intimacy":0,"importance":0},"realName":"ss","pinyin":"ss","phone":15111111112,"headPic":"https://img.rmp.com/img/head_pic/default.jpg"},{"realName":"ttt","pinyin":"ttt","phone":15111111113,"sex":0,"birthday":20100101,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"},{"realName":"ttt","pinyin":"ttt","phone":15111111111,"sex":0,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"}]}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"groups":[{"groupName":"a","users":[{"pinyinFirst":"a","realName":"ttt","pinyin":"att","phone":15111111111,"sex":0,"birthday":19900610,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"}]},{"groupName":"s","users":[{"customerRelationBean":{"relationshipValue":"其他","intimacyValue":"不详","importanceValue":"不重要","relationship":0,"intimacy":0,"importance":0},"pinyinFirst":"s","realName":"ss","pinyin":"ss","phone":15111111112,"sex":1,"birthday":20100302,"headPic":"https://img.rmp.com/img/head_pic/default.jpg","address":"ttt"}]},{"groupName":"t","users":[{"pinyinFirst":"t","realName":"ttt","pinyin":"ttt","phone":15111111113,"sex":0,"birthday":20100101,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"}]}],"letters":["a","s","t"]}}
      */
 	@RequestMapping(value = "/list")
 	public RespBean list(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
-		if (customerBean == null) AppException.toThrow(MSG_00003);
+		if (customerBean == null) customerBean = CustomerBean.builder().build();
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		/*
 		QueryPage queryPage = reqBean.getQueryPage();
 		if (queryPage == null) queryPage = new QueryPage();
 		*/
+		List<String> letters = null;
+		List<Map<String, Object>> groups = null;
+		
 		List<CustomerBean> customerBeanListResult = null;
 		List<CustomerBean> customerBeanList = customerService.selectListCustom(null, customerBean);
 		if (!CollectionUtils.isEmpty(customerBeanList)) {
 			customerBeanListResult = Lists.newArrayList();
 			for (CustomerBean customerBeanTmp : customerBeanList) {
 				if (customerBeanTmp == null) continue;
-				CustomerBean customerBeanResult = new CustomerBean();
-				customerBeanResult.setRealName(customerBeanTmp.getRealName());
-				customerBeanResult.setPhone(customerBeanTmp.getPhone());
-				customerBeanResult.setBirthday(customerBeanTmp.getBirthday());
-				customerBeanResult.setSex(customerBeanTmp.getSex());
-				customerBeanResult.setAreaId(customerBean.getAreaId());
-				customerBeanResult.setAddress(customerBeanTmp.getAddress());
-				customerBeanResult.setHeadPic(customerBeanTmp.getHeadPic());    // 获取图片域名
-				customerBeanResult.setPinyin(customerBeanTmp.getPinyin());
+				CustomerBean customerBeanResult = CustomerBean.builder()
+				.realName(customerBeanTmp.getRealName())
+				.phone(customerBeanTmp.getPhone())
+				.birthday(customerBeanTmp.getBirthday())
+				.sex(customerBeanTmp.getSex())
+				.areaId(customerBean.getAreaId())
+				.address(customerBeanTmp.getAddress())
+				.headPic(customerBeanTmp.getHeadPic())    // 获取图片域名
+				.pinyin(customerBeanTmp.getPinyin())
+				.build();
 				CustomerUtil.assembly(customerBeanResult);
 				
 				CustomerRelationBean customerRelationBeanResult = null;
 				CustomerRelationBean customerRelationBean = customerBeanTmp.getCustomerRelationBean();
 				if (customerRelationBean != null) {
-					customerRelationBeanResult = new CustomerRelationBean();
-					customerRelationBeanResult.setRelationship(customerRelationBean.getRelationship());
-					customerRelationBeanResult.setIntimacy(customerRelationBean.getIntimacy());
-					customerRelationBeanResult.setImportance(customerRelationBean.getImportance());
+					customerRelationBeanResult = CustomerRelationBean.builder()
+					.relationship(customerRelationBean.getRelationship())
+					.intimacy(customerRelationBean.getIntimacy())
+					.importance(customerRelationBean.getImportance())
+					.build();
 					CustomerRelationUtil.assembly(customerRelationBeanResult);
 					customerBeanResult.setCustomerRelationBean(customerRelationBeanResult);
 				}
-				
 				customerBeanListResult.add(customerBeanResult);
 			}
+			
+			letters = customerBeanListResult.stream().map(CustomerBean::getPinyinFirst).distinct().sorted().collect(Collectors.toList());
+			
+			groups = Lists.newArrayList();
+			for (Map.Entry<String, List<CustomerBean>> entry : customerBeanListResult.stream().collect(Collectors.groupingBy(CustomerBean::getPinyinFirst, Collectors.toList())).entrySet()) {
+				groups.add(ImmutableMap.of("groupName", entry.getKey(), "users", entry.getValue()));
+			}
 		}
-		return RespUtil.build(request).putData("customerBeanList", customerBeanListResult);
+		return RespUtil.build(request).putData("groups", groups).putData("letters", letters);
 	}
 	
 	/**

@@ -27,6 +27,7 @@ define({
     "user_job_config",
     "user_job_get",
     "user_job_update",
+    "user_remind_list",
     "customer_customer_config",
     "customer_customer_list",
     "customer_customer_get",
@@ -66,7 +67,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-11-19T02:54:41.467Z",
+    "time": "2018-11-25T13:09:24.155Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }

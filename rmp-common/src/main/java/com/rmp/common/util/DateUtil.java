@@ -40,22 +40,22 @@ public class DateUtil {
 	public static final String HHmmsssss = HH + mmsssss;
 	
 	public static final String ddHH = dd + HH;
-	public static final String ddHHMM = dd + HHmm;
-	public static final String ddHHMMSS = dd + HHmmss;
-	public static final String ddHHMMSSSSS = dd + HHmmsssss;
+	public static final String ddHHmm = dd + HHmm;
+	public static final String ddHHmmss = dd + HHmmss;
+	public static final String ddHHmmsssss = dd + HHmmsssss;
 	
 	public static final String MMdd = MM + dd;
 	public static final String MMddHH = MM + ddHH;
-	public static final String MMddHHMM = MM + ddHHMM;
-	public static final String MMddHHMMSS = MM + ddHHMMSS;
-	public static final String MMddHHMMSSSSS = MM + ddHHMMSSSSS;
+	public static final String MMddHHmm = MM + ddHHmm;
+	public static final String MMddHHmmss = MM + ddHHmmss;
+	public static final String MMddHHmmsssss = MM + ddHHmmsssss;
 	
 	public static final String yyyyMM = yyyy + MM;
 	public static final String yyyyMMdd = yyyy + MMdd;
 	public static final String yyyyMMddHH = yyyy + MMddHH;
-	public static final String yyyyMMddHHMM = yyyy + MMddHHMM;
-	public static final String yyyyMMddHHMMSS = yyyy + MMddHHMMSS;
-	public static final String yyyyMMddHHMMSSSSS = yyyy + MMddHHMMSSSSS;
+	public static final String yyyyMMddHHmm = yyyy + MMddHHmm;
+	public static final String yyyyMMddHHmmss = yyyy + MMddHHmmss;
+	public static final String yyyyMMddHHmmsssss = yyyy + MMddHHmmsssss;
 	
 	
 	
@@ -106,7 +106,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Long formatDate2Long(Date date) {
-		return Long.valueOf(formatDate(date, yyyyMMdd));
+		return Long.valueOf(formatDate(date, yyyyMMddHHmmss));
 	}
 	
 	/**

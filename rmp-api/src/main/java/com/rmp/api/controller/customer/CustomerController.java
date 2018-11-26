@@ -133,6 +133,7 @@ public class CustomerController extends BaseApiController {
      * @apiSuccess (data) {String} groups.groupName 分组名称
      * @apiSuccess (data) {List} groups.users 客户 bean list
      * 
+     * @apiSuccess (data) {Long} groups.users.id 客户ID
 	 * @apiSuccess (data) {String} groups.users.realName 真实姓名
 	 * @apiSuccess (data) {Long} groups.users.phone 手机
 	 * @apiSuccess (data) {Integer} groups.users.sex 性别<br/>0:女<br/>1:男
@@ -153,7 +154,7 @@ public class CustomerController extends BaseApiController {
 	 * @apiSuccess (data) {String} groups.users.customerRelationBean.relationshipValue 重要 值
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"groups":[{"groupName":"a","users":[{"pinyinFirst":"a","realName":"ttt","pinyin":"att","phone":15111111111,"sex":0,"birthday":19900610,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"}]},{"groupName":"s","users":[{"customerRelationBean":{"relationshipValue":"其他","intimacyValue":"不详","importanceValue":"不重要","relationship":0,"intimacy":0,"importance":0},"pinyinFirst":"s","realName":"ss","pinyin":"ss","phone":15111111112,"sex":1,"birthday":20100302,"headPic":"https://img.rmp.com/img/head_pic/default.jpg","address":"ttt"}]},{"groupName":"t","users":[{"pinyinFirst":"t","realName":"ttt","pinyin":"ttt","phone":15111111113,"sex":0,"birthday":20100101,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"}]}],"letters":["a","s","t"]}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"groups":[{"groupName":"s","users":[{"pinyinFirst":"s","id":6,"realName":"ss","pinyin":"ss","phone":15111111115,"headPic":"https://img.rmp.com/img/head_pic/default.jpg"},{"customerRelationBean":{"relationshipValue":"其他","intimacyValue":"不详","importanceValue":"不重要","relationship":0,"intimacy":0,"importance":0},"pinyinFirst":"s","id":2,"realName":"ss","pinyin":"ss","phone":15111111112,"sex":1,"birthday":20100101,"headPic":"https://img.rmp.com/img/head_pic/default.jpg","address":"ttt"}]},{"groupName":"t","users":[{"pinyinFirst":"t","id":5,"realName":"ttt","pinyin":"ttt","phone":15111111113,"sex":0,"birthday":20100101,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"},{"pinyinFirst":"t","id":4,"realName":"ttt","pinyin":"ttt","phone":15111111111,"sex":0,"headPic":"https://img.rmp.com/xxx/pic.jpg","address":"aaaaaaaaaaaaaa"}]},{"groupName":"d","users":[{"pinyinFirst":"d","id":8,"realName":"ddd","pinyin":"ddd","phone":13658327488,"headPic":"https://img.rmp.com/img/head_pic/default.jpg"}]}],"letters":["d","s","t"]}}
      */
 	@RequestMapping(value = "/list")
 	public RespBean list(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

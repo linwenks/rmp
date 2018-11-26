@@ -86,6 +86,10 @@ public class AppException extends RuntimeException {
 		throw new AppException(throwable);
 	}
 	
+	public static AppException toThrow(Throwable throwable, MsgEnum msgEnum) {
+		throw new AppException(throwable, msgEnum);
+	}
+	
 	public static AppException toThrow(MsgEnum msgEnum) {
 		throw new AppException(msgEnum);
 	}

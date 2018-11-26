@@ -175,6 +175,7 @@ public class CustomerController extends BaseApiController {
 			for (CustomerBean customerBeanTmp : customerBeanList) {
 				if (customerBeanTmp == null) continue;
 				CustomerBean customerBeanResult = CustomerBean.builder()
+				.id(customerBeanTmp.getId())
 				.realName(customerBeanTmp.getRealName())
 				.phone(customerBeanTmp.getPhone())
 				.birthday(customerBeanTmp.getBirthday())

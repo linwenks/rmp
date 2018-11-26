@@ -2,6 +2,7 @@ package com.rmp.api.controller.user;
 
 import static com.rmp.api.util.MsgEnum.*;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.ImmutableMap;
 import com.rmp.api.base.controller.BaseApiController;
@@ -26,7 +30,10 @@ import com.rmp.api.model.UserBean;
 import com.rmp.api.service.user.UserService;
 import com.rmp.api.util.UserUtil;
 import com.rmp.api.util.constant.Constant;
+import com.rmp.api.util.upload.UploadBean;
+import com.rmp.api.util.upload.UploadUtils;
 import com.rmp.common.http.HttpUtil;
+import com.rmp.common.util.DateUtil;
 import com.rmp.common.util.JsonUtil;
 
 /**
@@ -283,6 +290,54 @@ public class UserController extends BaseApiController {
 		return RespUtil.build(request);
 	}
 	
+	/**
+	 * 上传 头像
+	 * @throws Exception 
+     *
+     */
+	@RequestMapping(value = "/uploadHeadPic")
+	public RespBean updateHeadPic(@RequestParam Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ReqUtil.checkToken(param.getOrDefault("token", "").toString(), request, true);
+		
+		UploadUtils uploadUtils = new UploadUtils();
+		uploadUtils.setShowSizeType(UploadUtils.MB);
+		// 最大限制
+		Long maxSize = Long.valueOf(10 * 1024 * 1024);
+		uploadUtils.setMaxSize(maxSize);
+		// 后缀名限制
+		String suffixType = "jpg,jpeg,png,gif";
+		uploadUtils.setSuffixStr(suffixType);
+		
+		List<UploadBean> uploadBeanList = uploadUtils.getUploadFiles(request, "headPicFile");
+		if (CollectionUtils.isEmpty(uploadBeanList)) AppException.toThrow(MSG_00003);
+		UploadBean uploadBean = uploadBeanList.get(0);
+		if (uploadBean == null) AppException.toThrow(MSG_00003);
+		MultipartFile headPicMultipartFile = uploadBean.getMultipartFile();
+		if (headPicMultipartFile == null) AppException.toThrow(MSG_00003);
+		
+		// 上传路径
+		uploadUtils.saveUploadFiles(uploadBean, Constant.uploadTopPath(Constant.UPLOAD_TOP_PATH), Constant.uploadPath(Constant.UPLOAD_TOP_PATH, Constant.UPLOAD_USER_HEAD_PIC_PATH_TMP, DateUtil.yyyyMMddHHmmss));
+		String path = uploadBean.getPath();
+		
+		
+		/*
+        HttpParamBean imgFile = new HttpParamBean();
+        imgFile.setName("avatar");
+        imgFile.setValue(imgMultipartFile.getInputStream());
+        imgFile.setContentType(ContentType.MULTIPART_FORM_DATA);
+        imgFile.setFilename(imgMultipartFile.getOriginalFilename());
+		
+		MemberBean memberBean = new MemberBean();
+		memberBean.setImgFile(imgFile);
+		memberBean.setId(super.getCurrentUserId());
+		memberService.exe("updateImg", memberBean);
+		
+		MemberBean memberBeanTmp = new MemberBean();
+		memberBeanTmp.setImg(AppSettingUrlUtil.getValue(Constant.IMG_URL) + memberBean.getImg());
+		data(memberBeanTmp);
+		*/
+		return RespUtil.build(request);
+	}
 	
 	/**
 	 * 修改 头像

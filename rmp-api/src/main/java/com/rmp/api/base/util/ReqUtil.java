@@ -25,53 +25,79 @@ public class ReqUtil extends BaseUtil {
 		super();
 	}
 	
-	public static ReqBean build(String body, HttpServletRequest request, boolean isCheckToken, boolean isCheckLogin) {
+	public static ReqBean build(String body, HttpServletRequest request, boolean isCheckLogin) {
 		ReqBean reqBean = JsonUtil.fromJson(body, ReqBean.class);
 		if (reqBean != null) {
 			HeaderBean headerBean = reqBean.getHeader();
 			if (headerBean != null) {
-				if (isCheckToken) {
-					String token = StringUtils.trim(headerBean.getToken());
-					if (StringUtils.isEmpty(token)) AppException.toThrow(MSG_00006);
+				String token = StringUtils.trim(headerBean.getToken());
+				checkToken(token, request, isCheckLogin);
+				
+				/*
+				if (StringUtils.isEmpty(token)) AppException.toThrow(MSG_00006);
+				
+				if (isCheckLogin) {
+					String key = UserUtil.rKey(token);
+					Integer index = Constant.Redis.User.INDEX;
 					
-					if (isCheckLogin) {
-						String key = UserUtil.rKey(token);
-						Integer index = Constant.Redis.User.INDEX;
+					Map<String, String> userMap = jedisDao.hgetAll(index, key);
+					if (CollectionUtils.isEmpty(userMap)) {
+
+						UserBean userBeanTmp = new UserBean();
+						userBeanTmp.setToken(token);
+						userBeanTmp = userService.selectOne(userBeanTmp);
+						if (userBeanTmp == null) AppException.toThrow(MSG_00007);
+						UserUtil.checkUser(userBeanTmp);
 						
-						Map<String, String> userMap = jedisDao.hgetAll(index, key);
-						if (CollectionUtils.isEmpty(userMap)) {
-	
-							UserBean userBeanTmp = new UserBean();
-							userBeanTmp.setToken(token);
-							userBeanTmp = userService.selectOne(userBeanTmp);
-							if (userBeanTmp == null) AppException.toThrow(MSG_00007);
-							UserUtil.checkUser(userBeanTmp);
-							
-							userMap = UserUtil.rMap(userBeanTmp);
-							jedisDao.hmset(index, key, userMap);
-						}
-	
-						// 存入 request
-						UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
-						
-						jedisDao.expire(index, key, Constant.Redis.User.SECONDS);
+						userMap = UserUtil.rMap(userBeanTmp);
+						jedisDao.hmset(index, key, userMap);
 					}
+
+					// 存入 request
+					UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
+					
+					jedisDao.expire(index, key, Constant.Redis.User.SECONDS);
 				}
+				*/
 			}
 			request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerBean);
 		}
 		return reqBean;
 	}
 	
+	public static void checkToken(String token, HttpServletRequest request, boolean isCheckLogin) {
+		token = StringUtils.trim(token);
+		if (StringUtils.isEmpty(token)) AppException.toThrow(MSG_00006);
+		
+		if (isCheckLogin) {
+			String key = UserUtil.rKey(token);
+			Integer index = Constant.Redis.User.INDEX;
+			
+			Map<String, String> userMap = jedisDao.hgetAll(index, key);
+			if (CollectionUtils.isEmpty(userMap)) {
+
+				UserBean userBeanTmp = new UserBean();
+				userBeanTmp.setToken(token);
+				userBeanTmp = userService.selectOne(userBeanTmp);
+				if (userBeanTmp == null) AppException.toThrow(MSG_00007);
+				UserUtil.checkUser(userBeanTmp);
+				
+				userMap = UserUtil.rMap(userBeanTmp);
+				jedisDao.hmset(index, key, userMap);
+			}
+
+			// 存入 request
+			UserUtil.setCurrentUser(UserUtil.rBean(userMap), request);
+			
+			jedisDao.expire(index, key, Constant.Redis.User.SECONDS);
+		}
+	}
+	
 	public static ReqBean build(String body, HttpServletRequest request) {
-		return build(body, request, false, false);
+		return build(body, request, false);
 	}
-	/*
-	public static ReqBean buildCheckToken(String body, HttpServletRequest request) {
-		return build(body, request, true, false);
-	}
-	*/
+	
 	public static ReqBean buildCheckLogin(String body, HttpServletRequest request) {
-		return build(body, request, true, true);
+		return build(body, request, true);
 	}
 }

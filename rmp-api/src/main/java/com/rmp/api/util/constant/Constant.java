@@ -3,8 +3,12 @@ package com.rmp.api.util.constant;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.rmp.api.util.SysCodeUtil;
+import com.rmp.common.util.DateUtil;
 
 /**
  * 常量
@@ -45,6 +49,34 @@ public final class Constant {
 	
 	// 当前请求header
 	public static final String CURRENT_REQUEST_HEADER = "CURRENT_REQUEST_HEADER";
+	
+	
+	public static final String UPLOAD_TOP_PATH = "UPLOAD_TOP_PATH";    // 上传顶级路径
+	public static final String UPLOAD_USER_HEAD_PIC_PATH = "UPLOAD_USER_HEAD_PIC_PATH";    // 上传用户头像路径
+	public static final String UPLOAD_USER_HEAD_PIC_PATH_TMP = "UPLOAD_USER_HEAD_PIC_PATH_TMP";    // 上传用户头像路径临时
+	public static final String UPLOAD_CUSTOMER_HEAD_PIC_PATH = "UPLOAD_CUSTOMER_HEAD_PIC_PATH";    // 上传客户头像路径
+	public static final String UPLOAD_CUSTOMER_HEAD_PIC_PATH_TMP = "UPLOAD_CUSTOMER_HEAD_PIC_PATH_TMP";    // 上传客户头像路径临时
+	
+	// 图片 域名
+	private static final String IMG_DOMAIN = "IMG_DOMAIN";
+	public static String imgDomain() {
+		return SysCodeUtil.getValue(IMG_DOMAIN);
+	}
+	
+	// 上传
+	public static String uploadTopPath(String topPath) {
+		return SysCodeUtil.getValue(topPath);
+	}
+	
+	public static String uploadPath(String topPath, String path, String pattern) {
+		String str1 = SysCodeUtil.getValue(topPath, path);
+		pattern = StringUtils.trim(pattern);
+		String str2 = "";
+		if (!StringUtils.isEmpty(pattern)) {
+			str2 = "/" + DateUtil.formatDate(DateUtil.now(), pattern);
+		}
+		return str1 + str2;
+	}
 	
 	// 是否删除
 	public final static Integer DELETE_N = 0;    // 否

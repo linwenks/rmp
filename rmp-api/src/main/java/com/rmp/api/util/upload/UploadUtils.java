@@ -273,7 +273,7 @@ public class UploadUtils {
 			String suffix = uploadBean.getSuffix();
 			
 			// 文件名 新
-			String nameNew = DateUtil.nowSecondFormat().toString();
+			String nameNew = DateUtil.nowInFormat(DateUtil.yyyyMMddHHmmsssss);
 			nameNew = nameNew + getRandNum(5);
 			
 			// 上传路径

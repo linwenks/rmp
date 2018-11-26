@@ -8,8 +8,7 @@
 	<artifactId>rmp-auto</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>rmp-api Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>rmp-auto</name>
 	
 	<dependencies>
 		<dependency>

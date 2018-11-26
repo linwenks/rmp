@@ -10,8 +10,7 @@
 	<artifactId>rmp-api</artifactId>
 	<packaging>war</packaging>
 	
-	<name>rmp-api Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>rmp-api</name>
 	
 	<dependencies>
 		<dependency>

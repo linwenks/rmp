@@ -239,7 +239,7 @@
 		WHERE u.is_delete = 0 
 		AND u.birthday > 0
 		
-		AND date_format(u.birthday, '%m%d' = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
+		AND date_format(u.birthday, '%m%d') = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>

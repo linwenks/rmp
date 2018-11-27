@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.util.BaseUtil;
 import com.rmp.api.model.CustomerBean;
+import com.rmp.api.util.constant.Constant;
 import com.rmp.common.util.PatternUtil;
 
 public class CustomerUtil extends BaseUtil {
@@ -45,7 +46,7 @@ public class CustomerUtil extends BaseUtil {
 				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
 			}
 			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
-				bean.setHeadPic("https://img.rmp.com" + bean.getHeadPic());    // 获取图片域名
+				bean.setHeadPic(Constant.imgDomain() + bean.getHeadPic());    // 获取图片域名
 			}
 			if (!StringUtils.isEmpty(bean.getPinyin())) {
 				bean.setPinyinFirst(bean.getPinyin().substring(0, 1));

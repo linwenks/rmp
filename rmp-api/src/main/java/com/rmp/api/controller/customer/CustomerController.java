@@ -15,12 +15,15 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.rmp.api.base.controller.BaseApiController;
 import com.rmp.api.base.exception.AppException;
+import com.rmp.api.base.model.HeaderBean;
 import com.rmp.api.base.model.ReqBean;
 import com.rmp.api.base.model.RespBean;
 import com.rmp.api.base.util.ReqUtil;
@@ -33,6 +36,7 @@ import com.rmp.api.model.CustomerMaintainBean;
 import com.rmp.api.model.CustomerMemorialDayBean;
 import com.rmp.api.model.CustomerProblemBean;
 import com.rmp.api.model.CustomerRelationBean;
+import com.rmp.api.model.UserBean;
 import com.rmp.api.service.customer.CustomerFamilyService;
 import com.rmp.api.service.customer.CustomerHobbyService;
 import com.rmp.api.service.customer.CustomerJobService;
@@ -51,6 +55,10 @@ import com.rmp.api.util.CustomerRelationUtil;
 import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.SysCodeUtil;
 import com.rmp.api.util.UserUtil;
+import com.rmp.api.util.constant.Constant;
+import com.rmp.api.util.upload.UploadBean;
+import com.rmp.api.util.upload.UploadUtils;
+import com.rmp.common.util.DateUtil;
 
 /**
  * 客户 json controller
@@ -58,7 +66,7 @@ import com.rmp.api.util.UserUtil;
  *
  */
 @RestController("api_customer_CustomerController")
-@RequestMapping(value = "/api/customer/customer", method = RequestMethod.POST, produces="application/json;charset=utf-8")
+@RequestMapping(value = "/api/customer/customer", method = RequestMethod.POST)
 public class CustomerController extends BaseApiController {
 
 	@Autowired
@@ -459,5 +467,78 @@ public class CustomerController extends BaseApiController {
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerService.exe("delete", customerBean);
 		return RespUtil.build(request);
+	}
+	
+	/**
+	 * 客户 上传 头像
+	 * 
+     * @api {post} /api/customer/customer/uploadHeadPic 客户 上传 头像
+     * @apiDescription 客户 上传 头像 表单提交
+     * @apiName customer_customer_uploadHeadPic
+     * @apiGroup group_customer
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (Form) {String} token token
+     * @apiParam (Form) {File} headPicFile 头像文件
+     * 
+     * @apiSuccessExample {json} 成功返回-示例:
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"headPic":"http://47.94.5.205/customer/head_pic/20181127/1114000029789874659.jpg"}}}
+	 * 
+     */
+	@RequestMapping(value = "/uploadHeadPic")
+	public RespBean uploadHeadPic(@RequestParam Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String token = param.getOrDefault("token", "").toString();
+		ReqUtil.checkToken(token, request, true);
+		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, HeaderBean.builder().token(token).build());
+		
+		UploadUtils uploadUtils = new UploadUtils();
+		uploadUtils.setShowSizeType(UploadUtils.MB);
+		// 最大限制
+		Long maxSize = Long.valueOf(10 * 1024 * 1024);
+		uploadUtils.setMaxSize(maxSize);
+		// 后缀名限制
+		String suffixType = "jpg,jpeg,png,gif";
+		uploadUtils.setSuffixStr(suffixType);
+		
+		List<UploadBean> uploadBeanList = uploadUtils.getUploadFiles(request, "headPicFile");
+		if (CollectionUtils.isEmpty(uploadBeanList)) AppException.toThrow(MSG_00003);
+		UploadBean uploadBean = uploadBeanList.get(0);
+		if (uploadBean == null) AppException.toThrow(MSG_00003);
+		MultipartFile headPicMultipartFile = uploadBean.getMultipartFile();
+		if (headPicMultipartFile == null) AppException.toThrow(MSG_00003);
+		
+		// 上传路径
+		uploadUtils.saveUploadFiles(uploadBean, Constant.uploadTopPath(), Constant.uploadPath(Constant.UPLOAD_CUSTOMER_HEAD_PIC_PATH_TMP, DateUtil.yyyyMMdd));
+		String headPic = uploadBean.getPath();
+		
+		return RespUtil.build(request).putData("customerBean", CustomerBean.builder().headPic(Constant.imgDomain() + headPic).build());
+	}
+	
+	/**
+	 * 客户 修改 头像
+	 * 
+     * @api {post} /api/customer/customer/updateHeadPic 客户 修改 头像
+     * @apiDescription 客户 修改 头像
+     * @apiName customer_customer_updateHeadPic
+     * @apiGroup group_customer
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (UserBean) {Object} customerBean 用户 bean
+     * @apiParam (UserBean) {String} customerBean.id 客户ID
+     * @apiParam (UserBean) {String} customerBean.headPic 头像
+     * 
+     * @apiParamExample {json} 请求-示例: 
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":1,"headPic":"http://47.94.5.205/tmp/customer/head_pic/20181127/1114000029789874659.jpg"}}
+	 * 
+	 * @apiSuccessExample {json} 成功返回-示例:
+	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"headPic":"http://47.94.5.205/customer/head_pic/20181127/1114000029789874659.jpg"}}}
+     */
+	@RequestMapping(value = "/updateHeadPic")
+	public RespBean updateHeadPic(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
+		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
+		CustomerBean customerBean = reqBean.getCustomerBean();
+		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		customerService.exe("updateHeadPic", customerBean);
+		return RespUtil.build(request).putData("customerBean", UserBean.builder().headPic(Constant.imgDomain() + customerBean.getHeadPic()).build());
 	}
 }

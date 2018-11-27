@@ -2,6 +2,9 @@ package com.rmp.api.service.customer.impl;
 
 import static com.rmp.api.util.MsgEnum.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +54,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 			case "saveAll": saveAll((CustomerBean) obj);break;
 			case "update": update((CustomerBean) obj);break;
 			case "updateAll": updateAll((CustomerBean) obj);break;
+			case "updateHeadPic": updateHeadPic((CustomerBean) obj);break;
 			case "delete": deleteCustom((CustomerBean) obj);break;
 			default: return super.exe(cmd, obj);
 			}
@@ -298,5 +302,56 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		updatePkSelVer(customerBeanTmp);
 		
 		// 删除全部
+	}
+	
+
+	/**
+	 * 修改 头像
+	 * @param customerBean
+	 * @throws IOException 
+	 * @throws Exception 
+	 */
+	private void updateHeadPic(CustomerBean customerBean) throws IOException {
+		if (customerBean == null) AppException.toThrow(MSG_00003);
+		Long id = customerBean.getId();
+		Long userId = customerBean.getUserId();
+		String headPic = StringUtils.trim(customerBean.getHeadPic());
+		
+		if (id == null) AppException.toThrow(MSG_00003);
+		if (userId == null) AppException.toThrow(MSG_00003);
+		if (StringUtils.isEmpty(headPic)) AppException.toThrow(MSG_00003);
+		
+		boolean isMove = false;
+		String headPicNew = null;
+		String headPicOld = null;
+		if (headPic.startsWith(Constant.imgDomain())) {
+			headPic = headPic.replaceAll(Constant.imgDomain(), "");
+			if (headPic.startsWith(Constant.UPLOAD_TMP)) {
+				isMove = true;
+				headPicOld = headPic;
+				headPic = headPic.replaceAll(Constant.UPLOAD_TMP, "");
+				headPicNew = headPic;
+			}
+		}
+		
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(id).userId(userId).build();
+		customerBeanTmp = selectOne(customerBeanTmp);
+		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
+		
+		Date nowDate = DateUtil.now();
+		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+		
+		customerBeanTmp.setHeadPic(headPic);
+		customerBeanTmp.setUpdateTime(nowDateLong);
+		updatePkSelVer(customerBeanTmp);
+		
+		// redis
+		BeanUtils.copyProperties(customerBeanTmp, customerBean);
+		
+		// 移动文件
+		if (isMove) {
+			Files.createDirectories(Paths.get(Constant.uploadTopPath() + headPicNew.substring(0, headPicNew.lastIndexOf("/"))));
+			Files.move(Paths.get(Constant.uploadTopPath() + headPicOld), Paths.get(Constant.uploadTopPath() + headPicNew));    //移动文件（即复制并删除源文件）
+		}
 	}
 }

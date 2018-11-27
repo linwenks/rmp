@@ -189,9 +189,8 @@ public class UserUtil extends BaseUtil {
 				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
 			}
 			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
-				bean.setHeadPic("https://img.rmp.com" + bean.getHeadPic());    // 获取图片域名
+				bean.setHeadPic(Constant.imgDomain() + bean.getHeadPic());    // 获取图片域名
 			}
-			
 		}
 	}
 }

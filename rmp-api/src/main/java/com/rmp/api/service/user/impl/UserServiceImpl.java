@@ -521,6 +521,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		if (userBean == null) AppException.toThrow(MSG_00003);
 		Long id = userBean.getId();
 		String headPic = StringUtils.trim(userBean.getHeadPic());
+		if (StringUtils.isEmpty(headPic)) AppException.toThrow(MSG_00003);
 		
 		boolean isMove = false;
 		String headPicNew = null;

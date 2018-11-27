@@ -57,7 +57,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -95,7 +95,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -202,7 +202,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -307,6 +307,13 @@ define({ "api": [
             "optional": false,
             "field": "groups.users",
             "description": "<p>客户 bean list</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "groups.users.id",
+            "description": "<p>客户ID</p>"
           },
           {
             "group": "data",
@@ -425,12 +432,12 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"groups\":[{\"groupName\":\"a\",\"users\":[{\"pinyinFirst\":\"a\",\"realName\":\"ttt\",\"pinyin\":\"att\",\"phone\":15111111111,\"sex\":0,\"birthday\":19900610,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"}]},{\"groupName\":\"s\",\"users\":[{\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"pinyinFirst\":\"s\",\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100302,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"address\":\"ttt\"}]},{\"groupName\":\"t\",\"users\":[{\"pinyinFirst\":\"t\",\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111113,\"sex\":0,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"}]}],\"letters\":[\"a\",\"s\",\"t\"]}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"groups\":[{\"groupName\":\"s\",\"users\":[{\"pinyinFirst\":\"s\",\"id\":6,\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111115,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"},{\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"pinyinFirst\":\"s\",\"id\":2,\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"address\":\"ttt\"}]},{\"groupName\":\"t\",\"users\":[{\"pinyinFirst\":\"t\",\"id\":5,\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111113,\"sex\":0,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"},{\"pinyinFirst\":\"t\",\"id\":4,\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"}]},{\"groupName\":\"d\",\"users\":[{\"pinyinFirst\":\"d\",\"id\":8,\"realName\":\"ddd\",\"pinyin\":\"ddd\",\"phone\":13658327488,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"}]}],\"letters\":[\"d\",\"s\",\"t\"]}}",
           "type": "json"
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -475,7 +482,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -527,7 +534,101 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
+    "url": "/api/customer/customer/updateHeadPic",
+    "title": "客户 修改 头像",
+    "description": "<p>客户 修改 头像</p>",
+    "name": "customer_customer_updateHeadPic",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "UserBean": [
+          {
+            "group": "UserBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean",
+            "description": "<p>用户 bean</p>"
+          },
+          {
+            "group": "UserBean",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.id",
+            "description": "<p>客户ID</p>"
+          },
+          {
+            "group": "UserBean",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.headPic",
+            "description": "<p>头像</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"id\":1,\"headPic\":\"http://47.94.5.205/tmp/customer/head_pic/20181127/1114000029789874659.jpg\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"headPic\":\"http://47.94.5.205/customer/head_pic/20181127/1114000029789874659.jpg\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
+    "url": "/api/customer/customer/uploadHeadPic",
+    "title": "客户 上传 头像",
+    "description": "<p>客户 上传 头像 表单提交</p>",
+    "name": "customer_customer_uploadHeadPic",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Form": [
+          {
+            "group": "Form",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>token</p>"
+          },
+          {
+            "group": "Form",
+            "type": "File",
+            "optional": false,
+            "field": "headPicFile",
+            "description": "<p>头像文件</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"headPic\":\"http://47.94.5.205/customer/head_pic/20181127/1114000029789874659.jpg\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -581,7 +682,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -626,7 +727,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -754,7 +855,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -875,7 +976,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1038,7 +1139,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1125,7 +1226,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1179,7 +1280,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1300,7 +1401,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1359,7 +1460,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1406,7 +1507,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
     "groupTitle": "客户"
   },
   {
@@ -1590,7 +1691,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
     "groupTitle": "客户"
   },
   {
@@ -1753,7 +1854,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
     "groupTitle": "客户"
   },
   {
@@ -1793,7 +1894,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
     "groupTitle": "客户"
   },
   {
@@ -1865,7 +1966,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
     "groupTitle": "客户"
   },
   {
@@ -1910,7 +2011,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
     "groupTitle": "客户"
   },
   {
@@ -1957,7 +2058,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2002,7 +2103,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2116,7 +2217,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2223,7 +2324,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2358,7 +2459,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2431,7 +2532,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2478,7 +2579,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
     "groupTitle": "客户"
   },
   {
@@ -2585,7 +2686,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
     "groupTitle": "客户"
   },
   {
@@ -2637,7 +2738,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
     "groupTitle": "客户"
   },
   {
@@ -2691,7 +2792,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
     "groupTitle": "客户"
   },
   {
@@ -2791,7 +2892,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
     "groupTitle": "客户"
   },
   {
@@ -2850,7 +2951,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
     "groupTitle": "客户"
   },
   {
@@ -2953,7 +3054,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/base/config/ApidocConfig.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/base/config/ApidocConfig.java",
     "groupTitle": "示例",
     "error": {
       "fields": {
@@ -3070,7 +3171,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
     "groupTitle": "用户"
   },
   {
@@ -3128,7 +3229,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
     "groupTitle": "用户"
   },
   {
@@ -3186,7 +3287,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
     "groupTitle": "用户"
   },
   {
@@ -3240,7 +3341,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
     "groupTitle": "用户"
   },
   {
@@ -3343,7 +3444,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
     "groupTitle": "用户"
   },
   {
@@ -3395,7 +3496,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
     "groupTitle": "用户"
   },
   {
@@ -3442,7 +3543,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
   {
@@ -3599,7 +3700,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
   {
@@ -3721,7 +3822,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
   {
@@ -3837,7 +3938,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserRemindController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserRemindController.java",
     "groupTitle": "用户"
   },
   {
@@ -3909,7 +4010,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -3989,7 +4090,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4079,7 +4180,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4165,7 +4266,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4270,7 +4371,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4340,7 +4441,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4373,12 +4474,21 @@ define({ "api": [
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"headPic\":\"/xxx/xxx.jpg\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"headPic\":\"http://47.94.5.205/tmp/user/head_pic/20181127/1114000029789874659.jpg\"}}",
           "type": "json"
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"headPic\":\"http://47.94.5.205/user/head_pic/20181127/1114000029789874659.jpg\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4416,7 +4526,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4471,7 +4581,47 @@ define({ "api": [
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "groupTitle": "用户"
+  },
+  {
+    "type": "post",
+    "url": "/api/user/user/uploadHeadPic",
+    "title": "上传 头像",
+    "description": "<p>上传 头像 表单提交</p>",
+    "name": "user_user_uploadHeadPic",
+    "group": "group_user",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Form": [
+          {
+            "group": "Form",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>token</p>"
+          },
+          {
+            "group": "Form",
+            "type": "File",
+            "optional": false,
+            "field": "headPicFile",
+            "description": "<p>头像文件</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"headPic\":\"http://47.94.5.205/user/head_pic/20181127/1114000029789874659.jpg\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   }
 ] });

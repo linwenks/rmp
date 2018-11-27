@@ -303,11 +303,11 @@ public class UserController extends BaseApiController {
      * @apiParam (Form) {File} headPicFile 头像文件
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"http://47.94.5.205/head_pic/20181127/1114000029789874659.jpg"}}}
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"http://47.94.5.205/user/head_pic/20181127/1114000029789874659.jpg"}}}
 	 * 
      */
 	@RequestMapping(value = "/uploadHeadPic")
-	public RespBean updateHeadPic(@RequestParam Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public RespBean uploadHeadPic(@RequestParam Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String token = param.getOrDefault("token", "").toString();
 		ReqUtil.checkToken(token, request, true);
 		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, HeaderBean.builder().token(token).build());
@@ -348,10 +348,10 @@ public class UserController extends BaseApiController {
      * @apiParam (UserBean) {String} userBean.headPic 头像
      * 
      * @apiParamExample {json} 请求-示例: 
-	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"http://47.94.5.205/tmp/head_pic/20181127/1114000029789874659.jpg"}}
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"http://47.94.5.205/tmp/user/head_pic/20181127/1114000029789874659.jpg"}}
 	 * 
 	 * @apiSuccessExample {json} 成功返回-示例:
-	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"http://47.94.5.205/head_pic/20181127/1114000029789874659.jpg"}}}
+	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"http://47.94.5.205/user/head_pic/20181127/1114000029789874659.jpg"}}}
      */
 	@RequestMapping(value = "/updateHeadPic")
 	public RespBean updateHeadPic(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

@@ -42,6 +42,8 @@
   	"customer_customer_save",
   	"customer_customer_update",
   	"customer_customer_delete",
+  	"customer_customer_uploadHeadPic",
+  	"customer_customer_updateHeadPic",
   	
   	"customer_family_config",
   	"customer_family_list",

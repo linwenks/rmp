@@ -16,6 +16,7 @@
     "user_user_register",
     "msg_phoneMsg_sendRetrievePwd",
     "user_user_retrievePwd",
+    "user_user_uploadHeadPic",
     "user_user_updateHeadPic",
     "user_user_updateNickName",
     "msg_phoneMsg_sendUpdatePhone",
@@ -34,6 +35,8 @@
     "customer_customer_save",
     "customer_customer_update",
     "customer_customer_delete",
+    "customer_customer_uploadHeadPic",
+    "customer_customer_updateHeadPic",
     "customer_family_config",
     "customer_family_list",
     "customer_family_get",
@@ -67,7 +70,7 @@
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-11-25T13:09:24.155Z",
+    "time": "2018-11-27T06:44:30.973Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }

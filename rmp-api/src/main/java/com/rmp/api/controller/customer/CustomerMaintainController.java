@@ -94,19 +94,16 @@ public class CustomerMaintainController extends BaseApiController {
 		Long customerId = customerMaintainBean.getCustomerId();
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBean = new CustomerBean();
-		customerBean.setId(customerId);
-		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 		Long count = customerService.selectCount(customerBean);
 		if (count <= 0) AppException.toThrow(MSG_00003);
 		
 		CustomerMaintainBean customerMaintainBeanResult = null;
 		CustomerMaintainBean customerMaintainBeanTmp = customerMaintainService.selectOne(customerMaintainBean);
 		if (customerMaintainBeanTmp != null) {
-			customerMaintainBeanResult = new CustomerMaintainBean();
-			
-			customerMaintainBeanResult.setMaintain(customerMaintainBeanTmp.getMaintain());
-			
+			customerMaintainBeanResult = CustomerMaintainBean.builder()
+			.maintain(customerMaintainBeanTmp.getMaintain())
+			.build();
 			CustomerMaintainUtil.assembly(customerMaintainBeanResult);
 		}
 		return RespUtil.build(request).putData("customerMaintainBean", customerMaintainBeanResult);

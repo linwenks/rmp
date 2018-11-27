@@ -101,19 +101,18 @@ public class CustomerProblemController extends BaseApiController {
 		Long customerId = customerProblemBean.getCustomerId();
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBean = new CustomerBean();
-		customerBean.setId(customerId);
-		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 		Long count = customerService.selectCount(customerBean);
 		if (count <= 0) AppException.toThrow(MSG_00003);
 		
 		CustomerProblemBean customerProblemBeanResult = null;
 		CustomerProblemBean customerProblemBeanTmp = customerProblemService.selectOne(customerProblemBean);
 		if (customerProblemBeanTmp != null) {
-			customerProblemBeanResult = new CustomerProblemBean();
-			customerProblemBeanResult.setHealth(customerProblemBeanTmp.getHealth());
-			customerProblemBeanResult.setLife(customerProblemBeanTmp.getLife());
-			customerProblemBeanResult.setRemark(customerProblemBeanTmp.getRemark());
+			customerProblemBeanResult = CustomerProblemBean.builder()
+			.health(customerProblemBeanTmp.getHealth())
+			.life(customerProblemBeanTmp.getLife())
+			.remark(customerProblemBeanTmp.getRemark())
+			.build();
 			CustomerProblemUtil.assembly(customerProblemBeanResult);
 		}
 		return RespUtil.build(request).putData("customerProblemBean", customerProblemBeanResult);

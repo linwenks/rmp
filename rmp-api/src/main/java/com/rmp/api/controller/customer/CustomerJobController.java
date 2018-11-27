@@ -105,7 +105,7 @@ public class CustomerJobController extends BaseApiController {
      * @apiSuccess (data) {String} customerJobBean.address 地址
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"IT管理","industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":15111111111,"areaId":321200,"address":"aaaaaaaaaaaaaa"},"customerBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"areaId":321200,"address":"aaaaaaaaaaaaaa"},"customerBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -121,32 +121,32 @@ public class CustomerJobController extends BaseApiController {
 		CustomerJobBean customerJobBeanResult = null;
 		
 		if (customerId != null) {
-			CustomerBean customerBean = new CustomerBean();
-			customerBean.setId(customerId);
-			customerBean.setUserId(UserUtil.getCurrentUserId(request));
+			CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 			customerBean = customerService.selectOne(customerBean);
 			if (customerBean == null) AppException.toThrow(MSG_00003);
 			
-			customerBeanResult = new CustomerBean();
-			customerBeanResult.setRealName(customerBean.getRealName());
-			customerBeanResult.setPhone(customerBean.getPhone());
-			customerBeanResult.setBirthday(customerBean.getBirthday());
-			customerBeanResult.setSex(customerBean.getSex());
-			customerBeanResult.setAreaId(customerBean.getAreaId());
-			customerBeanResult.setAddress(customerBean.getAddress());
-			customerBeanResult.setHeadPic(customerBean.getHeadPic());
+			customerBeanResult = CustomerBean.builder()
+			.realName(customerBean.getRealName())
+			.phone(customerBean.getPhone())
+			.birthday(customerBean.getBirthday())
+			.sex(customerBean.getSex())
+			.areaId(customerBean.getAreaId())
+			.address(customerBean.getAddress())
+			.headPic(customerBean.getHeadPic())
+			.build();
 			CustomerUtil.assembly(customerBeanResult);
 			
 			CustomerJobBean customerJobBeanTmp = customerJobService.selectOne(customerJobBean);
 			if (customerJobBeanTmp != null) {
-				customerJobBeanResult = new CustomerJobBean();
-				customerJobBeanResult.setIndustry(customerJobBeanTmp.getIndustry());
-				customerJobBeanResult.setCompanyName(customerJobBeanTmp.getCompanyName());
-				customerJobBeanResult.setDepartmentName(customerJobBeanTmp.getDepartmentName());
-				customerJobBeanResult.setPosition(customerJobBeanTmp.getPosition());
-				customerJobBeanResult.setPhone(customerJobBeanTmp.getPhone());
-				customerJobBeanResult.setAreaId(customerJobBeanTmp.getAreaId());
-				customerJobBeanResult.setAddress(customerJobBeanTmp.getAddress());
+				customerJobBeanResult = CustomerJobBean.builder()
+				.industry(customerJobBeanTmp.getIndustry())
+				.companyName(customerJobBeanTmp.getCompanyName())
+				.departmentName(customerJobBeanTmp.getDepartmentName())
+				.position(customerJobBeanTmp.getPosition())
+				.phone(customerJobBeanTmp.getPhone())
+				.areaId(customerJobBeanTmp.getAreaId())
+				.address(customerJobBeanTmp.getAddress())
+				.build();
 				CustomerJobUtil.assembly(customerJobBeanResult);
 			}
 		}

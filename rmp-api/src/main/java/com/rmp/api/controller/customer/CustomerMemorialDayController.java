@@ -105,9 +105,7 @@ public class CustomerMemorialDayController extends BaseApiController {
 		Long customerId = customerMemorialDayBean.getCustomerId();
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBean = new CustomerBean();
-		customerBean.setId(customerId);
-		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 		Long count = customerService.selectCount(customerBean);
 		if (count <= 0) AppException.toThrow(MSG_00003);
 		
@@ -116,12 +114,13 @@ public class CustomerMemorialDayController extends BaseApiController {
 		if (!CollectionUtils.isEmpty(customerMemorialDayBeanListTmp)) {
 			customerMemorialDayBeanListResult = Lists.newArrayList();
 			for (CustomerMemorialDayBean customerMemorialDayBeanTmp : customerMemorialDayBeanListTmp) {
-				CustomerMemorialDayBean customerMemorialDayBeanResult = new CustomerMemorialDayBean();
-				customerMemorialDayBeanResult.setId(customerMemorialDayBeanTmp.getId());
-				customerMemorialDayBeanResult.setName(customerMemorialDayBeanTmp.getName());
-				customerMemorialDayBeanResult.setOccurType(customerMemorialDayBeanTmp.getOccurType());
-				customerMemorialDayBeanResult.setOccurDate(customerMemorialDayBeanTmp.getOccurDate());
-				customerMemorialDayBeanResult.setAdvanceType(customerMemorialDayBeanTmp.getAdvanceType());
+				CustomerMemorialDayBean customerMemorialDayBeanResult = CustomerMemorialDayBean.builder()
+				.id(customerMemorialDayBeanTmp.getId())
+				.name(customerMemorialDayBeanTmp.getName())
+				.occurType(customerMemorialDayBeanTmp.getOccurType())
+				.occurDate(customerMemorialDayBeanTmp.getOccurDate())
+				.advanceType(customerMemorialDayBeanTmp.getAdvanceType())
+				.build();
 				CustomerMemorialDayUtil.assembly(customerMemorialDayBeanResult);
 				customerMemorialDayBeanListResult.add(customerMemorialDayBeanResult);
 			}
@@ -165,21 +164,20 @@ public class CustomerMemorialDayController extends BaseApiController {
 		Long customerId = customerMemorialDayBean.getCustomerId();
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBean = new CustomerBean();
-		customerBean.setId(customerId);
-		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 		Long count = customerService.selectCount(customerBean);
 		if (count <= 0) AppException.toThrow(MSG_00003);
 		
 		CustomerMemorialDayBean customerMemorialDayBeanResult = null;
 		CustomerMemorialDayBean customerMemorialDayBeanTmp = customerMemorialDayService.selectOne(customerMemorialDayBean);
 		if (customerMemorialDayBeanTmp != null) {
-			customerMemorialDayBeanResult = new CustomerMemorialDayBean();
-			customerMemorialDayBeanResult.setId(customerMemorialDayBeanTmp.getId());
-			customerMemorialDayBeanResult.setName(customerMemorialDayBeanTmp.getName());
-			customerMemorialDayBeanResult.setOccurType(customerMemorialDayBeanTmp.getOccurType());
-			customerMemorialDayBeanResult.setOccurDate(customerMemorialDayBeanTmp.getOccurDate());
-			customerMemorialDayBeanResult.setAdvanceType(customerMemorialDayBeanTmp.getAdvanceType());
+			customerMemorialDayBeanResult = CustomerMemorialDayBean.builder()
+			.id(customerMemorialDayBeanTmp.getId())
+			.name(customerMemorialDayBeanTmp.getName())
+			.occurType(customerMemorialDayBeanTmp.getOccurType())
+			.occurDate(customerMemorialDayBeanTmp.getOccurDate())
+			.advanceType(customerMemorialDayBeanTmp.getAdvanceType())
+			.build();
 			CustomerMemorialDayUtil.assembly(customerMemorialDayBeanResult);
 		}
 		return RespUtil.build(request).putData("customerMemorialDayBean", customerMemorialDayBeanResult);
@@ -224,13 +222,13 @@ public class CustomerMemorialDayController extends BaseApiController {
 		customerMemorialDayBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerMemorialDayService.exe("save", customerMemorialDayBean);
 		
-		CustomerMemorialDayBean customerMemorialDayBeanResult = new CustomerMemorialDayBean();
-		customerMemorialDayBeanResult = new CustomerMemorialDayBean();
-		customerMemorialDayBeanResult.setId(customerMemorialDayBean.getId());
-		customerMemorialDayBeanResult.setName(customerMemorialDayBean.getName());
-		customerMemorialDayBeanResult.setOccurType(customerMemorialDayBean.getOccurType());
-		customerMemorialDayBeanResult.setOccurDate(customerMemorialDayBean.getOccurDate());
-		customerMemorialDayBeanResult.setAdvanceType(customerMemorialDayBean.getAdvanceType());
+		CustomerMemorialDayBean customerMemorialDayBeanResult = CustomerMemorialDayBean.builder()
+		.id(customerMemorialDayBean.getId())
+		.name(customerMemorialDayBean.getName())
+		.occurType(customerMemorialDayBean.getOccurType())
+		.occurDate(customerMemorialDayBean.getOccurDate())
+		.advanceType(customerMemorialDayBean.getAdvanceType())
+		.build();
 		CustomerMemorialDayUtil.assembly(customerMemorialDayBeanResult);
 		
 		return RespUtil.build(request).putData("customerMemorialDayBean", customerMemorialDayBeanResult);

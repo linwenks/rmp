@@ -105,19 +105,18 @@ public class CustomerHobbyController extends BaseApiController {
 		Long customerId = customerHobbyBean.getCustomerId();
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBean = new CustomerBean();
-		customerBean.setId(customerId);
-		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 		Long count = customerService.selectCount(customerBean);
 		if (count <= 0) AppException.toThrow(MSG_00003);
 		
 		CustomerHobbyBean customerHobbyBeanResult = null;
 		CustomerHobbyBean customerHobbyBeanTmp = customerHobbyService.selectOne(customerHobbyBean);
 		if (customerHobbyBeanTmp != null) {
-			customerHobbyBeanResult = new CustomerHobbyBean();
-			customerHobbyBeanResult.setInterest(customerHobbyBeanTmp.getInterest());
-			customerHobbyBeanResult.setDiet(customerHobbyBeanTmp.getDiet());
-			customerHobbyBeanResult.setTaste(customerHobbyBeanTmp.getTaste());
+			customerHobbyBeanResult = CustomerHobbyBean.builder()
+			.interest(customerHobbyBeanTmp.getInterest())
+			.diet(customerHobbyBeanTmp.getDiet())
+			.taste(customerHobbyBeanTmp.getTaste())
+			.build();
 			CustomerHobbyUtil.assembly(customerHobbyBeanResult);
 		}
 		return RespUtil.build(request).putData("customerHobbyBean", customerHobbyBeanResult);

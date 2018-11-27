@@ -259,7 +259,6 @@ public class CustomerController extends BaseApiController {
 		CustomerBean customerBeanTmp = customerService.selectById(id);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanResult = new CustomerBean();
 		CustomerJobBean customerJobBeanResult = null;
 		List<CustomerFamilyBean> customerFamilyBeanListResult = null;
 		CustomerHobbyBean customerHobbyBeanResult = null;
@@ -268,14 +267,16 @@ public class CustomerController extends BaseApiController {
 		CustomerProblemBean customerProblemBeanResult = null;
 		CustomerRelationBean customerRelationBeanResult = null;
 		
-		customerBeanResult.setRealName(customerBeanTmp.getRealName());
-		customerBeanResult.setPhone(customerBeanTmp.getPhone());
-		customerBeanResult.setBirthday(customerBeanTmp.getBirthday());
-		customerBeanResult.setSex(customerBeanTmp.getSex());
-		customerBeanResult.setAreaId(customerBeanTmp.getAreaId());
-		customerBeanResult.setAddress(customerBeanTmp.getAddress());
-		customerBeanResult.setHeadPic(customerBeanTmp.getHeadPic());
-		customerBeanResult.setVip(customerBeanTmp.getVip());
+		CustomerBean customerBeanResult = CustomerBean.builder()
+		.realName(customerBeanTmp.getRealName())
+		.phone(customerBeanTmp.getPhone())
+		.birthday(customerBeanTmp.getBirthday())
+		.sex(customerBeanTmp.getSex())
+		.areaId(customerBeanTmp.getAreaId())
+		.address(customerBeanTmp.getAddress())
+		.headPic(customerBeanTmp.getHeadPic())
+		.vip(customerBeanTmp.getVip())
+		.build();
 		CustomerUtil.assembly(customerBeanResult);
 		
 		// 工作
@@ -283,14 +284,15 @@ public class CustomerController extends BaseApiController {
 		customerJobBean.setCustomerId(id);
 		CustomerJobBean customerJobBeanTmp = customerJobService.selectOne(customerJobBean);
 		if (customerJobBeanTmp != null) {
-			customerJobBeanResult = new CustomerJobBean();
-			customerJobBeanResult.setIndustry(customerJobBeanTmp.getIndustry());
-			customerJobBeanResult.setCompanyName(customerJobBeanTmp.getCompanyName());
-			customerJobBeanResult.setDepartmentName(customerJobBeanTmp.getDepartmentName());
-			customerJobBeanResult.setPosition(customerJobBeanTmp.getPosition());
-			customerJobBeanResult.setPhone(customerJobBeanTmp.getPhone());
-			customerJobBeanResult.setAreaId(customerJobBeanTmp.getAreaId());
-			customerJobBeanResult.setAddress(customerJobBeanTmp.getAddress());
+			customerJobBeanResult = CustomerJobBean.builder()
+			.industry(customerJobBeanTmp.getIndustry())
+			.companyName(customerJobBeanTmp.getCompanyName())
+			.departmentName(customerJobBeanTmp.getDepartmentName())
+			.position(customerJobBeanTmp.getPosition())
+			.phone(customerJobBeanTmp.getPhone())
+			.areaId(customerJobBeanTmp.getAreaId())
+			.address(customerJobBeanTmp.getAddress())
+			.build();
 			CustomerJobUtil.assembly(customerJobBeanResult);
 		}
 		
@@ -319,10 +321,11 @@ public class CustomerController extends BaseApiController {
 		customerHobbyBean.setCustomerId(id);
 		CustomerHobbyBean customerHobbyBeanTmp = customerHobbyService.selectOne(customerHobbyBean);
 		if (customerHobbyBeanTmp != null) {
-			customerHobbyBeanResult = new CustomerHobbyBean();
-			customerHobbyBeanResult.setInterest(customerHobbyBeanTmp.getInterest());
-			customerHobbyBeanResult.setDiet(customerHobbyBeanTmp.getDiet());
-			customerHobbyBeanResult.setTaste(customerHobbyBeanTmp.getTaste());
+			customerHobbyBeanResult = CustomerHobbyBean.builder()
+			.interest(customerHobbyBeanTmp.getInterest())
+			.diet(customerHobbyBeanTmp.getDiet())
+			.taste(customerHobbyBeanTmp.getTaste())
+			.build();
 			CustomerHobbyUtil.assembly(customerHobbyBeanResult);
 		}
 		
@@ -331,8 +334,9 @@ public class CustomerController extends BaseApiController {
 		customerMaintainBean.setCustomerId(id);
 		CustomerMaintainBean customerMaintainBeanTmp = customerMaintainService.selectOne(customerMaintainBean);
 		if (customerMaintainBeanTmp != null) {
-			customerMaintainBeanResult = new CustomerMaintainBean();
-			customerMaintainBeanResult.setMaintain(customerMaintainBeanTmp.getMaintain());
+			customerMaintainBeanResult = CustomerMaintainBean.builder()
+			.maintain(customerMaintainBeanTmp.getMaintain())
+			.build();
 			CustomerMaintainUtil.assembly(customerMaintainBeanResult);
 		}
 		
@@ -343,12 +347,13 @@ public class CustomerController extends BaseApiController {
 		if (!CollectionUtils.isEmpty(customerMemorialDayBeanListTmp)) {
 			customerMemorialDayBeanListResult = Lists.newArrayList();
 			for (CustomerMemorialDayBean customerMemorialDayBeanTmp : customerMemorialDayBeanListTmp) {
-				CustomerMemorialDayBean customerMemorialDayBeanResult = new CustomerMemorialDayBean();
-				customerMemorialDayBeanResult.setId(customerMemorialDayBeanTmp.getId());
-				customerMemorialDayBeanResult.setName(customerMemorialDayBeanTmp.getName());
-				customerMemorialDayBeanResult.setOccurType(customerMemorialDayBeanTmp.getOccurType());
-				customerMemorialDayBeanResult.setOccurDate(customerMemorialDayBeanTmp.getOccurDate());
-				customerMemorialDayBeanResult.setAdvanceType(customerMemorialDayBeanTmp.getAdvanceType());
+				CustomerMemorialDayBean customerMemorialDayBeanResult = CustomerMemorialDayBean.builder()
+				.id(customerMemorialDayBeanTmp.getId())
+				.name(customerMemorialDayBeanTmp.getName())
+				.occurType(customerMemorialDayBeanTmp.getOccurType())
+				.occurDate(customerMemorialDayBeanTmp.getOccurDate())
+				.advanceType(customerMemorialDayBeanTmp.getAdvanceType())
+				.build();
 				CustomerMemorialDayUtil.assembly(customerMemorialDayBeanResult);
 				customerMemorialDayBeanListResult.add(customerMemorialDayBeanResult);
 			}
@@ -359,10 +364,11 @@ public class CustomerController extends BaseApiController {
 		customerProblemBean.setCustomerId(id);
 		CustomerProblemBean customerProblemBeanTmp = customerProblemService.selectOne(customerProblemBean);
 		if (customerProblemBeanTmp != null) {
-			customerProblemBeanResult = new CustomerProblemBean();
-			customerProblemBeanResult.setHealth(customerProblemBeanTmp.getHealth());
-			customerProblemBeanResult.setLife(customerProblemBeanTmp.getLife());
-			customerProblemBeanResult.setRemark(customerProblemBeanTmp.getRemark());
+			customerProblemBeanResult = CustomerProblemBean.builder()
+			.health(customerProblemBeanTmp.getHealth())
+			.life(customerProblemBeanTmp.getLife())
+			.remark(customerProblemBeanTmp.getRemark())
+			.build();
 			CustomerProblemUtil.assembly(customerProblemBeanResult);
 		}
 		
@@ -371,10 +377,11 @@ public class CustomerController extends BaseApiController {
 		customerRelationBean.setCustomerId(id);
 		CustomerRelationBean customerRelationBeanTmp = customerRelationService.selectOne(customerRelationBean);
 		if (customerRelationBeanTmp != null) {
-			customerRelationBeanResult = new CustomerRelationBean();
-			customerRelationBeanResult.setRelationship(customerRelationBeanTmp.getRelationship());
-			customerRelationBeanResult.setIntimacy(customerRelationBeanTmp.getIntimacy());
-			customerRelationBeanResult.setImportance(customerRelationBeanTmp.getImportance());
+			customerRelationBeanResult = CustomerRelationBean.builder()
+			.relationship(customerRelationBeanTmp.getRelationship())
+			.intimacy(customerRelationBeanTmp.getIntimacy())
+			.importance(customerRelationBeanTmp.getImportance())
+			.build();
 			CustomerRelationUtil.assembly(customerRelationBeanResult);
 		}
 		

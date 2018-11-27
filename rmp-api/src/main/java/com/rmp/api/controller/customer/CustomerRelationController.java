@@ -102,21 +102,18 @@ public class CustomerRelationController extends BaseApiController {
 		Long customerId = customerRelationBean.getCustomerId();
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBean = new CustomerBean();
-		customerBean.setId(customerId);
-		customerBean.setUserId(UserUtil.getCurrentUserId(request));
+		CustomerBean customerBean = CustomerBean.builder().id(customerId).userId(UserUtil.getCurrentUserId(request)).build();
 		Long count = customerService.selectCount(customerBean);
 		if (count <= 0) AppException.toThrow(MSG_00003);
 		
 		CustomerRelationBean customerRelationBeanResult = null;
 		CustomerRelationBean customerRelationBeanTmp = customerRelationService.selectOne(customerRelationBean);
 		if (customerRelationBeanTmp != null) {
-			customerRelationBeanResult = new CustomerRelationBean();
-			
-			customerRelationBeanResult.setRelationship(customerRelationBeanTmp.getRelationship());
-			customerRelationBeanResult.setIntimacy(customerRelationBeanTmp.getIntimacy());
-			customerRelationBeanResult.setImportance(customerRelationBeanTmp.getImportance());
-			
+			customerRelationBeanResult = CustomerRelationBean.builder()
+			.relationship(customerRelationBeanTmp.getRelationship())
+			.intimacy(customerRelationBeanTmp.getIntimacy())
+			.importance(customerRelationBeanTmp.getImportance())
+			.build();
 			CustomerRelationUtil.assembly(customerRelationBeanResult);
 		}
 		return RespUtil.build(request).putData("customerRelationBean", customerRelationBeanResult);

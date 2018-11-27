@@ -110,11 +110,12 @@ public class UserController extends BaseApiController {
 		}
 		
 		// 初始化
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setWxId(openid);
-		userBeanTmp.setNickName(userBean.getNickName());
-		userBeanTmp.setHeadPic(userBean.getHeadPic());
-		userBeanTmp.setWxSessionKey(session_key);
+		UserBean userBeanTmp = UserBean.builder()
+		.wxId(openid)
+		.nickName(userBean.getNickName())
+		.headPic(userBean.getHeadPic())
+		.wxSessionKey(session_key)
+		.build();
 		userService.exe("initialize", userBeanTmp);
 		
 		String token = userBeanTmp.getToken();

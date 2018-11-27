@@ -121,13 +121,13 @@ public class UserController extends BaseApiController {
 		String token = userBeanTmp.getToken();
 		
 		HeaderBean headerBean = reqBean.getHeader();
-		if (headerBean == null) headerBean = new HeaderBean();
-		headerBean.setToken(token);
+		if (headerBean == null) headerBean = HeaderBean.builder().token(token).build();
 		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerBean);
 		
-		UserBean userBeanTmp2 = new UserBean();
-		userBeanTmp2.setStatus(userBeanTmp.getStatus());
-		userBeanTmp2.setToken(token);
+		UserBean userBeanTmp2 = UserBean.builder()
+		.status(userBeanTmp.getStatus())
+		.token(token)
+		.build();
 		return RespUtil.build(request).putData("userBean", userBeanTmp2);
 	}
 	

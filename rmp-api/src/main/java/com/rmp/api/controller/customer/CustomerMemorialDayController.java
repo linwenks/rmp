@@ -66,8 +66,8 @@ public class CustomerMemorialDayController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("occurTypeCodeList", SysCodeUtil.getListSimple(CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE))
-				.putData("advanceTypeCodeList", SysCodeUtil.getListSimple(CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE));
+				.putData("occurTypeCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE))
+				.putData("advanceTypeCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE));
 	}
 	
 	/**

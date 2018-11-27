@@ -61,7 +61,7 @@ public class CustomerMaintainController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("maintainCodeList", SysCodeUtil.getListSimple(CUSTOMER_MAINTAIN_MAINTAIN));
+				.putData("maintainCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_MAINTAIN, CUSTOMER_MAINTAIN_MAINTAIN));
 	}
 	
 	/**

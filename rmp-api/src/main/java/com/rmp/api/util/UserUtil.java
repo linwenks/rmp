@@ -63,7 +63,7 @@ public class UserUtil extends BaseUtil {
 	 */
 	public static void checkUser(UserBean userBean) {
 		if (userBean == null) AppException.toThrow(MSG_01002);
-		if (Constant.User.Status._0.equals(userBean.getStatus())) AppException.toThrow(MSG_01006);
+		if (Constant.User.Status._0.equals(userBean.getStatus())) AppException.toThrow(MSG_01016);
 		if (Constant.DELETE_Y.equals(userBean.getIsDelete())) AppException.toThrow(MSG_01017);
 	}
 	

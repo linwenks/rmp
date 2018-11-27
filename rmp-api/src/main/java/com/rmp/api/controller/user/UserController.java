@@ -42,7 +42,7 @@ import com.rmp.common.util.JsonUtil;
  *
  */
 @RestController("api_user_UserController")
-@RequestMapping(value = "/api/user/user", method = RequestMethod.POST, produces="application/json;charset=utf-8")
+@RequestMapping(value = "/api/user/user", method = RequestMethod.POST)
 public class UserController extends BaseApiController {
 
 	@Autowired
@@ -292,12 +292,25 @@ public class UserController extends BaseApiController {
 	
 	/**
 	 * 上传 头像
-	 * @throws Exception 
-     *
+	 * 
+     * @api {post} /api/user/user/uploadHeadPic 上传 头像
+     * @apiDescription 上传 头像 表单提交
+     * @apiName user_user_uploadHeadPic
+     * @apiGroup group_user
+     * @apiVersion 1.0.0
+     * 
+     * @apiParam (Form) {String} token token
+     * @apiParam (Form) {File} headPicFile 头像文件
+     * 
+     * @apiSuccessExample {json} 成功返回-示例:
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"http://47.94.5.205/head_pic/20181127/1114000029789874659.jpg"}}}
+	 * 
      */
 	@RequestMapping(value = "/uploadHeadPic")
 	public RespBean updateHeadPic(@RequestParam Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ReqUtil.checkToken(param.getOrDefault("token", "").toString(), request, true);
+		String token = param.getOrDefault("token", "").toString();
+		ReqUtil.checkToken(token, request, true);
+		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, HeaderBean.builder().token(token).build());
 		
 		UploadUtils uploadUtils = new UploadUtils();
 		uploadUtils.setShowSizeType(UploadUtils.MB);
@@ -316,27 +329,10 @@ public class UserController extends BaseApiController {
 		if (headPicMultipartFile == null) AppException.toThrow(MSG_00003);
 		
 		// 上传路径
-		uploadUtils.saveUploadFiles(uploadBean, Constant.uploadTopPath(Constant.UPLOAD_TOP_PATH), Constant.uploadPath(Constant.UPLOAD_TOP_PATH, Constant.UPLOAD_USER_HEAD_PIC_PATH_TMP, DateUtil.yyyyMMddHHmmss));
-		String path = uploadBean.getPath();
+		uploadUtils.saveUploadFiles(uploadBean, Constant.uploadTopPath(), Constant.uploadPath(Constant.UPLOAD_USER_HEAD_PIC_PATH_TMP, DateUtil.yyyyMMdd));
+		String headPic = uploadBean.getPath();
 		
-		
-		/*
-        HttpParamBean imgFile = new HttpParamBean();
-        imgFile.setName("avatar");
-        imgFile.setValue(imgMultipartFile.getInputStream());
-        imgFile.setContentType(ContentType.MULTIPART_FORM_DATA);
-        imgFile.setFilename(imgMultipartFile.getOriginalFilename());
-		
-		MemberBean memberBean = new MemberBean();
-		memberBean.setImgFile(imgFile);
-		memberBean.setId(super.getCurrentUserId());
-		memberService.exe("updateImg", memberBean);
-		
-		MemberBean memberBeanTmp = new MemberBean();
-		memberBeanTmp.setImg(AppSettingUrlUtil.getValue(Constant.IMG_URL) + memberBean.getImg());
-		data(memberBeanTmp);
-		*/
-		return RespUtil.build(request);
+		return RespUtil.build(request).putData("userBean", UserBean.builder().headPic(Constant.imgDomain() + headPic).build());
 	}
 	
 	/**
@@ -352,8 +348,10 @@ public class UserController extends BaseApiController {
      * @apiParam (UserBean) {String} userBean.headPic 头像
      * 
      * @apiParamExample {json} 请求-示例: 
-	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"/xxx/xxx.jpg"}}
+	 *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"headPic":"http://47.94.5.205/tmp/head_pic/20181127/1114000029789874659.jpg"}}
 	 * 
+	 * @apiSuccessExample {json} 成功返回-示例:
+	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"http://47.94.5.205/head_pic/20181127/1114000029789874659.jpg"}}}
      */
 	@RequestMapping(value = "/updateHeadPic")
 	public RespBean updateHeadPic(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -361,7 +359,7 @@ public class UserController extends BaseApiController {
 		UserBean userBean = reqBean.getUserBean();
 		userBean.setId(UserUtil.getCurrentUserId(request));
 		userService.exe("updateHeadPic", userBean);
-		return RespUtil.build(request);
+		return RespUtil.build(request).putData("userBean", UserBean.builder().headPic(Constant.imgDomain() + userBean.getHeadPic()).build());
 	}
 	
 	/**

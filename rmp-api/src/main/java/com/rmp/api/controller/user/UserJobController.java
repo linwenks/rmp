@@ -61,8 +61,8 @@ public class UserJobController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("industryCodeList", SysCodeUtil.getListSimple(CUSTOMER_JOB_INDUSTRY))
-				.putData("positionCodeList", SysCodeUtil.getListSimple(CUSTOMER_JOB_POSITION));
+				.putData("industryCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_INDUSTRY))
+				.putData("positionCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_POSITION));
 	}
 	
 	/**

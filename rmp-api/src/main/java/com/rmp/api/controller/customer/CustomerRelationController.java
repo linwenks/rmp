@@ -63,9 +63,9 @@ public class CustomerRelationController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("importanceCodeList", SysCodeUtil.getListSimple(CUSTOMER_RELATION_IMPORTANCE))
-				.putData("intimacyCodeList", SysCodeUtil.getListSimple(CUSTOMER_RELATION_INTIMACY))
-				.putData("relationshipCodeList", SysCodeUtil.getListSimple(CUSTOMER_RELATION_RELATIONSHIP));
+				.putData("importanceCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_IMPORTANCE))
+				.putData("intimacyCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_INTIMACY))
+				.putData("relationshipCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_RELATIONSHIP));
 	}
 	
 	/**

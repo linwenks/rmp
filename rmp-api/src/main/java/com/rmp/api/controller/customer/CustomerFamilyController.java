@@ -67,7 +67,7 @@ public class CustomerFamilyController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("relationshipCodeList", SysCodeUtil.getListSimple(CUSTOMER_FAMILY_RELATIONSHIP));
+				.putData("relationshipCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_FAMILY, CUSTOMER_FAMILY_RELATIONSHIP));
 	}
 	
 	/**

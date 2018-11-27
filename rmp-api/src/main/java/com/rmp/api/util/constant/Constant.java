@@ -64,12 +64,14 @@ public final class Constant {
 	}
 	
 	// 上传
-	public static String uploadTopPath(String topPath) {
-		return SysCodeUtil.getValue(topPath);
+	public static final String UPLOAD_TMP = "/tmp";
+	
+	public static String uploadTopPath() {
+		return SysCodeUtil.getValue(UPLOAD_TOP_PATH);
 	}
 	
-	public static String uploadPath(String topPath, String path, String pattern) {
-		String str1 = SysCodeUtil.getValue(topPath, path);
+	public static String uploadPath(String path, String pattern) {
+		String str1 = SysCodeUtil.getValue(UPLOAD_TOP_PATH, path);
 		pattern = StringUtils.trim(pattern);
 		String str2 = "";
 		if (!StringUtils.isEmpty(pattern)) {

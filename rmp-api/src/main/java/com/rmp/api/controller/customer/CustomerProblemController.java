@@ -62,8 +62,8 @@ public class CustomerProblemController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("healthCodeList", SysCodeUtil.getListSimple(CUSTOMER_PROBLEM_HEALTH))
-				.putData("lifeCodeList", SysCodeUtil.getListSimple(CUSTOMER_PROBLEM_LIFE));
+				.putData("healthCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_HEALTH))
+				.putData("lifeCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_LIFE));
 	}
 	
 	/**

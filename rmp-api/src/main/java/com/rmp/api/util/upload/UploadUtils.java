@@ -25,6 +25,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.google.common.collect.Lists;
 import com.rmp.api.base.exception.AppException;
 import com.rmp.common.util.DateUtil;
+import com.rmp.common.util.RandomUtil;
 
 /**
  * 上传工具
@@ -273,7 +274,7 @@ public class UploadUtils {
 			String suffix = uploadBean.getSuffix();
 			
 			// 文件名 新
-			String nameNew = DateUtil.nowInFormat(DateUtil.yyyyMMddHHmmsssss);
+			String nameNew = DateUtil.nowInFormat(DateUtil.HHmmsssss) + RandomUtil.getRandomCode(5);
 			nameNew = nameNew + getRandNum(5);
 			
 			// 上传路径

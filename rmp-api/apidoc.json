@@ -18,6 +18,7 @@
     "user_user_register",
     "msg_phoneMsg_sendRetrievePwd",
     "user_user_retrievePwd",
+    "user_user_uploadHeadPic",
     "user_user_updateHeadPic",
     "user_user_updateNickName",
     "msg_phoneMsg_sendUpdatePhone",

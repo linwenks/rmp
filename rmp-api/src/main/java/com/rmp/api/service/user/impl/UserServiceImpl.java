@@ -2,6 +2,8 @@ package com.rmp.api.service.user.impl;
 
 import static com.rmp.api.util.MsgEnum.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Map;
 
@@ -520,6 +522,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		Long id = userBean.getId();
 		String headPic = StringUtils.trim(userBean.getHeadPic());
 		
+		boolean isMove = false;
+		String headPicNew = null;
+		String headPicOld = null;
+		if (headPic.startsWith(Constant.imgDomain())) {
+			headPic = headPic.replaceAll(Constant.imgDomain(), "");
+			if (headPic.startsWith(Constant.UPLOAD_TMP)) {
+				isMove = true;
+				headPicOld = headPic;
+				headPic = headPic.replaceAll(Constant.UPLOAD_TMP, "");
+				headPicNew = headPic;
+			}
+		}
+		
 		if (id == null) AppException.toThrow(MSG_00003);
 		UserUtil.checkHeadPic(headPic);
 		
@@ -553,6 +568,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 			}
 		} catch (Exception e) {
 			throw e;
+		}
+		
+		// 移动文件
+		if (isMove) {
+			Files.createDirectories(Paths.get(Constant.uploadTopPath() + headPicNew.substring(0, headPicNew.lastIndexOf("/"))));
+			Files.move(Paths.get(Constant.uploadTopPath() + headPicOld), Paths.get(Constant.uploadTopPath() + headPicNew));    //移动文件（即复制并删除源文件）
 		}
 	}
 	

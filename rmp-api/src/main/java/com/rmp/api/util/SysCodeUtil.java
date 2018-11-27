@@ -1,17 +1,13 @@
 package com.rmp.api.util;
 
-import static com.rmp.api.util.constant.Constant.SysCode.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.google.common.collect.Maps;
 import com.rmp.api.base.util.BaseUtil;
 import com.rmp.api.model.SysCodeBean;
 
@@ -25,8 +21,6 @@ public class SysCodeUtil extends BaseUtil {
 	
 	private static List<SysCodeBean> sysCodeBeanListTree;
 	private static List<SysCodeBean> sysCodeBeanListTreeSimple;
-	
-	private static Map<String, List<SysCodeBean>> sysCodeBeanMap;
 	
 	public static void load() {
 		SysCodeBean sysCodeBean = new SysCodeBean();
@@ -45,33 +39,9 @@ public class SysCodeUtil extends BaseUtil {
 			sysCodeBeanListTree = assemblyTreeList(sysCodeBeanList);
 			sysCodeBeanListTreeSimple = assemblyTreeListSimple(sysCodeBeanListTree);
 			
-			sysCodeBeanMap = Maps.newHashMap();
-			sysCodeBeanMap.put(CUSTOMER_RELATION_IMPORTANCE, getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_IMPORTANCE));
-			sysCodeBeanMap.put(CUSTOMER_RELATION_INTIMACY, getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_INTIMACY));
-			sysCodeBeanMap.put(CUSTOMER_RELATION_RELATIONSHIP, getChildSimple(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_RELATIONSHIP));
-					
-			sysCodeBeanMap.put(CUSTOMER_PROBLEM_HEALTH, getChildSimple(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_HEALTH));
-			sysCodeBeanMap.put(CUSTOMER_PROBLEM_LIFE, getChildSimple(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_LIFE));
-					
-			sysCodeBeanMap.put(CUSTOMER_HOBBY_DIET, getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_DIET));
-			sysCodeBeanMap.put(CUSTOMER_HOBBY_INTEREST, getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_INTEREST));
-			sysCodeBeanMap.put(CUSTOMER_HOBBY_TASTE, getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_TASTE));
-					
-			sysCodeBeanMap.put(CUSTOMER_JOB_INDUSTRY, getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_INDUSTRY));
-			sysCodeBeanMap.put(CUSTOMER_JOB_POSITION, getChildSimple(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_POSITION));
-			
-			sysCodeBeanMap.put(CUSTOMER_FAMILY_RELATIONSHIP, getChildSimple(CUSTOMER, CUSTOMER_FAMILY, CUSTOMER_FAMILY_RELATIONSHIP));
-			
-			sysCodeBeanMap.put(CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE, getChildSimple(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE));
-			sysCodeBeanMap.put(CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE, getChildSimple(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE));
-			
-			sysCodeBeanMap.put(CUSTOMER_MAINTAIN_MAINTAIN, getChildSimple(CUSTOMER, CUSTOMER_MAINTAIN, CUSTOMER_MAINTAIN_MAINTAIN));
-			
 		} else {
 			sysCodeBeanListTree = null;
 			sysCodeBeanListTreeSimple = null;
-			
-			sysCodeBeanMap = null;
 		}
 	}
 	
@@ -187,23 +157,6 @@ public class SysCodeUtil extends BaseUtil {
 		SysCodeBean bean = getSimple(keys);
 		if (bean != null) {
 			return bean.getValue();
-		}
-		return null;
-	}
-	
-	public static String getValue(String key1, String key2)	{
-		SysCodeBean beanTmp = new SysCodeBean();
-		beanTmp.setKey(key2);
-		SysCodeBean bean = getSimple(getListSimple(key1), beanTmp);
-		if (bean != null) {
-			return bean.getValue();
-		}
-		return null;
-	}
-	
-	public static List<SysCodeBean> getListSimple(String key) {
-		if (!CollectionUtils.isEmpty(sysCodeBeanMap)) {
-			return sysCodeBeanMap.get(key);
 		}
 		return null;
 	}

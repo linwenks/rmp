@@ -63,9 +63,9 @@ public class CustomerHobbyController extends BaseApiController {
 	public RespBean config(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		return RespUtil.build(request)
-				.putData("interestCodeList", SysCodeUtil.getListSimple(CUSTOMER_HOBBY_INTEREST))
-				.putData("dietCodeList", SysCodeUtil.getListSimple(CUSTOMER_HOBBY_DIET))
-				.putData("tasteCodeList", SysCodeUtil.getListSimple(CUSTOMER_HOBBY_TASTE));
+				.putData("interestCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_INTEREST))
+				.putData("dietCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_DIET))
+				.putData("tasteCodeList", SysCodeUtil.getChildSimple(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_TASTE));
 	}
 	
 	/**

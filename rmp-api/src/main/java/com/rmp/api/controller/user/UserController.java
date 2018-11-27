@@ -160,8 +160,7 @@ public class UserController extends BaseApiController {
 		
 		String token = reqBean.getHeader().getToken();
 		
-		UserBean userBean = new UserBean();
-		userBean.setToken(token);
+		UserBean userBean = UserBean.builder().token(token).build();
 		userService.exe("bindWxPhone", ImmutableMap.of("userBean", userBean, "wxPhoneNumberReqBean", reqBean.getWxPhoneNumberReqBean()));
 		
 		UserBean userBeanTmp2 = new UserBean();

@@ -95,14 +95,14 @@ public class UserHobbyController extends BaseApiController {
 		ReqUtil.buildCheckLogin(body, request);
 		
 		UserHobbyBean userHobbyBeanResult = null;
-		UserHobbyBean userHobbyBean = new UserHobbyBean();
-		userHobbyBean.setUserId(UserUtil.getCurrentUserId(request));
+		UserHobbyBean userHobbyBean = UserHobbyBean.builder().userId(UserUtil.getCurrentUserId(request)).build();
 		UserHobbyBean userHobbyBeanTmp = userHobbyService.selectOne(userHobbyBean);
 		if (userHobbyBeanTmp != null) {
-			userHobbyBeanResult = new UserHobbyBean();
-			userHobbyBeanResult.setInterest(userHobbyBeanTmp.getInterest());
-			userHobbyBeanResult.setDiet(userHobbyBeanTmp.getDiet());
-			userHobbyBeanResult.setTaste(userHobbyBeanTmp.getTaste());
+			userHobbyBeanResult = UserHobbyBean.builder()
+			.interest(userHobbyBeanTmp.getInterest())
+			.diet(userHobbyBeanTmp.getDiet())
+			.taste(userHobbyBeanTmp.getTaste())
+			.build();
 			UserHobbyUtil.assembly(userHobbyBeanResult);
 		}
 		return RespUtil.build(request).putData("userHobbyBean", userHobbyBeanResult);

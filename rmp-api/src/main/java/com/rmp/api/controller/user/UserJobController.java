@@ -107,32 +107,32 @@ public class UserJobController extends BaseApiController {
 		UserBean userBeanResult = null;
 		UserJobBean userJobBeanResult = null;
 		
-		UserBean userBean = new UserBean();
-		userBean.setId(userId);
+		UserBean userBean = UserBean.builder().id(userId).build();
 		userBean = userService.selectOne(userBean);
 		
-		userBeanResult = new UserBean();
-		userBeanResult.setRealName(userBean.getRealName());
-		userBeanResult.setPhone(userBean.getPhone());
-		userBeanResult.setBirthday(userBean.getBirthday());
-		userBeanResult.setSex(userBean.getSex());
-		userBeanResult.setAreaId(userBean.getAreaId());
-		userBeanResult.setAddress(userBean.getAddress());
-		userBeanResult.setHeadPic(userBean.getHeadPic());
+		userBeanResult = UserBean.builder()
+		.realName(userBean.getRealName())
+		.phone(userBean.getPhone())
+		.birthday(userBean.getBirthday())
+		.sex(userBean.getSex())
+		.areaId(userBean.getAreaId())
+		.address(userBean.getAddress())
+		.headPic(userBean.getHeadPic())
+		.build();
 		UserUtil.assembly(userBeanResult);
 		
-		UserJobBean userJobBean = new UserJobBean();
-		userJobBean.setUserId(userId);
+		UserJobBean userJobBean = UserJobBean.builder().userId(userId).build();
 		UserJobBean userJobBeanTmp = userJobService.selectOne(userJobBean);
 		if (userJobBeanTmp != null) {
-			userJobBeanResult = new UserJobBean();
-			userJobBeanResult.setIndustry(userJobBeanTmp.getIndustry());
-			userJobBeanResult.setCompanyName(userJobBeanTmp.getCompanyName());
-			userJobBeanResult.setDepartmentName(userJobBeanTmp.getDepartmentName());
-			userJobBeanResult.setPosition(userJobBeanTmp.getPosition());
-			userJobBeanResult.setPhone(userJobBeanTmp.getPhone());
-			userJobBeanResult.setAreaId(userJobBeanTmp.getAreaId());
-			userJobBeanResult.setAddress(userJobBeanTmp.getAddress());
+			userJobBeanResult = UserJobBean.builder()
+			.industry(userJobBeanTmp.getIndustry())
+			.companyName(userJobBeanTmp.getCompanyName())
+			.departmentName(userJobBeanTmp.getDepartmentName())
+			.position(userJobBeanTmp.getPosition())
+			.phone(userJobBeanTmp.getPhone())
+			.areaId(userJobBeanTmp.getAreaId())
+			.address(userJobBeanTmp.getAddress())
+			.build();
 			UserJobUtil.assembly(userJobBeanResult);
 		}
 		return RespUtil.build(request).putData("userBean", userBeanResult).putData("userJobBean", userJobBeanResult);
@@ -172,11 +172,9 @@ public class UserJobController extends BaseApiController {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		UserBean userBean = reqBean.getUserBean();
 		UserJobBean userJobBean = reqBean.getUserJobBean();
-		if (userBean == null) userBean = new UserBean();
-		if (userJobBean == null) userJobBean = new UserJobBean();
 		Long currentUserId = UserUtil.getCurrentUserId(request);
-		userBean.setId(currentUserId);
-		userJobBean.setUserId(currentUserId);
+		if (userBean == null) userBean = UserBean.builder().id(currentUserId).build();
+		if (userJobBean == null) userJobBean = UserJobBean.builder().userId(currentUserId).build();
 		userJobService.exe("update", ImmutableMap.of("userBean", userBean, "userJobBean", userJobBean));
 		return RespUtil.build(request);
 	}

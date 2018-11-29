@@ -81,27 +81,25 @@ public class CustomerMaintainServiceImpl extends BaseServiceImpl<CustomerMaintai
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		if (maintain == null) AppException.toThrow(MSG_02025);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerMaintainBean customerMaintainBeanTmp = new CustomerMaintainBean();
-		customerMaintainBeanTmp.setCustomerId(customerId);
+		CustomerMaintainBean customerMaintainBeanTmp = CustomerMaintainBean.builder().customerId(customerId).build();
 		customerMaintainBeanTmp = selectOne(customerMaintainBeanTmp);
 		if (customerMaintainBeanTmp != null) {
 			customerMaintainBeanTmp.setMaintain(maintain);
 			customerMaintainBeanTmp.setUpdateTime(nowDateLong);
 			updatePkSelVer(customerMaintainBeanTmp);
 		} else {
-			customerMaintainBeanTmp = new CustomerMaintainBean();
-			customerMaintainBeanTmp.setCustomerId(customerId);
-			customerMaintainBeanTmp.setMaintain(maintain);
-			customerMaintainBeanTmp.setCreateTime(nowDateLong);
+			customerMaintainBeanTmp = CustomerMaintainBean.builder()
+			.customerId(customerId)
+			.maintain(maintain)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(customerMaintainBeanTmp);
 		}
 		

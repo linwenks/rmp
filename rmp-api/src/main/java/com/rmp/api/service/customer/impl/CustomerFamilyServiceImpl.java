@@ -153,9 +153,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		CustomerFamilyUtil.checkAddress(address);
 		CustomerFamilyUtil.checkAge(age);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
@@ -195,9 +193,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 

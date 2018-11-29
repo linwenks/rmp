@@ -85,17 +85,14 @@ public class CustomerProblemServiceImpl extends BaseServiceImpl<CustomerProblem,
 		int remarkMaxLength = 100;
 		if (!StringUtils.isEmpty(remark) && remark.length() > remarkMaxLength) AppException.toThrow(MSG_02008, String.valueOf(remarkMaxLength));
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerProblemBean customerProblemBeanTmp = new CustomerProblemBean();
-		customerProblemBeanTmp.setCustomerId(customerId);
+		CustomerProblemBean customerProblemBeanTmp = CustomerProblemBean.builder().customerId(customerId).build();
 		customerProblemBeanTmp = selectOne(customerProblemBeanTmp);
 		if (customerProblemBeanTmp != null) {
 			customerProblemBeanTmp.setHealth(health);
@@ -104,12 +101,13 @@ public class CustomerProblemServiceImpl extends BaseServiceImpl<CustomerProblem,
 			customerProblemBeanTmp.setUpdateTime(nowDateLong);
 			updatePkVer(customerProblemBeanTmp);
 		} else {
-			customerProblemBeanTmp = new CustomerProblemBean();
-			customerProblemBeanTmp.setCustomerId(customerId);
-			customerProblemBeanTmp.setHealth(health);
-			customerProblemBeanTmp.setLife(life);
-			customerProblemBeanTmp.setRemark(remark);;
-			customerProblemBeanTmp.setCreateTime(nowDateLong);
+			customerProblemBeanTmp = CustomerProblemBean.builder()
+			.customerId(customerId)
+			.health(health)
+			.life(life)
+			.remark(remark)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(customerProblemBeanTmp);
 		}
 		

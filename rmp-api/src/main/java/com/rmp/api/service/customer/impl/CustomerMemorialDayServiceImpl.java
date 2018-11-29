@@ -92,22 +92,21 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		if (occurDate == null) AppException.toThrow(MSG_02023);
 		if (advanceType == null) AppException.toThrow(MSG_02024);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerMemorialDayBean customerMemorialDayBeanTmp = new CustomerMemorialDayBean();
-		customerMemorialDayBeanTmp.setCustomerId(customerId);
-		customerMemorialDayBeanTmp.setName(name);
-		customerMemorialDayBeanTmp.setOccurType(occurType);
-		customerMemorialDayBeanTmp.setOccurDate(occurDate);
-		customerMemorialDayBeanTmp.setAdvanceType(advanceType);
-		customerMemorialDayBeanTmp.setCreateTime(nowDateLong);
+		CustomerMemorialDayBean customerMemorialDayBeanTmp = CustomerMemorialDayBean.builder()
+		.customerId(customerId)
+		.name(name)
+		.occurType(occurType)
+		.occurDate(occurDate)
+		.advanceType(advanceType)
+		.createTime(nowDateLong)
+		.build();
 		insertSel(customerMemorialDayBeanTmp);
 		
 		// 修改
@@ -136,18 +135,14 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		if (occurDate == null) AppException.toThrow(MSG_02023);
 		if (advanceType == null) AppException.toThrow(MSG_02024);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerMemorialDayBean customerMemorialDayBeanTmp = new CustomerMemorialDayBean();
-		customerMemorialDayBeanTmp.setId(id);
-		customerMemorialDayBeanTmp.setCustomerId(customerId);
+		CustomerMemorialDayBean customerMemorialDayBeanTmp = CustomerMemorialDayBean.builder().id(id).customerId(customerId).build();
 		customerMemorialDayBeanTmp = selectOne(customerMemorialDayBeanTmp);
 		if (customerMemorialDayBeanTmp == null) AppException.toThrow(MSG_00003);
 		customerMemorialDayBeanTmp.setName(name);
@@ -174,18 +169,14 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerMemorialDayBean customerMemorialDayBeanTmp = new CustomerMemorialDayBean();
-		customerMemorialDayBeanTmp.setId(id);
-		customerMemorialDayBeanTmp.setCustomerId(customerId);
+		CustomerMemorialDayBean customerMemorialDayBeanTmp = CustomerMemorialDayBean.builder().id(id).customerId(customerId).build();
 		customerMemorialDayBeanTmp = selectOne(customerMemorialDayBeanTmp);
 		if (customerMemorialDayBeanTmp == null) AppException.toThrow(MSG_00003);
 		customerMemorialDayBeanTmp.setIsDelete(Constant.DELETE_Y);

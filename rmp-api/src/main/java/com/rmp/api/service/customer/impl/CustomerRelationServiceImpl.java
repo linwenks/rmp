@@ -85,17 +85,14 @@ public class CustomerRelationServiceImpl extends BaseServiceImpl<CustomerRelatio
 		if (intimacy == null) AppException.toThrow(MSG_02006);
 		if (importance == null) AppException.toThrow(MSG_02007);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerRelationBean customerRelationBeanTmp = new CustomerRelationBean();
-		customerRelationBeanTmp.setCustomerId(customerId);
+		CustomerRelationBean customerRelationBeanTmp = CustomerRelationBean.builder().customerId(customerId).build();
 		customerRelationBeanTmp = selectOne(customerRelationBeanTmp);
 		if (customerRelationBeanTmp != null) {
 			customerRelationBeanTmp.setRelationship(relationship);
@@ -104,12 +101,13 @@ public class CustomerRelationServiceImpl extends BaseServiceImpl<CustomerRelatio
 			customerRelationBeanTmp.setUpdateTime(nowDateLong);
 			updatePkSelVer(customerRelationBeanTmp);
 		} else {
-			customerRelationBeanTmp = new CustomerRelationBean();
-			customerRelationBeanTmp.setCustomerId(customerId);
-			customerRelationBeanTmp.setRelationship(relationship);
-			customerRelationBeanTmp.setIntimacy(intimacy);
-			customerRelationBeanTmp.setImportance(importance);
-			customerRelationBeanTmp.setCreateTime(nowDateLong);
+			customerRelationBeanTmp = CustomerRelationBean.builder()
+			.customerId(customerId)
+			.relationship(relationship)
+			.intimacy(intimacy)
+			.importance(importance)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(customerRelationBeanTmp);
 		}
 		

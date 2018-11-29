@@ -83,9 +83,7 @@ public class CustomerHobbyServiceImpl extends BaseServiceImpl<CustomerHobby, Cus
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(customerId);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 

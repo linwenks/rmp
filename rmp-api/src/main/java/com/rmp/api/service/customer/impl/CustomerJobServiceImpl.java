@@ -106,14 +106,11 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
 		if (customerId != null) {
-			CustomerBean customerBeanTmp = new CustomerBean();
-			customerBeanTmp.setId(customerId);
-			customerBeanTmp.setUserId(userId);
+			CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 			customerBeanTmp = customerService.selectOne(customerBeanTmp);
 			if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 			
-			CustomerJobBean customerJobBeanTmp = new CustomerJobBean();
-			customerJobBeanTmp.setCustomerId(customerId);
+			CustomerJobBean customerJobBeanTmp = CustomerJobBean.builder().customerId(customerId).build();
 			customerJobBeanTmp = selectOne(customerJobBeanTmp);
 			if (customerJobBeanTmp != null) {
 				customerJobBeanTmp.setIndustry(industry);
@@ -126,16 +123,17 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 				customerJobBeanTmp.setUpdateTime(nowDateLong);
 				updatePkVer(customerJobBeanTmp);
 			} else {
-				customerJobBeanTmp = new CustomerJobBean();
-				customerJobBeanTmp.setCustomerId(customerId);
-				customerJobBeanTmp.setIndustry(industry);
-				customerJobBeanTmp.setCompanyName(companyName);
-				customerJobBeanTmp.setDepartmentName(departmentName);
-				customerJobBeanTmp.setPosition(position);
-				customerJobBeanTmp.setPhone(phone);
-				customerJobBeanTmp.setAreaId(areaId);
-				customerJobBeanTmp.setAddress(address);
-				customerJobBeanTmp.setCreateTime(nowDateLong);
+				customerJobBeanTmp = CustomerJobBean.builder()
+				.customerId(customerId)
+				.industry(industry)
+				.companyName(companyName)
+				.departmentName(departmentName)
+				.position(position)
+				.phone(phone)
+				.areaId(areaId)
+				.address(address)
+				.createTime(nowDateLong)
+				.build();
 				insertSel(customerJobBeanTmp);
 			}
 			
@@ -148,16 +146,17 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 			customerService.exe("saveAll", customerBean);
 			customerId = customerBean.getId();
 			
-			CustomerJobBean customerJobBeanTmp = new CustomerJobBean();
-			customerJobBeanTmp.setCustomerId(customerId);
-			customerJobBeanTmp.setIndustry(industry);
-			customerJobBeanTmp.setCompanyName(companyName);
-			customerJobBeanTmp.setDepartmentName(departmentName);
-			customerJobBeanTmp.setPosition(position);
-			customerJobBeanTmp.setPhone(phone);
-			customerJobBeanTmp.setAreaId(areaId);
-			customerJobBeanTmp.setAddress(address);
-			customerJobBeanTmp.setCreateTime(nowDateLong);
+			CustomerJobBean customerJobBeanTmp = CustomerJobBean.builder()
+			.customerId(customerId)
+			.industry(industry)
+			.companyName(companyName)
+			.departmentName(departmentName)
+			.position(position)
+			.phone(phone)
+			.areaId(areaId)
+			.address(address)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(customerJobBeanTmp);
 		}
 	}

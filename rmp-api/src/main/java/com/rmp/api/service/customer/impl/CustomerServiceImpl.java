@@ -110,9 +110,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		CustomerUtil.checkRealName(realName);
 		CustomerUtil.checkPhone(phone);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setUserId(userId);
-		customerBeanTmp.setPhone(phone);
+		CustomerBean customerBeanTmp = CustomerBean.builder().userId(userId).phone(phone).build();
 		List<CustomerBean> customerBeanTmpList = selectList(null, customerBeanTmp);
 		if (!CollectionUtils.isEmpty(customerBeanTmpList)) AppException.toThrow(MSG_02004);
 		
@@ -120,13 +118,14 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
 		// 添加
-		customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setUserId(userId);
-		customerBeanTmp.setRealName(realName);
-		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
-		customerBeanTmp.setPhone(phone);
-		customerBeanTmp.setHeadPic(Constant.Customer.HEAD_PIC);
-		customerBeanTmp.setCreateTime(nowDateLong);
+		customerBeanTmp = CustomerBean.builder()
+		.userId(userId)
+		.realName(realName)
+		.pinyin(PinYinUtil.toPinYinLast(realName))
+		.phone(phone)
+		.headPic(Constant.Customer.HEAD_PIC)
+		.createTime(nowDateLong)
+		.build();
 		insertSel(customerBeanTmp);
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
@@ -154,9 +153,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		CustomerUtil.checkAddress(address);
 		if (StringUtils.isEmpty(headPic)) headPic = Constant.Customer.HEAD_PIC;
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setUserId(userId);
-		customerBeanTmp.setPhone(phone);
+		CustomerBean customerBeanTmp = CustomerBean.builder().userId(userId).phone(phone).build();
 		List<CustomerBean> customerBeanTmpList = selectList(null, customerBeanTmp);
 		if (!CollectionUtils.isEmpty(customerBeanTmpList)) AppException.toThrow(MSG_02004);
 		
@@ -164,17 +161,18 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
 		// 添加
-		customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setUserId(userId);
-		customerBeanTmp.setRealName(realName);
-		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
-		customerBeanTmp.setPhone(phone);
-		customerBeanTmp.setHeadPic(headPic);
-		customerBeanTmp.setBirthday(birthday);
-		customerBeanTmp.setSex(sex);
-		customerBeanTmp.setAreaId(areaId);
-		customerBeanTmp.setAddress(address);
-		customerBeanTmp.setCreateTime(nowDateLong);
+		customerBeanTmp = CustomerBean.builder()
+		.userId(userId)
+		.realName(realName)
+		.pinyin(PinYinUtil.toPinYinLast(realName))
+		.phone(phone)
+		.headPic(headPic)
+		.birthday(birthday)
+		.sex(sex)
+		.areaId(areaId)
+		.address(address)
+		.createTime(nowDateLong)
+		.build();
 		insertSel(customerBeanTmp);
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
@@ -197,15 +195,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		CustomerUtil.checkRealName(realName);
 		CustomerUtil.checkPhone(phone);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(id);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(id).build();
 		customerBeanTmp = selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp2 = new CustomerBean();
-		customerBeanTmp2.setIdNot(id);
-		customerBeanTmp2.setUserId(userId);
-		customerBeanTmp2.setPhone(phone);
+		CustomerBean customerBeanTmp2 = CustomerBean.builder().idNot(id).userId(userId).phone(phone).build();
 		List<CustomerBean> customerBeanTmp2List = selectList(null, customerBeanTmp2);
 		if (!CollectionUtils.isEmpty(customerBeanTmp2List)) AppException.toThrow(MSG_02004);
 		
@@ -245,15 +239,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		CustomerUtil.checkPhone(phone);
 		CustomerUtil.checkAddress(address);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(id);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(id).build();
 		customerBeanTmp = selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp2 = new CustomerBean();
-		customerBeanTmp2.setIdNot(id);
-		customerBeanTmp2.setUserId(userId);
-		customerBeanTmp2.setPhone(phone);
+		CustomerBean customerBeanTmp2 = CustomerBean.builder().idNot(id).userId(userId).phone(phone).build();
 		List<CustomerBean> customerBeanTmp2List = selectList(null, customerBeanTmp2);
 		if (!CollectionUtils.isEmpty(customerBeanTmp2List)) AppException.toThrow(MSG_02004);
 		
@@ -287,9 +277,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		if (id == null) AppException.toThrow(MSG_00003);
 		if (userId == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp = new CustomerBean();
-		customerBeanTmp.setId(id);
-		customerBeanTmp.setUserId(userId);
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(id).userId(userId).build();
 		customerBeanTmp = selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 		

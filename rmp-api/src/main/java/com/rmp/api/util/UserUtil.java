@@ -144,12 +144,12 @@ public class UserUtil extends BaseUtil {
 	public static UserBean rBean(Map<String, String> userMap) {
 		UserBean userBean = null;
 		if (!CollectionUtils.isEmpty(userMap)) {
-			userBean = new UserBean();
-			userBean.setId(userMap.get("id") != null ? Long.valueOf(userMap.get("id")) : null);
-			userBean.setLoginName(userMap.get("loginName") != null ? userMap.get("loginName") : null);
-			userBean.setNickName(userMap.get("nickName") != null ? userMap.get("nickName") : null);
-			userBean.setHeadPic(userMap.get("headPic") != null ? userMap.get("headPic") : null);
-			
+			userBean = UserBean.builder()
+			.id(userMap.get("id") != null ? Long.valueOf(userMap.get("id")) : null)
+			.loginName(userMap.get("loginName") != null ? userMap.get("loginName") : null)
+			.nickName(userMap.get("nickName") != null ? userMap.get("nickName") : null)
+			.headPic(userMap.get("headPic") != null ? userMap.get("headPic") : null)
+			.build();
 		}
 		return userBean;
 	}

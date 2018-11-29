@@ -1,8 +1,10 @@
 package com.rmp.api.util;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum MsgEnum {
 	
 	MSG_00002("00002", "系统繁忙，请稍候再试！"),
@@ -108,8 +110,4 @@ public enum MsgEnum {
 	private String key;
     private String value;
     
-    private MsgEnum(String key, String value) {
-    	this.key = key;
-    	this.value = value;
-    }
 }

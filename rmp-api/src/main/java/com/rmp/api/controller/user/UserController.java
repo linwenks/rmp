@@ -202,14 +202,15 @@ public class UserController extends BaseApiController {
 		String token = userBean.getToken();
 
 		HeaderBean headerBean = reqBean.getHeader();
-		if (headerBean == null) headerBean = new HeaderBean();
-		headerBean.setToken(token);
+		if (headerBean == null) headerBean = HeaderBean.builder().token(token).build();
 		request.setAttribute(Constant.CURRENT_REQUEST_HEADER, headerBean);
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setNickName(userBean.getNickName());
-		userBeanTmp.setHeadPic(userBean.getHeadPic());
-		userBeanTmp.setToken(token);
+		UserBean userBeanTmp = UserBean.builder()
+		.nickName(userBean.getNickName())
+		.headPic(userBean.getHeadPic())
+		.token(token)
+		.build();
+		UserUtil.assembly(userBeanTmp);
 		return RespUtil.build(request).putData("userBean", userBeanTmp);
 	}
 	
@@ -250,10 +251,12 @@ public class UserController extends BaseApiController {
 		userBean.setToken(token);
 		userService.exe("register", ImmutableMap.of("userBean", userBean, "phoneMsgBean", reqBean.getPhoneMsgBean()));
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setNickName(userBean.getNickName());
-		userBeanTmp.setHeadPic(userBean.getHeadPic());
-		userBeanTmp.setToken(token);
+		UserBean userBeanTmp = UserBean.builder()
+		.nickName(userBean.getNickName())
+		.headPic(userBean.getHeadPic())
+		.token(token)
+		.build();
+		UserUtil.assembly(userBeanTmp);
 		return RespUtil.build(request).putData("userBean", userBeanTmp);
 	}
 	
@@ -439,18 +442,18 @@ public class UserController extends BaseApiController {
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqUtil.buildCheckLogin(body, request);
 		
-		UserBean userBean = new UserBean();
-		userBean.setId(UserUtil.getCurrentUserId(request));
+		UserBean userBean = UserBean.builder().id(UserUtil.getCurrentUserId(request)).build();
 		userBean = userService.selectOne(userBean);
 		
-		UserBean userBeanResult = new UserBean();
-		userBeanResult.setRealName(userBean.getRealName());
-		userBeanResult.setPhone(userBean.getPhone());
-		userBeanResult.setBirthday(userBean.getBirthday());
-		userBeanResult.setSex(userBean.getSex());
-		userBeanResult.setAreaId(userBean.getAreaId());
-		userBeanResult.setAddress(userBean.getAddress());
-		userBeanResult.setHeadPic(userBean.getHeadPic());
+		UserBean userBeanResult = UserBean.builder()
+		.realName(userBean.getRealName())
+		.phone(userBean.getPhone())
+		.birthday(userBean.getBirthday())
+		.sex(userBean.getSex())
+		.areaId(userBean.getAreaId())
+		.address(userBean.getAddress())
+		.headPic(userBean.getHeadPic())
+		.build();
 		UserUtil.assembly(userBeanResult);
 		return RespUtil.build(request).putData("userBean", userBeanResult);
 	}

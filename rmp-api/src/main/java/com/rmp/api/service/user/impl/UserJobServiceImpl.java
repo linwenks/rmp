@@ -104,8 +104,7 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		UserJobBean userJobBeanTmp = new UserJobBean();
-		userJobBeanTmp.setUserId(userId);
+		UserJobBean userJobBeanTmp = UserJobBean.builder().userId(userId).build();
 		userJobBeanTmp = selectOne(userJobBeanTmp);
 		if (userJobBeanTmp != null) {
 			userJobBeanTmp.setIndustry(industry);
@@ -118,16 +117,17 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 			userJobBeanTmp.setUpdateTime(nowDateLong);
 			updatePkVer(userJobBeanTmp);
 		} else {
-			userJobBeanTmp = new UserJobBean();
-			userJobBeanTmp.setUserId(userId);
-			userJobBeanTmp.setIndustry(industry);
-			userJobBeanTmp.setCompanyName(companyName);
-			userJobBeanTmp.setDepartmentName(departmentName);
-			userJobBeanTmp.setPosition(position);
-			userJobBeanTmp.setPhone(phone);
-			userJobBeanTmp.setAreaId(areaId);
-			userJobBeanTmp.setAddress(address);
-			userJobBeanTmp.setCreateTime(nowDateLong);
+			userJobBeanTmp = UserJobBean.builder()
+			.userId(userId)
+			.industry(industry)
+			.companyName(companyName)
+			.departmentName(departmentName)
+			.position(position)
+			.phone(phone)
+			.areaId(areaId)
+			.address(address)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(userJobBeanTmp);
 		}
 		

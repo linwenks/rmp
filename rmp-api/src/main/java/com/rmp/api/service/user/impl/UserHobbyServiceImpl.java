@@ -81,16 +81,14 @@ public class UserHobbyServiceImpl extends BaseServiceImpl<UserHobby, UserHobbyBe
 		
 		if (userId == null) AppException.toThrow(MSG_00003);
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setId(userId);
+		UserBean userBeanTmp = UserBean.builder().id(userId).build();
 		userBeanTmp = userService.selectOne(userBeanTmp);
 		if (userBeanTmp == null) AppException.toThrow(MSG_00003);
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		UserHobbyBean userHobbyBeanTmp = new UserHobbyBean();
-		userHobbyBeanTmp.setUserId(userId);
+		UserHobbyBean userHobbyBeanTmp = UserHobbyBean.builder().userId(userId).build();
 		userHobbyBeanTmp = selectOne(userHobbyBeanTmp);
 		if (userHobbyBeanTmp != null) {
 			userHobbyBeanTmp.setInterest(interest);
@@ -99,12 +97,13 @@ public class UserHobbyServiceImpl extends BaseServiceImpl<UserHobby, UserHobbyBe
 			userHobbyBeanTmp.setUpdateTime(nowDateLong);
 			updatePkVer(userHobbyBeanTmp);
 		} else {
-			userHobbyBeanTmp = new UserHobbyBean();
-			userHobbyBeanTmp.setUserId(userId);
-			userHobbyBeanTmp.setInterest(interest);
-			userHobbyBeanTmp.setDiet(diet);
-			userHobbyBeanTmp.setTaste(taste);
-			userHobbyBeanTmp.setCreateTime(nowDateLong);
+			userHobbyBeanTmp = UserHobbyBean.builder()
+			.userId(userId)
+			.interest(interest)
+			.diet(diet)
+			.taste(taste)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(userHobbyBeanTmp);
 		}
 		

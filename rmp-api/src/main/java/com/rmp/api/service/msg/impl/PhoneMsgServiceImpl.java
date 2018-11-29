@@ -72,16 +72,12 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl<PhoneMsg, PhoneMsgBean,
 		if (phone == null) AppException.toThrow(MSG_01014);
 		if (!PatternUtil.matchesMobilePhone(phone.toString())) AppException.toThrow(MSG_01015);
 		
-		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();
-		phoneMsgBeanTmp.setPhone(phone);
-		phoneMsgBeanTmp.setType(type);
-		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
-		phoneMsgBeanTmp = this.selectOne(phoneMsgBeanTmp);
+		PhoneMsgBean phoneMsgBeanTmp = PhoneMsgBean.builder().phone(phone).type(type).createTimeStart(craeteTimeStart).build();
+		phoneMsgBeanTmp = selectOne(phoneMsgBeanTmp);
 		if (phoneMsgBeanTmp != null) AppException.toThrow(MSG_01013);
 		
 		// 验证账号
-		UserBean userBean = new UserBean();
-		userBean.setLoginName(phone.toString());
+		UserBean userBean = UserBean.builder().loginName(phone.toString()).build();
 		userBean = userService.selectOne(userBean);
 		if (Constant.PhoneMsg.Type._1 == type.intValue()) {
 			if (userBean != null) AppException.toThrow(MSG_01009);
@@ -94,9 +90,7 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl<PhoneMsg, PhoneMsgBean,
 			
 			if (userBean.getLoginName().equals(phone.toString())) AppException.toThrow(MSG_01023);
 			
-			UserBean userBeanTmp = new UserBean();
-			userBeanTmp.setLoginName(phone.toString());
-			userBeanTmp.setIsDelete(Constant.DELETE_N);
+			UserBean userBeanTmp = UserBean.builder().loginName(phone.toString()).isDelete(Constant.DELETE_N).build();
 			userBeanTmp = userService.selectOne(userBeanTmp);
 			if (userBeanTmp != null) AppException.toThrow(MSG_01023);
 		}
@@ -106,7 +100,7 @@ public class PhoneMsgServiceImpl extends BaseServiceImpl<PhoneMsg, PhoneMsgBean,
 		phoneMsgBean.setCreateTime(nowDateLong);
 		phoneMsgBean.setCode(code);
 		phoneMsgBean.setContent(code);
-		this.insertSel(phoneMsgBean);
+		insertSel(phoneMsgBean);
 		/*
 		// 请求短信接口，如果发送失败，抛出异常
 		Map<String, Object> result = SmsUtil.send(phone.toString(), code);

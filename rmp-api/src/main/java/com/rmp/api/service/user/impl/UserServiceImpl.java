@@ -125,8 +125,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		String tokenOld = null;
 		String token = UuidUtil.generateUUID();
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setWxId(wxId);
+		UserBean userBeanTmp = UserBean.builder().wxId(wxId).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		if (userBeanTmp != null) {
 			
@@ -140,15 +139,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 			updatePkSelVer(userBeanTmp);
 		} else {
 			// 初始化用户
-			userBeanTmp = new UserBean();
-			userBeanTmp.setLoginName(wxId);
-			userBeanTmp.setLoginPwd("0");
-			userBeanTmp.setWxId(wxId);
-			userBeanTmp.setNickName(nickName);
-			userBeanTmp.setHeadPic(headPic);
-			userBeanTmp.setCreateTime(nowDateLong);
-			userBeanTmp.setToken(token);
-			userBeanTmp.setWxSessionKey(wxSessionKey);
+			userBeanTmp = UserBean.builder()
+			.loginName(wxId)
+			.loginPwd("0")
+			.wxId(wxId)
+			.nickName(nickName)
+			.headPic(headPic)
+			.createTime(nowDateLong)
+			.token(token)
+			.wxSessionKey(wxSessionKey)
+			.build();
 			insertSel(userBeanTmp);
 		}
 		BeanUtils.copyProperties(userBeanTmp, userBean);
@@ -211,8 +211,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setToken(token);
+		UserBean userBeanTmp = UserBean.builder().token(token).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		if (userBeanTmp == null) AppException.toThrow(MSG_00007);
 		if (!Constant.User.Status._0.equals(userBeanTmp.getStatus())) AppException.toThrow(MSG_01009);
@@ -228,9 +227,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		if (StringUtils.isEmpty(phoneNumber)) AppException.toThrow(MSG_01034);
 		
 		// 查询用户是否注册
-		UserBean userBeanTmp2 = new UserBean();
-		userBeanTmp2.setLoginName(phoneNumber);
-		userBeanTmp2.setIdNotEqualTo(userBeanTmp.getId());
+		UserBean userBeanTmp2 = UserBean.builder().loginName(phoneNumber).idNotEqualTo(userBeanTmp.getId()).build();
 		userBeanTmp2 = selectOne(userBeanTmp2);
 		if (userBeanTmp2 != null) AppException.toThrow(MSG_01009);
 		
@@ -278,8 +275,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		UserUtil.checkLoginName(loginName);
 		UserUtil.checkLoginPwd(loginPwd);
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setLoginName(loginName);
+		UserBean userBeanTmp = UserBean.builder().loginName(loginName).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		UserUtil.checkUser(userBeanTmp);
 		
@@ -359,12 +355,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		Long craeteTimeStart = DateUtil.formatDate2Long(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.EFFECTIVE_TIME));
 		
-		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();
-		phoneMsgBeanTmp.setCode(code);
-		phoneMsgBeanTmp.setPhone(Long.valueOf(loginName));
-		phoneMsgBeanTmp.setType(Constant.PhoneMsg.Type._1);
-		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._0);
-		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
+		PhoneMsgBean phoneMsgBeanTmp = PhoneMsgBean.builder()
+		.code(code)
+		.phone(Long.valueOf(loginName))
+		.type(Constant.PhoneMsg.Type._1)
+		.status(Constant.PhoneMsg.Status._0)
+		.createTimeStart(craeteTimeStart)
+		.build();
 		phoneMsgBeanTmp = phoneMsgService.selectOne(phoneMsgBeanTmp);
 		if (phoneMsgBeanTmp == null) AppException.toThrow(MSG_01012);
 		// 修改验证码状态
@@ -373,13 +370,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		phoneMsgService.exe(UPDATE_PK_SEl_VER, phoneMsgBeanTmp);
 		
 		// 查询用户是否注册
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setLoginName(loginName);
+		UserBean userBeanTmp = UserBean.builder().loginName(loginName).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		if (userBeanTmp != null) AppException.toThrow(MSG_01009);
 		
-		userBeanTmp = new UserBean();
-		userBeanTmp.setToken(token);
+		userBeanTmp = UserBean.builder().token(token).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		if (userBeanTmp == null) AppException.toThrow(MSG_00007);
 		if (!Constant.User.Status._0.equals(userBeanTmp.getStatus())) AppException.toThrow(MSG_01009);
@@ -442,12 +437,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		Long craeteTimeStart = DateUtil.nowLong2(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.EFFECTIVE_TIME));
 
 
-		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();
-		phoneMsgBeanTmp.setCode(code);
-		phoneMsgBeanTmp.setPhone(Long.valueOf(loginName));
-		phoneMsgBeanTmp.setType(Constant.PhoneMsg.Type._2);
-		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._0);
-		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
+		PhoneMsgBean phoneMsgBeanTmp = PhoneMsgBean.builder()
+		.code(code)
+		.phone(Long.valueOf(loginName))
+		.type(Constant.PhoneMsg.Type._2)
+		.status(Constant.PhoneMsg.Status._0)
+		.createTimeStart(craeteTimeStart)
+		.build();
 		phoneMsgBeanTmp = phoneMsgService.selectOne(phoneMsgBeanTmp);
 		if (phoneMsgBeanTmp == null) AppException.toThrow(MSG_01012);
 		// 修改验证码状态
@@ -456,8 +452,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		phoneMsgService.exe(UPDATE_PK_SEl_VER, phoneMsgBeanTmp);
 		
 		// 查询用户是否注册
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setLoginName(loginName);
+		UserBean userBeanTmp = UserBean.builder().loginName(loginName).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		UserUtil.checkUser(userBeanTmp);
 		
@@ -604,12 +599,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		Long craeteTimeStart = DateUtil.formatDate2Long(DateUtil.changeSecond(nowDate, -Constant.PhoneMsg.EFFECTIVE_TIME));
 		
-		PhoneMsgBean phoneMsgBeanTmp = new PhoneMsgBean();
-		phoneMsgBeanTmp.setCode(code);
-		phoneMsgBeanTmp.setPhone(phone);
-		phoneMsgBeanTmp.setType(Constant.PhoneMsg.Type._3);
-		phoneMsgBeanTmp.setStatus(Constant.PhoneMsg.Status._0);
-		phoneMsgBeanTmp.setCreateTimeStart(craeteTimeStart);
+		PhoneMsgBean phoneMsgBeanTmp = PhoneMsgBean.builder()
+		.code(code)
+		.phone(phone)
+		.type(Constant.PhoneMsg.Type._3)
+		.status(Constant.PhoneMsg.Status._0)
+		.createTimeStart(craeteTimeStart)
+		.build();
 		phoneMsgBeanTmp = phoneMsgService.selectOne(phoneMsgBeanTmp);
 		if (phoneMsgBeanTmp == null) AppException.toThrow(MSG_01012);
 		// 修改验证码状态
@@ -622,9 +618,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		UserUtil.checkUser(userBeanTmp);
 		if (userBeanTmp.getLoginName().equals(phone.toString())) AppException.toThrow(MSG_01023);
 		
-		UserBean userBeanTmp2 = new UserBean();
-		userBeanTmp2.setLoginName(phone.toString());
-		userBeanTmp2.setIsDelete(Constant.DELETE_N);
+		UserBean userBeanTmp2 = UserBean.builder().loginName(phone.toString()).isDelete(Constant.DELETE_N).build();
 		userBeanTmp2 = selectOne(userBeanTmp2);
 		if (userBeanTmp2 != null) AppException.toThrow(MSG_01023);
 		
@@ -675,8 +669,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		UserUtil.checkRealName(realName);
 		UserUtil.checkAddress(address);
 		
-		UserBean userBeanTmp = new UserBean();
-		userBeanTmp.setId(id);
+		UserBean userBeanTmp = UserBean.builder().id(id).build();
 		userBeanTmp = selectOne(userBeanTmp);
 		if (userBeanTmp == null) AppException.toThrow(MSG_00003);
 		

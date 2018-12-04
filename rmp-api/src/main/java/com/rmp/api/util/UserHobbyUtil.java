@@ -17,17 +17,17 @@ public class UserHobbyUtil {
 			if (!StringUtils.isEmpty(bean.getInterest())) {
 				List<String> keyList = Arrays.asList(StringUtils.split(bean.getInterest(), ","));
 				bean.setInterestKeyList(keyList);
-				bean.setInterestValueList(keyList.stream().map(key -> {return SysCodeUtil.getValue(CUSTOMER_HOBBY_INTEREST, key);}).collect(Collectors.toList()));
+				bean.setInterestValueList(keyList.stream().map(key -> {return SysCodeUtil.getValue(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_INTEREST, key);}).collect(Collectors.toList()));
 			}
 			if (!StringUtils.isEmpty(bean.getDiet())) {
 				List<String> keyList = Arrays.asList(StringUtils.split(bean.getDiet(), ","));
 				bean.setDietKeyList(keyList);
-				bean.setDietValueList(keyList.stream().map(key -> {return SysCodeUtil.getValue(CUSTOMER_HOBBY_DIET, key);}).collect(Collectors.toList()));
+				bean.setDietValueList(keyList.stream().map(key -> {return SysCodeUtil.getValue(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_DIET, key);}).collect(Collectors.toList()));
 			}
 			if (!StringUtils.isEmpty(bean.getTaste())) {
 				List<String> keyList = Arrays.asList(StringUtils.split(bean.getTaste(), ","));
 				bean.setTasteKeyList(keyList);
-				bean.setTasteValueList(keyList.stream().map(key -> {return SysCodeUtil.getValue(CUSTOMER_HOBBY_TASTE, key);}).collect(Collectors.toList()));
+				bean.setTasteValueList(keyList.stream().map(key -> {return SysCodeUtil.getValue(CUSTOMER, CUSTOMER_HOBBY, CUSTOMER_HOBBY_TASTE, key);}).collect(Collectors.toList()));
 			}
 		}
 	}

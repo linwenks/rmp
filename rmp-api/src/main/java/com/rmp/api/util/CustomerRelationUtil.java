@@ -9,13 +9,13 @@ public class CustomerRelationUtil {
 	public static void assembly(CustomerRelationBean bean) {
 		if (bean != null) {
 			if (bean.getRelationship() != null) {
-				bean.setRelationshipValue(SysCodeUtil.getValue(CUSTOMER_RELATION_RELATIONSHIP, bean.getRelationship().toString()));
+				bean.setRelationshipValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_RELATIONSHIP, bean.getRelationship().toString()));
 			}
 			if (bean.getIntimacy() != null) {
-				bean.setIntimacyValue(SysCodeUtil.getValue(CUSTOMER_RELATION_INTIMACY, bean.getIntimacy().toString()));
+				bean.setIntimacyValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_INTIMACY, bean.getIntimacy().toString()));
 			}
 			if (bean.getImportance() != null) {
-				bean.setImportanceValue(SysCodeUtil.getValue(CUSTOMER_RELATION_IMPORTANCE, bean.getImportance().toString()));
+				bean.setImportanceValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_RELATION, CUSTOMER_RELATION_IMPORTANCE, bean.getImportance().toString()));
 			}
 		}
 	}

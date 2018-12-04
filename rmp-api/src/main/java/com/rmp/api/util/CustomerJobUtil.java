@@ -9,10 +9,10 @@ public class CustomerJobUtil {
 	public static void assembly(CustomerJobBean bean) {
 		if (bean != null) {
 			if (bean.getIndustry() != null) {
-				bean.setIndustryValue(SysCodeUtil.getValue(CUSTOMER_JOB_INDUSTRY, bean.getIndustry().toString()));
+				bean.setIndustryValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_INDUSTRY, bean.getIndustry().toString()));
 			}
 			if (bean.getPosition() != null) {
-				bean.setPositionValue(SysCodeUtil.getValue(CUSTOMER_JOB_POSITION, bean.getPosition().toString()));
+				bean.setPositionValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_POSITION, bean.getPosition().toString()));
 			}
 			if (bean.getAreaId() != null) {
 				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));

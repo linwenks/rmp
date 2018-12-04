@@ -9,7 +9,7 @@ public class CustomerMaintainUtil {
 	public static void assembly(CustomerMaintainBean bean) {
 		if (bean != null) {
 			if (bean.getMaintain() != null) {
-				bean.setMaintainValue(SysCodeUtil.getValue(CUSTOMER_MAINTAIN_MAINTAIN, bean.getMaintain().toString()));
+				bean.setMaintainValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_MAINTAIN, CUSTOMER_MAINTAIN_MAINTAIN, bean.getMaintain().toString()));
 			}
 		}
 	}

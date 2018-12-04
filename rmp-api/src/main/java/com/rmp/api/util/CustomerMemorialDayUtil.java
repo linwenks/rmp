@@ -23,10 +23,10 @@ public class CustomerMemorialDayUtil {
 	public static void assembly(CustomerMemorialDayBean bean) {
 		if (bean != null) {
 			if (bean.getAdvanceType() != null) {
-				bean.setAdvanceTypeValue(SysCodeUtil.getValue(CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE, bean.getAdvanceType().toString()));
+				bean.setAdvanceTypeValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE, bean.getAdvanceType().toString()));
 			}
 			if (bean.getOccurType() != null) {
-				bean.setOccurTypeValue(SysCodeUtil.getValue(CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE, bean.getOccurType().toString()));
+				bean.setOccurTypeValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE, bean.getOccurType().toString()));
 			}
 		}
 	}

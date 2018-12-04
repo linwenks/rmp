@@ -69,7 +69,7 @@ public class CustomerFamilyUtil {
 	public static void assembly(CustomerFamilyBean bean) {
 		if (bean != null) {
 			if (bean.getRelationship() != null) {
-				bean.setRelationshipValue(SysCodeUtil.getValue(CUSTOMER_FAMILY_RELATIONSHIP, bean.getRelationship().toString()));
+				bean.setRelationshipValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_FAMILY, CUSTOMER_FAMILY_RELATIONSHIP, bean.getRelationship().toString()));
 			}
 			if (bean.getAreaId() != null) {
 				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));

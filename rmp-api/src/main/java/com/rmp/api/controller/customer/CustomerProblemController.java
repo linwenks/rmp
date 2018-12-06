@@ -89,7 +89,7 @@ public class CustomerProblemController extends BaseApiController {
 	 * @apiSuccess (data) {String} customerProblemBean.remark 备注
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerProblemBean":{"healthValueList":[{"key":"1","value":"心脏病"}],"lifeValueList":[{"key":"1","value":"资金缺乏"},{"key":"3","value":"事业发展"}],"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerProblemBean":{"healthCodeList":[{"key":"1","value":"心脏病"}],"lifeCodeList":[{"key":"1","value":"资金缺乏"},{"key":"3","value":"事业发展"}],"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -132,7 +132,7 @@ public class CustomerProblemController extends BaseApiController {
 	 * @apiParam (data) {String} [customerProblemBean.remark] 备注
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerProblemBean":{"customerId":2,"healthValueList":[{"key":"1"}],"lifeValueList":[{"key":"1"},{"key":"3"}],"remark":"xxxxxxxxxTTT"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerProblemBean":{"customerId":2,"healthCodeList":[{"key":"1"}],"lifeCodeList":[{"key":"1"},{"key":"3"}],"remark":"xxxxxxxxxTTT"}}
      * 
      */
 	@RequestMapping(value = "/update")

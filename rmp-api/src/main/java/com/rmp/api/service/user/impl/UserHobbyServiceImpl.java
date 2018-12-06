@@ -3,13 +3,16 @@ package com.rmp.api.service.user.impl;
 import static com.rmp.api.util.MsgEnum.*;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
+import com.rmp.api.model.SysCodeBean;
 import com.rmp.api.model.UserBean;
 import com.rmp.api.model.UserHobbyBean;
 import com.rmp.api.service.user.UserHobbyService;
@@ -75,10 +78,23 @@ public class UserHobbyServiceImpl extends BaseServiceImpl<UserHobby, UserHobbyBe
 		if (userHobbyBean == null) AppException.toThrow(MSG_00003);
 		Long userId = userHobbyBean.getUserId();
 		
+		String interest = null;
+		String diet = null;
+		String taste = null;
+		if (!CollectionUtils.isEmpty(userHobbyBean.getInterestCodeList())) {
+			interest = userHobbyBean.getInterestCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		if (!CollectionUtils.isEmpty(userHobbyBean.getDietCodeList())) {
+			diet = userHobbyBean.getDietCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		if (!CollectionUtils.isEmpty(userHobbyBean.getTasteCodeList())) {
+			taste = userHobbyBean.getTasteCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		/*
 		String interest = StringUtils.trim(userHobbyBean.getInterest());
 		String diet = StringUtils.trim(userHobbyBean.getDiet());
 		String taste = StringUtils.trim(userHobbyBean.getTaste());
-		
+		*/
 		if (userId == null) AppException.toThrow(MSG_00003);
 		
 		UserBean userBeanTmp = UserBean.builder().id(userId).build();

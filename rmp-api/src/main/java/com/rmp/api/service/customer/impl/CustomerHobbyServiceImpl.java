@@ -3,15 +3,18 @@ package com.rmp.api.service.customer.impl;
 import static com.rmp.api.util.MsgEnum.*;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerHobbyBean;
+import com.rmp.api.model.SysCodeBean;
 import com.rmp.api.service.customer.CustomerHobbyService;
 import com.rmp.api.service.customer.CustomerService;
 import com.rmp.api.util.constant.Constant;
@@ -76,10 +79,23 @@ public class CustomerHobbyServiceImpl extends BaseServiceImpl<CustomerHobby, Cus
 		Long userId = customerHobbyBean.getUserId();
 		Long customerId = customerHobbyBean.getCustomerId();
 		
+		String interest = null;
+		String diet = null;
+		String taste = null;
+		if (!CollectionUtils.isEmpty(customerHobbyBean.getInterestCodeList())) {
+			interest = customerHobbyBean.getInterestCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		if (!CollectionUtils.isEmpty(customerHobbyBean.getDietCodeList())) {
+			diet = customerHobbyBean.getDietCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		if (!CollectionUtils.isEmpty(customerHobbyBean.getTasteCodeList())) {
+			taste = customerHobbyBean.getTasteCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		/*
 		String interest = StringUtils.trim(customerHobbyBean.getInterest());
 		String diet = StringUtils.trim(customerHobbyBean.getDiet());
 		String taste = StringUtils.trim(customerHobbyBean.getTaste());
-		
+		*/
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		
@@ -90,8 +106,7 @@ public class CustomerHobbyServiceImpl extends BaseServiceImpl<CustomerHobby, Cus
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		CustomerHobbyBean customerHobbyBeanTmp = new CustomerHobbyBean();
-		customerHobbyBeanTmp.setCustomerId(customerId);
+		CustomerHobbyBean customerHobbyBeanTmp = CustomerHobbyBean.builder().customerId(customerId).build();
 		customerHobbyBeanTmp = selectOne(customerHobbyBeanTmp);
 		if (customerHobbyBeanTmp != null) {
 			customerHobbyBeanTmp.setInterest(interest);
@@ -100,12 +115,13 @@ public class CustomerHobbyServiceImpl extends BaseServiceImpl<CustomerHobby, Cus
 			customerHobbyBeanTmp.setUpdateTime(nowDateLong);
 			updatePkVer(customerHobbyBeanTmp);
 		} else {
-			customerHobbyBeanTmp = new CustomerHobbyBean();
-			customerHobbyBeanTmp.setCustomerId(customerId);
-			customerHobbyBeanTmp.setInterest(interest);
-			customerHobbyBeanTmp.setDiet(diet);
-			customerHobbyBeanTmp.setTaste(taste);
-			customerHobbyBeanTmp.setCreateTime(nowDateLong);
+			customerHobbyBeanTmp = CustomerHobbyBean.builder()
+			.customerId(customerId)
+			.interest(interest)
+			.diet(diet)
+			.taste(taste)
+			.createTime(nowDateLong)
+			.build();
 			insertSel(customerHobbyBeanTmp);
 		}
 		

@@ -78,17 +78,14 @@ public class UserHobbyController extends BaseApiController {
      * 
      * @apiSuccess (data) {Object} userHobbyBean 兴趣爱好 bean
 	 * @apiSuccess (data) {String} userFamilyBean.interest 兴趣
-	 * @apiSuccess (data) {List} userFamilyBean.interestKeyList 兴趣 键 list
-	 * @apiSuccess (data) {List} userFamilyBean.interestValueList 兴趣 值 list
+	 * @apiSuccess (data) {SysCodeBean} userFamilyBean.interestCodeList 兴趣 code list
 	 * @apiSuccess (data) {String} userFamilyBean.diet 饮食
-	 * @apiSuccess (data) {List} userFamilyBean.dietKeyList 饮食 键 list
-	 * @apiSuccess (data) {List} userFamilyBean.dietValueList 饮食 值 list
+	 * @apiSuccess (data) {SysCodeBean} userFamilyBean.dietCodeList 饮食 code list
 	 * @apiSuccess (data) {String} userFamilyBean.taste 口味
-	 * @apiSuccess (data) {List} userFamilyBean.tasteKeyList 口味 键 list
-	 * @apiSuccess (data) {List} userFamilyBean.tasteValueList 口味 值 list
+	 * @apiSuccess (data) {SysCodeBean} userFamilyBean.tasteCodeList 口味 code list
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userHobbyBean":{"interestKeyList":["1"],"dietKeyList":["1","3"],"tasteKeyList":["4"],"interestValueList":["美食"],"dietValueList":["川湘菜","粤菜"],"tasteValueList":["苦"],"interest":"1","diet":"1,3","taste":"4"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userHobbyBean":{"interestCodeList":[{"key":"1","value":"美食"}],"dietCodeList":[{"key":"1","value":"川湘菜"},{"key":"3","value":"粤菜"}],"tasteCodeList":[{"key":"4","value":"苦"}],"interest":"1","diet":"1,3","taste":"4"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -118,12 +115,12 @@ public class UserHobbyController extends BaseApiController {
      * @apiVersion 1.0.0
      * 
      * @apiParam (data) {Object} userHobbyBean 兴趣爱好 bean
-	 * @apiParam (data) {String} [userFamilyBean.interest] 兴趣
-	 * @apiParam (data) {String} [userFamilyBean.diet] 饮食
-	 * @apiParam (data) {String} [userFamilyBean.taste] 口味
+	 * @apiParam (data) {SysCodeBean} [userHobbyBean.interestCodeList] 兴趣 code list
+	 * @apiParam (data) {SysCodeBean} [userHobbyBean.dietCodeList] 饮食 code list
+	 * @apiParam (data) {SysCodeBean} [userHobbyBean.tasteCodeList] 口味 code list
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userHobbyBean":{"interest":"1","diet":"1,3","taste":"4"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userHobbyBean":{"interestCodeList":[{"key":"1"}],"dietCodeList":[{"key":"1"},{"key":"3"}],"tasteCodeList":[{"key":"4"}]}}
      * 
      */
 	@RequestMapping(value = "/update")

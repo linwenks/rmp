@@ -83,15 +83,13 @@ public class CustomerProblemController extends BaseApiController {
      * 
      * @apiSuccess (data) {Object} customerProblemBean 可能问题 bean
 	 * @apiSuccess (data) {String} customerProblemBean.health 健康
-	 * @apiSuccess (data) {List} customerProblemBean.healthKeyList 健康 键 list
-	 * @apiSuccess (data) {List} customerProblemBean.healthValueList 健康 值 list
+	 * @apiSuccess (data) {SysCodeBean} customerProblemBean.healthCodeList 健康 code list
 	 * @apiSuccess (data) {String} customerProblemBean.life 生活
-	 * @apiSuccess (data) {List} customerProblemBean.lifeKeyList 生活 键 list
-	 * @apiSuccess (data) {List} customerProblemBean.lifeValueList 生活 值 list
+	 * @apiSuccess (data) {SysCodeBean} customerProblemBean.lifeCodeList 生活 code list
 	 * @apiSuccess (data) {String} customerProblemBean.remark 备注
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerProblemBean":{"healthKeyList":["1"],"lifeKeyList":["1","3"],"healthValueList":["心脏病"],"lifeValueList":["资金缺乏","事业发展"],"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerProblemBean":{"healthValueList":[{"key":"1","value":"心脏病"}],"lifeValueList":[{"key":"1","value":"资金缺乏"},{"key":"3","value":"事业发展"}],"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -129,12 +127,12 @@ public class CustomerProblemController extends BaseApiController {
      * 
      * @apiParam (data) {Object} customerProblemBean 可能问题 bean
      * @apiParam (data) {Long} customerProblemBean。customerId 客户ID
-	 * @apiParam (data) {String} [customerProblemBean.healt] 健康
-	 * @apiParam (data) {String} [customerProblemBean.life] 生活
+	 * @apiParam (data) {SysCodeBean} [customerProblemBean.healtCodeList] 健康
+	 * @apiParam (data) {SysCodeBean} [customerProblemBean.lifeCodeList] 生活
 	 * @apiParam (data) {String} [customerProblemBean.remark] 备注
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerProblemBean":{"customerId":2,"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerProblemBean":{"customerId":2,"healthValueList":[{"key":"1"}],"lifeValueList":[{"key":"1"},{"key":"3"}],"remark":"xxxxxxxxxTTT"}}
      * 
      */
 	@RequestMapping(value = "/update")

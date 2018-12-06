@@ -18,12 +18,12 @@ public class CustomerHobbyBean extends CustomerHobby {
 	@Builder
 	public CustomerHobbyBean(Long id, Long customerId, String interest, String diet, String taste, Integer isDelete,
 			Integer version, Long createTime, Long updateTime
-			, Long userId, List<SysCodeBean> interestSysCodeBeanList, List<SysCodeBean> dietSysCodeBeanList, List<SysCodeBean> tasteSysCodeBeanList) {
+			, Long userId, List<SysCodeBean> interestCodeList, List<SysCodeBean> dietCodeList, List<SysCodeBean> tasteCodeList) {
 		super(id, customerId, interest, diet, taste, isDelete, version, createTime, updateTime);
 		this.userId = userId;
-		this.interestSysCodeBeanList = interestSysCodeBeanList;
-		this.dietSysCodeBeanList = dietSysCodeBeanList;
-		this.tasteSysCodeBeanList = tasteSysCodeBeanList;
+		this.interestCodeList = interestCodeList;
+		this.dietCodeList = dietCodeList;
+		this.tasteCodeList = tasteCodeList;
 	}
 	
 	private Long userId;
@@ -31,15 +31,15 @@ public class CustomerHobbyBean extends CustomerHobby {
 	/**
      * 兴趣 SysCodeBean list
      */
-    private List<SysCodeBean> interestSysCodeBeanList;
+    private List<SysCodeBean> interestCodeList;
 
     /**
      * 饮食 SysCodeBean list
      */
-    private List<SysCodeBean> dietSysCodeBeanList;
+    private List<SysCodeBean> dietCodeList;
 
     /**
      * 口味 SysCodeBean list
      */
-    private List<SysCodeBean> tasteSysCodeBeanList;
+    private List<SysCodeBean> tasteCodeList;
 }

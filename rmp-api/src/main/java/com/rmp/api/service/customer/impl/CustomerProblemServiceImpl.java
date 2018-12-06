@@ -3,15 +3,18 @@ package com.rmp.api.service.customer.impl;
 import static com.rmp.api.util.MsgEnum.*;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerProblemBean;
+import com.rmp.api.model.SysCodeBean;
 import com.rmp.api.service.customer.CustomerProblemService;
 import com.rmp.api.service.customer.CustomerService;
 import com.rmp.api.util.constant.Constant;
@@ -75,9 +78,18 @@ public class CustomerProblemServiceImpl extends BaseServiceImpl<CustomerProblem,
 		if (customerProblemBean == null) AppException.toThrow(MSG_00003);
 		Long userId = customerProblemBean.getUserId();
 		Long customerId = customerProblemBean.getCustomerId();
-		
+		/*
 		String health = StringUtils.trim(customerProblemBean.getHealth());
 		String life = StringUtils.trim(customerProblemBean.getLife());
+		*/
+		String health = null;
+		String life = null;
+		if (!CollectionUtils.isEmpty(customerProblemBean.getHealthCodeList())) {
+			health = customerProblemBean.getHealthCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
+		if (!CollectionUtils.isEmpty(customerProblemBean.getLifeCodeList())) {
+			life = customerProblemBean.getLifeCodeList().stream().map(SysCodeBean::getKey).filter(StringUtils::isNotEmpty).distinct().collect(Collectors.joining(","));
+		}
 		String remark = StringUtils.trim(customerProblemBean.getRemark());
 		
 		if (userId == null) AppException.toThrow(MSG_00003);

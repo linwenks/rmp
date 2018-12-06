@@ -19,13 +19,13 @@ public class CustomerProblemUtil {
 			if (!StringUtils.isEmpty(bean.getHealth())) {
 				List<String> keyList = Arrays.asList(StringUtils.split(bean.getHealth(), ","));
 				if (!CollectionUtils.isEmpty(keyList)) {
-					bean.setHealthSysCodeBeanList(keyList.stream().map(key -> SysCodeBean.builder().key(key).value(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_HEALTH, key)).build()).collect(Collectors.toList()));
+					bean.setHealthCodeList(keyList.stream().map(key -> SysCodeBean.builder().key(key).value(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_HEALTH, key)).build()).collect(Collectors.toList()));
 				}
 			}
 			if (!StringUtils.isEmpty(bean.getLife())) {
 				List<String> keyList = Arrays.asList(StringUtils.split(bean.getLife(), ","));
 				if (!CollectionUtils.isEmpty(keyList)) {
-					bean.setLifeSysCodeBeanList(keyList.stream().map(key -> SysCodeBean.builder().key(key).value(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_LIFE, key)).build()).collect(Collectors.toList()));
+					bean.setLifeCodeList(keyList.stream().map(key -> SysCodeBean.builder().key(key).value(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_PROBLEM, CUSTOMER_PROBLEM_LIFE, key)).build()).collect(Collectors.toList()));
 				}
 			}
 		}

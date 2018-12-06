@@ -18,35 +18,22 @@ public class CustomerProblemBean extends CustomerProblem {
 	@Builder
 	public CustomerProblemBean(Long id, Long customerId, String health, String life, String remark, Integer isDelete,
 			Integer version, Long createTime, Long updateTime
-			, Long userId, List<String> healthKeyList, List<String> lifeKeyList, List<String> healthValueList, List<String> lifeValueList) {
+			, Long userId, List<SysCodeBean> healthSysCodeBeanList, List<SysCodeBean> lifeSysCodeBeanList) {
 		super(id, customerId, health, life, remark, isDelete, version, createTime, updateTime);
 		this.userId = userId;
-		this.healthKeyList = healthKeyList;
-		this.lifeKeyList = lifeKeyList;
-		this.healthValueList = healthValueList;
-		this.lifeValueList = lifeValueList;
+		this.healthSysCodeBeanList = healthSysCodeBeanList;
+		this.lifeSysCodeBeanList = lifeSysCodeBeanList;
 	}
 
 	private Long userId;
 	
 	/**
-     * 健康问题 key list
+     * 健康问题 SysCodeBean list
      */
-    private List<String> healthKeyList;
+    private List<SysCodeBean> healthSysCodeBeanList;
 
     /**
-     * 生活问题 key list
+     * 生活问题 SysCodeBean list
      */
-    private List<String> lifeKeyList;
-    
-	/**
-     * 健康问题 key list
-     */
-    private List<String> healthValueList;
-
-    /**
-     * 生活问题 key list
-     */
-    private List<String> lifeValueList;
-
+    private List<SysCodeBean> lifeSysCodeBeanList;
 }

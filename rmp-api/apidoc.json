@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "api接口文档",
   "title": "关系维护-api接口文档",
-  "url" : "http://47.94.5.205",
+  "url" : "http://test.relationkeep.cn",
   "order":[
   	"group_example",
 	"group_user",

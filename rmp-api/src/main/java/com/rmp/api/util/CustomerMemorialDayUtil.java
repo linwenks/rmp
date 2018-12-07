@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.model.CustomerMemorialDayBean;
+import com.rmp.common.util.DateUtil;
 
 public class CustomerMemorialDayUtil {
 
@@ -27,6 +28,18 @@ public class CustomerMemorialDayUtil {
 			}
 			if (bean.getOccurType() != null) {
 				bean.setOccurTypeValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_MEMORIAL_DAY, CUSTOMER_MEMORIAL_DAY_OCCUR_TYPE, bean.getOccurType().toString()));
+			}
+			if (bean.getOccurDate() != null && bean.getOccurType() != null) {
+				switch (bean.getOccurType()) {
+				case 1:
+					bean.setOccurDateStr(DateUtil.formatDate(DateUtil.parseDate(bean.getOccurDate().toString(), DateUtil.yyyyMMdd)));
+					break;
+				case 2:
+					bean.setOccurDateStr(DateUtil.formatDate(DateUtil.parseDate(bean.getOccurDate().toString(), DateUtil.MMdd)));
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}

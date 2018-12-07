@@ -14,6 +14,7 @@ import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.util.BaseUtil;
 import com.rmp.api.model.UserBean;
 import com.rmp.api.util.constant.Constant;
+import com.rmp.common.util.DateUtil;
 import com.rmp.common.util.PatternUtil;
 
 public class UserUtil extends BaseUtil {
@@ -190,6 +191,9 @@ public class UserUtil extends BaseUtil {
 			}
 			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
 				bean.setHeadPic(Constant.imgDomain() + bean.getHeadPic());    // 获取图片域名
+			}
+			if (bean.getBirthday() != null) {
+				bean.setBirthdayStr(DateUtil.formatDate(DateUtil.parseDate(bean.getBirthday().toString(), DateUtil.yyyyMMdd)));
 			}
 		}
 	}

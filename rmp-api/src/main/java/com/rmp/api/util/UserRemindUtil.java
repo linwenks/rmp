@@ -1,6 +1,7 @@
 package com.rmp.api.util;
 
 import com.rmp.api.model.UserRemindBean;
+import com.rmp.common.util.DateUtil;
 
 public class UserRemindUtil {
 
@@ -18,7 +19,9 @@ public class UserRemindUtil {
 				}
 				bean.setAdvanceDayStr(advanceDayStr);
 			}
-			UserRemindUtil.assembly(bean);
+			if (bean.getRemindDateStr() != null) {
+				bean.setRemindDateStr(DateUtil.formatDate(DateUtil.parseDate(bean.getRemindDate().toString(), DateUtil.yyyyMMdd)));
+			}
 			CustomerUtil.assembly(bean.getCustomerBean());
 		}
 	}

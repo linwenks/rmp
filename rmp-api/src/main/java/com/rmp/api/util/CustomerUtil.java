@@ -8,6 +8,7 @@ import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.util.BaseUtil;
 import com.rmp.api.model.CustomerBean;
 import com.rmp.api.util.constant.Constant;
+import com.rmp.common.util.DateUtil;
 import com.rmp.common.util.PatternUtil;
 
 public class CustomerUtil extends BaseUtil {
@@ -50,6 +51,9 @@ public class CustomerUtil extends BaseUtil {
 			}
 			if (!StringUtils.isEmpty(bean.getPinyin())) {
 				bean.setPinyinFirst(bean.getPinyin().substring(0, 1));
+			}
+			if (bean.getBirthday() != null) {
+				bean.setBirthdayStr(DateUtil.formatDate(DateUtil.parseDate(bean.getBirthday().toString(), DateUtil.yyyyMMdd)));
 			}
 		}
 	}

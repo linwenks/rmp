@@ -17,13 +17,14 @@ public class CustomerFamilyBean extends CustomerFamily {
 	public CustomerFamilyBean(Long id, Long customerId, Integer relationship, String realName, Integer birthday,
 			Long phone, Long areaId, String address, Integer isDelete, Integer version, Long createTime,
 			Long updateTime
-			, Long userId, String areaNameAll, String relationshipValue, Integer age) {
+			, Long userId, String areaNameAll, String relationshipValue, Integer age, String birthdayStr) {
 		super(id, customerId, relationship, realName, birthday, phone, areaId, address, isDelete, version, createTime,
 				updateTime);
 		this.userId = userId;
 		this.areaNameAll = areaNameAll;
 		this.relationshipValue = relationshipValue;
 		this.age = age;
+		this.birthdayStr = birthdayStr;
 	}
 	
 	private Long userId;
@@ -42,4 +43,9 @@ public class CustomerFamilyBean extends CustomerFamily {
      * 年龄
      */
     private Integer age;
+    
+    /**
+     * 生日 str
+     */
+    private String birthdayStr;
 }

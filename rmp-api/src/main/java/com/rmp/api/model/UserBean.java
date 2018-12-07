@@ -20,11 +20,12 @@ public class UserBean extends User {
 			String headPic, Integer sex, Integer birthday, String payPwd, BigDecimal account, Long lastLoginTime,
 			Long areaId, String address, String wxId, String token, Integer status, String wxSessionKey,
 			Integer isDelete, Integer version, Long createTime, Long updateTime
-			, String jsCode, String areaNameAll, Long idNotEqualTo) {
+			, String jsCode, String areaNameAll, String birthdayStr, Long idNotEqualTo) {
 		super(id, loginName, loginPwd, phone, realName, nickName, headPic, sex, birthday, payPwd, account, lastLoginTime,
 				areaId, address, wxId, token, status, wxSessionKey, isDelete, version, createTime, updateTime);
 		this.jsCode = jsCode;
 		this.areaNameAll = areaNameAll;
+		this.birthdayStr = birthdayStr;
 		this.idNotEqualTo = idNotEqualTo;
 	}
 	
@@ -37,6 +38,11 @@ public class UserBean extends User {
      * 区域 名称 all
      */
     private String areaNameAll;
+    
+    /**
+     * 生日 str
+     */
+    private String birthdayStr;
     
     private Long idNotEqualTo;
 }

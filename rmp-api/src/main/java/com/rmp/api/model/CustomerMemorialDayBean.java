@@ -16,11 +16,12 @@ public class CustomerMemorialDayBean extends CustomerMemorialDay {
 	@Builder
 	public CustomerMemorialDayBean(Long id, Long customerId, String name, Integer occurType, Integer occurDate,
 			Integer advanceType, String remark, Integer isDelete, Integer version, Long createTime, Long updateTime
-			, Long userId, String occurTypeValue, String advanceTypeValue) {
+			, Long userId, String occurTypeValue, String advanceTypeValue, String occurDateStr) {
 		super(id, customerId, name, occurType, occurDate, advanceType, remark, isDelete, version, createTime, updateTime);
 		this.userId = userId;
 		this.occurTypeValue = occurTypeValue;
 		this.advanceTypeValue = advanceTypeValue;
+		this.occurDateStr = occurDateStr;
 	}
 	
 	private Long userId;
@@ -34,4 +35,10 @@ public class CustomerMemorialDayBean extends CustomerMemorialDay {
      * 提前类型 value
      */
     private String advanceTypeValue;
+    
+    /**
+     * 提前类型 value
+     */
+    private String occurDateStr;
+    
 }

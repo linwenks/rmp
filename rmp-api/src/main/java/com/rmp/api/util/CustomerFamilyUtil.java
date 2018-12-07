@@ -80,6 +80,11 @@ public class CustomerFamilyUtil {
 					bean.setBirthday(null);
 				}
 			}
+			if (bean.getBirthday() != null) {
+				int year = Integer.parseInt(bean.getBirthday().toString().substring(0, 4));
+				bean.setAge(getAge(year));
+				bean.setBirthdayStr(DateUtil.formatDate(DateUtil.parseDate(bean.getBirthday().toString(), DateUtil.yyyyMMdd)));
+			}
 		}
 	}
 }

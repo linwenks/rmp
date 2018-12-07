@@ -75,12 +75,6 @@ public class CustomerFamilyUtil {
 				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
 			}
 			if (bean.getBirthday() != null) {
-				if (bean.getBirthday().toString().length() == 4) {
-					bean.setAge(getAge(bean.getBirthday()));
-					bean.setBirthday(null);
-				}
-			}
-			if (bean.getBirthday() != null) {
 				int year = Integer.parseInt(bean.getBirthday().toString().substring(0, 4));
 				bean.setAge(getAge(year));
 				bean.setBirthdayStr(DateUtil.formatDate(DateUtil.parseDate(bean.getBirthday().toString(), DateUtil.yyyyMMdd)));

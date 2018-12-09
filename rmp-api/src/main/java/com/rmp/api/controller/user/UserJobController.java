@@ -164,7 +164,7 @@ public class UserJobController extends BaseApiController {
      * @apiParam (UserJobBean) {String} [userJobBean.address] 地址
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"realName":"ttt","sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"},"userJobBean":{"userId":4,"industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","areaId":321200,"address":"aaaaaaaaaaaaaa"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"realName":"ttt","sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"},"userJobBean":{"ndustry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","areaId":321200,"address":"aaaaaaaaaaaaaa"}}
      * 
      */
 	@RequestMapping(value = "/update")

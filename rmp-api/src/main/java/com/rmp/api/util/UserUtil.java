@@ -186,8 +186,9 @@ public class UserUtil extends BaseUtil {
 	
 	public static void assembly(UserBean bean) {
 		if (bean != null) {
-			if (bean.getAreaId() != null) {
-				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+			if (bean.getArea() != null) {
+			//	bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+				bean.setAreaNameAll(bean.getArea());
 			}
 			if (!StringUtils.isEmpty(bean.getHeadPic()) && !bean.getHeadPic().startsWith("http")) {
 				bean.setHeadPic(Constant.imgDomain() + bean.getHeadPic());    // 获取图片域名

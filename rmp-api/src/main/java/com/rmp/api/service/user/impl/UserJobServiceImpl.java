@@ -89,8 +89,8 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 		String departmentName = userJobBean.getDepartmentName();
 		Integer position = userJobBean.getPosition();
 		Long phone = userJobBean.getPhone();
-		Long areaId = userJobBean.getAreaId();
-		String address = userJobBean.getAddress();
+		String area = StringUtils.trim(userJobBean.getArea());
+		String address = StringUtils.trim(userJobBean.getAddress());
 		
 		if (userId == null) AppException.toThrow(MSG_00003);
 		int companyNameMaxLength = 100;
@@ -112,7 +112,7 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 			userJobBeanTmp.setDepartmentName(departmentName);
 			userJobBeanTmp.setPosition(position);
 			userJobBeanTmp.setPhone(phone);
-			userJobBeanTmp.setAreaId(areaId);
+			userJobBeanTmp.setArea(area);
 			userJobBeanTmp.setAddress(address);
 			userJobBeanTmp.setUpdateTime(nowDateLong);
 			updatePkVer(userJobBeanTmp);
@@ -124,7 +124,7 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 			.departmentName(departmentName)
 			.position(position)
 			.phone(phone)
-			.areaId(areaId)
+			.area(area)
 			.address(address)
 			.createTime(nowDateLong)
 			.build();

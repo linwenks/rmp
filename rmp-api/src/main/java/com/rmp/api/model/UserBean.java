@@ -18,11 +18,11 @@ public class UserBean extends User {
 	@Builder
 	public UserBean(Long id, String loginName, String loginPwd, Long phone, String realName, String nickName,
 			String headPic, Integer sex, Integer birthday, String payPwd, BigDecimal account, Long lastLoginTime,
-			Long areaId, String address, String wxId, String token, Integer status, String wxSessionKey,
+			String area, String address, String wxId, String token, Integer status, String wxSessionKey,
 			Integer isDelete, Integer version, Long createTime, Long updateTime
 			, String jsCode, String areaNameAll, String birthdayStr, Long idNotEqualTo) {
 		super(id, loginName, loginPwd, phone, realName, nickName, headPic, sex, birthday, payPwd, account, lastLoginTime,
-				areaId, address, wxId, token, status, wxSessionKey, isDelete, version, createTime, updateTime);
+				area, address, wxId, token, status, wxSessionKey, isDelete, version, createTime, updateTime);
 		this.jsCode = jsCode;
 		this.areaNameAll = areaNameAll;
 		this.birthdayStr = birthdayStr;

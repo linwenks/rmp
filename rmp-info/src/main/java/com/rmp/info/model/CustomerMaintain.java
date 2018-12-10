@@ -1,9 +1,7 @@
 package com.rmp.info.model;
 
-import java.math.BigDecimal;
-
 import com.rmp.info.base.model.Model;
-
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

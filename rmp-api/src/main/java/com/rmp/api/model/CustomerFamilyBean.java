@@ -15,10 +15,10 @@ public class CustomerFamilyBean extends CustomerFamily {
 	
 	@Builder
 	public CustomerFamilyBean(Long id, Long customerId, Integer relationship, String realName, Integer birthday,
-			Long phone, Long areaId, String address, Integer isDelete, Integer version, Long createTime,
+			Long phone, String area, String address, Integer isDelete, Integer version, Long createTime,
 			Long updateTime
 			, Long userId, String areaNameAll, String relationshipValue, Integer age, String birthdayStr) {
-		super(id, customerId, relationship, realName, birthday, phone, areaId, address, isDelete, version, createTime,
+		super(id, customerId, relationship, realName, birthday, phone, area, address, isDelete, version, createTime,
 				updateTime);
 		this.userId = userId;
 		this.areaNameAll = areaNameAll;

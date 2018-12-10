@@ -79,7 +79,7 @@ public class UserJobController extends BaseApiController {
 	 * @apiSuccess (data) {Long} userBean.phone 手机
 	 * @apiSuccess (data) {Integer} userBean.sex 性别<br/>0:女<br/>1:男
 	 * @apiSuccess (data) {String} userBean.headPic 头像
-	 * @apiSuccess (data) {Long} userBean.areaId 区域ID
+	 * @apiSuccess (data) {String} userBean.area 区域
 	 * @apiSuccess (data) {String} userBean.areaNameAll 区域全称
      * @apiSuccess (data) {String} userBean.address 地址
      *
@@ -91,12 +91,12 @@ public class UserJobController extends BaseApiController {
 	 * @apiSuccess (data) {Integer} userJobBean.position 职位
 	 * @apiSuccess (data) {String} userJobBean.positionValue 职位 值
 	 * @apiSuccess (data) {String} userJobBean.phone 手机
-	 * @apiSuccess (data) {Long} userJobBean.areaId 区域ID
+	 * @apiSuccess (data) {String} userJobBean.area 区域
 	 * @apiSuccess (data) {String} userJobBean.areaNameAll 区域全称
      * @apiSuccess (data) {String} userJobBean.address 地址
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"areaId":321200,"address":"aaaaaaaaaaaaaa"},"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -115,7 +115,7 @@ public class UserJobController extends BaseApiController {
 		.phone(userBean.getPhone())
 		.birthday(userBean.getBirthday())
 		.sex(userBean.getSex())
-		.areaId(userBean.getAreaId())
+		.area(userBean.getArea())
 		.address(userBean.getAddress())
 		.headPic(userBean.getHeadPic())
 		.build();
@@ -130,7 +130,7 @@ public class UserJobController extends BaseApiController {
 			.departmentName(userJobBeanTmp.getDepartmentName())
 			.position(userJobBeanTmp.getPosition())
 			.phone(userJobBeanTmp.getPhone())
-			.areaId(userJobBeanTmp.getAreaId())
+			.area(userJobBeanTmp.getArea())
 			.address(userJobBeanTmp.getAddress())
 			.build();
 			UserJobUtil.assembly(userJobBeanResult);
@@ -151,7 +151,7 @@ public class UserJobController extends BaseApiController {
 	 * @apiParam (UserJobBean) {String} userBean.realName 真实姓名
 	 * @apiParam (UserJobBean) {Integer} [userBean.sex] 性别<br/>0:女<br/>1:男
 	 * @apiParam (UserJobBean) {String} [userBean.headPic] 头像
-	 * @apiParam (UserJobBean) {Long} [userBean.areaId] 区域ID
+	 * @apiParam (UserJobBean) {String} [userBean.area] 区域
      * @apiParam (UserJobBean) {String} [userBean.address] 地址
      *
      * @apiParam (UserJobBean) {Object} userJobBean 工作 bean
@@ -160,11 +160,11 @@ public class UserJobController extends BaseApiController {
 	 * @apiParam (UserJobBean) {String} [userJobBean.departmentName] 部门
 	 * @apiParam (UserJobBean) {Integer} [userJobBean.position] 职位
 	 * @apiParam (UserJobBean) {String} [userJobBean.phone] 手机
-	 * @apiParam (UserJobBean) {Long} [userJobBean.areaId] 区域ID
+	 * @apiParam (UserJobBean) {String} [userJobBean.area] 区域
      * @apiParam (UserJobBean) {String} [userJobBean.address] 地址
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"realName":"ttt","sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"},"userJobBean":{"ndustry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","areaId":321200,"address":"aaaaaaaaaaaaaa"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"realName":"ttt","sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"userJobBean":{"ndustry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}
      * 
      */
 	@RequestMapping(value = "/update")

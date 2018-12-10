@@ -90,8 +90,8 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 		String departmentName = customerJobBean.getDepartmentName();
 		Integer position = customerJobBean.getPosition();
 		Long phone = customerJobBean.getPhone();
-		Long areaId = customerJobBean.getAreaId();
-		String address = customerJobBean.getAddress();
+		String area = StringUtils.trim(customerJobBean.getArea());
+		String address = StringUtils.trim(customerJobBean.getAddress());
 		
 		if (userId == null) AppException.toThrow(MSG_00003);
 		int companyNameMaxLength = 100;
@@ -118,7 +118,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 				customerJobBeanTmp.setDepartmentName(departmentName);
 				customerJobBeanTmp.setPosition(position);
 				customerJobBeanTmp.setPhone(phone);
-				customerJobBeanTmp.setAreaId(areaId);
+				customerJobBeanTmp.setArea(area);
 				customerJobBeanTmp.setAddress(address);
 				customerJobBeanTmp.setUpdateTime(nowDateLong);
 				updatePkVer(customerJobBeanTmp);
@@ -130,7 +130,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 				.departmentName(departmentName)
 				.position(position)
 				.phone(phone)
-				.areaId(areaId)
+				.area(area)
 				.address(address)
 				.createTime(nowDateLong)
 				.build();
@@ -153,7 +153,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 			.departmentName(departmentName)
 			.position(position)
 			.phone(phone)
-			.areaId(areaId)
+			.area(area)
 			.address(address)
 			.createTime(nowDateLong)
 			.build();

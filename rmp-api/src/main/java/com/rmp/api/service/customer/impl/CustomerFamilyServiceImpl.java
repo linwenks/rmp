@@ -85,7 +85,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		
 		Long phone = customerFamilyBean.getPhone();
 		Integer birthday = customerFamilyBean.getBirthday();
-		Long areaId = customerFamilyBean.getAreaId();
+		String area = StringUtils.trim(customerFamilyBean.getArea());
 		String address = StringUtils.trim(customerFamilyBean.getAddress());
 		Integer age = customerFamilyBean.getAge();
 		
@@ -116,7 +116,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		.phone(phone)
 		.relationship(relationship)
 		.birthday(birthday)
-		.areaId(areaId)
+		.area(area)
 		.address(address)
 		.createTime(nowDateLong)
 		.build();
@@ -140,7 +140,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		
 		Long phone = customerFamilyBean.getPhone();
 		Integer birthday = customerFamilyBean.getBirthday();
-		Long areaId = customerFamilyBean.getAreaId();
+		String area = StringUtils.trim(customerFamilyBean.getArea());
 		String address = StringUtils.trim(customerFamilyBean.getAddress());
 		Integer age = customerFamilyBean.getAge();
 		
@@ -171,7 +171,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		customerFamilyBeanTmp.setPhone(phone);
 		customerFamilyBeanTmp.setRelationship(relationship);
 		customerFamilyBeanTmp.setBirthday(birthday);
-		customerFamilyBeanTmp.setAreaId(areaId);
+		customerFamilyBeanTmp.setArea(area);
 		customerFamilyBeanTmp.setAddress(address);
 		customerFamilyBeanTmp.setUpdateTime(nowDateLong);
 		updatePkVer(customerFamilyBeanTmp);

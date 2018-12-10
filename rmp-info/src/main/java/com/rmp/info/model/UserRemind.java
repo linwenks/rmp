@@ -1,7 +1,6 @@
 package com.rmp.info.model;
 
 import com.rmp.info.base.model.Model;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +29,7 @@ public class UserRemind extends Model {
     private Long userId;
 
     /**
-     * 分类（1:纪念日 2:客户生日 3:用户生日）
+     * 分类（1:纪念日 2:客户家庭生日 3:客户生日 4:用户生日）
      */
     private Integer type;
 

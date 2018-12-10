@@ -661,7 +661,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 
 		Integer birthday = userBean.getBirthday();
 		Integer sex = userBean.getSex();
-		Long areaId = userBean.getAreaId();
+		String area = StringUtils.trim(userBean.getArea());
 		String address = StringUtils.trim(userBean.getAddress());
 		String headPic = StringUtils.trim(userBean.getHeadPic());
 		
@@ -681,7 +681,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		userBeanTmp.setHeadPic(headPic);
 		userBeanTmp.setBirthday(birthday);
 		userBeanTmp.setSex(sex);
-		userBeanTmp.setAreaId(areaId);
+		userBeanTmp.setArea(area);
 		userBeanTmp.setAddress(address);
 		userBeanTmp.setUpdateTime(nowDateLong);
 		updatePkVer(userBeanTmp);

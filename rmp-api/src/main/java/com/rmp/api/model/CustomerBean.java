@@ -15,10 +15,10 @@ public class CustomerBean extends Customer {
 	
 	@Builder
 	public CustomerBean(Long id, Long userId, String realName, String pinyin, Long phone, Integer sex, Integer birthday,
-			String headPic, Long areaId, String address, Integer vip, String tag, Integer isDelete, Integer version,
+			String headPic, String area, String address, Integer vip, String tag, Integer isDelete, Integer version,
 			Long createTime, Long updateTime
 			, Long idNot, String areaNameAll, CustomerRelationBean customerRelationBean, String pinyinFirst, String birthdayStr) {
-		super(id, userId, realName, pinyin, phone, sex, birthday, headPic, areaId, address, vip, tag, isDelete, version,
+		super(id, userId, realName, pinyin, phone, sex, birthday, headPic, area, address, vip, tag, isDelete, version,
 				createTime, updateTime);
 		this.idNot = idNot;
 		this.areaNameAll = areaNameAll;

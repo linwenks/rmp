@@ -10,7 +10,7 @@
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="birthday" jdbcType="INTEGER" property="birthday" />
     <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
-    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="vip" jdbcType="INTEGER" property="vip" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
@@ -78,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, real_name, pinyin, phone, sex, birthday, head_pic, area_id, address, 
-    vip, tag, is_delete, version, create_time, update_time
+    id, user_id, real_name, pinyin, phone, sex, birthday, head_pic, area, address, vip, 
+    tag, is_delete, version, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.rmp.info.model.CustomerCriteria" resultMap="BaseResultMap">
     select
@@ -117,13 +117,13 @@
   <insert id="insert" parameterType="com.rmp.info.model.Customer">
     insert into t_customer (id, user_id, real_name, 
       pinyin, phone, sex, 
-      birthday, head_pic, area_id, 
+      birthday, head_pic, area, 
       address, vip, tag, 
       is_delete, version, create_time, 
       update_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
       #{pinyin,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, #{sex,jdbcType=INTEGER}, 
-      #{birthday,jdbcType=INTEGER}, #{headPic,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, 
+      #{birthday,jdbcType=INTEGER}, #{headPic,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{vip,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=BIGINT})
@@ -158,8 +158,8 @@
       <if test="headPic != null">
         head_pic,
       </if>
-      <if test="areaId != null">
-        area_id,
+      <if test="area != null">
+        area,
       </if>
       <if test="address != null">
         address,
@@ -208,8 +208,8 @@
       <if test="headPic != null">
         #{headPic,jdbcType=VARCHAR},
       </if>
-      <if test="areaId != null">
-        #{areaId,jdbcType=BIGINT},
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -270,8 +270,8 @@
       <if test="record.headPic != null">
         head_pic = #{record.headPic,jdbcType=VARCHAR},
       </if>
-      <if test="record.areaId != null">
-        area_id = #{record.areaId,jdbcType=BIGINT},
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -309,7 +309,7 @@
       sex = #{record.sex,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=INTEGER},
       head_pic = #{record.headPic,jdbcType=VARCHAR},
-      area_id = #{record.areaId,jdbcType=BIGINT},
+      area = #{record.area,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       vip = #{record.vip,jdbcType=INTEGER},
       tag = #{record.tag,jdbcType=VARCHAR},
@@ -345,8 +345,8 @@
       <if test="headPic != null">
         head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
-      <if test="areaId != null">
-        area_id = #{areaId,jdbcType=BIGINT},
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -381,7 +381,7 @@
       sex = #{sex,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=INTEGER},
       head_pic = #{headPic,jdbcType=VARCHAR},
-      area_id = #{areaId,jdbcType=BIGINT},
+      area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       vip = #{vip,jdbcType=INTEGER},
       tag = #{tag,jdbcType=VARCHAR},
@@ -401,7 +401,7 @@
     sex,
     birthday,
     head_pic,
-    area_id,
+    area,
     address,
     vip,
     tag,
@@ -421,7 +421,7 @@
          #{record.sex,jdbcType=INTEGER}, 
          #{record.birthday,jdbcType=INTEGER}, 
          #{record.headPic,jdbcType=VARCHAR}, 
-         #{record.areaId,jdbcType=BIGINT}, 
+         #{record.area,jdbcType=VARCHAR}, 
          #{record.address,jdbcType=VARCHAR}, 
          #{record.vip,jdbcType=INTEGER}, 
          #{record.tag,jdbcType=VARCHAR}, 
@@ -460,8 +460,8 @@
       <if test="recordColl[0].headPic != null">
         head_pic,
       </if>
-      <if test="recordColl[0].areaId != null">
-        area_id,
+      <if test="recordColl[0].area != null">
+        area,
       </if>
       <if test="recordColl[0].address != null">
         address,
@@ -513,8 +513,8 @@
         <if test="record.headPic != null">
            #{record.headPic,jdbcType=VARCHAR}, 
         </if>
-        <if test="record.areaId != null">
-           #{record.areaId,jdbcType=BIGINT}, 
+        <if test="record.area != null">
+           #{record.area,jdbcType=VARCHAR}, 
         </if>
         <if test="record.address != null">
            #{record.address,jdbcType=VARCHAR}, 
@@ -579,8 +579,8 @@
       <if test="headPic != null">
           head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
-      <if test="areaId != null">
-          area_id = #{areaId,jdbcType=BIGINT},
+      <if test="area != null">
+          area = #{area,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
           address = #{address,jdbcType=VARCHAR},
@@ -615,7 +615,7 @@
       sex = #{sex,jdbcType=INTEGER},
       birthday = #{birthday,jdbcType=INTEGER},
       head_pic = #{headPic,jdbcType=VARCHAR},
-      area_id = #{areaId,jdbcType=BIGINT},
+      area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       vip = #{vip,jdbcType=INTEGER},
       tag = #{tag,jdbcType=VARCHAR},

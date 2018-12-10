@@ -88,7 +88,7 @@ public class CustomerJobController extends BaseApiController {
 	 * @apiSuccess (data) {Long} customerBean.phone 手机
 	 * @apiSuccess (data) {Integer} customerBean.sex 性别<br/>0:女<br/>1:男
 	 * @apiSuccess (data) {String} customerBean.headPic 头像
-	 * @apiSuccess (data) {Long} customerBean.areaId 区域ID
+	 * @apiSuccess (data) {String} customerBean.area 区域
 	 * @apiSuccess (data) {String} customerBean.areaNameAll 区域全称
      * @apiSuccess (data) {String} customerBean.address 地址
      *
@@ -100,12 +100,12 @@ public class CustomerJobController extends BaseApiController {
 	 * @apiSuccess (data) {Integer} customerJobBean.position 职位
 	 * @apiSuccess (data) {String} customerJobBean.positionValue 职位 值
 	 * @apiSuccess (data) {String} customerJobBean.phone 手机
-	 * @apiSuccess (data) {Long} customerJobBean.areaId 区域ID
+	 * @apiSuccess (data) {String} customerJobBean.area 区域
 	 * @apiSuccess (data) {String} customerJobBean.areaNameAll 区域全称
      * @apiSuccess (data) {String} customerJobBean.address 地址
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"areaId":321200,"address":"aaaaaaaaaaaaaa"},"customerBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"customerBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -130,7 +130,7 @@ public class CustomerJobController extends BaseApiController {
 			.phone(customerBean.getPhone())
 			.birthday(customerBean.getBirthday())
 			.sex(customerBean.getSex())
-			.areaId(customerBean.getAreaId())
+			.area(customerBean.getArea())
 			.address(customerBean.getAddress())
 			.headPic(customerBean.getHeadPic())
 			.build();
@@ -144,7 +144,7 @@ public class CustomerJobController extends BaseApiController {
 				.departmentName(customerJobBeanTmp.getDepartmentName())
 				.position(customerJobBeanTmp.getPosition())
 				.phone(customerJobBeanTmp.getPhone())
-				.areaId(customerJobBeanTmp.getAreaId())
+				.area(customerJobBeanTmp.getArea())
 				.address(customerJobBeanTmp.getAddress())
 				.build();
 				CustomerJobUtil.assembly(customerJobBeanResult);
@@ -167,7 +167,7 @@ public class CustomerJobController extends BaseApiController {
 	 * @apiParam (CustomerJobBean) {Long} customerBean.phone 手机
 	 * @apiParam (CustomerJobBean) {Integer} [customerBean.sex] 性别<br/>0:女<br/>1:男
 	 * @apiParam (CustomerJobBean) {String} [customerBean.headPic] 头像
-	 * @apiParam (CustomerJobBean) {Long} [customerBean.areaId] 区域ID
+	 * @apiParam (CustomerJobBean) {String} [customerBean.area] 区域
      * @apiParam (CustomerJobBean) {String} [customerBean.address] 地址
      *
      * @apiParam (CustomerJobBean) {Object} customerJobBean 工作 bean
@@ -177,11 +177,11 @@ public class CustomerJobController extends BaseApiController {
 	 * @apiParam (CustomerJobBean) {String} [customerJobBean.departmentName] 部门
 	 * @apiParam (CustomerJobBean) {Integer} [customerJobBean.position] 职位
 	 * @apiParam (CustomerJobBean) {String} [customerJobBean.phone] 手机
-	 * @apiParam (CustomerJobBean) {Long} [customerJobBean.areaId] 区域ID
+	 * @apiParam (CustomerJobBean) {String} [customerJobBean.area] 区域
      * @apiParam (CustomerJobBean) {String} [customerJobBean.address] 地址
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ttt","phone":15111111111,"sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","areaId":321200,"address":"aaaaaaaaaaaaaa"},"customerJobBean":{"customerId":4,"industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","areaId":321200,"address":"aaaaaaaaaaaaaa"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ttt","phone":15111111111,"sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"customerJobBean":{"customerId":4,"industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"phone":"15111111111","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}
      * 
      * @apiSuccess (data) {Object} customerBean 客户 bean
 	 * @apiSuccess (data) {Integer} customerBean.id ID

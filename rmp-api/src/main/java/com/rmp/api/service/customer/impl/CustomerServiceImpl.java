@@ -143,7 +143,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		
 		Integer birthday = customerBean.getBirthday();
 		Integer sex = customerBean.getSex();
-		Long areaId = customerBean.getAreaId();
+		String area = StringUtils.trim(customerBean.getArea());
 		String address = StringUtils.trim(customerBean.getAddress());
 		String headPic = StringUtils.trim(customerBean.getHeadPic());
 		
@@ -169,7 +169,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		.headPic(headPic)
 		.birthday(birthday)
 		.sex(sex)
-		.areaId(areaId)
+		.area(area)
 		.address(address)
 		.createTime(nowDateLong)
 		.build();
@@ -229,7 +229,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 
 		Integer birthday = customerBean.getBirthday();
 		Integer sex = customerBean.getSex();
-		Long areaId = customerBean.getAreaId();
+		String area = StringUtils.trim(customerBean.getArea());
 		String address = StringUtils.trim(customerBean.getAddress());
 		String headPic = StringUtils.trim(customerBean.getHeadPic());
 		
@@ -257,7 +257,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		customerBeanTmp.setHeadPic(headPic);
 		customerBeanTmp.setBirthday(birthday);
 		customerBeanTmp.setSex(sex);
-		customerBeanTmp.setAreaId(areaId);
+		customerBeanTmp.setArea(area);
 		customerBeanTmp.setAddress(address);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkVer(customerBeanTmp);

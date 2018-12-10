@@ -71,8 +71,9 @@ public class CustomerFamilyUtil {
 			if (bean.getRelationship() != null) {
 				bean.setRelationshipValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_FAMILY, CUSTOMER_FAMILY_RELATIONSHIP, bean.getRelationship().toString()));
 			}
-			if (bean.getAreaId() != null) {
-				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+			if (bean.getArea() != null) {
+			//	bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+				bean.setAreaNameAll(bean.getArea());
 			}
 			if (bean.getBirthday() != null) {
 				int year = Integer.parseInt(bean.getBirthday().toString().substring(0, 4));

@@ -1,7 +1,6 @@
 package com.rmp.info.model;
 
 import com.rmp.info.base.model.Model;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

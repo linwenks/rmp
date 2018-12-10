@@ -9,7 +9,7 @@
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <result column="position" jdbcType="INTEGER" property="position" />
     <result column="phone" jdbcType="BIGINT" property="phone" />
-    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, industry, company_name, department_name, `position`, phone, area_id, 
-    address, is_delete, version, create_time, update_time
+    id, user_id, industry, company_name, department_name, `position`, phone, area, address, 
+    is_delete, version, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.rmp.info.model.UserJobCriteria" resultMap="BaseResultMap">
     select
@@ -114,12 +114,12 @@
   <insert id="insert" parameterType="com.rmp.info.model.UserJob">
     insert into t_user_job (id, user_id, industry, 
       company_name, department_name, `position`, 
-      phone, area_id, address, 
+      phone, area, address, 
       is_delete, version, create_time, 
       update_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{industry,jdbcType=INTEGER}, 
       #{companyName,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{position,jdbcType=INTEGER}, 
-      #{phone,jdbcType=BIGINT}, #{areaId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=BIGINT}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=BIGINT})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -150,8 +150,8 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="areaId != null">
-        area_id,
+      <if test="area != null">
+        area,
       </if>
       <if test="address != null">
         address,
@@ -191,8 +191,8 @@
       <if test="phone != null">
         #{phone,jdbcType=BIGINT},
       </if>
-      <if test="areaId != null">
-        #{areaId,jdbcType=BIGINT},
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -244,8 +244,8 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=BIGINT},
       </if>
-      <if test="record.areaId != null">
-        area_id = #{record.areaId,jdbcType=BIGINT},
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -276,7 +276,7 @@
       department_name = #{record.departmentName,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=INTEGER},
       phone = #{record.phone,jdbcType=BIGINT},
-      area_id = #{record.areaId,jdbcType=BIGINT},
+      area = #{record.area,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=INTEGER},
       version = #{record.version,jdbcType=INTEGER},
@@ -307,8 +307,8 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=BIGINT},
       </if>
-      <if test="areaId != null">
-        area_id = #{areaId,jdbcType=BIGINT},
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -336,7 +336,7 @@
       department_name = #{departmentName,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=INTEGER},
       phone = #{phone,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=BIGINT},
+      area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},
@@ -353,7 +353,7 @@
     department_name,
     position,
     phone,
-    area_id,
+    area,
     address,
     is_delete,
     version,
@@ -370,7 +370,7 @@
          #{record.departmentName,jdbcType=VARCHAR}, 
          #{record.position,jdbcType=INTEGER}, 
          #{record.phone,jdbcType=BIGINT}, 
-         #{record.areaId,jdbcType=BIGINT}, 
+         #{record.area,jdbcType=VARCHAR}, 
          #{record.address,jdbcType=VARCHAR}, 
          #{record.isDelete,jdbcType=INTEGER}, 
          #{record.version,jdbcType=INTEGER}, 
@@ -404,8 +404,8 @@
       <if test="recordColl[0].phone != null">
         phone,
       </if>
-      <if test="recordColl[0].areaId != null">
-        area_id,
+      <if test="recordColl[0].area != null">
+        area,
       </if>
       <if test="recordColl[0].address != null">
         address,
@@ -448,8 +448,8 @@
         <if test="record.phone != null">
            #{record.phone,jdbcType=BIGINT}, 
         </if>
-        <if test="record.areaId != null">
-           #{record.areaId,jdbcType=BIGINT}, 
+        <if test="record.area != null">
+           #{record.area,jdbcType=VARCHAR}, 
         </if>
         <if test="record.address != null">
            #{record.address,jdbcType=VARCHAR}, 
@@ -505,8 +505,8 @@
       <if test="phone != null">
           phone = #{phone,jdbcType=BIGINT},
       </if>
-      <if test="areaId != null">
-          area_id = #{areaId,jdbcType=BIGINT},
+      <if test="area != null">
+          area = #{area,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
           address = #{address,jdbcType=VARCHAR},
@@ -534,7 +534,7 @@
       department_name = #{departmentName,jdbcType=VARCHAR},
       position = #{position,jdbcType=INTEGER},
       phone = #{phone,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=BIGINT},
+      area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},

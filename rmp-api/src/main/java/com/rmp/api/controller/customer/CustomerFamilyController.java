@@ -92,12 +92,12 @@ public class CustomerFamilyController extends BaseApiController {
 	 * @apiSuccess (data) {String} customerFamilyBeanList.realName 真实姓名
 	 * @apiSuccess (data) {Integer} customerFamilyBeanList.birthday 生日
 	 * @apiSuccess (data) {Long} customerFamilyBeanList.phone 手机
-	 * @apiSuccess (data) {Long} customerFamilyBeanList.areaId 区域
+	 * @apiSuccess (data) {String} customerFamilyBeanList.area 区域
 	 * @apiSuccess (data) {String} customerFamilyBeanList.areaNameAll 区域全名 
 	 * @apiSuccess (data) {String} customerFamilyBeanList.address 地址 
 	 * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBeanList":[{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200,"address":"ttt"},{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":1,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200}]}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBeanList":[{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"area":"重庆市九龙坡区","address":"ttt"},{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":1,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"area":"重庆市九龙坡区"}]}}
      */
 	@RequestMapping(value = "/list")
 	public RespBean list(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -124,7 +124,7 @@ public class CustomerFamilyController extends BaseApiController {
 						.realName(customerFamilyBeanTmp.getRealName())
 						.birthday(customerFamilyBeanTmp.getBirthday())
 						.phone(customerFamilyBeanTmp.getPhone())
-						.areaId(customerFamilyBeanTmp.getAreaId())
+						.area(customerFamilyBeanTmp.getArea())
 						.address(customerFamilyBeanTmp.getAddress())
 						.build();
 				CustomerFamilyUtil.assembly(customerFamilyBeanResult);
@@ -157,12 +157,12 @@ public class CustomerFamilyController extends BaseApiController {
 	 * @apiSuccess (data) {String} customerFamilyBean.realName 真实姓名
 	 * @apiSuccess (data) {Integer} customerFamilyBean.birthday 生日
 	 * @apiSuccess (data) {Long} customerFamilyBean.phone 手机
-	 * @apiSuccess (data) {Long} customerFamilyBean.areaId 区域
+	 * @apiSuccess (data) {String} customerFamilyBean.area 区域
 	 * @apiSuccess (data) {String} customerFamilyBean.areaNameAll 区域全名 
 	 * @apiSuccess (data) {String} customerFamilyBean.address 地址 
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBean":{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":1,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBean":{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":1,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"area":"重庆市九龙坡区"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -187,7 +187,7 @@ public class CustomerFamilyController extends BaseApiController {
 					.realName(customerFamilyBeanTmp.getRealName())
 					.birthday(customerFamilyBeanTmp.getBirthday())
 					.phone(customerFamilyBeanTmp.getPhone())
-					.areaId(customerFamilyBeanTmp.getAreaId())
+					.area(customerFamilyBeanTmp.getArea())
 					.address(customerFamilyBeanTmp.getAddress())
 					.build();
 			CustomerFamilyUtil.assembly(customerFamilyBeanResult);
@@ -210,11 +210,11 @@ public class CustomerFamilyController extends BaseApiController {
 	 * @apiParam (CustomerFamilyBean) {String} customerFamilyBean.realName 真实姓名
 	 * @apiParam (CustomerFamilyBean) {Integer} [customerFamilyBean.birthday] 生日
 	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.phone] 手机
-	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.areaId] 区域
+	 * @apiParam (CustomerFamilyBean) {String} [customerFamilyBean.area] 区域
 	 * @apiParam (CustomerFamilyBean) {String} [customerFamilyBean.address] 地址 
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"customerId":2,"realName":"xxx","phone":15111111111,"relationship":2,"birthday":20100101,"areaId":321200,"address":"ttt"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"customerId":2,"realName":"xxx","phone":15111111111,"relationship":2,"birthday":20100101,"area":"重庆市九龙坡区","address":"ttt"}}
      * 
      * @apiSuccess (data) {Object} customerFamilyBean 家庭 bean
 	 * @apiSuccess (data) {Long} customerFamilyBeanList.id ID
@@ -223,12 +223,12 @@ public class CustomerFamilyController extends BaseApiController {
 	 * @apiSuccess (data) {String} customerFamilyBeanList.realName 真实姓名
 	 * @apiSuccess (data) {Integer} customerFamilyBeanList.birthday 生日 yyyyMMdd
 	 * @apiSuccess (data) {Long} customerFamilyBeanList.phone 手机
-	 * @apiSuccess (data) {Long} customerFamilyBeanList.areaId 区域
+	 * @apiSuccess (data) {String} customerFamilyBeanList.area 区域
 	 * @apiSuccess (data) {String} customerFamilyBeanList.areaNameAll 区域全名 
 	 * @apiSuccess (data) {String} customerFamilyBeanList.address 地址 
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBean":{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"areaId":321200,"address":"ttt"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerFamilyBean":{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"phone":15111111111,"area":"重庆市九龙坡区","address":"ttt"}}}
      */
 	@RequestMapping(value = "/save")
 	public RespBean save(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -244,7 +244,7 @@ public class CustomerFamilyController extends BaseApiController {
 				.realName(customerFamilyBean.getRealName())
 				.birthday(customerFamilyBean.getBirthday())
 				.phone(customerFamilyBean.getPhone())
-				.areaId(customerFamilyBean.getAreaId())
+				.area(customerFamilyBean.getArea())
 				.address(customerFamilyBean.getAddress())
 				.build();
 		CustomerFamilyUtil.assembly(customerFamilyBeanResult);
@@ -268,11 +268,11 @@ public class CustomerFamilyController extends BaseApiController {
 	 * @apiParam (CustomerFamilyBean) {String} customerFamilyBean.realName 真实姓名
 	 * @apiParam (CustomerFamilyBean) {Integer} [customerFamilyBean.birthday] 生日 yyyyMMdd
 	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.phone] 手机
-	 * @apiParam (CustomerFamilyBean) {Long} [customerFamilyBean.areaId] 区域
+	 * @apiParam (CustomerFamilyBean) {String} [customerFamilyBean.area] 区域
 	 * @apiParam (CustomerFamilyBean) {String} [customerFamilyBean.address] 地址 
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"id":1,"customerId":2,"realName":"xxx","phone":15111111111,"relationship":2,"birthday":20100101,"areaId":321200,"address":"ttt"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerFamilyBean":{"id":1,"customerId":2,"realName":"xxx","phone":15111111111,"relationship":2,"birthday":20100101,"area":"重庆市九龙坡区","address":"ttt"}}
      * 
      */
 	@RequestMapping(value = "/update")

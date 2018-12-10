@@ -1,9 +1,7 @@
 package com.rmp.info.model;
 
-import java.math.BigDecimal;
-
 import com.rmp.info.base.model.Model;
-
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -82,9 +80,9 @@ public class User extends Model {
     private Long lastLoginTime;
 
     /**
-     * 区域ID
+     * 区域
      */
-    private Long areaId;
+    private String area;
 
     /**
      * 地址

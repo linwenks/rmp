@@ -1,7 +1,6 @@
 package com.rmp.info.model;
 
 import com.rmp.info.base.model.Model;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -50,9 +49,9 @@ public class CustomerFamily extends Model {
     private Long phone;
 
     /**
-     * 区域ID
+     * 区域
      */
-    private Long areaId;
+    private String area;
 
     /**
      * 地址

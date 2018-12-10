@@ -14,8 +14,9 @@ public class CustomerJobUtil {
 			if (bean.getPosition() != null) {
 				bean.setPositionValue(SysCodeUtil.getValue(CUSTOMER, CUSTOMER_JOB, CUSTOMER_JOB_POSITION, bean.getPosition().toString()));
 			}
-			if (bean.getAreaId() != null) {
-				bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+			if (bean.getArea() != null) {
+			//	bean.setAreaNameAll(AreaUtil.getNameAll(bean.getAreaId()));
+				bean.setAreaNameAll(bean.getArea());
 			}
 		}
 	}

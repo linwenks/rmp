@@ -31,14 +31,10 @@ public class UserRemindDayAction extends BaseAction {
 		userRemindService.exe("insertBy1ToDNow", UserRemindBean.builder().advanceDate(ymd1).build());
 		userRemindService.exe("insertBy1ToWNow", UserRemindBean.builder().advanceDate(ymd1).build());
 		
-		int advanceDay5 = 5;
-		userRemindService.exe("insertBy2", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(advanceDay5).build());
-		userRemindService.exe("insertBy3", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(advanceDay5).build());
-		userRemindService.exe("insertBy4", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(advanceDay5).build());
-		
-		int advanceDay0 = 0;
-		userRemindService.exe("insertBy2", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(advanceDay0).build());
-		userRemindService.exe("insertBy3", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(advanceDay0).build());
-		userRemindService.exe("insertBy4", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(advanceDay0).build());
+		for (int i=0; i<=7; i++) {
+			userRemindService.exe("insertBy2", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(i).build());
+			userRemindService.exe("insertBy3", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(i).build());
+			userRemindService.exe("insertBy4", UserRemindBean.builder().advanceDate(nowYmd).advanceDay(i).build());
+		}
 	}
 }

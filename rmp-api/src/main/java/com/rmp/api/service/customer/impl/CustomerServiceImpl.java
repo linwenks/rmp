@@ -321,26 +321,33 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		updatePkSelVer(customerBeanTmp);
 		
 		// 删除全部
-		customerFamilyService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerFamilyBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerFamilyBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerFamilyService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerFamilyBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerFamilyBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
-		customerHobbyService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerHobbyBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerHobbyBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerHobbyService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerHobbyBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerHobbyBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
-		customerJobService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerJobBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerJobBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerJobService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerJobBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerJobBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
-		customerMaintainService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerMaintainBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerMaintainBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerMaintainService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerMaintainBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerMaintainBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
-		customerMemorialDayService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerMemorialDayBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerMemorialDayBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerMemorialDayService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerMemorialDayBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerMemorialDayBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
-		customerProblemService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerProblemService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
-		customerRelationService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
-				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).build()));
+		customerRelationService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 	}
 	
 

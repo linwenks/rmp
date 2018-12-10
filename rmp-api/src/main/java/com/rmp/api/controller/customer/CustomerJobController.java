@@ -165,6 +165,7 @@ public class CustomerJobController extends BaseApiController {
      * @apiParam (CustomerJobBean) {Object} customerBean 客户 bean
 	 * @apiParam (CustomerJobBean) {String} customerBean.realName 真实姓名
 	 * @apiParam (CustomerJobBean) {Long} customerBean.phone 手机
+	 * @apiParam (CustomerJobBean) {Integer} customerBean.birthday 生日 yyyyMMdd
 	 * @apiParam (CustomerJobBean) {Integer} [customerBean.sex] 性别<br/>0:女<br/>1:男
 	 * @apiParam (CustomerJobBean) {String} [customerBean.headPic] 头像
 	 * @apiParam (CustomerJobBean) {String} [customerBean.area] 区域

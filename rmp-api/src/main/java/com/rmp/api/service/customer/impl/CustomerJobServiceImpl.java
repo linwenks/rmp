@@ -46,7 +46,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 	public Object exe(String cmd, Object obj) {
 		try {
 			switch (cmd) {
-			case "update": update((Map<String, Object>) obj);break;
+			case "update": updateCustom((Map<String, Object>) obj);break;
 			default: return super.exe(cmd, obj);
 			}
 		} catch (AppException e) {
@@ -75,7 +75,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 		}
 	}
 	
-	private void update(Map<String, Object> map) {
+	private void updateCustom(Map<String, Object> map) {
 		if (CollectionUtils.isEmpty(map)) AppException.toThrow(MSG_00003);
 		CustomerBean customerBean = (CustomerBean) map.get("customerBean");
 		CustomerJobBean customerJobBean = (CustomerJobBean) map.get("customerJobBean");

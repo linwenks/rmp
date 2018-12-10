@@ -5,6 +5,7 @@ import static com.rmp.api.util.MsgEnum.*;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -170,6 +171,10 @@ public abstract class BaseServiceImpl<T extends Model, B, E> implements BaseServ
 			switch (cmd) {
 			case INSERT: return insert((B) obj);
 			case INSERT_SEL: return insertSel((B) obj);
+			case UPDATE: return update((Map<String, Object>) obj);
+			case UPDATE_NOT_E: return updateNotE((Map<String, Object>) obj);
+			case UPDATE_SEl: return updateSel((Map<String, Object>) obj);
+			case UPDATE_SEl_NOT_E: return updateSelNotE((Map<String, Object>) obj);
 			case UPDATE_PK: return updatePk((B) obj);
 			case UPDATE_PK_SEl: return updatePkSel((B) obj);
 			case UPDATE_PK_VER: return updatePkVer((B) obj);
@@ -205,6 +210,58 @@ public abstract class BaseServiceImpl<T extends Model, B, E> implements BaseServ
 			log.error(e.getMessage(), e);
 		}
 		if (row == 0) AppException.toThrow(MSG_00010);
+		return row;
+	}
+	
+	protected int update(Map<String, Object> map) {
+		int row = updateNotE(map);
+		if (row == 0) AppException.toThrow(MSG_00010);
+		return row;
+	}
+	
+	protected int updateNotE(Map<String, Object> map) {
+		Class<E> criteriaClass = criteriaClass();
+		
+		B obj = (B) map.get("obj");
+		B objEx = (B) map.get("objEx");
+				
+		if (obj == null) AppException.toThrow(MSG_00003);
+		int row = 0;
+		try {
+			E criteria = criteriaClass.newInstance();
+			Object criteriaDetail = criteriaClass.getMethod("createCriteria", null).invoke(criteria, null);
+			where(criteriaDetail, objEx);
+			
+			row = mapper().updateByExample((T) obj, criteria);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return row;
+	}
+	
+	protected int updateSel(Map<String, Object> map) {
+		int row = updateSelNotE(map);
+		if (row == 0) AppException.toThrow(MSG_00010);
+		return row;
+	}
+	
+	protected int updateSelNotE(Map<String, Object> map) {
+		Class<E> criteriaClass = criteriaClass();
+		
+		B obj = (B) map.get("obj");
+		B objEx = (B) map.get("objEx");
+		
+		if (obj == null) AppException.toThrow(MSG_00003);
+		int row = 0;
+		try {
+			E criteria = criteriaClass.newInstance();
+			Object criteriaDetail = criteriaClass.getMethod("createCriteria", null).invoke(criteria, null);
+			where(criteriaDetail, objEx);
+			
+			row = mapper().updateByExampleSelective((T) obj, criteria);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 		return row;
 	}
 	

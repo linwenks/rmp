@@ -429,6 +429,8 @@ public class UserController extends BaseApiController {
      * @apiSuccess (data) {Object} userBean 客户 bean
 	 * @apiSuccess (data) {String} userBean.realName 真实姓名
 	 * @apiSuccess (data) {Long} userBean.phone 手机
+	 * @apiSuccess (data) {Integer} userBean.birthday 生日 yyyyMMdd
+	 * @apiSuccess (data) {String} userBean.birthdayStr 生日 yyyy-MM-dd
 	 * @apiSuccess (data) {Integer} userBean.sex 性别<br/>0:女<br/>1:男
 	 * @apiSuccess (data) {String} userBean.headPic 头像
 	 * @apiSuccess (data) {String} userBean.area 区域
@@ -436,7 +438,7 @@ public class UserController extends BaseApiController {
      * @apiSuccess (data) {String} userBean.address 地址
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","birthday":20100101,"birthdayStr":"2010-01-01","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

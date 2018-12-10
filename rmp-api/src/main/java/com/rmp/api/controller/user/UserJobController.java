@@ -76,6 +76,8 @@ public class UserJobController extends BaseApiController {
      *
      * @apiSuccess (data) {Object} userBean 客户 bean
 	 * @apiSuccess (data) {String} userBean.realName 真实姓名
+	 * @apiSuccess (data) {Integer} userBean.birthday 生日 yyyyMMdd
+	 * @apiSuccess (data) {String} userBean.birthdayStr 生日 yyyy-MM-dd
 	 * @apiSuccess (data) {Long} userBean.phone 手机
 	 * @apiSuccess (data) {Integer} userBean.sex 性别<br/>0:女<br/>1:男
 	 * @apiSuccess (data) {String} userBean.headPic 头像
@@ -96,7 +98,7 @@ public class UserJobController extends BaseApiController {
      * @apiSuccess (data) {String} userJobBean.address 地址
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"sex":0,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"工薪族","industry":2,"companyName":"aaaa","departmentName":"bbb","position":1,"phone":15111111111,"area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"userBean":{"areaNameAll":"江苏省泰州市","realName":"ttt","phone":15111111111,"birthday":20100101,"birthdayStr":"2010-01-01","sex":0,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}}
      */
 	@RequestMapping(value = "/get")
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

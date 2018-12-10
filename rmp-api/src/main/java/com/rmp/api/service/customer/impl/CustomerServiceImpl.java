@@ -1,6 +1,7 @@
 package com.rmp.api.service.customer.impl;
 
-import static com.rmp.api.util.MsgEnum.*;
+import static com.rmp.api.util.MsgEnum.MSG_00003;
+import static com.rmp.api.util.MsgEnum.MSG_02004;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,10 +15,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.google.common.collect.ImmutableMap;
 import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.mapper.CustomerMapperCustom;
 import com.rmp.api.model.CustomerBean;
+import com.rmp.api.model.CustomerFamilyBean;
+import com.rmp.api.model.CustomerHobbyBean;
+import com.rmp.api.model.CustomerJobBean;
+import com.rmp.api.model.CustomerMaintainBean;
+import com.rmp.api.model.CustomerMemorialDayBean;
+import com.rmp.api.model.CustomerProblemBean;
+import com.rmp.api.service.customer.CustomerFamilyService;
+import com.rmp.api.service.customer.CustomerHobbyService;
+import com.rmp.api.service.customer.CustomerJobService;
+import com.rmp.api.service.customer.CustomerMaintainService;
+import com.rmp.api.service.customer.CustomerMemorialDayService;
+import com.rmp.api.service.customer.CustomerProblemService;
+import com.rmp.api.service.customer.CustomerRelationService;
 import com.rmp.api.service.customer.CustomerService;
 import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.constant.Constant;
@@ -40,6 +55,22 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 	private CustomerMapper customerMapper;
 	@Autowired
 	private CustomerMapperCustom customerMapperCustom;
+	
+	@Autowired
+	private CustomerFamilyService customerFamilyService;
+	@Autowired
+	private CustomerHobbyService customerHobbyService;
+	@Autowired
+	private CustomerJobService customerJobService;
+	@Autowired
+	private CustomerMaintainService customerMaintainService;
+	@Autowired
+	private CustomerMemorialDayService customerMemorialDayService;
+	@Autowired
+	private CustomerProblemService customerProblemService;
+	@Autowired
+	private CustomerRelationService customerRelationService;
+	
 	
 	@Override
 	public CustomerMapper mapper() {
@@ -290,6 +321,26 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		updatePkSelVer(customerBeanTmp);
 		
 		// 删除全部
+		customerFamilyService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerFamilyBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerFamilyBean.builder().isDelete(Constant.DELETE_N).build()));
+		
+		customerHobbyService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerHobbyBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerHobbyBean.builder().isDelete(Constant.DELETE_N).build()));
+		
+		customerJobService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerJobBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerJobBean.builder().isDelete(Constant.DELETE_N).build()));
+		
+		customerMaintainService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerMaintainBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerMaintainBean.builder().isDelete(Constant.DELETE_N).build()));
+		
+		customerMemorialDayService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerMemorialDayBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerMemorialDayBean.builder().isDelete(Constant.DELETE_N).build()));
+		
+		customerProblemService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).build()));
+		
+		customerRelationService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of("obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).build()));
 	}
 	
 

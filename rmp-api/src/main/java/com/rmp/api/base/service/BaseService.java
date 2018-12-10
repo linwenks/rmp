@@ -22,8 +22,14 @@ public interface BaseService<B> {
 	// 修改
 	public final static String UPDATE = "base_update";
 	
+	// 修改 不抛异常
+	public final static String UPDATE_NOT_E = "base_update_not_e";
+	
 	// 修改 选择参数
 	public final static String UPDATE_SEl = "base_update_sel";
+	
+	// 修改 选择参数 不抛异常
+	public final static String UPDATE_SEl_NOT_E = "base_update_sel_not_e";
 	
 	// 修改 根据主键
 	public final static String UPDATE_PK = "base_update_pk";

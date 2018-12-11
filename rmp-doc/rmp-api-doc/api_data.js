@@ -197,7 +197,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"areaId\":321200,\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":15111111111,\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"areaId\":321200,\"address\":\"ttt\",\"vip\":0}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\",\"vip\":0}}}",
           "type": "json"
         }
       ]
@@ -333,6 +333,20 @@ define({ "api": [
             "group": "data",
             "type": "Integer",
             "optional": false,
+            "field": "groups.users.birthday",
+            "description": "<p>生日</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "groups.users.birthdayStr",
+            "description": "<p>生日 yyyy-MM-dd</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
             "field": "groups.users.sex",
             "description": "<p>性别<br/>0:女<br/>1:男</p>"
           },
@@ -345,10 +359,10 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "groups.users.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "groups.users.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "data",
@@ -432,7 +446,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"groups\":[{\"groupName\":\"s\",\"users\":[{\"pinyinFirst\":\"s\",\"id\":6,\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111115,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"},{\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"pinyinFirst\":\"s\",\"id\":2,\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"address\":\"ttt\"}]},{\"groupName\":\"t\",\"users\":[{\"pinyinFirst\":\"t\",\"id\":5,\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111113,\"sex\":0,\"birthday\":20100101,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"},{\"pinyinFirst\":\"t\",\"id\":4,\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"}]},{\"groupName\":\"d\",\"users\":[{\"pinyinFirst\":\"d\",\"id\":8,\"realName\":\"ddd\",\"pinyin\":\"ddd\",\"phone\":13658327488,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"}]}],\"letters\":[\"d\",\"s\",\"t\"]}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"groups\":[{\"groupName\":\"s\",\"users\":[{\"pinyinFirst\":\"s\",\"id\":6,\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111115,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"},{\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"pinyinFirst\":\"s\",\"id\":2,\"realName\":\"ss\",\"pinyin\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"address\":\"ttt\"}]},{\"groupName\":\"t\",\"users\":[{\"pinyinFirst\":\"t\",\"id\":5,\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111113,\"sex\":0,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"},{\"pinyinFirst\":\"t\",\"id\":4,\"realName\":\"ttt\",\"pinyin\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"https://img.rmp.com/xxx/pic.jpg\",\"address\":\"aaaaaaaaaaaaaa\"}]},{\"groupName\":\"d\",\"users\":[{\"pinyinFirst\":\"d\",\"id\":8,\"realName\":\"ddd\",\"pinyin\":\"ddd\",\"phone\":13658327488,\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\"}]}],\"letters\":[\"d\",\"s\",\"t\"]}}",
           "type": "json"
         }
       ]
@@ -815,7 +829,14 @@ define({ "api": [
             "type": "Integer",
             "optional": false,
             "field": "customerFamilyBean.birthday",
-            "description": "<p>生日</p>"
+            "description": "<p>生日 yyyyMMdd</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerFamilyBean.birthdayStr",
+            "description": "<p>生日 yyyy-MM-dd</p>"
           },
           {
             "group": "data",
@@ -826,9 +847,9 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "customerFamilyBean.areaId",
+            "field": "customerFamilyBean.area",
             "description": "<p>区域</p>"
           },
           {
@@ -850,7 +871,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerFamilyBean\":{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":1,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"areaId\":321200}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerFamilyBean\":{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":1,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\"}}}",
           "type": "json"
         }
       ]
@@ -940,6 +961,13 @@ define({ "api": [
           },
           {
             "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerFamilyBeanList.birthdayStr",
+            "description": "<p>生日 yyyy-MM-dd</p>"
+          },
+          {
+            "group": "data",
             "type": "Long",
             "optional": false,
             "field": "customerFamilyBeanList.phone",
@@ -947,9 +975,9 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "customerFamilyBeanList.areaId",
+            "field": "customerFamilyBeanList.area",
             "description": "<p>区域</p>"
           },
           {
@@ -971,7 +999,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"areaId\":321200,\"address\":\"ttt\"},{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":1,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"areaId\":321200}]}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"},{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":1,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"birthdayStr\":\"2010-01-01\",\"area\":\"重庆市九龙坡区\"}]}}",
           "type": "json"
         }
       ]
@@ -1023,7 +1051,7 @@ define({ "api": [
             "type": "Integer",
             "optional": true,
             "field": "customerFamilyBean.birthday",
-            "description": "<p>生日</p>"
+            "description": "<p>生日 yyyyMMdd</p>"
           },
           {
             "group": "CustomerFamilyBean",
@@ -1034,9 +1062,9 @@ define({ "api": [
           },
           {
             "group": "CustomerFamilyBean",
-            "type": "Long",
+            "type": "String",
             "optional": true,
-            "field": "customerFamilyBean.areaId",
+            "field": "customerFamilyBean.area",
             "description": "<p>区域</p>"
           },
           {
@@ -1051,7 +1079,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerFamilyBean\":{\"customerId\":2,\"realName\":\"xxx\",\"phone\":15111111111,\"relationship\":2,\"birthday\":20100101,\"areaId\":321200,\"address\":\"ttt\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerFamilyBean\":{\"customerId\":2,\"realName\":\"xxx\",\"phone\":15111111111,\"relationship\":2,\"birthday\":20100101,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}}",
           "type": "json"
         }
       ]
@@ -1070,63 +1098,70 @@ define({ "api": [
             "group": "data",
             "type": "Long",
             "optional": false,
-            "field": "customerFamilyBeanList.id",
+            "field": "customerFamilyBean.id",
             "description": "<p>ID</p>"
           },
           {
             "group": "data",
             "type": "Integer",
             "optional": false,
-            "field": "customerFamilyBeanList.relationship",
+            "field": "customerFamilyBean.relationship",
             "description": "<p>关系</p>"
           },
           {
             "group": "data",
             "type": "String",
             "optional": false,
-            "field": "customerFamilyBeanList.relationshipValue",
+            "field": "customerFamilyBean.relationshipValue",
             "description": "<p>关系 值</p>"
           },
           {
             "group": "data",
             "type": "String",
             "optional": false,
-            "field": "customerFamilyBeanList.realName",
+            "field": "customerFamilyBean.realName",
             "description": "<p>真实姓名</p>"
           },
           {
             "group": "data",
             "type": "Integer",
             "optional": false,
-            "field": "customerFamilyBeanList.birthday",
+            "field": "customerFamilyBean.birthday",
             "description": "<p>生日 yyyyMMdd</p>"
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "customerFamilyBeanList.phone",
-            "description": "<p>手机</p>"
+            "field": "customerFamilyBean.birthdayStr",
+            "description": "<p>生日 yyyy-MM-dd</p>"
           },
           {
             "group": "data",
             "type": "Long",
             "optional": false,
-            "field": "customerFamilyBeanList.areaId",
+            "field": "customerFamilyBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerFamilyBean.area",
             "description": "<p>区域</p>"
           },
           {
             "group": "data",
             "type": "String",
             "optional": false,
-            "field": "customerFamilyBeanList.areaNameAll",
+            "field": "customerFamilyBean.areaNameAll",
             "description": "<p>区域全名</p>"
           },
           {
             "group": "data",
             "type": "String",
             "optional": false,
-            "field": "customerFamilyBeanList.address",
+            "field": "customerFamilyBean.address",
             "description": "<p>地址</p>"
           }
         ]
@@ -1134,7 +1169,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerFamilyBean\":{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"phone\":15111111111,\"areaId\":321200,\"address\":\"ttt\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerFamilyBean\":{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}}}",
           "type": "json"
         }
       ]
@@ -1204,9 +1239,9 @@ define({ "api": [
           },
           {
             "group": "CustomerFamilyBean",
-            "type": "Long",
+            "type": "String",
             "optional": true,
-            "field": "customerFamilyBean.areaId",
+            "field": "customerFamilyBean.area",
             "description": "<p>区域</p>"
           },
           {
@@ -1221,7 +1256,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerFamilyBean\":{\"id\":1,\"customerId\":2,\"realName\":\"xxx\",\"phone\":15111111111,\"relationship\":2,\"birthday\":20100101,\"areaId\":321200,\"address\":\"ttt\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerFamilyBean\":{\"id\":1,\"customerId\":2,\"realName\":\"xxx\",\"phone\":15111111111,\"relationship\":2,\"birthday\":20100101,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}}",
           "type": "json"
         }
       ]
@@ -1564,10 +1599,10 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "customerBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "customerBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "data",
@@ -1641,10 +1676,10 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "customerJobBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "customerJobBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "data",
@@ -1665,7 +1700,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"phone\":15111111111,\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
           "type": "json"
         }
       ]
@@ -1708,6 +1743,13 @@ define({ "api": [
           {
             "group": "CustomerJobBean",
             "type": "Integer",
+            "optional": false,
+            "field": "customerBean.birthday",
+            "description": "<p>生日 yyyyMMdd</p>"
+          },
+          {
+            "group": "CustomerJobBean",
+            "type": "Integer",
             "optional": true,
             "field": "customerBean.sex",
             "description": "<p>性别<br/>0:女<br/>1:男</p>"
@@ -1721,10 +1763,10 @@ define({ "api": [
           },
           {
             "group": "CustomerJobBean",
-            "type": "Long",
+            "type": "String",
             "optional": true,
-            "field": "customerBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "customerBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "CustomerJobBean",
@@ -1784,10 +1826,10 @@ define({ "api": [
           },
           {
             "group": "CustomerJobBean",
-            "type": "Long",
+            "type": "String",
             "optional": true,
-            "field": "customerJobBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "customerJobBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "CustomerJobBean",
@@ -1801,7 +1843,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"customerJobBean\":{\"customerId\":4,\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerJobBean\":{\"customerId\":4,\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}",
           "type": "json"
         }
       ]
@@ -3517,6 +3559,20 @@ define({ "api": [
           },
           {
             "group": "data",
+            "type": "Integer",
+            "optional": false,
+            "field": "userBean.birthday",
+            "description": "<p>生日 yyyyMMdd</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.birthdayStr",
+            "description": "<p>生日 yyyy-MM-dd</p>"
+          },
+          {
+            "group": "data",
             "type": "Long",
             "optional": false,
             "field": "userBean.phone",
@@ -3538,10 +3594,10 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "userBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "userBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "data",
@@ -3615,10 +3671,10 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "userJobBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "userJobBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "data",
@@ -3639,7 +3695,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"phone\":15111111111,\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
           "type": "json"
         }
       ]
@@ -3688,10 +3744,10 @@ define({ "api": [
           },
           {
             "group": "UserJobBean",
-            "type": "Long",
+            "type": "String",
             "optional": true,
-            "field": "userBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "userBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "UserJobBean",
@@ -3744,10 +3800,10 @@ define({ "api": [
           },
           {
             "group": "UserJobBean",
-            "type": "Long",
+            "type": "String",
             "optional": true,
-            "field": "userJobBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "userJobBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "UserJobBean",
@@ -3761,7 +3817,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"realName\":\"ttt\",\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"},\"userJobBean\":{\"userId\":4,\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"realName\":\"ttt\",\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"userJobBean\":{\"ndustry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}",
           "type": "json"
         }
       ]
@@ -3993,6 +4049,20 @@ define({ "api": [
             "group": "data",
             "type": "Integer",
             "optional": false,
+            "field": "userBean.birthday",
+            "description": "<p>生日 yyyyMMdd</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.birthdayStr",
+            "description": "<p>生日 yyyy-MM-dd</p>"
+          },
+          {
+            "group": "data",
+            "type": "Integer",
+            "optional": false,
             "field": "userBean.sex",
             "description": "<p>性别<br/>0:女<br/>1:男</p>"
           },
@@ -4005,10 +4075,10 @@ define({ "api": [
           },
           {
             "group": "data",
-            "type": "Long",
+            "type": "String",
             "optional": false,
-            "field": "userBean.areaId",
-            "description": "<p>区域ID</p>"
+            "field": "userBean.area",
+            "description": "<p>区域</p>"
           },
           {
             "group": "data",
@@ -4029,7 +4099,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"areaId\":321200,\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
           "type": "json"
         }
       ]

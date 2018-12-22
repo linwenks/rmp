@@ -198,9 +198,10 @@ public class CustomerJobController extends BaseApiController {
 		
 		Long currentUserId = UserUtil.getCurrentUserId(request);
 		
-		if (customerBean == null) customerBean = CustomerBean.builder().userId(currentUserId).build();
-		if (customerJobBean == null) customerJobBean = CustomerJobBean.builder().userId(currentUserId).build();
-		
+		if (customerBean == null) customerBean = CustomerBean.builder().build();
+		if (customerJobBean == null) customerJobBean = CustomerJobBean.builder().build();
+		customerBean.setUserId(currentUserId);
+		customerJobBean.setUserId(currentUserId);
 		customerJobService.exe("update", ImmutableMap.of("customerBean", customerBean, "customerJobBean", customerJobBean));
 		CustomerBean customerBeanResult = CustomerBean.builder().id(customerBean.getId()).build();
 		return RespUtil.build(request).putData("customerBean", customerBeanResult);

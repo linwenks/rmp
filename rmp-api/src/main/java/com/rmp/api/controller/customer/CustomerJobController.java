@@ -195,14 +195,14 @@ public class CustomerJobController extends BaseApiController {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
 		CustomerJobBean customerJobBean = reqBean.getCustomerJobBean();
-		if (customerBean == null) customerBean = new CustomerBean();
-		if (customerJobBean == null) customerJobBean = new CustomerJobBean();
+		
 		Long currentUserId = UserUtil.getCurrentUserId(request);
-		customerBean.setUserId(currentUserId);
-		customerJobBean.setUserId(currentUserId);
+		
+		if (customerBean == null) customerBean = CustomerBean.builder().userId(currentUserId).build();
+		if (customerJobBean == null) customerJobBean = CustomerJobBean.builder().userId(currentUserId).build();
+		
 		customerJobService.exe("update", ImmutableMap.of("customerBean", customerBean, "customerJobBean", customerJobBean));
-		CustomerBean customerBeanResult = new CustomerBean();
-		customerBeanResult.setId(customerBean.getId());
+		CustomerBean customerBeanResult = CustomerBean.builder().id(customerBean.getId()).build();
 		return RespUtil.build(request).putData("customerBean", customerBeanResult);
 	}
 }

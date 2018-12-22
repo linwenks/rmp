@@ -22,21 +22,21 @@
 	
 	<resultMap id="CustomerBean" type="com.rmp.api.model.CustomerBean">
 	    <id column="id" jdbcType="BIGINT" property="id" />
-	    <result column="user_id" jdbcType="BIGINT" property="userId" />
-	    <result column="real_name" jdbcType="VARCHAR" property="realName" />
-	    <result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
-	    <result column="phone" jdbcType="BIGINT" property="phone" />
-	    <result column="sex" jdbcType="INTEGER" property="sex" />
-	    <result column="birthday" jdbcType="INTEGER" property="birthday" />
-	    <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
-	    <result column="area_id" jdbcType="BIGINT" property="areaId" />
-	    <result column="address" jdbcType="VARCHAR" property="address" />
-	    <result column="vip" jdbcType="INTEGER" property="vip" />
-	    <result column="tag" jdbcType="VARCHAR" property="tag" />
-	    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
-	    <result column="version" jdbcType="INTEGER" property="version" />
-	    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-	    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
+		<result column="phone" jdbcType="BIGINT" property="phone" />
+		<result column="sex" jdbcType="INTEGER" property="sex" />
+		<result column="birthday" jdbcType="INTEGER" property="birthday" />
+		<result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+		<result column="area" jdbcType="VARCHAR" property="area" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="vip" jdbcType="INTEGER" property="vip" />
+		<result column="tag" jdbcType="VARCHAR" property="tag" />
+		<result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+		<result column="version" jdbcType="INTEGER" property="version" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<result column="update_time" jdbcType="BIGINT" property="updateTime" />
 	</resultMap>
 	
 	<resultMap id="CustomerRelationBean" type="com.rmp.api.model.CustomerRelationBean">

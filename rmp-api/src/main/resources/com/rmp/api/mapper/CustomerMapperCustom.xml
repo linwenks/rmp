@@ -10,7 +10,7 @@
 		<result column="sex" jdbcType="INTEGER" property="sex" />
 		<result column="birthday" jdbcType="INTEGER" property="birthday" />
 		<result column="head_pic" jdbcType="VARCHAR" property="headPic" />
-		<result column="area_id" jdbcType="BIGINT" property="areaId" />
+		<result column="area" jdbcType="VARCHAR" property="area" />
 		<result column="address" jdbcType="VARCHAR" property="address" />
 		<result column="vip" jdbcType="INTEGER" property="vip" />
 		<result column="tag" jdbcType="VARCHAR" property="tag" />
@@ -43,7 +43,7 @@
 	<select id="selectList" resultMap="CustomerBean">
 		select
 		
-		c.id, c.user_id, c.real_name, c.pinyin, c.phone, c.sex, c.birthday, c.head_pic, c.area_id, c.address, c.vip, c.tag, c.is_delete, c.version, c.create_time, c.update_time
+		c.id, c.user_id, c.real_name, c.pinyin, c.phone, c.sex, c.birthday, c.head_pic, c.area, c.address, c.vip, c.tag, c.is_delete, c.version, c.create_time, c.update_time
 		
 		, cr.id cr_id, cr.customer_id cr_customer_id, cr.relationship cr_relationship, cr.intimacy cr_intimacy, cr.importance cr_importance, cr.is_delete cr_is_delete
 		, cr.version cr_version, cr.create_time cr_create_time, cr.update_time cr_update_time

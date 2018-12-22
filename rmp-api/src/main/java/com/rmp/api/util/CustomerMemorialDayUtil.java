@@ -21,6 +21,29 @@ public class CustomerMemorialDayUtil {
 		if (name.length() > nameMax) AppException.toThrow(MSG_02021, String.valueOf(nameMax));
 	}
 	
+	/**
+	 * 检查
+	 * @param occurType 发生类型
+	 * @param occurDate 关系日期
+	 */
+	public static void checkOccur(Integer occurType, Integer occurDate) {
+		if (occurType == null) AppException.toThrow(MSG_02022);
+		if (occurDate == null) AppException.toThrow(MSG_02023);
+		
+		switch (occurType) {
+		case 1:
+			if (occurDate.toString().length() != 8) AppException.toThrow(MSG_02027);
+		case 2:
+			if (occurDate.toString().length() != 4) AppException.toThrow(MSG_02027);
+		case 3:
+			if (occurDate < 1 || occurDate > 31) AppException.toThrow(MSG_02027);
+		case 4:
+			if (occurDate < 1 || occurDate > 7) AppException.toThrow(MSG_02027);
+		default:
+			AppException.toThrow(MSG_02026);
+		}
+	}
+	
 	public static void assembly(CustomerMemorialDayBean bean) {
 		if (bean != null) {
 			if (bean.getAdvanceType() != null) {

@@ -96,6 +96,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		CustomerFamilyUtil.checkPhone(phone);
 		CustomerFamilyUtil.checkAddress(address);
 		CustomerFamilyUtil.checkAge(age);
+		CustomerFamilyUtil.checkBirthday(birthday);
 		
 		CustomerBean customerBeanTmp = new CustomerBean();
 		customerBeanTmp.setId(customerId);
@@ -105,11 +106,11 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
-		
+		/*
 		if (age != null) {
 			birthday = CustomerFamilyUtil.getYear(age);
 		}
-		
+		*/
 		CustomerFamilyBean customerFamilyBeanTmp = CustomerFamilyBean.builder()
 		.customerId(customerId)
 		.realName(realName)
@@ -152,6 +153,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		CustomerFamilyUtil.checkPhone(phone);
 		CustomerFamilyUtil.checkAddress(address);
 		CustomerFamilyUtil.checkAge(age);
+		CustomerFamilyUtil.checkBirthday(birthday);
 		
 		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
 		customerBeanTmp = customerService.selectOne(customerBeanTmp);
@@ -159,11 +161,11 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
-		
+		/*
 		if (age != null) {
 			birthday = CustomerFamilyUtil.getYear(age);
 		}
-		
+		*/
 		CustomerFamilyBean customerFamilyBeanTmp = CustomerFamilyBean.builder().id(id).customerId(customerId).build();
 		customerFamilyBeanTmp = selectOne(customerFamilyBeanTmp);
 		if (customerFamilyBeanTmp == null) AppException.toThrow(MSG_00003);

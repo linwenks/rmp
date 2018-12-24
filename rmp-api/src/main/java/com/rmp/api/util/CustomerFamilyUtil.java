@@ -47,6 +47,15 @@ public class CustomerFamilyUtil {
 		if (age != null && age < 0) AppException.toThrow(MSG_02019);
 	}
 	
+	/**
+	 * 检查 生日
+	 * @param phone
+	 */
+	public static void checkBirthday(Integer birthday) {
+		if (birthday != null && birthday.toString().length() != 8) AppException.toThrow(MSG_02028);
+	}
+	
+	
 	public static Integer getYear(Integer age) {
 		Integer year = null;
 		if (age != null) {

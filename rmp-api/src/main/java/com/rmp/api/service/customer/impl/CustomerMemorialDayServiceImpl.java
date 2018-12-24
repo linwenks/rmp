@@ -88,8 +88,7 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		CustomerMemorialDayUtil.checkName(name);
-		if (occurType == null) AppException.toThrow(MSG_02022);
-		if (occurDate == null) AppException.toThrow(MSG_02023);
+		CustomerMemorialDayUtil.checkOccur(occurType, occurDate);
 		if (advanceType == null) AppException.toThrow(MSG_02024);
 		
 		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();
@@ -131,8 +130,7 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (customerId == null) AppException.toThrow(MSG_00003);
 		CustomerMemorialDayUtil.checkName(name);
-		if (occurType == null) AppException.toThrow(MSG_02022);
-		if (occurDate == null) AppException.toThrow(MSG_02023);
+		CustomerMemorialDayUtil.checkOccur(occurType, occurDate);
 		if (advanceType == null) AppException.toThrow(MSG_02024);
 		
 		CustomerBean customerBeanTmp = CustomerBean.builder().id(customerId).userId(userId).build();

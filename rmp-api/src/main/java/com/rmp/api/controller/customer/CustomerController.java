@@ -412,6 +412,12 @@ public class CustomerController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ss","phone":"15111111111"}}
      *
+     * @apiSuccess (data) {Object} customerBean 客户 bean
+     * @apiSuccess (data) {Long} customerBean.id 客户 ID
+     *
+     * @apiSuccessExample {json} 成功返回-示例:
+	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":111}}}
+     *
      */
 	@RequestMapping(value = "/save")
 	public RespBean save(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
@@ -420,7 +426,7 @@ public class CustomerController extends BaseApiController {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerService.exe("save", customerBean);
-		return RespUtil.build(request);
+		return RespUtil.build(request).putData("customerBean", CustomerBean.builder().id(customerBean.getId()).build());
 	}
 	
 	/**

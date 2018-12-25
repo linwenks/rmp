@@ -35,7 +35,7 @@ public class CustomerMemorialDayUtil {
 			if (occurDate.toString().length() != 8) AppException.toThrow(MSG_02027);
 			break;
 		case 2:
-			if (occurDate.toString().length() != 4) AppException.toThrow(MSG_02027);
+			if (occurDate.toString().length() < 3 || occurDate.toString().length() > 4) AppException.toThrow(MSG_02027);
 			break;
 		case 3:
 			if (occurDate < 1 || occurDate > 31) AppException.toThrow(MSG_02027);

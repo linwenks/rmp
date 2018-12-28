@@ -68,6 +68,24 @@ public class CustomerMemorialDayUtil {
 					}
 					bean.setOccurDateStr(DateUtil.formatDate(DateUtil.parseDate(occurDate, DateUtil.MMdd), "MM-dd"));
 					break;
+				case 3:
+					bean.setOccurDateStr(bean.getOccurDate().toString() + "号");
+					break;
+				case 4:
+					String occurDateStr = "";
+					switch (bean.getOccurDate()) {
+					case 1: occurDateStr = "星期一"; break;
+					case 2: occurDateStr = "星期二"; break;
+					case 3: occurDateStr = "星期三"; break;
+					case 4: occurDateStr = "星期四"; break;
+					case 5: occurDateStr = "星期五"; break;
+					case 6: occurDateStr = "星期六"; break;
+					case 7: occurDateStr = "星期日"; break;
+					default:
+						break;
+					}
+					bean.setOccurDateStr(occurDateStr);
+					break;
 				default:
 					bean.setOccurDateStr(bean.getOccurDate().toString());
 					break;

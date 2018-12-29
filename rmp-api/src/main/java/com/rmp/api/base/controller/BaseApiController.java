@@ -45,7 +45,16 @@ public class BaseApiController extends BaseController {
 		} else {
 			msgs.forEach(msg -> {
 				if (msg != null) {
-					log.error(msg.getCode() + " " + msg.getDes());
+					String code = msg.getCode();
+					String des = msg.getDes();
+					if (MsgEnum.MSG_00002.getKey().equals(code) 
+							|| MsgEnum.MSG_00003.getKey().equals(code)
+							|| MsgEnum.MSG_00004.getKey().equals(code)) {
+						log.error(code + " " + des, t);
+					} else {
+						log.error(code + " " + des);
+					}
+					
 				}
 			});
 		}

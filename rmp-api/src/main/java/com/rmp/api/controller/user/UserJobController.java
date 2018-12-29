@@ -175,8 +175,10 @@ public class UserJobController extends BaseApiController {
 		UserBean userBean = reqBean.getUserBean();
 		UserJobBean userJobBean = reqBean.getUserJobBean();
 		Long currentUserId = UserUtil.getCurrentUserId(request);
-		if (userBean == null) userBean = UserBean.builder().id(currentUserId).build();
-		if (userJobBean == null) userJobBean = UserJobBean.builder().userId(currentUserId).build();
+		if (userBean == null) userBean = UserBean.builder().build();
+		if (userJobBean == null) userJobBean = UserJobBean.builder().build();
+		userBean.setId(currentUserId);
+		userJobBean.setUserId(currentUserId);
 		userJobService.exe("update", ImmutableMap.of("userBean", userBean, "userJobBean", userJobBean));
 		return RespUtil.build(request);
 	}

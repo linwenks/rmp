@@ -4,13 +4,11 @@
   <resultMap id="BaseResultMap" type="com.rmp.info.model.CustomerDetail">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
     <result column="update_time" jdbcType="BIGINT" property="updateTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.rmp.info.model.CustomerDetail">
-    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,27 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, customer_id, is_delete, version, create_time, update_time
+    id, customer_id, remark, is_delete, version, create_time, update_time
   </sql>
-  <sql id="Blob_Column_List">
-    remark
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.rmp.info.model.CustomerDetailCriteria" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_customer_detail
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.rmp.info.model.CustomerDetailCriteria" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -109,11 +88,9 @@
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from t_customer_detail
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -128,12 +105,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.rmp.info.model.CustomerDetail">
-    insert into t_customer_detail (id, customer_id, is_delete, 
-      version, create_time, update_time, 
-      remark)
-    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{isDelete,jdbcType=INTEGER}, 
-      #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
-      #{remark,jdbcType=LONGVARCHAR})
+    insert into t_customer_detail (id, customer_id, remark, 
+      is_delete, version, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -147,6 +124,9 @@
       <if test="customerId != null">
         customer_id,
       </if>
+      <if test="remark != null">
+        remark,
+      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -159,9 +139,6 @@
       <if test="updateTime != null">
         update_time,
       </if>
-      <if test="remark != null">
-        remark,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -169,6 +146,9 @@
       </if>
       <if test="customerId != null">
         #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
@@ -181,9 +161,6 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=LONGVARCHAR},
       </if>
     </trim>
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -205,6 +182,9 @@
       <if test="record.customerId != null">
         customer_id = #{record.customerId,jdbcType=BIGINT},
       </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=INTEGER},
       </if>
@@ -217,23 +197,7 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=BIGINT},
       </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update t_customer_detail
-    set id = #{record.id,jdbcType=BIGINT},
-      customer_id = #{record.customerId,jdbcType=BIGINT},
-      is_delete = #{record.isDelete,jdbcType=INTEGER},
-      version = #{record.version,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=BIGINT},
-      update_time = #{record.updateTime,jdbcType=BIGINT},
-      remark = #{record.remark,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,6 +206,7 @@
     update t_customer_detail
     set id = #{record.id,jdbcType=BIGINT},
       customer_id = #{record.customerId,jdbcType=BIGINT},
+      remark = #{record.remark,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=INTEGER},
       version = #{record.version,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT},
@@ -256,6 +221,9 @@
       <if test="customerId != null">
         customer_id = #{customerId,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
@@ -268,25 +236,13 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=BIGINT},
       </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rmp.info.model.CustomerDetail">
-    update t_customer_detail
-    set customer_id = #{customerId,jdbcType=BIGINT},
-      is_delete = #{isDelete,jdbcType=INTEGER},
-      version = #{version,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT},
-      remark = #{remark,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.rmp.info.model.CustomerDetail">
     update t_customer_detail
     set customer_id = #{customerId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},
@@ -297,22 +253,22 @@
     insert into t_customer_detail ( 
     id,
     customer_id,
+    remark,
     is_delete,
     version,
     create_time,
-    update_time,
-    remark
+    update_time
      ) values 
     <foreach collection="recordColl" item="record" separator=",">
       (
       <trim suffixOverrides=",">
          #{record.id,jdbcType=BIGINT}, 
          #{record.customerId,jdbcType=BIGINT}, 
+         #{record.remark,jdbcType=VARCHAR}, 
          #{record.isDelete,jdbcType=INTEGER}, 
          #{record.version,jdbcType=INTEGER}, 
          #{record.createTime,jdbcType=BIGINT}, 
          #{record.updateTime,jdbcType=BIGINT}, 
-         #{record.remark,jdbcType=LONGVARCHAR}, 
       </trim>
       )
     </foreach>
@@ -326,6 +282,9 @@
       <if test="recordColl[0].customerId != null">
         customer_id,
       </if>
+      <if test="recordColl[0].remark != null">
+        remark,
+      </if>
       <if test="recordColl[0].isDelete != null">
         is_delete,
       </if>
@@ -338,9 +297,6 @@
       <if test="recordColl[0].updateTime != null">
         update_time,
       </if>
-      <if test="recordColl[0].remark != null">
-        remark,
-      </if>
     </trim>
      ) values 
     <foreach collection="recordColl" item="record" separator=",">
@@ -351,6 +307,9 @@
         </if>
         <if test="record.customerId != null">
            #{record.customerId,jdbcType=BIGINT}, 
+        </if>
+        <if test="record.remark != null">
+           #{record.remark,jdbcType=VARCHAR}, 
         </if>
         <if test="record.isDelete != null">
            #{record.isDelete,jdbcType=INTEGER}, 
@@ -363,9 +322,6 @@
         </if>
         <if test="record.updateTime != null">
            #{record.updateTime,jdbcType=BIGINT}, 
-        </if>
-        <if test="record.remark != null">
-           #{record.remark,jdbcType=LONGVARCHAR}, 
         </if>
       </trim>
       )
@@ -391,6 +347,9 @@
       <if test="customerId != null">
           customer_id = #{customerId,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+          remark = #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="isDelete != null">
           is_delete = #{isDelete,jdbcType=INTEGER},
       </if>
@@ -399,9 +358,6 @@
       </if>
       <if test="updateTime != null">
           update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="remark != null">
-          remark = #{remark,jdbcType=LONGVARCHAR},
       </if>
         version = version + 1
     </set>
@@ -412,10 +368,10 @@
     update t_customer_detail
     set 
       customer_id = #{customerId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=BIGINT},
-      remark = #{remark,jdbcType=LONGVARCHAR},
       version = version + 1
     where id = #{id,jdbcType=BIGINT}
     and version = #{version,jdbcType=INTEGER}

@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 public class CustomerDetailBean extends CustomerDetail {
 	
 	@Builder
-	public CustomerDetailBean(Long id, Long customerId, Integer isDelete, Integer version, Long createTime,
-			Long updateTime, String remark
+	public CustomerDetailBean(Long id, Long customerId, String remark, Integer isDelete, Integer version,
+			Long createTime, Long updateTime
 			, Long userId) {
-		super(id, customerId, isDelete, version, createTime, updateTime, remark);
+		super(id, customerId, remark, isDelete, version, createTime, updateTime);
 		this.userId = userId;
 	}
-
+	
 	private Long userId;
 }

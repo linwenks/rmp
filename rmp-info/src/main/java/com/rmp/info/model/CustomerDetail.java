@@ -29,6 +29,11 @@ public class CustomerDetail extends Model {
     private Long customerId;
 
     /**
+     * 备注
+     */
+    private String remark;
+
+    /**
      * 是否删除（0:未删除 1:已删除）
      */
     private Integer isDelete;
@@ -47,9 +52,4 @@ public class CustomerDetail extends Model {
      * 修改时间
      */
     private Long updateTime;
-
-    /**
-     * 备注
-     */
-    private String remark;
 }

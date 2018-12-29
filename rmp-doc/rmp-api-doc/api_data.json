@@ -57,7 +57,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -95,7 +95,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -191,18 +191,25 @@
             "optional": false,
             "field": "customerRelationBean",
             "description": "<p>客户 关系 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerDetailBean",
+            "description": "<p>客户 明细 bean</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\",\"vip\":0}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"office\":\"xxxxxxx\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\",\"vip\":0},\"customerDetailBean\":{\"remark\":\"xxxxxxxxxTTT\"}}}",
           "type": "json"
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -451,7 +458,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -496,7 +503,34 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBean.id",
+            "description": "<p>客户 ID</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"id\":111}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -548,7 +582,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -602,7 +636,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
     "groupTitle": "客户"
   },
   {
@@ -642,7 +676,117 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
+    "url": "/api/customer/detail/get",
+    "title": "客户 明细 查询",
+    "description": "<p>客户 明细 查询</p>",
+    "name": "customer_detail_get",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "CustomerDetailBean": [
+          {
+            "group": "CustomerDetailBean",
+            "type": "Object",
+            "optional": false,
+            "field": "customerDetailBean",
+            "description": "<p>明细 bean</p>"
+          },
+          {
+            "group": "CustomerDetailBean",
+            "type": "Long",
+            "optional": false,
+            "field": "customerDetailBean.customerId",
+            "description": "<p>客户ID</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerDetailBean\":{\"customerId\":2}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerDetailBean",
+            "description": "<p>明细 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerDetailBean.remark",
+            "description": "<p>备注</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerDetailBean\":{\"remark\":\"xxxxxxxxxTTT\"}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerDetailController.java",
+    "groupTitle": "客户"
+  },
+  {
+    "type": "post",
+    "url": "/api/customer/detail/update",
+    "title": "客户 明细 修改",
+    "description": "<p>客户 明细 修改</p>",
+    "name": "customer_detail_update",
+    "group": "group_customer",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerDetailBean",
+            "description": "<p>明细 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerDetailBean.customerId",
+            "description": "<p>客户ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": true,
+            "field": "customerDetailBean.remark",
+            "description": "<p>备注</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求-示例: ",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerDetailBean\":{\"customerId\":2,\"remark\":\"xxxxxxxxxTTT\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerDetailController.java",
     "groupTitle": "客户"
   },
   {
@@ -696,7 +840,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -741,7 +885,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -876,7 +1020,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1004,7 +1148,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1174,7 +1318,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1261,7 +1405,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerFamilyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1315,7 +1459,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1415,7 +1559,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1474,7 +1618,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerHobbyController.java",
     "groupTitle": "客户"
   },
   {
@@ -1509,7 +1653,7 @@
             "type": "List",
             "optional": false,
             "field": "positionCodeList",
-            "description": "<p>职位 code list</p>"
+            "description": "<p>职业 code list</p>"
           }
         ]
       },
@@ -1521,7 +1665,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
     "groupTitle": "客户"
   },
   {
@@ -1658,14 +1802,21 @@
             "type": "Integer",
             "optional": false,
             "field": "customerJobBean.position",
-            "description": "<p>职位</p>"
+            "description": "<p>职业</p>"
           },
           {
             "group": "data",
             "type": "String",
             "optional": false,
             "field": "customerJobBean.positionValue",
-            "description": "<p>职位 值</p>"
+            "description": "<p>职业 值</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerJobBean.office",
+            "description": "<p>职位</p>"
           },
           {
             "group": "data",
@@ -1700,12 +1851,12 @@
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"office\":\"xxxxxxxxxx\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
           "type": "json"
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
     "groupTitle": "客户"
   },
   {
@@ -1815,6 +1966,13 @@
             "type": "Integer",
             "optional": true,
             "field": "customerJobBean.position",
+            "description": "<p>职业</p>"
+          },
+          {
+            "group": "CustomerJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "customerJobBean.office",
             "description": "<p>职位</p>"
           },
           {
@@ -1843,7 +2001,7 @@
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerJobBean\":{\"customerId\":4,\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"realName\":\"ttt\",\"phone\":15111111111,\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerJobBean\":{\"customerId\":4,\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"office\":\"xxxxxxxxxx\",\"phone\":\"15111111111\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}",
           "type": "json"
         }
       ]
@@ -1875,7 +2033,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerJobController.java",
     "groupTitle": "客户"
   },
   {
@@ -1915,7 +2073,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
     "groupTitle": "客户"
   },
   {
@@ -1987,7 +2145,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
     "groupTitle": "客户"
   },
   {
@@ -2032,7 +2190,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMaintainController.java",
     "groupTitle": "客户"
   },
   {
@@ -2079,7 +2237,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2124,7 +2282,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2238,7 +2396,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2345,7 +2503,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2480,7 +2638,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2553,7 +2711,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerMemorialDayController.java",
     "groupTitle": "客户"
   },
   {
@@ -2600,7 +2758,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
     "groupTitle": "客户"
   },
   {
@@ -2693,7 +2851,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
     "groupTitle": "客户"
   },
   {
@@ -2745,7 +2903,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerProblemController.java",
     "groupTitle": "客户"
   },
   {
@@ -2799,7 +2957,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
     "groupTitle": "客户"
   },
   {
@@ -2899,7 +3057,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
     "groupTitle": "客户"
   },
   {
@@ -2958,7 +3116,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/customer/CustomerRelationController.java",
     "groupTitle": "客户"
   },
   {
@@ -3061,7 +3219,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/base/config/ApidocConfig.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/base/config/ApidocConfig.java",
     "groupTitle": "示例",
     "error": {
       "fields": {
@@ -3178,7 +3336,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
     "groupTitle": "用户"
   },
   {
@@ -3236,7 +3394,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
     "groupTitle": "用户"
   },
   {
@@ -3294,7 +3452,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/msg/PhoneMsgController.java",
     "groupTitle": "用户"
   },
   {
@@ -3348,7 +3506,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
     "groupTitle": "用户"
   },
   {
@@ -3430,7 +3588,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
     "groupTitle": "用户"
   },
   {
@@ -3482,7 +3640,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserHobbyController.java",
     "groupTitle": "用户"
   },
   {
@@ -3517,7 +3675,7 @@
             "type": "List",
             "optional": false,
             "field": "positionCodeList",
-            "description": "<p>职位 code list</p>"
+            "description": "<p>职业 code list</p>"
           }
         ]
       },
@@ -3529,7 +3687,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
   {
@@ -3653,14 +3811,21 @@
             "type": "Integer",
             "optional": false,
             "field": "userJobBean.position",
-            "description": "<p>职位</p>"
+            "description": "<p>职业</p>"
           },
           {
             "group": "data",
             "type": "String",
             "optional": false,
             "field": "userJobBean.positionValue",
-            "description": "<p>职位 值</p>"
+            "description": "<p>职业 值</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userJobBean.office",
+            "description": "<p>职位</p>"
           },
           {
             "group": "data",
@@ -3695,12 +3860,12 @@
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"工薪族\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":1,\"office\":\"xxxxxx\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"phone\":15111111111,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
           "type": "json"
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
   {
@@ -3789,6 +3954,13 @@
             "type": "Integer",
             "optional": true,
             "field": "userJobBean.position",
+            "description": "<p>职业</p>"
+          },
+          {
+            "group": "UserJobBean",
+            "type": "String",
+            "optional": true,
+            "field": "userJobBean.office",
             "description": "<p>职位</p>"
           },
           {
@@ -3817,12 +3989,12 @@
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"realName\":\"ttt\",\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"userJobBean\":{\"ndustry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"phone\":\"15111111111\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"userBean\":{\"realName\":\"ttt\",\"sex\":0,\"birthday\":20100101,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"userJobBean\":{\"ndustry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"office\":\"xxxxxx\",\"phone\":\"15111111111\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}",
           "type": "json"
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
   {
@@ -3938,7 +4110,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserRemindController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserRemindController.java",
     "groupTitle": "用户"
   },
   {
@@ -4010,7 +4182,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4104,7 +4276,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4194,7 +4366,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4280,7 +4452,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4385,7 +4557,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4455,7 +4627,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4502,7 +4674,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4540,7 +4712,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4595,7 +4767,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   },
   {
@@ -4635,7 +4807,7 @@
         }
       ]
     },
-    "filename": "D:/git-linw/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
+    "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserController.java",
     "groupTitle": "用户"
   }
 ]

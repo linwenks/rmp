@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rmp.info.mapper.CustomerJobMapper">
-  <resultMap id="BaseResultMap" type="com.rmp.info.model.CustomerJob">
+<mapper namespace="com.rmp.info.mapper.CustomerDetailMapper">
+  <resultMap id="BaseResultMap" type="com.rmp.info.model.CustomerDetail">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="customer_id" jdbcType="BIGINT" property="customerId" />
-    <result column="industry" jdbcType="INTEGER" property="industry" />
-    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
-    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
-    <result column="position" jdbcType="INTEGER" property="position" />
-    <result column="office" jdbcType="VARCHAR" property="office" />
-    <result column="phone" jdbcType="BIGINT" property="phone" />
-    <result column="area" jdbcType="VARCHAR" property="area" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="version" jdbcType="INTEGER" property="version" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
     <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.rmp.info.model.CustomerDetail">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,16 +71,34 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, customer_id, industry, company_name, department_name, `position`, office, phone, 
-    area, address, is_delete, version, create_time, update_time
+    id, customer_id, is_delete, version, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.rmp.info.model.CustomerJobCriteria" resultMap="BaseResultMap">
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.rmp.info.model.CustomerDetailCriteria" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_customer_job
+    ,
+    <include refid="Blob_Column_List" />
+    from t_customer_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.rmp.info.model.CustomerDetailCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_customer_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,69 +109,43 @@
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
-    from t_customer_job
+    ,
+    <include refid="Blob_Column_List" />
+    from t_customer_detail
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from t_customer_job
+    delete from t_customer_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.rmp.info.model.CustomerJobCriteria">
-    delete from t_customer_job
+  <delete id="deleteByExample" parameterType="com.rmp.info.model.CustomerDetailCriteria">
+    delete from t_customer_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.rmp.info.model.CustomerJob">
-    insert into t_customer_job (id, customer_id, industry, 
-      company_name, department_name, `position`, 
-      office, phone, area, 
-      address, is_delete, version, 
-      create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{industry,jdbcType=INTEGER}, 
-      #{companyName,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{position,jdbcType=INTEGER}, 
-      #{office,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, #{area,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  <insert id="insert" parameterType="com.rmp.info.model.CustomerDetail">
+    insert into t_customer_detail (id, customer_id, is_delete, 
+      version, create_time, update_time, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{isDelete,jdbcType=INTEGER}, 
+      #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{remark,jdbcType=LONGVARCHAR})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
-  <insert id="insertSelective" parameterType="com.rmp.info.model.CustomerJob">
-    insert into t_customer_job
+  <insert id="insertSelective" parameterType="com.rmp.info.model.CustomerDetail">
+    insert into t_customer_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
       <if test="customerId != null">
         customer_id,
-      </if>
-      <if test="industry != null">
-        industry,
-      </if>
-      <if test="companyName != null">
-        company_name,
-      </if>
-      <if test="departmentName != null">
-        department_name,
-      </if>
-      <if test="position != null">
-        `position`,
-      </if>
-      <if test="office != null">
-        office,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="area != null">
-        area,
-      </if>
-      <if test="address != null">
-        address,
       </if>
       <if test="isDelete != null">
         is_delete,
@@ -172,6 +159,9 @@
       <if test="updateTime != null">
         update_time,
       </if>
+      <if test="remark != null">
+        remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -179,30 +169,6 @@
       </if>
       <if test="customerId != null">
         #{customerId,jdbcType=BIGINT},
-      </if>
-      <if test="industry != null">
-        #{industry,jdbcType=INTEGER},
-      </if>
-      <if test="companyName != null">
-        #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        #{position,jdbcType=INTEGER},
-      </if>
-      <if test="office != null">
-        #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=BIGINT},
-      </if>
-      <if test="area != null">
-        #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
@@ -216,49 +182,28 @@
       <if test="updateTime != null">
         #{updateTime,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
-  <select id="countByExample" parameterType="com.rmp.info.model.CustomerJobCriteria" resultType="java.lang.Long">
-    select count(*) from t_customer_job
+  <select id="countByExample" parameterType="com.rmp.info.model.CustomerDetailCriteria" resultType="java.lang.Long">
+    select count(*) from t_customer_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update t_customer_job
+    update t_customer_detail
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.customerId != null">
         customer_id = #{record.customerId,jdbcType=BIGINT},
-      </if>
-      <if test="record.industry != null">
-        industry = #{record.industry,jdbcType=INTEGER},
-      </if>
-      <if test="record.companyName != null">
-        company_name = #{record.companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.departmentName != null">
-        department_name = #{record.departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.position != null">
-        `position` = #{record.position,jdbcType=INTEGER},
-      </if>
-      <if test="record.office != null">
-        office = #{record.office,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=BIGINT},
-      </if>
-      <if test="record.area != null">
-        area = #{record.area,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
       </if>
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=INTEGER},
@@ -272,23 +217,31 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=BIGINT},
       </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
-    update t_customer_job
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update t_customer_detail
     set id = #{record.id,jdbcType=BIGINT},
       customer_id = #{record.customerId,jdbcType=BIGINT},
-      industry = #{record.industry,jdbcType=INTEGER},
-      company_name = #{record.companyName,jdbcType=VARCHAR},
-      department_name = #{record.departmentName,jdbcType=VARCHAR},
-      `position` = #{record.position,jdbcType=INTEGER},
-      office = #{record.office,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=BIGINT},
-      area = #{record.area,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      version = #{record.version,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=BIGINT},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_customer_detail
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
       is_delete = #{record.isDelete,jdbcType=INTEGER},
       version = #{record.version,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT},
@@ -297,35 +250,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.rmp.info.model.CustomerJob">
-    update t_customer_job
+  <update id="updateByPrimaryKeySelective" parameterType="com.rmp.info.model.CustomerDetail">
+    update t_customer_detail
     <set>
       <if test="customerId != null">
         customer_id = #{customerId,jdbcType=BIGINT},
-      </if>
-      <if test="industry != null">
-        industry = #{industry,jdbcType=INTEGER},
-      </if>
-      <if test="companyName != null">
-        company_name = #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentName != null">
-        department_name = #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        `position` = #{position,jdbcType=INTEGER},
-      </if>
-      <if test="office != null">
-        office = #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=BIGINT},
-      </if>
-      <if test="area != null">
-        area = #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=INTEGER},
@@ -339,20 +268,25 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.rmp.info.model.CustomerJob">
-    update t_customer_job
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rmp.info.model.CustomerDetail">
+    update t_customer_detail
     set customer_id = #{customerId,jdbcType=BIGINT},
-      industry = #{industry,jdbcType=INTEGER},
-      company_name = #{companyName,jdbcType=VARCHAR},
-      department_name = #{departmentName,jdbcType=VARCHAR},
-      `position` = #{position,jdbcType=INTEGER},
-      office = #{office,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=BIGINT},
-      area = #{area,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rmp.info.model.CustomerDetail">
+    update t_customer_detail
+    set customer_id = #{customerId,jdbcType=BIGINT},
       is_delete = #{isDelete,jdbcType=INTEGER},
       version = #{version,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},
@@ -360,75 +294,37 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <insert id="insertBatch">
-    insert into t_customer_job ( 
+    insert into t_customer_detail ( 
     id,
     customer_id,
-    industry,
-    company_name,
-    department_name,
-    position,
-    office,
-    phone,
-    area,
-    address,
     is_delete,
     version,
     create_time,
-    update_time
+    update_time,
+    remark
      ) values 
     <foreach collection="recordColl" item="record" separator=",">
       (
       <trim suffixOverrides=",">
          #{record.id,jdbcType=BIGINT}, 
          #{record.customerId,jdbcType=BIGINT}, 
-         #{record.industry,jdbcType=INTEGER}, 
-         #{record.companyName,jdbcType=VARCHAR}, 
-         #{record.departmentName,jdbcType=VARCHAR}, 
-         #{record.position,jdbcType=INTEGER}, 
-         #{record.office,jdbcType=VARCHAR}, 
-         #{record.phone,jdbcType=BIGINT}, 
-         #{record.area,jdbcType=VARCHAR}, 
-         #{record.address,jdbcType=VARCHAR}, 
          #{record.isDelete,jdbcType=INTEGER}, 
          #{record.version,jdbcType=INTEGER}, 
          #{record.createTime,jdbcType=BIGINT}, 
          #{record.updateTime,jdbcType=BIGINT}, 
+         #{record.remark,jdbcType=LONGVARCHAR}, 
       </trim>
       )
     </foreach>
   </insert>
   <insert id="insertBatchSel">
-    insert into t_customer_job ( 
+    insert into t_customer_detail ( 
     <trim suffixOverrides=",">
       <if test="recordColl[0].id != null">
         id,
       </if>
       <if test="recordColl[0].customerId != null">
         customer_id,
-      </if>
-      <if test="recordColl[0].industry != null">
-        industry,
-      </if>
-      <if test="recordColl[0].companyName != null">
-        company_name,
-      </if>
-      <if test="recordColl[0].departmentName != null">
-        department_name,
-      </if>
-      <if test="recordColl[0].position != null">
-        position,
-      </if>
-      <if test="recordColl[0].office != null">
-        office,
-      </if>
-      <if test="recordColl[0].phone != null">
-        phone,
-      </if>
-      <if test="recordColl[0].area != null">
-        area,
-      </if>
-      <if test="recordColl[0].address != null">
-        address,
       </if>
       <if test="recordColl[0].isDelete != null">
         is_delete,
@@ -442,6 +338,9 @@
       <if test="recordColl[0].updateTime != null">
         update_time,
       </if>
+      <if test="recordColl[0].remark != null">
+        remark,
+      </if>
     </trim>
      ) values 
     <foreach collection="recordColl" item="record" separator=",">
@@ -452,30 +351,6 @@
         </if>
         <if test="record.customerId != null">
            #{record.customerId,jdbcType=BIGINT}, 
-        </if>
-        <if test="record.industry != null">
-           #{record.industry,jdbcType=INTEGER}, 
-        </if>
-        <if test="record.companyName != null">
-           #{record.companyName,jdbcType=VARCHAR}, 
-        </if>
-        <if test="record.departmentName != null">
-           #{record.departmentName,jdbcType=VARCHAR}, 
-        </if>
-        <if test="record.position != null">
-           #{record.position,jdbcType=INTEGER}, 
-        </if>
-        <if test="record.office != null">
-           #{record.office,jdbcType=VARCHAR}, 
-        </if>
-        <if test="record.phone != null">
-           #{record.phone,jdbcType=BIGINT}, 
-        </if>
-        <if test="record.area != null">
-           #{record.area,jdbcType=VARCHAR}, 
-        </if>
-        <if test="record.address != null">
-           #{record.address,jdbcType=VARCHAR}, 
         </if>
         <if test="record.isDelete != null">
            #{record.isDelete,jdbcType=INTEGER}, 
@@ -489,6 +364,9 @@
         <if test="record.updateTime != null">
            #{record.updateTime,jdbcType=BIGINT}, 
         </if>
+        <if test="record.remark != null">
+           #{record.remark,jdbcType=LONGVARCHAR}, 
+        </if>
       </trim>
       )
     </foreach>
@@ -499,7 +377,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_customer_job
+    from t_customer_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -507,35 +385,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <update id="updateByPrimaryKeySelectiveVer" parameterType="com.rmp.info.model.CustomerJob">
-    update t_customer_job
+  <update id="updateByPrimaryKeySelectiveVer" parameterType="com.rmp.info.model.CustomerDetail">
+    update t_customer_detail
     <set>
       <if test="customerId != null">
           customer_id = #{customerId,jdbcType=BIGINT},
-      </if>
-      <if test="industry != null">
-          industry = #{industry,jdbcType=INTEGER},
-      </if>
-      <if test="companyName != null">
-          company_name = #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentName != null">
-          department_name = #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-          position = #{position,jdbcType=INTEGER},
-      </if>
-      <if test="office != null">
-          office = #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-          phone = #{phone,jdbcType=BIGINT},
-      </if>
-      <if test="area != null">
-          area = #{area,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-          address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
           is_delete = #{isDelete,jdbcType=INTEGER},
@@ -546,26 +400,22 @@
       <if test="updateTime != null">
           update_time = #{updateTime,jdbcType=BIGINT},
       </if>
+      <if test="remark != null">
+          remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
         version = version + 1
     </set>
     where id = #{id,jdbcType=BIGINT}
     and version = #{version,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyVer" parameterType="com.rmp.info.model.CustomerJob">
-    update t_customer_job
+  <update id="updateByPrimaryKeyVer" parameterType="com.rmp.info.model.CustomerDetail">
+    update t_customer_detail
     set 
       customer_id = #{customerId,jdbcType=BIGINT},
-      industry = #{industry,jdbcType=INTEGER},
-      company_name = #{companyName,jdbcType=VARCHAR},
-      department_name = #{departmentName,jdbcType=VARCHAR},
-      position = #{position,jdbcType=INTEGER},
-      office = #{office,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=BIGINT},
-      area = #{area,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=LONGVARCHAR},
       version = version + 1
     where id = #{id,jdbcType=BIGINT}
     and version = #{version,jdbcType=INTEGER}

@@ -63,14 +63,16 @@ define({
     "customer_relation_update",
     "customer_maintain_config",
     "customer_maintain_get",
-    "customer_maintain_update"
+    "customer_maintain_update",
+    "customer_detail_get",
+    "customer_detail_update"
   ],
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-12-11T12:33:41.513Z",
+    "time": "2018-12-29T07:38:22.732Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }

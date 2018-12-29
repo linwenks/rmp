@@ -109,6 +109,9 @@
 		<table tableName="t_customer" domainObjectName="Customer" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
+		<table tableName="t_customer_detail" domainObjectName="CustomerDetail" >
+			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
+		</table>
 		<table tableName="t_customer_family" domainObjectName="CustomerFamily" >
 			<property name="rootClass" value="com.rmp.info.base.model.Model"/>
 		</table>
@@ -132,8 +135,6 @@
 		</table>
 		
 		 -->
-		
-		
 		
 	</context>
 

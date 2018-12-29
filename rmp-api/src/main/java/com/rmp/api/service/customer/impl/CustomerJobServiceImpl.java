@@ -89,18 +89,21 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 		String companyName = customerJobBean.getCompanyName();
 		String departmentName = customerJobBean.getDepartmentName();
 		Integer position = customerJobBean.getPosition();
+		String office = StringUtils.trim(customerJobBean.getOffice());
 		Long phone = customerJobBean.getPhone();
 		String area = StringUtils.trim(customerJobBean.getArea());
 		String address = StringUtils.trim(customerJobBean.getAddress());
 		
 		if (userId == null) AppException.toThrow(MSG_00003);
 		int companyNameMaxLength = 100;
-		if (!StringUtils.isEmpty(companyName) && companyName.length() > companyNameMaxLength) AppException.toThrow(MSG_02010, String.valueOf(companyName));
+		if (!StringUtils.isEmpty(companyName) && companyName.length() > companyNameMaxLength) AppException.toThrow(MSG_02010, String.valueOf(companyNameMaxLength));
 		int departmentNameMaxLength = 100;
-		if (!StringUtils.isEmpty(departmentName) && departmentName.length() > departmentNameMaxLength) AppException.toThrow(MSG_02011, String.valueOf(departmentName));
+		if (!StringUtils.isEmpty(departmentName) && departmentName.length() > departmentNameMaxLength) AppException.toThrow(MSG_02011, String.valueOf(departmentNameMaxLength));
 		if (phone != null && !PatternUtil.matchesMobilePhone(phone.toString())) AppException.toThrow(MSG_02013);
 		int addressMaxLength = 100;
-		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02012, String.valueOf(address));
+		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_02012, String.valueOf(addressMaxLength));
+		int officeMaxLength = 150;
+		if (!StringUtils.isEmpty(office) && office.length() > officeMaxLength) AppException.toThrow(MSG_02029, String.valueOf(officeMaxLength));
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
@@ -117,6 +120,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 				customerJobBeanTmp.setCompanyName(companyName);
 				customerJobBeanTmp.setDepartmentName(departmentName);
 				customerJobBeanTmp.setPosition(position);
+				customerJobBeanTmp.setOffice(office);
 				customerJobBeanTmp.setPhone(phone);
 				customerJobBeanTmp.setArea(area);
 				customerJobBeanTmp.setAddress(address);
@@ -129,6 +133,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 				.companyName(companyName)
 				.departmentName(departmentName)
 				.position(position)
+				.office(office)
 				.phone(phone)
 				.area(area)
 				.address(address)
@@ -152,6 +157,7 @@ public class CustomerJobServiceImpl extends BaseServiceImpl<CustomerJob, Custome
 			.companyName(companyName)
 			.departmentName(departmentName)
 			.position(position)
+			.office(office)
 			.phone(phone)
 			.area(area)
 			.address(address)

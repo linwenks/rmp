@@ -88,18 +88,21 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 		String companyName = userJobBean.getCompanyName();
 		String departmentName = userJobBean.getDepartmentName();
 		Integer position = userJobBean.getPosition();
+		String office = StringUtils.trim(userJobBean.getOffice());
 		Long phone = userJobBean.getPhone();
 		String area = StringUtils.trim(userJobBean.getArea());
 		String address = StringUtils.trim(userJobBean.getAddress());
 		
 		if (userId == null) AppException.toThrow(MSG_00003);
 		int companyNameMaxLength = 100;
-		if (!StringUtils.isEmpty(companyName) && companyName.length() > companyNameMaxLength) AppException.toThrow(MSG_01024, String.valueOf(companyName));
+		if (!StringUtils.isEmpty(companyName) && companyName.length() > companyNameMaxLength) AppException.toThrow(MSG_01024, String.valueOf(companyNameMaxLength));
 		int departmentNameMaxLength = 100;
-		if (!StringUtils.isEmpty(departmentName) && departmentName.length() > departmentNameMaxLength) AppException.toThrow(MSG_01025, String.valueOf(departmentName));
+		if (!StringUtils.isEmpty(departmentName) && departmentName.length() > departmentNameMaxLength) AppException.toThrow(MSG_01025, String.valueOf(departmentNameMaxLength));
 		if (phone != null && !PatternUtil.matchesMobilePhone(phone.toString())) AppException.toThrow(MSG_01027);
 		int addressMaxLength = 100;
-		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_01026, String.valueOf(address));
+		if (!StringUtils.isEmpty(address) && address.length() > addressMaxLength) AppException.toThrow(MSG_01026, String.valueOf(addressMaxLength));
+		int officeMaxLength = 150;
+		if (!StringUtils.isEmpty(office) && office.length() > officeMaxLength) AppException.toThrow(MSG_01035, String.valueOf(officeMaxLength));
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
@@ -111,6 +114,7 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 			userJobBeanTmp.setCompanyName(companyName);
 			userJobBeanTmp.setDepartmentName(departmentName);
 			userJobBeanTmp.setPosition(position);
+			userJobBeanTmp.setOffice(office);
 			userJobBeanTmp.setPhone(phone);
 			userJobBeanTmp.setArea(area);
 			userJobBeanTmp.setAddress(address);
@@ -123,6 +127,7 @@ public class UserJobServiceImpl extends BaseServiceImpl<UserJob, UserJobBean, Us
 			.companyName(companyName)
 			.departmentName(departmentName)
 			.position(position)
+			.office(office)
 			.phone(phone)
 			.area(area)
 			.address(address)

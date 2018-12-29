@@ -8,6 +8,7 @@
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <result column="position" jdbcType="INTEGER" property="position" />
+    <result column="office" jdbcType="VARCHAR" property="office" />
     <result column="phone" jdbcType="BIGINT" property="phone" />
     <result column="area" jdbcType="VARCHAR" property="area" />
     <result column="address" jdbcType="VARCHAR" property="address" />
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, industry, company_name, department_name, `position`, phone, area, address, 
-    is_delete, version, create_time, update_time
+    id, user_id, industry, company_name, department_name, `position`, office, phone, 
+    area, address, is_delete, version, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.rmp.info.model.UserJobCriteria" resultMap="BaseResultMap">
     select
@@ -114,14 +115,14 @@
   <insert id="insert" parameterType="com.rmp.info.model.UserJob">
     insert into t_user_job (id, user_id, industry, 
       company_name, department_name, `position`, 
-      phone, area, address, 
-      is_delete, version, create_time, 
-      update_time)
+      office, phone, area, 
+      address, is_delete, version, 
+      create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{industry,jdbcType=INTEGER}, 
       #{companyName,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{position,jdbcType=INTEGER}, 
-      #{phone,jdbcType=BIGINT}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=BIGINT})
+      #{office,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, #{area,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -146,6 +147,9 @@
       </if>
       <if test="position != null">
         `position`,
+      </if>
+      <if test="office != null">
+        office,
       </if>
       <if test="phone != null">
         phone,
@@ -187,6 +191,9 @@
       </if>
       <if test="position != null">
         #{position,jdbcType=INTEGER},
+      </if>
+      <if test="office != null">
+        #{office,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=BIGINT},
@@ -241,6 +248,9 @@
       <if test="record.position != null">
         `position` = #{record.position,jdbcType=INTEGER},
       </if>
+      <if test="record.office != null">
+        office = #{record.office,jdbcType=VARCHAR},
+      </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=BIGINT},
       </if>
@@ -275,6 +285,7 @@
       company_name = #{record.companyName,jdbcType=VARCHAR},
       department_name = #{record.departmentName,jdbcType=VARCHAR},
       `position` = #{record.position,jdbcType=INTEGER},
+      office = #{record.office,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=BIGINT},
       area = #{record.area,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
@@ -303,6 +314,9 @@
       </if>
       <if test="position != null">
         `position` = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="office != null">
+        office = #{office,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=BIGINT},
@@ -335,6 +349,7 @@
       company_name = #{companyName,jdbcType=VARCHAR},
       department_name = #{departmentName,jdbcType=VARCHAR},
       `position` = #{position,jdbcType=INTEGER},
+      office = #{office,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=BIGINT},
       area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
@@ -352,6 +367,7 @@
     company_name,
     department_name,
     position,
+    office,
     phone,
     area,
     address,
@@ -369,6 +385,7 @@
          #{record.companyName,jdbcType=VARCHAR}, 
          #{record.departmentName,jdbcType=VARCHAR}, 
          #{record.position,jdbcType=INTEGER}, 
+         #{record.office,jdbcType=VARCHAR}, 
          #{record.phone,jdbcType=BIGINT}, 
          #{record.area,jdbcType=VARCHAR}, 
          #{record.address,jdbcType=VARCHAR}, 
@@ -400,6 +417,9 @@
       </if>
       <if test="recordColl[0].position != null">
         position,
+      </if>
+      <if test="recordColl[0].office != null">
+        office,
       </if>
       <if test="recordColl[0].phone != null">
         phone,
@@ -444,6 +464,9 @@
         </if>
         <if test="record.position != null">
            #{record.position,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.office != null">
+           #{record.office,jdbcType=VARCHAR}, 
         </if>
         <if test="record.phone != null">
            #{record.phone,jdbcType=BIGINT}, 
@@ -502,6 +525,9 @@
       <if test="position != null">
           position = #{position,jdbcType=INTEGER},
       </if>
+      <if test="office != null">
+          office = #{office,jdbcType=VARCHAR},
+      </if>
       <if test="phone != null">
           phone = #{phone,jdbcType=BIGINT},
       </if>
@@ -533,6 +559,7 @@
       company_name = #{companyName,jdbcType=VARCHAR},
       department_name = #{departmentName,jdbcType=VARCHAR},
       position = #{position,jdbcType=INTEGER},
+      office = #{office,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=BIGINT},
       area = #{area,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},

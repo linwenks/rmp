@@ -504,6 +504,76 @@ public class UserJobCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andOfficeIsNull() {
+            addCriterion("office is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeIsNotNull() {
+            addCriterion("office is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeEqualTo(String value) {
+            addCriterion("office =", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeNotEqualTo(String value) {
+            addCriterion("office <>", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeGreaterThan(String value) {
+            addCriterion("office >", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeGreaterThanOrEqualTo(String value) {
+            addCriterion("office >=", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeLessThan(String value) {
+            addCriterion("office <", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeLessThanOrEqualTo(String value) {
+            addCriterion("office <=", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeLike(String value) {
+            addCriterion("office like", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeNotLike(String value) {
+            addCriterion("office not like", value, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeIn(List<String> values) {
+            addCriterion("office in", values, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeNotIn(List<String> values) {
+            addCriterion("office not in", values, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeBetween(String value1, String value2) {
+            addCriterion("office between", value1, value2, "office");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfficeNotBetween(String value1, String value2) {
+            addCriterion("office not between", value1, value2, "office");
+            return (Criteria) this;
+        }
+
         public Criteria andPhoneIsNull() {
             addCriterion("phone is null");
             return (Criteria) this;

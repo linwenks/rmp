@@ -15,10 +15,10 @@ public class CustomerJobBean extends CustomerJob {
 	
 	@Builder
 	public CustomerJobBean(Long id, Long customerId, Integer industry, String companyName, String departmentName,
-			Integer position, Long phone, String area, String address, Integer isDelete, Integer version,
+			Integer position, String office, Long phone, String area, String address, Integer isDelete, Integer version,
 			Long createTime, Long updateTime
 			, Long userId, String areaNameAll, String industryValue, String positionValue) {
-		super(id, customerId, industry, companyName, departmentName, position, phone, area, address, isDelete, version,
+		super(id, customerId, industry, companyName, departmentName, position, office, phone, area, address, isDelete, version,
 				createTime, updateTime);
 		this.userId = userId;
 		this.areaNameAll = areaNameAll;

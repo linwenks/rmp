@@ -12,19 +12,18 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 public class UserJobBean extends UserJob {
-
+	
 	@Builder
 	public UserJobBean(Long id, Long userId, Integer industry, String companyName, String departmentName,
-			Integer position, Long phone, String area, String address, Integer isDelete, Integer version,
+			Integer position, String office, Long phone, String area, String address, Integer isDelete, Integer version,
 			Long createTime, Long updateTime
 			, String areaNameAll, String industryValue, String positionValue) {
-		super(id, userId, industry, companyName, departmentName, position, phone, area, address, isDelete, version,
+		super(id, userId, industry, companyName, departmentName, position, office, phone, area, address, isDelete, version,
 				createTime, updateTime);
 		this.areaNameAll = areaNameAll;
 		this.industryValue = industryValue;
-		this.positionValue = positionValue;
 	}
-	
+
 	/**
      * 区域 名称 all
      */

@@ -3,6 +3,7 @@ package com.rmp.api.base.model;
 import javax.servlet.http.HttpServletRequest;
 
 import com.rmp.api.model.CustomerBean;
+import com.rmp.api.model.CustomerDetailBean;
 import com.rmp.api.model.CustomerFamilyBean;
 import com.rmp.api.model.CustomerHobbyBean;
 import com.rmp.api.model.CustomerJobBean;
@@ -61,6 +62,8 @@ public class ReqBean {
 	
 	
 	private CustomerBean customerBean;
+	
+	private CustomerDetailBean customerDetailBean;
 	
 	private CustomerRelationBean customerRelationBean;
 	

@@ -44,9 +44,14 @@ public class CustomerJob extends Model {
     private String departmentName;
 
     /**
-     * 职位（工薪族、个体户、企业主、学生、公务员、自由职业、无业）
+     * 职业（工薪族、个体户、企业主、学生、公务员、自由职业、无业）
      */
     private Integer position;
+
+    /**
+     * 职位
+     */
+    private String office;
 
     /**
      * 工作电话

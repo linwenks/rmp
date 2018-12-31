@@ -64,7 +64,7 @@
 					and locate(#{customerBean.realName}, c.real_name) > 0
 			    </if>
 			    <if test="customerBean.phone != null" >
-					and c.phone = #{customerBean.phone}
+					and locate(#{customerBean.phone}, c.phone) > 0
 			    </if>
 			    
 			    <if test="customerBean.customerRelationBean != null" >

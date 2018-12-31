@@ -26,6 +26,7 @@ import com.rmp.api.model.CustomerJobBean;
 import com.rmp.api.model.CustomerMaintainBean;
 import com.rmp.api.model.CustomerMemorialDayBean;
 import com.rmp.api.model.CustomerProblemBean;
+import com.rmp.api.service.customer.CustomerDetailService;
 import com.rmp.api.service.customer.CustomerFamilyService;
 import com.rmp.api.service.customer.CustomerHobbyService;
 import com.rmp.api.service.customer.CustomerJobService;
@@ -70,7 +71,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 	private CustomerProblemService customerProblemService;
 	@Autowired
 	private CustomerRelationService customerRelationService;
-	
+	@Autowired
+	private CustomerDetailService customerDetailService;
 	
 	@Override
 	public CustomerMapper mapper() {
@@ -346,6 +348,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
 		customerRelationService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
+				"obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
+				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
+		
+		customerDetailService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
 				"obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
 				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 	}

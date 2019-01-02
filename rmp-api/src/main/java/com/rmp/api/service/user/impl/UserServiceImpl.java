@@ -2,6 +2,7 @@ package com.rmp.api.service.user.impl;
 
 import static com.rmp.api.util.MsgEnum.*;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -643,8 +644,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 	/**
 	 * 修改 全部
 	 * @param userBean
+	 * @throws IOException 
 	 */
-	private void updateAll(UserBean userBean) {
+	private void updateAll(UserBean userBean) throws IOException {
 		if (userBean == null) AppException.toThrow(MSG_00003);
 		Long id = userBean.getId();
 		String realName = StringUtils.trim(userBean.getRealName());
@@ -666,9 +668,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
+		boolean isMove = false;
+		String headPicNew = userBeanTmp.getHeadPic();
+		String headPicOld = null;
+		if (!StringUtils.isEmpty(headPic)) {
+			Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+			isMove = (boolean) headPicMap.get("isMove");
+			headPicNew = (String) headPicMap.get("headPicNew");
+			headPicOld = (String) headPicMap.get("headPicOld");
+		}
+		
 		// 修改
 		userBeanTmp.setRealName(realName);
-		userBeanTmp.setHeadPic(headPic);
+		userBeanTmp.setHeadPic(headPicNew);
 		userBeanTmp.setBirthday(birthday);
 		userBeanTmp.setSex(sex);
 		userBeanTmp.setArea(area);
@@ -677,5 +689,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		updatePkVer(userBeanTmp);
 		
 		BeanUtils.copyProperties(userBeanTmp, userBean);
+
+		// 移动文件
+		if (isMove) {
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
+		}
 	}
 }

@@ -183,6 +183,8 @@ public class UserJobController extends BaseApiController {
 		userBean.setId(currentUserId);
 		userJobBean.setUserId(currentUserId);
 		userJobService.exe("update", ImmutableMap.of("userBean", userBean, "userJobBean", userJobBean));
-		return RespUtil.build(request);
+		UserUtil.assembly(userBean);
+		return RespUtil.build(request)
+				.putData("userBean", UserBean.builder().headPic(userBean.getHeadPic()).build());
 	}
 }

@@ -191,7 +191,7 @@ public class CustomerJobController extends BaseApiController {
 	 * @apiSuccess (data) {Integer} customerBean.id ID
      * 
      * @apiSuccessExample {json} 成功返回-示例:
-     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":4}}}
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":59,"headPic":"http://47.94.5.205/img/head_pic/default.jpg"}}}
      */
 	@RequestMapping(value = "/update")
 	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

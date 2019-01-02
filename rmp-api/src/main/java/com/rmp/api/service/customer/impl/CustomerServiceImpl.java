@@ -347,7 +347,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		customerBeanTmp.setRealName(realName);
 		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
 		customerBeanTmp.setPhone(phone);
-		customerBeanTmp.setHeadPic(headPic);
+		customerBeanTmp.setHeadPic(headPicNew);
 		customerBeanTmp.setBirthday(birthday);
 		customerBeanTmp.setSex(sex);
 		customerBeanTmp.setArea(area);

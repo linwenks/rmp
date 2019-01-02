@@ -428,10 +428,13 @@ public class CustomerController extends BaseApiController {
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ss","phone":"15111111111"}}
      *
      * @apiSuccess (data) {Object} customerBean 客户 bean
-     * @apiSuccess (data) {Long} customerBean.id 客户 ID
-     *
+     * @apiSuccess (data) {Long} customerBean.id ID
+     * @apiSuccess (data) {String} customerBean.realName 真实姓名
+     * @apiSuccess (data) {Long} customerBean.phone 手机
+     * @apiSuccess (data) {String} customerBean.headPic 头像
+     * 
      * @apiSuccessExample {json} 成功返回-示例:
-	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":111}}}
+	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":60,"realName":"ss","phone":15111111113,"headPic":"http://47.94.5.205/img/head_pic/default.jpg"}}}
      *
      */
 	@RequestMapping(value = "/save")
@@ -463,10 +466,20 @@ public class CustomerController extends BaseApiController {
      * @apiParam (CustomerBean) {Long} customerBean.id ID
      * @apiParam (CustomerBean) {String} customerBean.realName 真实姓名
      * @apiParam (CustomerBean) {Long} customerBean.phone 手机
+     * @apiParam (CustomerBean) {String} [customerBean.headPic] 头像
      * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":1,"realName":"aa","phone":"15111111116"}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":60,"realName":"ss","phone":15111111113,"headPic":"http://47.94.5.205/tmp/customer/head_pic/20181231/1444000280787608578.png"}}
      * 
+     * @apiSuccess (data) {Object} customerBean 客户 bean
+     * @apiSuccess (data) {Long} customerBean.id ID
+     * @apiSuccess (data) {String} customerBean.realName 真实姓名
+     * @apiSuccess (data) {Long} customerBean.phone 手机
+     * @apiSuccess (data) {String} customerBean.headPic 头像
+     * 
+     * @apiSuccessExample {json} 成功返回-示例:
+	 * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerBean":{"id":60,"realName":"ss","phone":15111111113,"headPic":"http://47.94.5.205/customer/head_pic/20181231/1444000280787608578.png"}}}
+     *
      */
 	@RequestMapping(value = "/update")
 	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

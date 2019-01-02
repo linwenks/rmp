@@ -171,6 +171,12 @@ public class UserJobController extends BaseApiController {
      * @apiParamExample {json} 请求-示例: 
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"userBean":{"realName":"ttt","sex":0,"birthday":20100101,"headPic":"/xxx/pic.jpg","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"userJobBean":{"ndustry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"office":"xxxxxx","phone":"15111111111","area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"}}
      * 
+     * @apiSuccess (data) {Object} userBean 客户 bean
+	 * @apiSuccess (data) {String} userBean.headPic 头像
+     * 
+     * @apiSuccessExample {json} 成功返回-示例:
+     * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"userBean":{"headPic":"/xxx/pic.jpg"}}}
+     *
      */
 	@RequestMapping(value = "/update")
 	public RespBean update(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {

@@ -206,7 +206,8 @@ public class CustomerJobController extends BaseApiController {
 		customerBean.setUserId(currentUserId);
 		customerJobBean.setUserId(currentUserId);
 		customerJobService.exe("update", ImmutableMap.of("customerBean", customerBean, "customerJobBean", customerJobBean));
-		CustomerBean customerBeanResult = CustomerBean.builder().id(customerBean.getId()).build();
+		CustomerBean customerBeanResult = CustomerBean.builder().id(customerBean.getId()).headPic(customerBean.getHeadPic()).build();
+		CustomerUtil.assembly(customerBeanResult);
 		return RespUtil.build(request).putData("customerBean", customerBeanResult);
 	}
 }

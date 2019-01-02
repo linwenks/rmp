@@ -1,13 +1,11 @@
 package com.rmp.api.service.customer.impl;
 
-import static com.rmp.api.util.MsgEnum.MSG_00003;
-import static com.rmp.api.util.MsgEnum.MSG_02004;
+import static com.rmp.api.util.MsgEnum.*;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +34,7 @@ import com.rmp.api.service.customer.CustomerProblemService;
 import com.rmp.api.service.customer.CustomerRelationService;
 import com.rmp.api.service.customer.CustomerService;
 import com.rmp.api.util.CustomerUtil;
+import com.rmp.api.util.HeadPicUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.page.QueryPage;
 import com.rmp.common.util.DateUtil;
@@ -130,14 +129,16 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 	
 	/**
 	 * 添加
-	 * 姓名、手机号
+	 * 姓名、手机号、头像
 	 * @param customerBean
+	 * @throws IOException 
 	 */
-	private void save(CustomerBean customerBean) {
+	private void save(CustomerBean customerBean) throws IOException {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long userId = customerBean.getUserId();
 		String realName = StringUtils.trim(customerBean.getRealName());
 		Long phone = customerBean.getPhone();
+		String headPic = StringUtils.trim(customerBean.getHeadPic());
 		
 		if (userId == null) AppException.toThrow(MSG_00003);
 		CustomerUtil.checkRealName(realName);
@@ -149,6 +150,16 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
+
+		boolean isMove = false;
+		String headPicNew = Constant.Customer.HEAD_PIC;
+		String headPicOld = null;
+		if (!StringUtils.isEmpty(headPic)) {
+			Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+			isMove = (boolean) headPicMap.get("isMove");
+			headPicNew = (String) headPicMap.get("headPicNew");
+			headPicOld = (String) headPicMap.get("headPicOld");
+		}
 		
 		// 添加
 		customerBeanTmp = CustomerBean.builder()
@@ -156,19 +167,25 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		.realName(realName)
 		.pinyin(PinYinUtil.toPinYinLast(realName))
 		.phone(phone)
-		.headPic(Constant.Customer.HEAD_PIC)
+		.headPic(headPicNew)
 		.createTime(nowDateLong)
 		.build();
 		insertSel(customerBeanTmp);
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
+		
+		// 移动文件
+		if (isMove) {
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
+		}
 	}
 	
 	/**
 	 * 添加 全部
 	 * @param customerBean
+	 * @throws IOException 
 	 */
-	private void saveAll(CustomerBean customerBean) {
+	private void saveAll(CustomerBean customerBean) throws IOException {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long userId = customerBean.getUserId();
 		String realName = StringUtils.trim(customerBean.getRealName());
@@ -184,7 +201,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		CustomerUtil.checkRealName(realName);
 		CustomerUtil.checkPhone(phone);
 		CustomerUtil.checkAddress(address);
-		if (StringUtils.isEmpty(headPic)) headPic = Constant.Customer.HEAD_PIC;
 		
 		CustomerBean customerBeanTmp = CustomerBean.builder().userId(userId).phone(phone).build();
 		List<CustomerBean> customerBeanTmpList = selectList(null, customerBeanTmp);
@@ -193,13 +209,23 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
+		boolean isMove = false;
+		String headPicNew = Constant.Customer.HEAD_PIC;
+		String headPicOld = null;
+		if (!StringUtils.isEmpty(headPic)) {
+			Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+			isMove = (boolean) headPicMap.get("isMove");
+			headPicNew = (String) headPicMap.get("headPicNew");
+			headPicOld = (String) headPicMap.get("headPicOld");
+		}
+		
 		// 添加
 		customerBeanTmp = CustomerBean.builder()
 		.userId(userId)
 		.realName(realName)
 		.pinyin(PinYinUtil.toPinYinLast(realName))
 		.phone(phone)
-		.headPic(headPic)
+		.headPic(headPicNew)
 		.birthday(birthday)
 		.sex(sex)
 		.area(area)
@@ -209,19 +235,26 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		insertSel(customerBeanTmp);
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
+		
+		// 移动文件
+		if (isMove) {
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
+		}
 	}
 	
 	/**
 	 * 修改
-	 * 姓名，手机号
+	 * 姓名、手机号、头像
 	 * @param customerBean
+	 * @throws IOException 
 	 */
-	private void update(CustomerBean customerBean) {
+	private void update(CustomerBean customerBean) throws IOException {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();
 		Long userId = customerBean.getUserId();
 		String realName = StringUtils.trim(customerBean.getRealName());
 		Long phone = customerBean.getPhone();
+		String headPic = StringUtils.trim(customerBean.getHeadPic());
 		
 		if (id == null) AppException.toThrow(MSG_00003);
 		if (userId == null) AppException.toThrow(MSG_00003);
@@ -239,21 +272,38 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
+		boolean isMove = false;
+		String headPicNew = customerBeanTmp.getHeadPic();
+		String headPicOld = null;
+		if (!StringUtils.isEmpty(headPic)) {
+			Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+			isMove = (boolean) headPicMap.get("isMove");
+			headPicNew = (String) headPicMap.get("headPicNew");
+			headPicOld = (String) headPicMap.get("headPicOld");
+		}
+		
 		// 修改
 		customerBeanTmp.setRealName(realName);
 		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
 		customerBeanTmp.setPhone(phone);
+		customerBeanTmp.setHeadPic(headPicNew);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerBeanTmp);
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
+		
+		// 移动文件
+		if (isMove) {
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
+		}
 	}
 	
 	/**
 	 * 修改 全部
 	 * @param customerBean
+	 * @throws IOException 
 	 */
-	private void updateAll(CustomerBean customerBean) {
+	private void updateAll(CustomerBean customerBean) throws IOException {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();
 		Long userId = customerBean.getUserId();
@@ -283,6 +333,16 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
+		boolean isMove = false;
+		String headPicNew = customerBeanTmp.getHeadPic();
+		String headPicOld = null;
+		if (!StringUtils.isEmpty(headPic)) {
+			Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+			isMove = (boolean) headPicMap.get("isMove");
+			headPicNew = (String) headPicMap.get("headPicNew");
+			headPicOld = (String) headPicMap.get("headPicOld");
+		}
+		
 		// 修改
 		customerBeanTmp.setRealName(realName);
 		customerBeanTmp.setPinyin(PinYinUtil.toPinYinLast(realName));
@@ -296,6 +356,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		updatePkVer(customerBeanTmp);
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
+		
+		// 移动文件
+		if (isMove) {
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
+		}
 	}
 	
 	/**
@@ -373,18 +438,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		if (userId == null) AppException.toThrow(MSG_00003);
 		if (StringUtils.isEmpty(headPic)) AppException.toThrow(MSG_00003);
 		
-		boolean isMove = false;
-		String headPicNew = null;
-		String headPicOld = null;
-		if (headPic.startsWith(Constant.imgDomain())) {
-			headPic = headPic.replaceAll(Constant.imgDomain(), "");
-			if (headPic.startsWith(Constant.UPLOAD_TMP)) {
-				isMove = true;
-				headPicOld = headPic;
-				headPic = headPic.replaceAll(Constant.UPLOAD_TMP, "");
-				headPicNew = headPic;
-			}
-		}
+		Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+		boolean isMove = (boolean) headPicMap.get("isMove");
+		String headPicNew = (String) headPicMap.get("headPicNew");
+		String headPicOld = (String) headPicMap.get("headPicOld");
 		
 		CustomerBean customerBeanTmp = CustomerBean.builder().id(id).userId(userId).build();
 		customerBeanTmp = selectOne(customerBeanTmp);
@@ -393,7 +450,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		Date nowDate = DateUtil.now();
 		Long nowDateLong = DateUtil.formatDate2Long(nowDate);
 		
-		customerBeanTmp.setHeadPic(headPic);
+		customerBeanTmp.setHeadPic(headPicNew);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerBeanTmp);
 		
@@ -402,8 +459,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		
 		// 移动文件
 		if (isMove) {
-			Files.createDirectories(Paths.get(Constant.uploadTopPath() + headPicNew.substring(0, headPicNew.lastIndexOf("/"))));
-			Files.move(Paths.get(Constant.uploadTopPath() + headPicOld), Paths.get(Constant.uploadTopPath() + headPicNew));    //移动文件（即复制并删除源文件）
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
 		}
 	}
 }

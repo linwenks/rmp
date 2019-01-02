@@ -422,6 +422,7 @@ public class CustomerController extends BaseApiController {
      * @apiParam (CustomerBean) {Object} customerBean 客户 bean
      * @apiParam (CustomerBean) {String} customerBean.realName 真实姓名
      * @apiParam (CustomerBean) {Long} customerBean.phone 手机
+     * @apiParam (CustomerBean) {String} [customerBean.headPic] 头像
      * 
      * @apiParamExample {json} 请求-示例: 
      * 		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"realName":"ss","phone":"15111111111"}}
@@ -440,7 +441,13 @@ public class CustomerController extends BaseApiController {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerService.exe("save", customerBean);
-		return RespUtil.build(request).putData("customerBean", CustomerBean.builder().id(customerBean.getId()).build());
+		CustomerUtil.assembly(customerBean);
+		return RespUtil.build(request).putData("customerBean", CustomerBean.builder()
+				.id(customerBean.getId())
+				.phone(customerBean.getPhone())
+				.realName(customerBean.getRealName())
+				.headPic(customerBean.getHeadPic())
+				.build());
 	}
 	
 	/**
@@ -468,7 +475,13 @@ public class CustomerController extends BaseApiController {
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		customerBean.setUserId(UserUtil.getCurrentUserId(request));
 		customerService.exe("update", customerBean);
-		return RespUtil.build(request);
+		CustomerUtil.assembly(customerBean);
+		return RespUtil.build(request).putData("customerBean", CustomerBean.builder()
+				.id(customerBean.getId())
+				.phone(customerBean.getPhone())
+				.realName(customerBean.getRealName())
+				.headPic(customerBean.getHeadPic())
+				.build());
 	}
 	
 	/**

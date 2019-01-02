@@ -2,8 +2,6 @@ package com.rmp.api.service.user.impl;
 
 import static com.rmp.api.util.MsgEnum.*;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Map;
 
@@ -23,6 +21,7 @@ import com.rmp.api.model.WxPhoneNumberRespBean;
 import com.rmp.api.model.PhoneMsgBean;
 import com.rmp.api.service.msg.PhoneMsgService;
 import com.rmp.api.service.user.UserService;
+import com.rmp.api.util.HeadPicUtil;
 import com.rmp.api.util.UserUtil;
 import com.rmp.api.util.WxUtil;
 import com.rmp.api.util.constant.Constant;
@@ -518,18 +517,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		String headPic = StringUtils.trim(userBean.getHeadPic());
 		if (StringUtils.isEmpty(headPic)) AppException.toThrow(MSG_00003);
 		
-		boolean isMove = false;
-		String headPicNew = null;
-		String headPicOld = null;
-		if (headPic.startsWith(Constant.imgDomain())) {
-			headPic = headPic.replaceAll(Constant.imgDomain(), "");
-			if (headPic.startsWith(Constant.UPLOAD_TMP)) {
-				isMove = true;
-				headPicOld = headPic;
-				headPic = headPic.replaceAll(Constant.UPLOAD_TMP, "");
-				headPicNew = headPic;
-			}
-		}
+		Map<String, Object> headPicMap = HeadPicUtil.getHeadPic(headPic);
+		boolean isMove = (boolean) headPicMap.get("isMove");
+		String headPicNew = (String) headPicMap.get("headPicNew");
+		String headPicOld = (String) headPicMap.get("headPicOld");
 		
 		if (id == null) AppException.toThrow(MSG_00003);
 		UserUtil.checkHeadPic(headPic);
@@ -540,7 +531,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		UserBean userBeanTmp = selectById(id);
 		UserUtil.checkUser(userBeanTmp);
 		
-		userBeanTmp.setHeadPic(headPic);
+		userBeanTmp.setHeadPic(headPicNew);
 		userBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(userBeanTmp);
 		
@@ -556,7 +547,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 			jedis.select(index);
 			jedis.watch(key);
 			try (Transaction tx = jedis.multi();) {
-				tx.hset(key, "headPic", headPic);
+				tx.hset(key, "headPic", headPicNew);
 				tx.expire(key, Constant.Redis.User.SECONDS);
 				if (CollectionUtils.isEmpty(tx.exec())) AppException.toThrow(MSG_00008);
 			} catch (Exception e) {
@@ -568,8 +559,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserBean, UserCriteri
 		
 		// 移动文件
 		if (isMove) {
-			Files.createDirectories(Paths.get(Constant.uploadTopPath() + headPicNew.substring(0, headPicNew.lastIndexOf("/"))));
-			Files.move(Paths.get(Constant.uploadTopPath() + headPicOld), Paths.get(Constant.uploadTopPath() + headPicNew));    //移动文件（即复制并删除源文件）
+			HeadPicUtil.moveHeadPic(headPicNew, headPicOld);
 		}
 	}
 	

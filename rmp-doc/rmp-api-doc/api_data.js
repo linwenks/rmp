@@ -492,6 +492,13 @@ define({ "api": [
             "optional": false,
             "field": "customerBean.phone",
             "description": "<p>手机</p>"
+          },
+          {
+            "group": "CustomerBean",
+            "type": "String",
+            "optional": true,
+            "field": "customerBean.headPic",
+            "description": "<p>头像</p>"
           }
         ]
       },
@@ -518,14 +525,35 @@ define({ "api": [
             "type": "Long",
             "optional": false,
             "field": "customerBean.id",
-            "description": "<p>客户 ID</p>"
+            "description": "<p>ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.headPic",
+            "description": "<p>头像</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"id\":111}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"id\":60,\"realName\":\"ss\",\"phone\":15111111113,\"headPic\":\"http://47.94.5.205/img/head_pic/default.jpg\"}}}",
           "type": "json"
         }
       ]
@@ -571,13 +599,68 @@ define({ "api": [
             "optional": false,
             "field": "customerBean.phone",
             "description": "<p>手机</p>"
+          },
+          {
+            "group": "CustomerBean",
+            "type": "String",
+            "optional": true,
+            "field": "customerBean.headPic",
+            "description": "<p>头像</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"id\":1,\"realName\":\"aa\",\"phone\":\"15111111116\"}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"id\":60,\"realName\":\"ss\",\"phone\":15111111113,\"headPic\":\"http://47.94.5.205/tmp/customer/head_pic/20181231/1444000280787608578.png\"}}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "customerBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBean.id",
+            "description": "<p>ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.realName",
+            "description": "<p>真实姓名</p>"
+          },
+          {
+            "group": "data",
+            "type": "Long",
+            "optional": false,
+            "field": "customerBean.phone",
+            "description": "<p>手机</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.headPic",
+            "description": "<p>头像</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"id\":60,\"realName\":\"ss\",\"phone\":15111111113,\"headPic\":\"http://47.94.5.205/customer/head_pic/20181231/1444000280787608578.png\"}}}",
           "type": "json"
         }
       ]
@@ -2022,13 +2105,20 @@ define({ "api": [
             "optional": false,
             "field": "customerBean.id",
             "description": "<p>ID</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "customerBean.headPic",
+            "description": "<p>头像</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"id\":4}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerBean\":{\"id\":59,\"headPic\":\"http://47.94.5.205/customer/head_pic/20181231/1236000391194045151.png\"}}}",
           "type": "json"
         }
       ]
@@ -3994,6 +4084,33 @@ define({ "api": [
         }
       ]
     },
+    "success": {
+      "fields": {
+        "data": [
+          {
+            "group": "data",
+            "type": "Object",
+            "optional": false,
+            "field": "userBean",
+            "description": "<p>客户 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.headPic",
+            "description": "<p>头像</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "成功返回-示例:",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"headPic\":\"/xxx/pic.jpg\"}}}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "D:/git_repository/rmp/rmp-api/src/main/java/com/rmp/api/controller/user/UserJobController.java",
     "groupTitle": "用户"
   },
@@ -4265,13 +4382,20 @@ define({ "api": [
             "optional": false,
             "field": "userBean.address",
             "description": "<p>地址</p>"
+          },
+          {
+            "group": "data",
+            "type": "String",
+            "optional": false,
+            "field": "userBean.nickName",
+            "description": "<p>昵称</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ttt\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"sex\":0,\"headPic\":\"/xxx/pic.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\",\"nickName\":\"bbb\"}}}",
           "type": "json"
         }
       ]

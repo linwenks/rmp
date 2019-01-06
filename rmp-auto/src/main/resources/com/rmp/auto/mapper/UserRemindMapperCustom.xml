@@ -39,28 +39,12 @@
 			, 1 type
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
-			, <include refid="advance_day" /> advance_day
-			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 1 
-		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%Y%m%d')
-		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-			SELECT LAST_INSERT_ID()
-	    </selectKey>
-	</insert>
-	
-	<insert id="insertBy1ToYmdNow">
-		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
-		SELECT 
-			u.id user_id
-			, 1 type
-			, cmd.id type_id
-			, ${userRemindBean.advanceDate} advance_date
-			, 0 advance_day
-			, ${userRemindBean.advanceDate} remind_date
-		<include refid="table" />
-		AND cmd.occur_type = 1 
-		AND cmd.occur_date = date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%Y%m%d')
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -74,28 +58,12 @@
 			, 1 type
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
-			, <include refid="advance_day" /> advance_day
-			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 2
-		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%m%d')
-		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-			SELECT LAST_INSERT_ID()
-	    </selectKey>
-	</insert>
-	
-	<insert id="insertBy1ToMdNow">
-		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
-		SELECT 
-			u.id user_id
-			, 1 type
-			, cmd.id type_id
-			, ${userRemindBean.advanceDate} advance_date
-			, 0 advance_day
-			, ${userRemindBean.advanceDate} remind_date
-		<include refid="table" />
-		AND cmd.occur_type = 2
-		AND cmd.occur_date = date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), '%m%d')
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -109,28 +77,12 @@
 			, 1 type
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
-			, <include refid="advance_day" /> advance_day
-			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 3
-		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%d')
-		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-			SELECT LAST_INSERT_ID()
-	    </selectKey>
-	</insert>
-	
-	<insert id="insertBy1ToDNow">
-		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
-		SELECT 
-			u.id user_id
-			, 1 type
-			, cmd.id type_id
-			, ${userRemindBean.advanceDate} advance_date
-			, 0 advance_day
-			, ${userRemindBean.advanceDate} remind_date
-		<include refid="table" />
-		AND cmd.occur_type = 3
-		AND cmd.occur_date = date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%d')
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%d')
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>
@@ -144,36 +96,16 @@
 			, 1 type
 			, cmd.id type_id
 			, ${userRemindBean.advanceDate} advance_date
-			, <include refid="advance_day" /> advance_day
-			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY) remind_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
 		<include refid="table" />
 		AND cmd.occur_type = 4
 		AND cmd.occur_date = (
 			CASE 
-				WHEN date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w') = 0 THEN 7
-				ELSE date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +<include refid="advance_day" /> DAY),'%w')
+				WHEN date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%w') = 0 THEN 7
+				ELSE date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%w')
 			END)
-		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-			SELECT LAST_INSERT_ID()
-	    </selectKey>
-	</insert>
-	
-	<insert id="insertBy1ToWNow">
-		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
-		SELECT 
-			u.id user_id
-			, 1 type
-			, cmd.id type_id
-			, ${userRemindBean.advanceDate} advance_date
-			, 0 advance_day
-			, ${userRemindBean.advanceDate} remind_date
-		<include refid="table" />
-		AND cmd.occur_type = 4
-		AND cmd.occur_date = (
-			CASE 
-				WHEN date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%w') = 0 THEN 7
-				ELSE date_format(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'),'%w')
-			END)
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			SELECT LAST_INSERT_ID()
 	    </selectKey>

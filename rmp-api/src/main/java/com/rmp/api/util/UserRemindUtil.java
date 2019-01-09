@@ -4,6 +4,8 @@ import com.rmp.api.model.UserRemindBean;
 import com.rmp.common.util.DateUtil;
 
 public class UserRemindUtil {
+	
+	public static final int MAX_DAY = 6;
 
 	public static void assembly(UserRemindBean bean) {
 		if (bean != null) {

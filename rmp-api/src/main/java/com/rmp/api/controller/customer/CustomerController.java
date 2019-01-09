@@ -38,6 +38,7 @@ import com.rmp.api.model.CustomerMemorialDayBean;
 import com.rmp.api.model.CustomerProblemBean;
 import com.rmp.api.model.CustomerRelationBean;
 import com.rmp.api.model.UserBean;
+import com.rmp.api.model.UserRemindBean;
 import com.rmp.api.service.customer.CustomerDetailService;
 import com.rmp.api.service.customer.CustomerFamilyService;
 import com.rmp.api.service.customer.CustomerHobbyService;
@@ -47,6 +48,7 @@ import com.rmp.api.service.customer.CustomerMemorialDayService;
 import com.rmp.api.service.customer.CustomerProblemService;
 import com.rmp.api.service.customer.CustomerRelationService;
 import com.rmp.api.service.customer.CustomerService;
+import com.rmp.api.service.user.UserRemindService;
 import com.rmp.api.util.CustomerDetailUtil;
 import com.rmp.api.util.CustomerFamilyUtil;
 import com.rmp.api.util.CustomerHobbyUtil;
@@ -90,6 +92,8 @@ public class CustomerController extends BaseApiController {
 	private CustomerProblemService customerProblemService;
 	@Autowired
 	private CustomerDetailService customerDetailService;
+	@Autowired
+	private UserRemindService userRemindService;
 	
 	/**
 	 * 客户 配置
@@ -250,6 +254,7 @@ public class CustomerController extends BaseApiController {
      * @apiSuccess (data) {Object} customerProblemBean 客户 可能问题 bean
      * @apiSuccess (data) {Object} customerRelationBean 客户 关系 bean
      * @apiSuccess (data) {Object} customerDetailBean 客户 明细 bean
+     * @apiSuccess (data) {List} beanuserRemindBeanList 客户 提醒 bean
      * 
      * @apiSuccessExample {json} 成功返回-示例:
      *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"msgs":[],"msg":{},"state":"0","data":{"customerHobbyBean":{"interestKeyList":["1"],"dietKeyList":["1","3"],"tasteKeyList":["4"],"interestValueList":["美食"],"dietValueList":["川湘菜","粤菜"],"tasteValueList":["苦"],"interest":"1","diet":"1,3","taste":"4"},"customerFamilyBeanList":[{"areaNameAll":"江苏省泰州市","relationshipValue":"母亲","id":2,"relationship":2,"realName":"xxx","birthday":20100101,"birthdayStr":"2010-01-01","phone":15111111111,"area":"重庆市九龙坡区","address":"ttt"}],"customerMemorialDayBeanList":[{"occurTypeValue":"1次","advanceTypeValue":"1天","id":2,"name":"ttttt2","occurType":1,"occurDate":20181030,"advanceType":1},{"occurTypeValue":"1次","advanceTypeValue":"1天","id":1,"name":"ttttt2","occurType":1,"occurDate":20181030,"advanceType":1}],"customerJobBean":{"areaNameAll":"江苏省泰州市","industryValue":"互联网/电子商务/网游","positionValue":"IT管理","industry":2,"companyName":"aaaa","departmentName":"bbb","position":3,"office":"xxxxxxx","phone":15111111111,"area":"重庆市九龙坡区","address":"aaaaaaaaaaaaaa"},"customerProblemBean":{"healthKeyList":["1"],"lifeKeyList":["1","3"],"healthValueList":["心脏病"],"lifeValueList":["资金缺乏","事业发展"],"health":"1","life":"1,3","remark":"xxxxxxxxxTTT"},"customerRelationBean":{"relationshipValue":"其他","intimacyValue":"不详","importanceValue":"不重要","relationship":0,"intimacy":0,"importance":0},"customerBean":{"areaNameAll":"江苏省泰州市","realName":"ss","phone":15111111112,"sex":1,"birthday":20100101,"birthdayStr":"2010-01-01","headPic":"https://img.rmp.com/img/head_pic/default.jpg","area":"重庆市九龙坡区","address":"ttt","vip":0},"customerDetailBean":{"remark":"xxxxxxxxxTTT"}}}
@@ -287,9 +292,18 @@ public class CustomerController extends BaseApiController {
 		.build();
 		CustomerUtil.assembly(customerBeanResult);
 		
+		// 提醒
+		UserRemindBean userRemindBean = UserRemindBean.builder().userId(UserUtil.getCurrentUserId(request)).customerId(id).build();
+		List<UserRemindBean> userRemindBeanListTmp = userRemindService.selectListCustom(null, userRemindBean);
+		if (!CollectionUtils.isEmpty(userRemindBeanListTmp)) {
+			userRemindBeanListTmp.forEach(bean -> {
+				bean.setAdvanceDate(null);
+				CustomerRelationUtil.assembly(bean.getCustomerRelationBean());
+			});
+		}
+		
 		// 工作
-		CustomerJobBean customerJobBean = new CustomerJobBean();
-		customerJobBean.setCustomerId(id);
+		CustomerJobBean customerJobBean = CustomerJobBean.builder().customerId(id).build();
 		CustomerJobBean customerJobBeanTmp = customerJobService.selectOne(customerJobBean);
 		if (customerJobBeanTmp != null) {
 			customerJobBeanResult = CustomerJobBean.builder()
@@ -399,7 +413,8 @@ public class CustomerController extends BaseApiController {
 			CustomerDetailUtil.assembly(customerDetailBeanResult);
 		}
 		
-		return RespUtil.build(request).putData("customerBean", customerBeanResult)
+		return RespUtil.build(request)
+				.putData("customerBean", customerBeanResult)
 				.putData("customerJobBean", customerJobBeanResult)
 				.putData("customerFamilyBeanList", customerFamilyBeanListResult)
 				.putData("customerHobbyBean", customerHobbyBeanResult)
@@ -407,7 +422,9 @@ public class CustomerController extends BaseApiController {
 				.putData("customerMemorialDayBeanList", customerMemorialDayBeanListResult)
 				.putData("customerProblemBean", customerProblemBeanResult)
 				.putData("customerRelationBean", customerRelationBeanResult)
-				.putData("customerDetailBean", customerDetailBeanResult);
+				.putData("customerDetailBean", customerDetailBeanResult)
+				.putData("userRemindBeanList", userRemindBeanListTmp);
+		
 	}
 	
 	/**

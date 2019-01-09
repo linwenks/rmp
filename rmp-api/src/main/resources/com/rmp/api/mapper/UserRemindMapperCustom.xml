@@ -62,6 +62,9 @@
 			<if test="userRemindBean.userId != null" >
 				and ur.user_id = #{userRemindBean.userId}
 		    </if>
+		    <if test="userRemindBean.customerId != null" >
+				and c.id = #{userRemindBean.customerId}
+		    </if>
 		    <if test="userRemindBean.advanceDate != null" >
 				and ur.advance_date = #{userRemindBean.advanceDate}
 		    </if>
@@ -159,4 +162,181 @@
 		order by advance_date, advance_day, remind_date, c_id, c_real_name, c_sex, c_head_pic, cr_relationship
 		<include refid="limit" />
 	</select>
+	
+	
+	<sql id="advance_day">
+		(
+		CASE 
+			WHEN cmd.advance_type = 1 THEN 1 
+			WHEN cmd.advance_type = 2 THEN 2 
+			WHEN cmd.advance_type = 3 THEN 3 
+			WHEN cmd.advance_type = 4 THEN 5 
+			WHEN cmd.advance_type = 5 THEN 7 
+			WHEN cmd.advance_type = 6 THEN 14 
+			WHEN cmd.advance_type = 7 THEN 30 
+			ELSE 0 
+		END
+		)
+	</sql>
+	
+	<sql id="table">
+		FROM t_customer_memorial_day cmd 
+		
+		INNER JOIN t_customer c ON cmd.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cmd.is_delete = 0 
+		
+		AND u.id = ${userRemindBean.userId}
+		AND cmd.id = ${userRemindBean.typeId}
+	</sql>
+	
+	<insert id="insertBy1ToYmd">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 1 
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%Y%m%d')
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<insert id="insertBy1ToMd">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 2
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<insert id="insertBy1ToD">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 3
+		AND cmd.occur_date = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%d')
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<insert id="insertBy1ToW">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 1 type
+			, cmd.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		<include refid="table" />
+		AND cmd.occur_type = 4
+		AND cmd.occur_date = (
+			CASE 
+				WHEN date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%w') = 0 THEN 7
+				ELSE date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%w')
+			END)
+		AND <include refid="advance_day" /> >= ${userRemindBean.advanceDay}
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	
+	<insert id="insertBy2">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 2 type
+			, cf.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		FROM t_customer_family cf 
+		
+		INNER JOIN t_customer c ON cf.customer_id = c.id AND c.is_delete = 0
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE cf.is_delete = 0 
+		AND cf.birthday > 0
+		AND u.id = ${userRemindBean.userId}
+		AND cf.id = ${userRemindBean.typeId}
+		
+		AND date_format(cf.birthday, '%m%d') = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<insert id="insertBy3">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 3 type
+			, c.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		FROM t_customer c 
+		
+		INNER JOIN t_user u ON c.user_id = u.id AND u.is_delete = 0
+		
+		WHERE c.is_delete = 0 
+		AND c.birthday > 0
+		AND u.id = ${userRemindBean.userId}
+		AND c.id = ${userRemindBean.typeId}
+		
+		AND date_format(c.birthday, '%m%d') = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<insert id="insertBy4">
+		INSERT INTO `t_user_remind` (`user_id`, `type`, `type_id`, `advance_date`, `advance_day`, `remind_date`)
+		SELECT 
+			u.id user_id
+			, 4 type
+			, u.id type_id
+			, ${userRemindBean.advanceDate} advance_date
+			, ${userRemindBean.advanceDay} advance_day
+			, date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY) remind_date
+		FROM t_user u
+		
+		WHERE u.is_delete = 0 
+		AND u.birthday > 0
+		
+		AND date_format(u.birthday, '%m%d') = date_format(date_add(str_to_date('${userRemindBean.advanceDate}', '%Y%m%d'), INTERVAL +${userRemindBean.advanceDay} DAY),'%m%d')
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
 </mapper>

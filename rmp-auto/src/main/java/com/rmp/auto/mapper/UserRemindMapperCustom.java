@@ -10,19 +10,11 @@ public interface UserRemindMapperCustom {
 	
 	public int insertBy1ToYmd(@Param("userRemindBean") UserRemindBean userRemindBean);
 	
-	public int insertBy1ToYmdNow(@Param("userRemindBean")UserRemindBean userRemindBean);
-	
 	public int insertBy1ToMd(@Param("userRemindBean")UserRemindBean userRemindBean);
-	
-	public int insertBy1ToMdNow(@Param("userRemindBean")UserRemindBean userRemindBean);
 	
 	public int insertBy1ToD(@Param("userRemindBean")UserRemindBean userRemindBean);
 	
-	public int insertBy1ToDNow(@Param("userRemindBean")UserRemindBean userRemindBean);
-	
 	public int insertBy1ToW(@Param("userRemindBean")UserRemindBean userRemindBean);
-	
-	public int insertBy1ToWNow(@Param("userRemindBean")UserRemindBean userRemindBean);
 	
 	public int insertBy2(@Param("userRemindBean")UserRemindBean userRemindBean);
 	

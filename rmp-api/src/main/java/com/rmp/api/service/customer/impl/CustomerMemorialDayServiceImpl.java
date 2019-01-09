@@ -13,9 +13,12 @@ import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.model.CustomerBean;
 import com.rmp.api.model.CustomerMemorialDayBean;
+import com.rmp.api.model.UserRemindBean;
 import com.rmp.api.service.customer.CustomerMemorialDayService;
 import com.rmp.api.service.customer.CustomerService;
+import com.rmp.api.service.user.UserRemindService;
 import com.rmp.api.util.CustomerMemorialDayUtil;
+import com.rmp.api.util.UserRemindUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.util.DateUtil;
 import com.rmp.info.mapper.CustomerMemorialDayMapper;
@@ -34,6 +37,8 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 	private CustomerMemorialDayMapper customerMemorialDayMapper;
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private UserRemindService userRemindService;
 	
 	@Override
 	public CustomerMemorialDayMapper mapper() {
@@ -108,6 +113,26 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		.build();
 		insertSel(customerMemorialDayBeanTmp);
 		
+		// 添加 提醒
+		int maxDay = UserRemindUtil.MAX_DAY;
+		for (int i=0; i<=maxDay; i++) {
+			Date nowDateTmp = DateUtil.changeDays(nowDate, i);
+			int ymdTmp = Integer.parseInt(DateUtil.formatDate(nowDateTmp, DateUtil.yyyyMMdd));
+			
+			for (int j=0; i+j<=maxDay; j++) {
+				String cmd = null;
+				switch (occurType) {
+				case 1: cmd = "insertBy1ToYmd"; break;
+				case 2: cmd = "insertBy1ToMd"; break;
+				case 3: cmd = "insertBy1ToD"; break;
+				case 4: cmd = "insertBy1ToW"; break;
+				default:
+					break;
+				}
+				userRemindService.exe(cmd, UserRemindBean.builder().userId(userId).typeId(customerMemorialDayBeanTmp.getId()).advanceDate(ymdTmp).advanceDay(j).build());
+			}
+		}
+		
 		// 修改
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		customerService.exe(UPDATE_PK_SEl_VER, customerBeanTmp);
@@ -149,6 +174,29 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		customerMemorialDayBeanTmp.setAdvanceType(advanceType);
 		customerMemorialDayBeanTmp.setUpdateTime(nowDateLong);
 		updatePkVer(customerMemorialDayBeanTmp);
+
+		// 删除 提醒
+		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(1).typeId(customerMemorialDayBeanTmp.getId()).build());
+		
+		// 添加 提醒
+		int maxDay = UserRemindUtil.MAX_DAY;
+		for (int i=0; i<=maxDay; i++) {
+			Date nowDateTmp = DateUtil.changeDays(nowDate, i);
+			int ymdTmp = Integer.parseInt(DateUtil.formatDate(nowDateTmp, DateUtil.yyyyMMdd));
+			
+			for (int j=0; i+j<=maxDay; j++) {
+				String cmd = null;
+				switch (occurType) {
+				case 1: cmd = "insertBy1ToYmd"; break;
+				case 2: cmd = "insertBy1ToMd"; break;
+				case 3: cmd = "insertBy1ToD"; break;
+				case 4: cmd = "insertBy1ToW"; break;
+				default:
+					break;
+				}
+				userRemindService.exe(cmd, UserRemindBean.builder().userId(userId).typeId(customerMemorialDayBeanTmp.getId()).advanceDate(ymdTmp).advanceDay(j).build());
+			}
+		}
 		
 		// 修改
 		customerBeanTmp.setUpdateTime(nowDateLong);
@@ -180,6 +228,9 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		customerMemorialDayBeanTmp.setIsDelete(Constant.DELETE_Y);
 		customerMemorialDayBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerMemorialDayBeanTmp);
+		
+		// 删除 提醒
+		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(1).typeId(customerMemorialDayBeanTmp.getId()).build());
 		
 		// 修改
 		customerBeanTmp.setUpdateTime(nowDateLong);

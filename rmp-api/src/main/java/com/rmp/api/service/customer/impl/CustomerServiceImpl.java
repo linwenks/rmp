@@ -24,6 +24,7 @@ import com.rmp.api.model.CustomerJobBean;
 import com.rmp.api.model.CustomerMaintainBean;
 import com.rmp.api.model.CustomerMemorialDayBean;
 import com.rmp.api.model.CustomerProblemBean;
+import com.rmp.api.model.UserRemindBean;
 import com.rmp.api.service.customer.CustomerDetailService;
 import com.rmp.api.service.customer.CustomerFamilyService;
 import com.rmp.api.service.customer.CustomerHobbyService;
@@ -33,8 +34,10 @@ import com.rmp.api.service.customer.CustomerMemorialDayService;
 import com.rmp.api.service.customer.CustomerProblemService;
 import com.rmp.api.service.customer.CustomerRelationService;
 import com.rmp.api.service.customer.CustomerService;
+import com.rmp.api.service.user.UserRemindService;
 import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.HeadPicUtil;
+import com.rmp.api.util.UserRemindUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.common.page.QueryPage;
 import com.rmp.common.util.DateUtil;
@@ -72,6 +75,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 	private CustomerRelationService customerRelationService;
 	@Autowired
 	private CustomerDetailService customerDetailService;
+	@Autowired
+	private UserRemindService userRemindService;
 	
 	@Override
 	public CustomerMapper mapper() {
@@ -171,6 +176,17 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		.createTime(nowDateLong)
 		.build();
 		insertSel(customerBeanTmp);
+
+		// 添加 提醒
+		int maxDay = UserRemindUtil.MAX_DAY;
+		for (int i=0; i<=maxDay; i++) {
+			Date nowDateTmp = DateUtil.changeDays(nowDate, i);
+			int ymdTmp = Integer.parseInt(DateUtil.formatDate(nowDateTmp, DateUtil.yyyyMMdd));
+			
+			for (int j=0; i+j<=maxDay; j++) {
+				userRemindService.exe("insertBy3", UserRemindBean.builder().userId(userId).typeId(customerBeanTmp.getId()).advanceDate(ymdTmp).advanceDay(j).build());
+			}
+		}
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 		
@@ -234,6 +250,17 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		.build();
 		insertSel(customerBeanTmp);
 		
+		// 添加 提醒
+		int maxDay = UserRemindUtil.MAX_DAY;
+		for (int i=0; i<=maxDay; i++) {
+			Date nowDateTmp = DateUtil.changeDays(nowDate, i);
+			int ymdTmp = Integer.parseInt(DateUtil.formatDate(nowDateTmp, DateUtil.yyyyMMdd));
+			
+			for (int j=0; i+j<=maxDay; j++) {
+				userRemindService.exe("insertBy3", UserRemindBean.builder().userId(userId).typeId(customerBeanTmp.getId()).advanceDate(ymdTmp).advanceDay(j).build());
+			}
+		}
+		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 		
 		// 移动文件
@@ -289,6 +316,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		customerBeanTmp.setHeadPic(headPicNew);
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkSelVer(customerBeanTmp);
+
+		// 删除 提醒
+		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
+		
+		// 添加 提醒
+		int maxDay = UserRemindUtil.MAX_DAY;
+		for (int i=0; i<=maxDay; i++) {
+			Date nowDateTmp = DateUtil.changeDays(nowDate, i);
+			int ymdTmp = Integer.parseInt(DateUtil.formatDate(nowDateTmp, DateUtil.yyyyMMdd));
+			
+			for (int j=0; i+j<=maxDay; j++) {
+				userRemindService.exe("insertBy3", UserRemindBean.builder().userId(userId).typeId(customerBeanTmp.getId()).advanceDate(ymdTmp).advanceDay(j).build());
+			}
+		}
 		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 		
@@ -355,6 +396,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		customerBeanTmp.setUpdateTime(nowDateLong);
 		updatePkVer(customerBeanTmp);
 		
+		// 删除 提醒
+		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
+		
+		// 添加 提醒
+		int maxDay = UserRemindUtil.MAX_DAY;
+		for (int i=0; i<=maxDay; i++) {
+			Date nowDateTmp = DateUtil.changeDays(nowDate, i);
+			int ymdTmp = Integer.parseInt(DateUtil.formatDate(nowDateTmp, DateUtil.yyyyMMdd));
+			
+			for (int j=0; i+j<=maxDay; j++) {
+				userRemindService.exe("insertBy3", UserRemindBean.builder().userId(userId).typeId(customerBeanTmp.getId()).advanceDate(ymdTmp).advanceDay(j).build());
+			}
+		}
+		
 		BeanUtils.copyProperties(customerBeanTmp, customerBean);
 		
 		// 移动文件
@@ -419,6 +474,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		customerDetailService.exe(UPDATE_SEl_NOT_E, ImmutableMap.of(
 				"obj", CustomerProblemBean.builder().isDelete(Constant.DELETE_Y).updateTime(nowDateLong).build()
 				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
+		
+		// 删除 提醒
+		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
 	}
 	
 

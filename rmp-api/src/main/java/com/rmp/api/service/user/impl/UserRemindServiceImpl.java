@@ -9,9 +9,12 @@ import com.rmp.api.base.exception.AppException;
 import com.rmp.api.base.service.impl.BaseServiceImpl;
 import com.rmp.api.mapper.UserRemindMapperCustom;
 import com.rmp.api.model.UserRemindBean;
+import com.rmp.api.model.UserRemindBean;
 import com.rmp.api.service.user.UserRemindService;
+import com.rmp.api.util.constant.Constant;
 import com.rmp.common.page.QueryPage;
 import com.rmp.info.mapper.UserRemindMapper;
+import com.rmp.info.model.UserRemindCriteria;
 import com.rmp.info.model.UserRemind;
 import com.rmp.info.model.UserRemindCriteria;
 
@@ -48,6 +51,29 @@ public class UserRemindServiceImpl extends BaseServiceImpl<UserRemind, UserRemin
 		}
 		return null;
 	}
+	
+
+	@Override
+	protected void where(Object criteria, UserRemindBean bean) {
+		if (bean == null) {
+			return;
+		}
+		UserRemindCriteria.Criteria criteriaTmp = (UserRemindCriteria.Criteria) criteria;
+		criteriaTmp.andIsDeleteEqualTo(Constant.DELETE_N);
+		if (bean.getId() != null) {
+			criteriaTmp.andIdEqualTo(bean.getId());
+		}
+		if (bean.getUserId() != null) {
+			criteriaTmp.andUserIdEqualTo(bean.getUserId());
+		}
+		if (bean.getType() != null) {
+			criteriaTmp.andTypeEqualTo(bean.getType());
+		}
+		if (bean.getTypeId() != null) {
+			criteriaTmp.andTypeIdEqualTo(bean.getTypeId());
+		}
+	}
+	
 
 	@Override
 	public List<UserRemindBean> selectListCustom(QueryPage queryPage, UserRemindBean userRemindBean) {

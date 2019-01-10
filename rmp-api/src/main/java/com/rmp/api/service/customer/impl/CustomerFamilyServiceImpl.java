@@ -195,7 +195,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		updatePkVer(customerFamilyBeanTmp);
 		
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(2).typeId(customerFamilyBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(2).typeId(customerFamilyBeanTmp.getId()).build());
 		
 		// 添加 提醒
 		int maxDay = UserRemindUtil.MAX_DAY;
@@ -240,7 +240,7 @@ public class CustomerFamilyServiceImpl extends BaseServiceImpl<CustomerFamily, C
 		updatePkSelVer(customerFamilyBeanTmp);
 		
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(2).typeId(customerFamilyBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(2).typeId(customerFamilyBeanTmp.getId()).build());
 		
 		// 修改
 		customerBeanTmp.setUpdateTime(nowDateLong);

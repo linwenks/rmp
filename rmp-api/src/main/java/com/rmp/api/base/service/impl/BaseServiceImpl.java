@@ -180,6 +180,7 @@ public abstract class BaseServiceImpl<T extends Model, B, E> implements BaseServ
 			case UPDATE_PK_VER: return updatePkVer((B) obj);
 			case UPDATE_PK_SEl_VER: return updatePkSelVer((B) obj);
 			case DELETE: return delete((B) obj);
+			case DELETE_NOT_E: return deleteNotE((B) obj);
 			case DELETE_PK: return deletePk((Long) obj);
 			default: break;
 			}
@@ -233,6 +234,22 @@ public abstract class BaseServiceImpl<T extends Model, B, E> implements BaseServ
 			where(criteriaDetail, objEx);
 			
 			row = mapper().updateByExample((T) obj, criteria);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return row;
+	}
+	
+	protected int deleteNotE(B obj) {
+		Class<E> criteriaClass = criteriaClass();
+		
+		if (obj == null) AppException.toThrow(MSG_00003);
+		int row = 0;
+		try {
+			E criteria = criteriaClass.newInstance();
+			Object criteriaDetail = criteriaClass.getMethod("createCriteria", null).invoke(criteria, null);
+			where(criteriaDetail, obj);
+			row = mapper().deleteByExample(criteria);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}

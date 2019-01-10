@@ -318,7 +318,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		updatePkSelVer(customerBeanTmp);
 
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
 		
 		// 添加 提醒
 		int maxDay = UserRemindUtil.MAX_DAY;
@@ -397,7 +397,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 		updatePkVer(customerBeanTmp);
 		
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
 		
 		// 添加 提醒
 		int maxDay = UserRemindUtil.MAX_DAY;
@@ -476,7 +476,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, CustomerBean,
 				, "objEx", CustomerProblemBean.builder().isDelete(Constant.DELETE_N).customerId(id).build()));
 		
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(3).typeId(customerBeanTmp.getId()).build());
 	}
 	
 

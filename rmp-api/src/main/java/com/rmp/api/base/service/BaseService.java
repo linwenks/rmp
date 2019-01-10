@@ -54,6 +54,9 @@ public interface BaseService<B> {
 	// 删除
 	public final static String DELETE = "base_delete";
 	
+	// 删除 不抛异常
+	public final static String DELETE_NOT_E = "base_delete_not_e";
+	
 	// 删除 根据主键 
 	public final static String DELETE_PK = "base_delete_pk";
 	

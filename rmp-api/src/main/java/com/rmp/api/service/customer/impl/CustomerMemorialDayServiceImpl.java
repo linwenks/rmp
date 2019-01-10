@@ -176,7 +176,7 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		updatePkVer(customerMemorialDayBeanTmp);
 
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(1).typeId(customerMemorialDayBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(1).typeId(customerMemorialDayBeanTmp.getId()).build());
 		
 		// 添加 提醒
 		int maxDay = UserRemindUtil.MAX_DAY;
@@ -230,7 +230,7 @@ public class CustomerMemorialDayServiceImpl extends BaseServiceImpl<CustomerMemo
 		updatePkSelVer(customerMemorialDayBeanTmp);
 		
 		// 删除 提醒
-		userRemindService.exe(DELETE, UserRemindBean.builder().userId(userId).type(1).typeId(customerMemorialDayBeanTmp.getId()).build());
+		userRemindService.exe(DELETE_NOT_E, UserRemindBean.builder().userId(userId).type(1).typeId(customerMemorialDayBeanTmp.getId()).build());
 		
 		// 修改
 		customerBeanTmp.setUpdateTime(nowDateLong);

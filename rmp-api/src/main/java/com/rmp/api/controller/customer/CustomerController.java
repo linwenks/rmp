@@ -60,6 +60,7 @@ import com.rmp.api.util.CustomerProblemUtil;
 import com.rmp.api.util.CustomerRelationUtil;
 import com.rmp.api.util.CustomerUtil;
 import com.rmp.api.util.SysCodeUtil;
+import com.rmp.api.util.UserRemindUtil;
 import com.rmp.api.util.UserUtil;
 import com.rmp.api.util.constant.Constant;
 import com.rmp.api.util.upload.UploadBean;
@@ -302,6 +303,7 @@ public class CustomerController extends BaseApiController {
 		if (!CollectionUtils.isEmpty(userRemindBeanListTmp)) {
 			userRemindBeanListTmp.forEach(bean -> {
 				bean.setAdvanceDate(null);
+				UserRemindUtil.assembly(bean);
 				CustomerRelationUtil.assembly(bean.getCustomerRelationBean());
 			});
 		}

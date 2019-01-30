@@ -3,6 +3,7 @@ package com.rmp.api.controller.customer;
 import static com.rmp.api.util.MsgEnum.*;
 import static com.rmp.api.util.constant.Constant.SysCode.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -292,8 +293,11 @@ public class CustomerController extends BaseApiController {
 		.build();
 		CustomerUtil.assembly(customerBeanResult);
 		
+		Date nowDate = DateUtil.now();
+		Integer ymd = Integer.valueOf(DateUtil.formatDate(nowDate, DateUtil.yyyyMMdd));
+		
 		// 提醒
-		UserRemindBean userRemindBean = UserRemindBean.builder().userId(UserUtil.getCurrentUserId(request)).customerId(id).build();
+		UserRemindBean userRemindBean = UserRemindBean.builder().advanceDate(ymd).userId(UserUtil.getCurrentUserId(request)).customerId(id).build();
 		List<UserRemindBean> userRemindBeanListTmp = userRemindService.selectListCustom(null, userRemindBean);
 		if (!CollectionUtils.isEmpty(userRemindBeanListTmp)) {
 			userRemindBeanListTmp.forEach(bean -> {

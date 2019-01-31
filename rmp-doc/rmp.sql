@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 192.168.7.124
+ Source Server         : r
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : 192.168.7.124:3306
+ Source Server Version : 100310
+ Source Host           : localhost:3306
  Source Schema         : rmp
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 100310
  File Encoding         : 65001
 
- Date: 29/12/2018 15:39:26
+ Date: 31/01/2019 09:40:39
 */
 
 SET NAMES utf8mb4;
@@ -40,58 +40,24 @@ CREATE TABLE `t_customer`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `is_delete`(`is_delete`, `user_id`, `phone`, `real_name`, `pinyin`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 基础' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 基础' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer
 -- ----------------------------
-INSERT INTO `t_customer` VALUES (1, 1, 'aa', 'aa', 15111111116, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 4, 20181027183019, 20181027204213);
-INSERT INTO `t_customer` VALUES (2, 1, 'ss', 'ss', 15111111112, 1, 20100101, '/img/head_pic/default.jpg', '321200', 'ttt', 0, NULL, 0, 31, 20181027183458, 20181228094130);
-INSERT INTO `t_customer` VALUES (4, 1, 'ttt', 'ttt', 15111111111, 0, 20100101, '/xxx/pic.jpg', 'aaa', 'aaaaaaaaaaaaaa', 0, NULL, 0, 5, 20181028134438, 20181222193743);
-INSERT INTO `t_customer` VALUES (5, 1, 'ttt', 'ttt', 15111111113, 0, 20100101, '/xxx/pic.jpg', '321200', 'aaaaaaaaaaaaaa', 0, NULL, 0, 0, 20181028135135, NULL);
-INSERT INTO `t_customer` VALUES (6, 1, 'ss', 'ss', 15111111115, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20181119105500, NULL);
-INSERT INTO `t_customer` VALUES (7, 2, 'ss', 'ss', 15111111111, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20181124174000, NULL);
-INSERT INTO `t_customer` VALUES (8, 1, 'ddd', 'ddd', 13658327488, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20181125010915, NULL);
-INSERT INTO `t_customer` VALUES (10, 3, 'dsaf', 'dsaf', 13112121212, 1, 20150901, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, 'gg', 0, NULL, 1, 4, 20181126162732, 20181227162314);
-INSERT INTO `t_customer` VALUES (12, 3, '幽云', 'yy', 13658327455, 1, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 10, 20181126164844, 20181221115302);
-INSERT INTO `t_customer` VALUES (13, 3, 'ttt', 'ttt', 15111111111, 0, 20100101, '/xxx/pic.jpg', '321200', 'aaaaaaaaaaaaaa', 0, NULL, 1, 2, 20181126194313, 20181227162258);
-INSERT INTO `t_customer` VALUES (14, 3, 'ttt', 'ttt', 15111111133, 0, 20100101, '/xxx/pic.jpg', '321200', 'asdfassdf;fm;aslsdf', 0, NULL, 1, 5, 20181126194347, 20181227162256);
-INSERT INTO `t_customer` VALUES (15, 3, 'ddd', 'ddd', 15111111122, 1, 19700101, 'http://47.94.5.205/xxx/pic.jpg', '321200', 'aaaaaaaaaaaaaa', 0, NULL, 1, 2, 20181127165307, 20181227162308);
-INSERT INTO `t_customer` VALUES (16, 3, 'ttt', 'ttt', 15111111134, 1, 20150901, 'http://47.94.5.205/xxx/pic.jpg', '321200', 'aaaaaaaaaaaaaa', 0, NULL, 1, 9, 20181127194855, 20181221115947);
-INSERT INTO `t_customer` VALUES (17, 3, '张三', 'zs', 15111111156, 1, 20100101, 'http://47.94.5.205/xxx/pic.jpg', '321200', 'aaaaaaaaaaaaaa', 0, NULL, 1, 4, 20181127195020, 20181221115132);
-INSERT INTO `t_customer` VALUES (18, 3, '王5', 'w5', 13666666666, 0, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, 'qerqwer', 0, NULL, 1, 3, 20181127213216, 20181227162318);
-INSERT INTO `t_customer` VALUES (19, 3, '王5233', 'w5233', 13658327484, 0, 20221001, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市渝北区胜利路129号金港国际广场沃尔玛1楼', '1-1室', 0, NULL, 1, 79, 20181127225007, 20181227162320);
-INSERT INTO `t_customer` VALUES (20, 3, '??...', '??...', 13958327483, 1, 20161101, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市南岸区花园路', 'rr', 0, NULL, 1, 10, 20181207163521, 20181227162327);
-INSERT INTO `t_customer` VALUES (21, 3, '新增客户', 'xzkh', 13101315226, 1, 20170901, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, '辅向路8号', 0, NULL, 1, 8, 20181208004436, 20181227162323);
-INSERT INTO `t_customer` VALUES (22, 3, 'gg', 'gg', 13658328477, 0, 20151001, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 2, 20181208173623, 20181221223455);
-INSERT INTO `t_customer` VALUES (23, 3, '啊哈哈', 'ahh', 13658327422, 0, 20160901, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, '大大大', 0, NULL, 1, 5, 20181209114432, 20181221115253);
-INSERT INTO `t_customer` VALUES (24, 3, '不单单', 'bdd', 13658627455, 0, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 5, 20181209124241, 20181226213301);
-INSERT INTO `t_customer` VALUES (25, 3, '太热', 'tr', 13852145236, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 3, 20181209132025, 20181221115941);
-INSERT INTO `t_customer` VALUES (26, 5, '哈哈', 'hh', 17521455875, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20181218115602, NULL);
-INSERT INTO `t_customer` VALUES (27, 3, '阿达', 'ad', 13658328782, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181218144956, 20181221115954);
-INSERT INTO `t_customer` VALUES (28, 3, 'ddd', 'ddd', 13658327483, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 3, 20181221115422, 20181227162306);
-INSERT INTO `t_customer` VALUES (29, 3, 'ff', 'ff', 13658327866, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181221162847, 20181227162316);
-INSERT INTO `t_customer` VALUES (30, 5, '看看', 'kk', 13587411254, 1, 19671221, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 11, 20181221163837, 20181227141551);
-INSERT INTO `t_customer` VALUES (31, 3, '新增测试', 'xzcs', 13658325477, 0, 20181222, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市渝北区义学路10号', NULL, 0, NULL, 1, 2, 20181221164220, 20181227162322);
-INSERT INTO `t_customer` VALUES (32, 3, 'lrbfly', 'lrbfly', 13658328744, 1, 20181224, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市南岸区南城大道199号南岸文化艺术中心4/5楼', NULL, 0, NULL, 1, 4, 20181223121813, 20181227162325);
-INSERT INTO `t_customer` VALUES (33, 3, '四十四', 'sss', 13658658788, 0, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 6, 20181223134854, 20181227162253);
-INSERT INTO `t_customer` VALUES (34, 3, '多的', 'dd', 13658324565, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181223164047, 20181227162303);
-INSERT INTO `t_customer` VALUES (35, 3, 'ddd', 'ddd', 13658328766, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227133135, 20181227162305);
-INSERT INTO `t_customer` VALUES (36, 3, 'ddd', 'ddd', 15656565658, 1, 20181228, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市渝北区两路街道金航路', 'hhh', 0, NULL, 1, 2, 20181227133832, 20181227162302);
-INSERT INTO `t_customer` VALUES (37, 3, 'dddd', 'dddd', 13658959865, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227134026, 20181227162310);
-INSERT INTO `t_customer` VALUES (38, 3, 'dsadds', 'dsadds', 13589574854, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227134117, 20181227162312);
-INSERT INTO `t_customer` VALUES (39, 3, 'rrr', 'rrr', 15623212312, 0, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 2, 20181227134246, 20181227162031);
-INSERT INTO `t_customer` VALUES (40, 5, '测试2', 'cs2', 13521455785, 1, 19721227, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市江北区图书馆(金源路64号附2号)', NULL, 0, NULL, 0, 4, 20181227141624, 20181227150124);
-INSERT INTO `t_customer` VALUES (41, 5, '测试3', 'cs3', 17412545214, 0, 19951227, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市江北区图书馆(金源路64号附2号)', NULL, 0, NULL, 0, 1, 20181227142336, 20181227142443);
-INSERT INTO `t_customer` VALUES (42, 5, '测试4', 'cs4', 13854168547, 1, 19961227, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 2, 20181227142615, 20181227145955);
-INSERT INTO `t_customer` VALUES (43, 3, 'assdf', 'assdf', 13212121232, 0, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 3, 20181227144303, 20181227162251);
-INSERT INTO `t_customer` VALUES (44, 3, 'dd', 'dd', 13254545454, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227150453, 20181227162300);
-INSERT INTO `t_customer` VALUES (45, 5, '测试5', 'cs5', 15225478542, 1, NULL, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 5, 20181227150546, 20181227150937);
-INSERT INTO `t_customer` VALUES (46, 3, 'sa', 'sa', 13658328755, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227162349, 20181227162354);
-INSERT INTO `t_customer` VALUES (47, 3, 'asdf', 'asdf', 13654879587, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227162432, 20181227162437);
-INSERT INTO `t_customer` VALUES (48, 3, '的风神股份', 'dfsgf', 13589874874, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 1, 1, 20181227162901, 20181227162907);
-INSERT INTO `t_customer` VALUES (49, 3, '测试a1', 'csa1', 13658327483, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 88, 20181227210707, 20181229132024);
-INSERT INTO `t_customer` VALUES (50, 3, 'dd', 'dd', 13658328783, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 1, 20181229140607, 20181229140639);
+INSERT INTO `t_customer` VALUES (84, 10, '测试1', 'cs1', 13965422548, 1, 19780110, 'http://47.94.5.205/img/head_pic/default.jpg', '重庆市江北区北城天街33号', NULL, 0, NULL, 0, 6, 20190110204312, 20190117172024);
+INSERT INTO `t_customer` VALUES (85, 9, '1', '1', 13958327480, 0, 20180116, 'http://47.94.5.205/img/head_pic/default.jpg', '?????????', 'rr', 0, NULL, 0, 19, 20190110205325, 20190130101654);
+INSERT INTO `t_customer` VALUES (86, 10, '测试2', 'cs2', 13854211457, 0, 19820313, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 6, 20190110205804, 20190117172040);
+INSERT INTO `t_customer` VALUES (87, 10, '不测试3', 'bcs3', 17425477458, 1, 19910819, 'http://47.94.5.205/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 6, 20190110210319, 20190111185724);
+INSERT INTO `t_customer` VALUES (88, 11, 'gg', 'gg', 13576567866, 1, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20190110211227, NULL);
+INSERT INTO `t_customer` VALUES (89, 11, 'ff', 'ff', 13467656787, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20190110211347, NULL);
+INSERT INTO `t_customer` VALUES (90, 11, 'hj', 'hj', 13454345456, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20190110211405, NULL);
+INSERT INTO `t_customer` VALUES (91, 9, '??', '??', 13958327481, 0, 20190114, 'http://47.94.5.205/img/head_pic/default.jpg', '?????????', 'rr', 0, NULL, 0, 8, 20190110212504, 20190110213715);
+INSERT INTO `t_customer` VALUES (92, 11, 'ff', 'ff', 13658321232, 0, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20190110212623, NULL);
+INSERT INTO `t_customer` VALUES (93, 11, 'dd', 'dd', 13565434567, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 2, 20190110212732, 20190110220620);
+INSERT INTO `t_customer` VALUES (94, 11, 'rr', 'rr', 13658324877, 1, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 9, 20190110213036, 20190130105223);
+INSERT INTO `t_customer` VALUES (95, 11, 'ccc', 'ccc', 13658327483, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 3, 20190112203903, 20190124184441);
+INSERT INTO `t_customer` VALUES (96, 11, '哈哈哈', 'hhh', 13658327489, NULL, NULL, '/img/head_pic/default.jpg', NULL, NULL, 0, NULL, 0, 0, 20190112215708, NULL);
 
 -- ----------------------------
 -- Table structure for t_customer_detail
@@ -107,7 +73,7 @@ CREATE TABLE `t_customer_detail`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `customer_id`(`customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 明细' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 明细' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_customer_family
@@ -128,23 +94,14 @@ CREATE TABLE `t_customer_family`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `is_delete`(`is_delete`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 家庭' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 家庭' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer_family
 -- ----------------------------
-INSERT INTO `t_customer_family` VALUES (23, 19, 2, 'llddd', 20181008, 13658328788, '重庆市渝北区两路街道金航路', 'dddd', 1, 2, 20181221124041, 20181227162320);
-INSERT INTO `t_customer_family` VALUES (24, 28, 2, 'ddddsf', 20180808, 13658328566, '重庆市渝北区义学路10号', 'ddd', 1, 1, 20181221163527, 20181227162306);
-INSERT INTO `t_customer_family` VALUES (25, 30, 0, '顾及', 20180808, 13541255412, '金源路(重庆市江北区)', NULL, 0, 1, 20181221164153, 20181221165421);
-INSERT INTO `t_customer_family` VALUES (26, 10, 0, '000', 20180808, 13658888888, '重庆市南岸区南城大道199号', NULL, 1, 0, 20181221231132, 20181227162314);
-INSERT INTO `t_customer_family` VALUES (27, 14, 0, 'sss', 20180808, 13658658777, '重庆市南岸区花园路', 'ccc', 1, 1, 20181222202723, 20181227162256);
-INSERT INTO `t_customer_family` VALUES (28, 2, 2, 'xxx', 20100102, 15111111111, '???????', 'ttt', 0, 1, 20181222203812, 20181222204052);
-INSERT INTO `t_customer_family` VALUES (29, 20, 2, '1212', 20180908, 13658585878, '重庆市南岸区花园路', '测试', 1, 1, 20181223121602, 20181227162327);
-INSERT INTO `t_customer_family` VALUES (30, 30, 2, '巨卡', 19760808, 13983522145, '', NULL, 0, 0, 20181227141454, NULL);
-INSERT INTO `t_customer_family` VALUES (31, 45, 0, '父测试5', 19920808, 13854211452, '重庆市江北区图书馆(金源路64号附2号)', NULL, 0, 0, 20181227150937, NULL);
-INSERT INTO `t_customer_family` VALUES (32, 49, 0, '大时代', 20180808, 13658659888, '重庆市渝北区义学路10号', '阿斯顿发生的', 0, 0, 20181228103208, NULL);
-INSERT INTO `t_customer_family` VALUES (33, 49, 1, 'sa', 20180808, 13658328577, '重庆市渝北区义学路10号', 'dd', 0, 0, 20181229130101, NULL);
-INSERT INTO `t_customer_family` VALUES (34, 49, 2, 'dsf', 20180808, 13658657488, '', NULL, 0, 0, 20181229130120, NULL);
+INSERT INTO `t_customer_family` VALUES (49, 84, 1, '测试父', 19600515, 13254122541, '', NULL, 0, 0, 20190110204520, NULL);
+INSERT INTO `t_customer_family` VALUES (50, 85, 1, '爸爸', 20180116, 15120000000, '', NULL, 0, 1, 20190110214248, 20190130101654);
+INSERT INTO `t_customer_family` VALUES (51, 87, 1, '测试3', 19630107, 13854255412, '', NULL, 0, 0, 20190111185548, NULL);
 
 -- ----------------------------
 -- Table structure for t_customer_hobby
@@ -161,18 +118,14 @@ CREATE TABLE `t_customer_hobby`  (
   `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 兴趣爱好' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 兴趣爱好' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer_hobby
 -- ----------------------------
-INSERT INTO `t_customer_hobby` VALUES (1, 2, '2', '1,3', '4', 0, 3, 20181027212631, 20181206225003);
-INSERT INTO `t_customer_hobby` VALUES (2, 19, '15,18,19', '3,6,11', '2,3', 1, 4, 20181207234248, 20181227162320);
-INSERT INTO `t_customer_hobby` VALUES (3, 21, '18', '6,10', '2', 1, 0, 20181208014256, 20181227162323);
-INSERT INTO `t_customer_hobby` VALUES (4, 30, '1,3,5,6,7,9,12,14,15', '1,3', '1,3', 0, 1, 20181221164353, 20181227141525);
-INSERT INTO `t_customer_hobby` VALUES (5, 24, '3,11,18,19', '3,7,11', '1,2,3,4', 1, 0, 20181226213210, 20181226213301);
-INSERT INTO `t_customer_hobby` VALUES (6, 43, '7,15', '7', '2,3', 1, 0, 20181227144311, 20181227162251);
-INSERT INTO `t_customer_hobby` VALUES (7, 45, '1,6,9,10,15,19', '2,6,9', '1,2', 0, 0, 20181227150825, NULL);
+INSERT INTO `t_customer_hobby` VALUES (14, 84, '1,3,6,10,13', '1,2,5,6', '2', 0, 0, 20190110204625, NULL);
+INSERT INTO `t_customer_hobby` VALUES (15, 86, '2,11,14', '2', '2', 0, 0, 20190110205931, NULL);
+INSERT INTO `t_customer_hobby` VALUES (16, 87, '1,2,7,11,14', '2,3', '2', 0, 0, 20190111185705, NULL);
 
 -- ----------------------------
 -- Table structure for t_customer_job
@@ -195,39 +148,23 @@ CREATE TABLE `t_customer_job`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `is_delete`(`is_delete`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 工作' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 工作' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer_job
 -- ----------------------------
-INSERT INTO `t_customer_job` VALUES (1, 2, 2, 'aaaa', 'bbb', 3, NULL, 15111111111, '321200', 'aaaaaaaaaaaaaa', 0, 3, 20181028134438, 20181028135348);
-INSERT INTO `t_customer_job` VALUES (2, 5, 2, 'aaaa', 'bbb', 3, NULL, 15111111111, '321200', 'aaaaaaaaaaaaaa', 0, 0, 20181028135135, NULL);
-INSERT INTO `t_customer_job` VALUES (3, 13, 2, 'aaaa', 'bbb', 3, NULL, 15111111111, '321200', 'aaaaaaaaaaaaaa', 1, 0, 20181127095208, 20181227162258);
-INSERT INTO `t_customer_job` VALUES (6, 14, 2, 'aaaa', 'bbb', 3, NULL, 15111111121, '321200', '拉撒盗号翻江搅海', 1, 0, 20181127102921, 20181227162256);
-INSERT INTO `t_customer_job` VALUES (7, 15, 2, 'aaaa', 'bbb', 3, NULL, 15111111111, '321200', 'aaaaaaaaaaaaaa', 1, 1, 20181127165307, 20181227162308);
-INSERT INTO `t_customer_job` VALUES (8, 16, 2, 'aaaa', 'bbb', 3, NULL, 15111111111, '321200', 'aaaaaaaaaaaaaa', 1, 3, 20181127194855, 20181221115947);
-INSERT INTO `t_customer_job` VALUES (9, 17, 2, 'aaaa', 'bbb', 3, NULL, 15111111111, '321200', 'aaaaaaaaaaaaaa', 1, 3, 20181127195020, 20181221115132);
-INSERT INTO `t_customer_job` VALUES (10, 12, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 1, 6, 20181127204733, 20181221115302);
-INSERT INTO `t_customer_job` VALUES (11, 18, 2, 'qwerqwer', NULL, 2, NULL, NULL, NULL, 'qerqewrqwerqwer', 1, 1, 20181127223449, 20181227162318);
-INSERT INTO `t_customer_job` VALUES (12, 19, 3, 'ifm科技', NULL, 3, NULL, NULL, '重庆市渝北区金航路1号', '测试测试测试测试', 1, 17, 20181127225154, 20181227162320);
-INSERT INTO `t_customer_job` VALUES (13, 21, 2, '蓝天可以', NULL, 3, NULL, NULL, NULL, 'dddd', 1, 0, 20181208004732, 20181227162323);
-INSERT INTO `t_customer_job` VALUES (14, 20, 6, 'rrr', NULL, 6, NULL, NULL, '重庆市南岸区南城大道199号南岸文化艺术中心4/5楼', 'rrrr', 1, 5, 20181208165748, 20181227162327);
-INSERT INTO `t_customer_job` VALUES (15, 10, 3, 'fff', NULL, 2, NULL, NULL, NULL, 'ffff', 1, 0, 20181208173427, 20181227162314);
-INSERT INTO `t_customer_job` VALUES (16, 22, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 1, 0, 20181208173712, 20181221223455);
-INSERT INTO `t_customer_job` VALUES (17, 23, 5, NULL, NULL, 4, NULL, NULL, NULL, NULL, 1, 0, 20181209114613, 20181221115253);
-INSERT INTO `t_customer_job` VALUES (18, 24, 36, '好久', NULL, 5, NULL, NULL, NULL, NULL, 1, 0, 20181209124350, 20181226213301);
-INSERT INTO `t_customer_job` VALUES (19, 31, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 1, 0, 20181221165032, 20181227162322);
-INSERT INTO `t_customer_job` VALUES (20, 30, 2, '还好还好哈', NULL, 2, NULL, NULL, NULL, NULL, 0, 1, 20181221165339, 20181227141321);
-INSERT INTO `t_customer_job` VALUES (21, 4, NULL, 'aaaa', 'bbb', NULL, NULL, 15111111111, NULL, 'aaaaaaaaaaaaaa', 0, 1, 20181222193519, 20181222193743);
-INSERT INTO `t_customer_job` VALUES (22, 32, 2, NULL, NULL, 2, NULL, NULL, NULL, '', 1, 2, 20181223121855, 20181227162325);
-INSERT INTO `t_customer_job` VALUES (23, 36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 20181227134217, 20181227162302);
-INSERT INTO `t_customer_job` VALUES (24, 40, 3, NULL, NULL, 2, NULL, NULL, NULL, NULL, 0, 1, 20181227141653, 20181227141837);
-INSERT INTO `t_customer_job` VALUES (25, 41, 4, NULL, NULL, 5, NULL, NULL, NULL, NULL, 0, 0, 20181227142442, NULL);
-INSERT INTO `t_customer_job` VALUES (26, 42, 2, '看看公司', NULL, 3, NULL, NULL, NULL, NULL, 0, 1, 20181227142712, 20181227145955);
-INSERT INTO `t_customer_job` VALUES (27, 39, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 1, 0, 20181227143734, 20181227162031);
-INSERT INTO `t_customer_job` VALUES (28, 33, 4, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 3, 20181227143809, 20181227162253);
-INSERT INTO `t_customer_job` VALUES (29, 43, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, 1, 0, 20181227144337, 20181227162251);
-INSERT INTO `t_customer_job` VALUES (30, 45, 4, NULL, NULL, 4, NULL, NULL, NULL, NULL, 0, 0, 20181227150617, NULL);
+INSERT INTO `t_customer_job` VALUES (56, 84, 2, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, 1, 20190110204312, 20190110204757);
+INSERT INTO `t_customer_job` VALUES (57, 85, 6, 'rrr', NULL, 6, NULL, NULL, '??????????199?', 'rrrr', 0, 13, 20190110205410, 20190110213845);
+INSERT INTO `t_customer_job` VALUES (58, 86, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190110205804, NULL);
+INSERT INTO `t_customer_job` VALUES (59, 87, 3, '测试公司3', NULL, 2, 'CTO', NULL, NULL, NULL, 0, 0, 20190110210505, NULL);
+INSERT INTO `t_customer_job` VALUES (60, 88, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190110211227, NULL);
+INSERT INTO `t_customer_job` VALUES (61, 90, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190110211405, NULL);
+INSERT INTO `t_customer_job` VALUES (62, 91, 6, 'rrr', NULL, 6, NULL, NULL, '??????????199?', 'rrrr', 0, 7, 20190110212522, 20190110213715);
+INSERT INTO `t_customer_job` VALUES (63, 92, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190110212623, NULL);
+INSERT INTO `t_customer_job` VALUES (64, 93, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190110212732, NULL);
+INSERT INTO `t_customer_job` VALUES (65, 94, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190110213036, NULL);
+INSERT INTO `t_customer_job` VALUES (66, 95, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190112203903, NULL);
+INSERT INTO `t_customer_job` VALUES (67, 96, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 20190112215708, NULL);
 
 -- ----------------------------
 -- Table structure for t_customer_maintain
@@ -265,63 +202,23 @@ CREATE TABLE `t_customer_memorial_day`  (
   `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 纪念日' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 86 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 纪念日' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer_memorial_day
 -- ----------------------------
-INSERT INTO `t_customer_memorial_day` VALUES (1, 2, 'ttttt2', 1, 20181030, 1, NULL, 0, 1, 20181028192857, 20181028193057);
-INSERT INTO `t_customer_memorial_day` VALUES (2, 2, 'ttttt2', 1, 20181030, 1, NULL, 0, 0, 20181028193023, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (3, 19, 'dd', 1, 20181030, 6, NULL, 1, 1, 20181128164226, 20181220112115);
-INSERT INTO `t_customer_memorial_day` VALUES (4, 19, '冠军日', 1, 20181030, 5, NULL, 1, 1, 20181128164349, 20181129002423);
-INSERT INTO `t_customer_memorial_day` VALUES (5, 16, '对对对', 1, 20181030, 2, NULL, 1, 0, 20181129100140, 20181221115947);
-INSERT INTO `t_customer_memorial_day` VALUES (6, 21, 'fafds', 2, 20181030, 2, NULL, 1, 0, 20181208013054, 20181227162323);
-INSERT INTO `t_customer_memorial_day` VALUES (7, 19, 'gaagagf', 2, 20150901, 2, NULL, 1, 1, 20181208013412, 20181220112118);
-INSERT INTO `t_customer_memorial_day` VALUES (8, 21, 'gggf', 2, 20150901, 2, NULL, 1, 0, 20181208014232, 20181227162323);
-INSERT INTO `t_customer_memorial_day` VALUES (9, 23, '大大大', 3, 20160901, 4, NULL, 1, 0, 20181209114812, 20181221115253);
-INSERT INTO `t_customer_memorial_day` VALUES (10, 19, 'd', 2, 20050901, 5, NULL, 1, 0, 20181220112244, 20181227162320);
-INSERT INTO `t_customer_memorial_day` VALUES (11, 19, '尴尬', 3, 20050901, 3, NULL, 1, 1, 20181220112416, 20181220112612);
-INSERT INTO `t_customer_memorial_day` VALUES (12, 19, '订单', 2, 20150901, 3, NULL, 1, 0, 20181220112720, 20181227162320);
-INSERT INTO `t_customer_memorial_day` VALUES (13, 30, '测试1', 1, 20170901, 1, NULL, 0, 0, 20181221164311, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (14, 2, 'ttttt', 2, 20181030, 1, NULL, 0, 0, 20181222200027, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (15, 33, 'eeee', 2, 1224, 2, NULL, 1, 0, 20181223205115, 20181227162253);
-INSERT INTO `t_customer_memorial_day` VALUES (16, 49, 'dd', 1, 20050402, 2, NULL, 1, 1, 20181227211009, 20181227214927);
-INSERT INTO `t_customer_memorial_day` VALUES (17, 49, 'dd', 1, 20181227, 1, NULL, 1, 1, 20181227212859, 20181227214925);
-INSERT INTO `t_customer_memorial_day` VALUES (18, 49, 'ddd', 2, 1010, 1, NULL, 1, 1, 20181227213026, 20181227214923);
-INSERT INTO `t_customer_memorial_day` VALUES (19, 49, 'ddd', 2, 202, 1, NULL, 1, 1, 20181227214346, 20181227214921);
-INSERT INTO `t_customer_memorial_day` VALUES (20, 49, 'ddd', 2, 101, 1, NULL, 1, 1, 20181227214505, 20181227214919);
-INSERT INTO `t_customer_memorial_day` VALUES (21, 49, 'dfdf', 2, 101, 1, NULL, 1, 1, 20181227214731, 20181227214917);
-INSERT INTO `t_customer_memorial_day` VALUES (22, 49, 'df', 2, 101, 1, NULL, 1, 1, 20181227214947, 20181228102015);
-INSERT INTO `t_customer_memorial_day` VALUES (23, 49, 'dfd', 2, 202, 1, NULL, 1, 1, 20181227215006, 20181228102013);
-INSERT INTO `t_customer_memorial_day` VALUES (24, 49, 'ddd', 2, 1010, 1, NULL, 1, 1, 20181227215910, 20181228102012);
-INSERT INTO `t_customer_memorial_day` VALUES (25, 49, 'ff', 2, 210, 1, NULL, 1, 1, 20181227220348, 20181228102010);
-INSERT INTO `t_customer_memorial_day` VALUES (26, 49, 'jyfg', 2, 404, 1, NULL, 1, 1, 20181227235759, 20181228102008);
-INSERT INTO `t_customer_memorial_day` VALUES (27, 49, 'hsg', 3, 3, 1, NULL, 1, 1, 20181228000632, 20181228102006);
-INSERT INTO `t_customer_memorial_day` VALUES (28, 49, 'fdj', 3, 31, 1, NULL, 1, 1, 20181228000714, 20181228102005);
-INSERT INTO `t_customer_memorial_day` VALUES (29, 49, 'bzx', 4, 3, 1, NULL, 1, 1, 20181228000957, 20181228102003);
-INSERT INTO `t_customer_memorial_day` VALUES (30, 2, 'ttttt', 2, 203, 1, NULL, 0, 0, 20181228092754, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (31, 2, 'ddd', 2, 1010, 1, NULL, 0, 0, 20181228092838, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (32, 2, 'ddd', 2, 1030, 1, NULL, 0, 0, 20181228092907, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (33, 2, 'ddd', 2, 1001, 1, NULL, 0, 0, 20181228092916, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (34, 2, 'ddd', 2, 1001, 1, NULL, 0, 0, 20181228093827, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (35, 2, 'ddd', 2, 101, 1, NULL, 0, 0, 20181228094028, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (36, 2, 'ddd', 2, 101, 1, NULL, 0, 0, 20181228094130, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (37, 49, '儿童节', 2, 101, 1, NULL, 1, 1, 20181228094820, 20181228102001);
-INSERT INTO `t_customer_memorial_day` VALUES (38, 49, '生日歌', 2, 1006, 1, NULL, 1, 1, 20181228094950, 20181228102000);
-INSERT INTO `t_customer_memorial_day` VALUES (39, 49, 'ad沙发上的', 4, 4, 3, NULL, 1, 1, 20181228095043, 20181228101958);
-INSERT INTO `t_customer_memorial_day` VALUES (40, 49, '鼎折覆餗', 3, 3, 1, NULL, 1, 1, 20181228095127, 20181228101956);
-INSERT INTO `t_customer_memorial_day` VALUES (41, 49, '测试节日', 1, 20181228, 1, NULL, 0, 1, 20181228102612, 20181228111521);
-INSERT INTO `t_customer_memorial_day` VALUES (42, 49, '到底', 1, 20181229, 1, NULL, 0, 0, 20181228102627, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (43, 49, 'esr', 2, 203, 1, NULL, 0, 1, 20181228113219, 20181228115200);
-INSERT INTO `t_customer_memorial_day` VALUES (44, 49, 'ddd', 1, 20181229, 3, NULL, 0, 3, 20181228121822, 20181229110025);
-INSERT INTO `t_customer_memorial_day` VALUES (45, 49, 'dddss', 2, 131, 1, NULL, 0, 9, 20181228121848, 20181229132024);
-INSERT INTO `t_customer_memorial_day` VALUES (46, 49, 'dsss', 2, 1004, 1, NULL, 0, 0, 20181228145659, NULL);
-INSERT INTO `t_customer_memorial_day` VALUES (47, 49, 'adfa', 2, 630, 3, NULL, 0, 4, 20181228151639, 20181229105909);
-INSERT INTO `t_customer_memorial_day` VALUES (48, 49, '是否', 2, 228, 3, NULL, 0, 13, 20181228154135, 20181229111533);
-INSERT INTO `t_customer_memorial_day` VALUES (49, 49, '打的费', 3, 2, 1, NULL, 0, 2, 20181228160033, 20181229105800);
-INSERT INTO `t_customer_memorial_day` VALUES (50, 49, 'asdfadd', 4, 4, 3, NULL, 0, 2, 20181228160919, 20181229131910);
-INSERT INTO `t_customer_memorial_day` VALUES (51, 49, 'asdd愿意', 4, 2, 2, NULL, 0, 1, 20181229111659, 20181229131938);
-INSERT INTO `t_customer_memorial_day` VALUES (52, 49, 'af', 1, 20181229, 1, NULL, 1, 1, 20181229125748, 20181229131926);
+INSERT INTO `t_customer_memorial_day` VALUES (74, 84, '测试1', 1, 20190114, 7, NULL, 0, 0, 20190110204608, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (75, 86, '测试2', 4, 7, 4, NULL, 0, 0, 20190110205917, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (76, 94, 'dd3', 1, 20190114, 3, NULL, 0, 1, 20190110213815, 20190110213914);
+INSERT INTO `t_customer_memorial_day` VALUES (77, 94, 'dd', 1, 20190114, 1, NULL, 0, 0, 20190110213827, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (78, 94, 'dd2', 1, 20190114, 2, NULL, 0, 0, 20190110213852, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (79, 93, '测试提醒', 1, 20190110, 1, NULL, 0, 0, 20190110220620, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (80, 87, '特殊3', 4, 1, 3, NULL, 0, 0, 20190111185649, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (81, 86, '测试2a', 1, 20190121, 1, NULL, 0, 1, 20190117170902, 20190117171410);
+INSERT INTO `t_customer_memorial_day` VALUES (82, 94, '测试11', 1, 20190124, 1, NULL, 0, 0, 20190124214903, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (83, 94, '测试11111', 1, 20190131, 1, NULL, 1, 1, 20190130102827, 20190130105011);
+INSERT INTO `t_customer_memorial_day` VALUES (84, 94, '改红果果', 1, 20190202, 1, NULL, 0, 0, 20190130105048, NULL);
+INSERT INTO `t_customer_memorial_day` VALUES (85, 94, '皇皇巨著', 1, 20190131, 1, NULL, 0, 0, 20190130105223, NULL);
 
 -- ----------------------------
 -- Table structure for t_customer_problem
@@ -339,17 +236,14 @@ CREATE TABLE `t_customer_problem`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `customer_id`(`customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 可能问题' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 可能问题' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer_problem
 -- ----------------------------
-INSERT INTO `t_customer_problem` VALUES (1, 2, '2', '1,3', 'xxxxxxxxxTTT', 0, 4, 20181027220102, 20181206225425);
-INSERT INTO `t_customer_problem` VALUES (2, 19, '2,6', '2', NULL, 1, 3, 20181208002821, 20181227162320);
-INSERT INTO `t_customer_problem` VALUES (3, 21, '2,6,10', '2,3', NULL, 1, 0, 20181208014313, 20181227162323);
-INSERT INTO `t_customer_problem` VALUES (4, 30, '1,6', '1', NULL, 0, 1, 20181221164430, 20181227141551);
-INSERT INTO `t_customer_problem` VALUES (5, 24, '6,7,8,10,12', '3,7', NULL, 1, 0, 20181226213240, 20181226213301);
-INSERT INTO `t_customer_problem` VALUES (6, 45, '1,2,9,13', '1,2', NULL, 0, 0, 20181227150831, NULL);
+INSERT INTO `t_customer_problem` VALUES (12, 84, '1,6,13', '2', NULL, 0, 0, 20190110204632, NULL);
+INSERT INTO `t_customer_problem` VALUES (13, 86, '6,9,11', '2', NULL, 0, 0, 20190110205940, NULL);
+INSERT INTO `t_customer_problem` VALUES (14, 87, '2,7,10', '1,2', NULL, 0, 0, 20190111185724, NULL);
 
 -- ----------------------------
 -- Table structure for t_customer_relation
@@ -367,25 +261,17 @@ CREATE TABLE `t_customer_relation`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customer_id`(`is_delete`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 关系' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '客户 关系' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_customer_relation
 -- ----------------------------
-INSERT INTO `t_customer_relation` VALUES (1, 2, 0, 0, 0, 0, 1, 20181027210812, 20181027210836);
-INSERT INTO `t_customer_relation` VALUES (2, 19, 1, 1, 1, 0, 11, 20181128095934, 20181220104005);
-INSERT INTO `t_customer_relation` VALUES (3, 12, 2, 2, 0, 0, 1, 20181128225603, 20181128225634);
-INSERT INTO `t_customer_relation` VALUES (4, 16, 5, 1, 1, 0, 0, 20181129095922, NULL);
-INSERT INTO `t_customer_relation` VALUES (5, 14, 6, 1, 1, 0, 0, 20181207223859, NULL);
-INSERT INTO `t_customer_relation` VALUES (6, 21, 5, 1, 2, 0, 0, 20181208004933, NULL);
-INSERT INTO `t_customer_relation` VALUES (7, 20, 6, 1, 1, 0, 0, 20181209104556, NULL);
-INSERT INTO `t_customer_relation` VALUES (8, 23, 0, 1, 1, 0, 0, 20181209114635, NULL);
-INSERT INTO `t_customer_relation` VALUES (9, 10, 2, 2, 1, 0, 0, 20181221151628, NULL);
-INSERT INTO `t_customer_relation` VALUES (10, 30, 1, 1, 1, 0, 0, 20181221164112, NULL);
-INSERT INTO `t_customer_relation` VALUES (11, 24, 5, 2, 1, 0, 0, 20181226213154, NULL);
-INSERT INTO `t_customer_relation` VALUES (12, 40, 2, 3, 1, 0, 1, 20181227141938, 20181227150124);
-INSERT INTO `t_customer_relation` VALUES (13, 45, 3, 2, 1, 0, 0, 20181227150632, NULL);
-INSERT INTO `t_customer_relation` VALUES (14, 50, 8, 4, 2, 0, 0, 20181229140639, NULL);
+INSERT INTO `t_customer_relation` VALUES (21, 93, 4, 0, 0, 0, 0, 20190110212758, NULL);
+INSERT INTO `t_customer_relation` VALUES (22, 87, 6, 1, 1, 0, 0, 20190111185433, NULL);
+INSERT INTO `t_customer_relation` VALUES (23, 95, 0, 0, 1, 0, 2, 20190112203914, 20190124184441);
+INSERT INTO `t_customer_relation` VALUES (24, 84, 1, 2, 0, 0, 0, 20190117172024, NULL);
+INSERT INTO `t_customer_relation` VALUES (25, 86, 3, 3, 1, 0, 0, 20190117172040, NULL);
+INSERT INTO `t_customer_relation` VALUES (26, 85, 4, 4, 2, 0, 2, 20190130101624, 20190130101639);
 
 -- ----------------------------
 -- Table structure for t_gift
@@ -504,43 +390,6 @@ CREATE TABLE `t_phone_msg`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '手机短信' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of t_phone_msg
--- ----------------------------
-INSERT INTO `t_phone_msg` VALUES (1, 15123815032, '666666', 1, '666666', 1, 0, 2, 20181021174100, 20181021174853);
-INSERT INTO `t_phone_msg` VALUES (2, 15123815032, '777777', 2, '666666', 1, 0, 3, 20181021181100, 1540116915);
-INSERT INTO `t_phone_msg` VALUES (3, 15123815000, '623694', 1, '623694', 0, 0, 0, 20181021182045, NULL);
-INSERT INTO `t_phone_msg` VALUES (4, 15123815000, '289984', 1, '289984', 0, 0, 0, 20181021182152, NULL);
-INSERT INTO `t_phone_msg` VALUES (5, 15123815032, '382336', 2, '382336', 0, 0, 0, 20181021182251, NULL);
-INSERT INTO `t_phone_msg` VALUES (6, 15123815000, '538612', 1, '538612', 0, 0, 0, 20181105130834, NULL);
-INSERT INTO `t_phone_msg` VALUES (7, 15123815000, '996774', 1, '996774', 0, 0, 0, 20181105145921, NULL);
-INSERT INTO `t_phone_msg` VALUES (8, 15123815000, '205931', 1, '205931', 0, 0, 0, 20181105150036, NULL);
-INSERT INTO `t_phone_msg` VALUES (9, 15123815000, '068424', 1, '068424', 0, 0, 0, 20181105151052, NULL);
-INSERT INTO `t_phone_msg` VALUES (10, 15123815000, '284295', 1, '284295', 0, 0, 0, 20181105151519, NULL);
-INSERT INTO `t_phone_msg` VALUES (11, 15123815000, '425152', 1, '425152', 0, 0, 0, 20181105153123, NULL);
-INSERT INTO `t_phone_msg` VALUES (12, 15123815000, '149024', 1, '149024', 0, 0, 0, 20181105153243, NULL);
-INSERT INTO `t_phone_msg` VALUES (13, 15123815000, '758388', 1, '758388', 0, 0, 0, 20181105153350, NULL);
-INSERT INTO `t_phone_msg` VALUES (14, 15123815000, '128831', 1, '128831', 0, 0, 0, 20181105153456, NULL);
-INSERT INTO `t_phone_msg` VALUES (15, 15123815000, '454301', 1, '454301', 0, 0, 0, 20181105153603, NULL);
-INSERT INTO `t_phone_msg` VALUES (16, 15123815000, '016740', 1, '016740', 0, 0, 0, 20181105154127, NULL);
-INSERT INTO `t_phone_msg` VALUES (17, 15123815000, '622251', 1, '622251', 0, 0, 0, 20181105154401, NULL);
-INSERT INTO `t_phone_msg` VALUES (18, 15123815000, '322474', 1, '322474', 0, 0, 0, 20181105154511, NULL);
-INSERT INTO `t_phone_msg` VALUES (19, 15123815000, '860460', 1, '860460', 0, 0, 0, 20181105160722, NULL);
-INSERT INTO `t_phone_msg` VALUES (20, 15123815000, '353582', 1, '353582', 0, 0, 0, 20181105161400, NULL);
-INSERT INTO `t_phone_msg` VALUES (21, 15123815000, '278921', 1, '278921', 0, 0, 0, 20181105163223, NULL);
-INSERT INTO `t_phone_msg` VALUES (22, 15123815000, '552302', 1, '552302', 0, 0, 0, 20181105164158, NULL);
-INSERT INTO `t_phone_msg` VALUES (23, 15123815000, '452371', 1, '452371', 0, 0, 0, 20181106155115, NULL);
-INSERT INTO `t_phone_msg` VALUES (24, 15123815000, '953658', 1, '953658', 0, 0, 0, 20181126143727, NULL);
-INSERT INTO `t_phone_msg` VALUES (25, 13658327483, '313817', 1, '313817', 0, 0, 0, 20181126143727, NULL);
-INSERT INTO `t_phone_msg` VALUES (26, 13658327483, '657866', 1, '657866', 0, 0, 0, 20181126143727, NULL);
-INSERT INTO `t_phone_msg` VALUES (28, 15123815033, '767505', 1, '767505', 0, 0, 0, 20181126143727, NULL);
-INSERT INTO `t_phone_msg` VALUES (35, 17353133429, '997302', 1, '997302', 1, 0, 1, 20181126152102, 20181126152128);
-INSERT INTO `t_phone_msg` VALUES (36, 15320500581, '511883', 1, '511883', 0, 0, 0, 20181130212240, NULL);
-INSERT INTO `t_phone_msg` VALUES (37, 13558327483, '339933', 1, '339933', 0, 0, 0, 20181130212522, NULL);
-INSERT INTO `t_phone_msg` VALUES (38, 13658327483, '368137', 1, '368137', 0, 0, 0, 20181130212644, NULL);
-INSERT INTO `t_phone_msg` VALUES (39, 17356565656, '633607', 1, '633607', 0, 0, 0, 20181130214841, NULL);
-INSERT INTO `t_phone_msg` VALUES (40, 13521212121, '363135', 1, '363135', 0, 0, 0, 20181208203829, NULL);
 
 -- ----------------------------
 -- Table structure for t_site_msg
@@ -757,10 +606,10 @@ INSERT INTO `t_sys_code` VALUES (158, 'CUSTOMER_MEMORIAL_DAY_ADVANCE_TYPE', '提
 INSERT INTO `t_sys_code` VALUES (159, '1', '1天', 158, 1, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (160, '2', '2天', 158, 2, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (161, '3', '3天', 158, 3, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (162, '4', '5天', 158, 4, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (163, '5', '1周', 158, 5, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (164, '6', '2周', 158, 6, NULL, 0, 0, NULL, NULL);
-INSERT INTO `t_sys_code` VALUES (165, '7', '1月', 158, 7, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (162, '4', '4天', 158, 4, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (163, '5', '5天', 158, 5, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (164, '6', '6天', 158, 6, NULL, 0, 0, NULL, NULL);
+INSERT INTO `t_sys_code` VALUES (165, '7', '7天', 158, 7, NULL, 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (166, 'CUSTOMER_MAINTAIN', '维护设置', 1, 0, '', 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (167, 'CUSTOMER_MAINTAIN_MAINTAIN', '维护', 166, 0, '', 0, 0, NULL, NULL);
 INSERT INTO `t_sys_code` VALUES (168, '0', '手动', 167, 0, '', 0, 0, NULL, NULL);
@@ -883,32 +732,14 @@ CREATE TABLE `t_user`  (
   UNIQUE INDEX `login_name`(`login_name`) USING BTREE,
   UNIQUE INDEX `phone`(`phone`) USING BTREE,
   UNIQUE INDEX `wx_id`(`wx_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, '15123815032', '7c4a8d09ca3762af61e59520943dc26494f8941b', 15123815032, 'ttt', 'ttt', '/xxx/pic.jpg', 0, 20100101, NULL, 0.00, 20181021175641, 'fffff', 'aaaaaaaaaaaaaa', 'wx_id', '2661f2cac9754c98873aa9ce431b8012', 1, NULL, 0, 15, 20181021155201, 20181213230911);
-INSERT INTO `t_user` VALUES (3, '13658327483', '7c4a8d09ca3762af61e59520943dc26494f8941b', 13658327483, NULL, '蓝天', 'https://wx.qlogo.cn/mmopen/vi_32/icGYw95jPibIboG9OAoniboicLVM6W1SCHiaWsaNTe1pMCxicGAVKu9OyMiavJwicdLFgRwTPoEULORWXMkick6xL04ngFA/132', NULL, NULL, NULL, 0.00, 20181221154537, '333', '444', 'oJUjE5JqZpGAJhkdodFeHq81NuaI', 'c19c430d09f94defa5f7848d4bc25d57', 1, 'iK9DatACA/m0kG7GIZ3ohg==', 0, 3263, 20181126150058, 20181229142127);
-INSERT INTO `t_user` VALUES (4, 'oJUjE5D5EPE9HyLrsknXwwxjq5Po', '0', NULL, 'aad', '遮不住的眼', 'https://wx.qlogo.cn/mmopen/vi_32/icGYw95jPibIboG9OAoniboicLVM6W1SCHiaWsaNTe1pMCxicGAVKu9OyMiavJwicdLFgRwTPoEULORWXMkick6xL04ngFA/132', 0, 20180901, NULL, 0.00, NULL, '333', '444', 'oJUjE5D5EPE9HyLrsknXwwxjq5Po', 'b43e079cc01c463d83d7ca47aca3e4f4', 0, 'TX24K7Xf/vSpQZwoZVygUQ==', 0, 14, 20181201204219, 20181229142200);
-INSERT INTO `t_user` VALUES (5, '13983100194', '0', 13983100194, NULL, '物随缘我', 'https://wx.qlogo.cn/mmopen/vi_32/Uj8UYOic8oKZRrvBYFMU418vt94CP310Q5r1k2VB4JOOlUjYPOeDjdTyVkO9nwesaJDNdAib6C2sQ8siarxibWNS4A/132', NULL, NULL, NULL, 0.00, 20181218115031, NULL, NULL, 'oJUjE5OAaBvVxkvgF8JSanMk20Y8', '921cda5e87644addaaa8b8eaf8387383', 1, 'C/X+lOWwvikA4Z/BsJrrPA==', 0, 27, 20181218114939, 20181227151821);
-
--- ----------------------------
--- Table structure for t_user_customer
--- ----------------------------
-DROP TABLE IF EXISTS `t_user_customer`;
-CREATE TABLE `t_user_customer`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-  `customer_id` bigint(20) NOT NULL COMMENT '客户ID',
-  `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
-  `is_delete` int(1) NOT NULL DEFAULT 0 COMMENT '是否删除（0:未删除 1:已删除）',
-  `version` int(11) NOT NULL DEFAULT 0 COMMENT '版本号',
-  `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `user_id`(`user_id`, `customer_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 客户 关联' ROW_FORMAT = Compact;
+INSERT INTO `t_user` VALUES (9, '15123815032', '0', 15123815032, NULL, '遮不住的眼', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epz6CO3m7cUvNxIkibSMYO3LqyIIZrJLeA1wUSNcQKPkxCswIFficatmc1CeaCdjRUgHy7bUYJAefvg/132', NULL, NULL, NULL, 0.00, 20190130101550, NULL, NULL, 'oJUjE5D5EPE9HyLrsknXwwxjq5Po', 'd9d3792d2bd348658c321c9a47fda2e5', 1, 'QMPZ7/d2YUFKCnuYuugpkQ==', 0, 18, 20190110203901, 20190130101600);
+INSERT INTO `t_user` VALUES (10, '13983100194', '0', 13983100194, NULL, '物随缘我', 'https://wx.qlogo.cn/mmopen/vi_32/Uj8UYOic8oKZRrvBYFMU418vt94CP310Q5r1k2VB4JOOlUjYPOeDjdTyVkO9nwesaJDNdAib6C2sQ8siarxibWNS4A/132', NULL, NULL, NULL, 0.00, 20190117163448, NULL, NULL, 'oJUjE5OAaBvVxkvgF8JSanMk20Y8', '8b1c0779f8804dedb6411576e8491adc', 1, 'OhoIT5QmSDeLaOWNn9eZvw==', 0, 51, 20190110204003, 20190124113506);
+INSERT INTO `t_user` VALUES (11, '13658327483', '0', 13658327483, 'sdsdd', '蓝天', 'https://wx.qlogo.cn/mmopen/vi_32/icGYw95jPibIboG9OAoniboicLVM6W1SCHiaWsaNTe1pMCxicGAVKu9OyMiavJwicdLFgRwTPoEULORWXMkick6xL04ngFA/132', 0, NULL, NULL, 0.00, 20190117165102, NULL, NULL, 'oJUjE5JqZpGAJhkdodFeHq81NuaI', 'fcbe3ff96aad44d59eec666d4b3d357f', 1, 'Ph6KGgqyGFsTaFrWAZaAkA==', 0, 186, 20190110205347, 20190130192652);
 
 -- ----------------------------
 -- Table structure for t_user_hobby
@@ -925,13 +756,7 @@ CREATE TABLE `t_user_hobby`  (
   `create_time` bigint(14) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 兴趣爱好' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of t_user_hobby
--- ----------------------------
-INSERT INTO `t_user_hobby` VALUES (1, 1, '1', '1,3', '4', 0, 0, 20181206225706, NULL);
-INSERT INTO `t_user_hobby` VALUES (2, 3, '6,14,18', '4,6,7', '2,3', 0, 2, 20181208231443, 20181223213255);
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 兴趣爱好' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_user_job
@@ -954,13 +779,12 @@ CREATE TABLE `t_user_job`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `is_delete`(`is_delete`, `user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 工作' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 工作' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_user_job
 -- ----------------------------
-INSERT INTO `t_user_job` VALUES (1, 4, 2, 'asdf', NULL, 2, NULL, NULL, NULL, 'adfad', 0, 4, 20181208223635, 20181229142200);
-INSERT INTO `t_user_job` VALUES (3, 1, 1, '33', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 20181211204554, 20181213230911);
+INSERT INTO `t_user_job` VALUES (11, 11, 3, NULL, NULL, 1, NULL, NULL, NULL, NULL, 0, 1, 20190112203035, 20190112203323);
 
 -- ----------------------------
 -- Table structure for t_user_maintain
@@ -999,15 +823,21 @@ CREATE TABLE `t_user_remind`  (
   `update_time` bigint(14) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `is_delete`(`is_delete`, `user_id`, `advance_date`, `type`, `type_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 提醒' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户 提醒' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of t_user_remind
 -- ----------------------------
-INSERT INTO `t_user_remind` VALUES (1, 1, 3, 4, 20181229, 3, 20190101, 0, 0, NULL, NULL);
-INSERT INTO `t_user_remind` VALUES (2, 1, 3, 2, 20181229, 3, 20190101, 0, 0, NULL, NULL);
-INSERT INTO `t_user_remind` VALUES (3, 1, 3, 5, 20181229, 3, 20190101, 0, 0, NULL, NULL);
-INSERT INTO `t_user_remind` VALUES (4, 1, 4, 1, 20181229, 3, 20190101, 0, 0, NULL, NULL);
-INSERT INTO `t_user_remind` VALUES (5, 1, 2, 28, 20181229, 4, 20190102, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (1, 11, 1, 85, 20190131, 0, 20190131, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (2, 10, 1, 75, 20190131, 3, 20190203, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (3, 11, 1, 84, 20190201, 1, 20190202, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (4, 10, 1, 75, 20190201, 2, 20190203, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (5, 10, 1, 80, 20190201, 3, 20190204, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (6, 11, 1, 84, 20190202, 0, 20190202, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (7, 10, 1, 75, 20190202, 1, 20190203, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (8, 10, 1, 80, 20190202, 2, 20190204, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (9, 10, 1, 75, 20190203, 0, 20190203, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (10, 10, 1, 80, 20190203, 1, 20190204, 0, 0, NULL, NULL);
+INSERT INTO `t_user_remind` VALUES (11, 10, 1, 80, 20190204, 0, 20190204, 0, 0, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

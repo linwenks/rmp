@@ -123,12 +123,29 @@ define({ "api": [
             "field": "customerBean.id",
             "description": "<p>ID</p>"
           }
+        ],
+        "UserRemindBean": [
+          {
+            "group": "UserRemindBean",
+            "type": "Object",
+            "optional": false,
+            "field": "userRemindBean",
+            "description": "<p>用户提醒 bean</p>"
+          },
+          {
+            "group": "UserRemindBean",
+            "type": "Integer",
+            "optional": true,
+            "field": "userRemindBean.advanceDate",
+            "defaultValue": "当前时间",
+            "description": "<p>提前时间 yyyyMMdd</p>"
+          }
         ]
       },
       "examples": [
         {
           "title": "请求-示例: ",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"id\":2}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"customerBean\":{\"id\":2},\"userRemindBean\":{\"advanceDate\":20190131}}",
           "type": "json"
         }
       ]
@@ -198,13 +215,20 @@ define({ "api": [
             "optional": false,
             "field": "customerDetailBean",
             "description": "<p>客户 明细 bean</p>"
+          },
+          {
+            "group": "data",
+            "type": "List",
+            "optional": false,
+            "field": "beanuserRemindBeanList",
+            "description": "<p>客户 提醒 bean</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "成功返回-示例:",
-          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"office\":\"xxxxxxx\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\",\"vip\":0},\"customerDetailBean\":{\"remark\":\"xxxxxxxxxTTT\"}}}",
+          "content": "{\"header\":{\"token\":\"2661f2cac9754c98873aa9ce431b8012\"},\"msgs\":[],\"msg\":{},\"state\":\"0\",\"data\":{\"userRemindBeanList\":[{\"content\":\"客户生日\",\"customerBean\":{\"id\":62,\"realName\":\"ttt\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\"},\"advanceDay\":4,\"remindDate\":20190113},{\"content\":\"客户生日\",\"customerBean\":{\"id\":62,\"realName\":\"ttt\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\"},\"advanceDay\":3,\"remindDate\":20190113},{\"content\":\"客户生日\",\"customerBean\":{\"id\":62,\"realName\":\"ttt\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\"},\"advanceDay\":2,\"remindDate\":20190113},{\"content\":\"客户生日\",\"customerBean\":{\"id\":62,\"realName\":\"ttt\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\"},\"advanceDay\":1,\"remindDate\":20190113},{\"content\":\"客户生日\",\"customerBean\":{\"id\":62,\"realName\":\"ttt\",\"sex\":0,\"headPic\":\"/xxx/pic.jpg\"},\"advanceDay\":0,\"remindDate\":20190113}],\"customerHobbyBean\":{\"interestKeyList\":[\"1\"],\"dietKeyList\":[\"1\",\"3\"],\"tasteKeyList\":[\"4\"],\"interestValueList\":[\"美食\"],\"dietValueList\":[\"川湘菜\",\"粤菜\"],\"tasteValueList\":[\"苦\"],\"interest\":\"1\",\"diet\":\"1,3\",\"taste\":\"4\"},\"customerFamilyBeanList\":[{\"areaNameAll\":\"江苏省泰州市\",\"relationshipValue\":\"母亲\",\"id\":2,\"relationship\":2,\"realName\":\"xxx\",\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\"}],\"customerMemorialDayBeanList\":[{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":2,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1},{\"occurTypeValue\":\"1次\",\"advanceTypeValue\":\"1天\",\"id\":1,\"name\":\"ttttt2\",\"occurType\":1,\"occurDate\":20181030,\"advanceType\":1}],\"customerJobBean\":{\"areaNameAll\":\"江苏省泰州市\",\"industryValue\":\"互联网/电子商务/网游\",\"positionValue\":\"IT管理\",\"industry\":2,\"companyName\":\"aaaa\",\"departmentName\":\"bbb\",\"position\":3,\"office\":\"xxxxxxx\",\"phone\":15111111111,\"area\":\"重庆市九龙坡区\",\"address\":\"aaaaaaaaaaaaaa\"},\"customerProblemBean\":{\"healthKeyList\":[\"1\"],\"lifeKeyList\":[\"1\",\"3\"],\"healthValueList\":[\"心脏病\"],\"lifeValueList\":[\"资金缺乏\",\"事业发展\"],\"health\":\"1\",\"life\":\"1,3\",\"remark\":\"xxxxxxxxxTTT\"},\"customerRelationBean\":{\"relationshipValue\":\"其他\",\"intimacyValue\":\"不详\",\"importanceValue\":\"不重要\",\"relationship\":0,\"intimacy\":0,\"importance\":0},\"customerBean\":{\"areaNameAll\":\"江苏省泰州市\",\"realName\":\"ss\",\"phone\":15111111112,\"sex\":1,\"birthday\":20100101,\"birthdayStr\":\"2010-01-01\",\"headPic\":\"https://img.rmp.com/img/head_pic/default.jpg\",\"area\":\"重庆市九龙坡区\",\"address\":\"ttt\",\"vip\":0},\"customerDetailBean\":{\"remark\":\"xxxxxxxxxTTT\"}}}",
           "type": "json"
         }
       ]

@@ -244,8 +244,11 @@ public class CustomerController extends BaseApiController {
      * @apiParam (CustomerBean) {Object} customerBean 客户 bean
      * @apiParam (CustomerBean) {Long} customerBean.id ID
      * 
+     * @apiParam (UserRemindBean) {Object} userRemindBean 用户提醒 bean
+     * @apiParam (UserRemindBean) {Integer} [userRemindBean.advanceDate=当前时间] 提前时间 yyyyMMdd
+     * 
      * @apiParamExample {json} 请求-示例: 
-     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":2}}
+     *		{"header":{"token":"2661f2cac9754c98873aa9ce431b8012"},"customerBean":{"id":2},"userRemindBean":{"advanceDate":20190131}}
      * 
      * @apiSuccess (data) {Object} customerBean 客户 bean
      * @apiSuccess (data) {Object} customerJobBean 客户 工作 bean
@@ -266,6 +269,7 @@ public class CustomerController extends BaseApiController {
 	public RespBean get(@RequestBody String body, HttpServletRequest request, HttpServletResponse response) {
 		ReqBean reqBean = ReqUtil.buildCheckLogin(body, request);
 		CustomerBean customerBean = reqBean.getCustomerBean();
+		UserRemindBean userRemindBean = reqBean.getUserRemindBean();
 		if (customerBean == null) AppException.toThrow(MSG_00003);
 		Long id = customerBean.getId();
 		if (id == null) AppException.toThrow(MSG_00003);
@@ -296,10 +300,13 @@ public class CustomerController extends BaseApiController {
 		
 		Date nowDate = DateUtil.now();
 		Integer ymd = Integer.valueOf(DateUtil.formatDate(nowDate, DateUtil.yyyyMMdd));
+		if (userRemindBean != null && userRemindBean.getAdvanceDate() != null) {
+			ymd = userRemindBean.getAdvanceDate();
+		}
 		
 		// 提醒
-		UserRemindBean userRemindBean = UserRemindBean.builder().advanceDate(ymd).userId(UserUtil.getCurrentUserId(request)).customerId(id).build();
-		List<UserRemindBean> userRemindBeanListTmp = userRemindService.selectListCustom(null, userRemindBean);
+		UserRemindBean userRemindBeanTmp = UserRemindBean.builder().advanceDate(ymd).userId(UserUtil.getCurrentUserId(request)).customerId(id).build();
+		List<UserRemindBean> userRemindBeanListTmp = userRemindService.selectListCustom(null, userRemindBeanTmp);
 		if (!CollectionUtils.isEmpty(userRemindBeanListTmp)) {
 			userRemindBeanListTmp.forEach(bean -> {
 				bean.setAdvanceDate(null);

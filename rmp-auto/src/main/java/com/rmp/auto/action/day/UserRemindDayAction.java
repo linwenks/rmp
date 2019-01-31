@@ -32,7 +32,7 @@ public class UserRemindDayAction extends BaseAction {
 		userRemindService.exe("insertBy1ToWNow", UserRemindBean.builder().advanceDate(ymd1).build());
 		*/
 		
-		int maxDay = 6;
+		int maxDay = 13;
 		
 		for (int i=0; i<=maxDay; i++) {
 			

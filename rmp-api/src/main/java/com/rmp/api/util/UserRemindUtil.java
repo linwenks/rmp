@@ -12,6 +12,8 @@ public class UserRemindUtil {
 			if (bean.getAdvanceDay() != null) {
 				String advanceDayStr = bean.getAdvanceDay().toString() + "天后";
 				switch (bean.getAdvanceDay()) {
+				case 0:
+					advanceDayStr = "今天"; break;
 				case 1:
 					advanceDayStr = "明天"; break;
 				case 2:

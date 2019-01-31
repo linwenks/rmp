@@ -274,7 +274,10 @@ public class CustomerController extends BaseApiController {
 		Long id = customerBean.getId();
 		if (id == null) AppException.toThrow(MSG_00003);
 		
-		CustomerBean customerBeanTmp = customerService.selectById(id);
+		Long userId = UserUtil.getCurrentUserId(request);
+		
+		CustomerBean customerBeanTmp = CustomerBean.builder().id(id).userId(userId).build();
+		customerBeanTmp = customerService.selectOne(customerBeanTmp);
 		if (customerBeanTmp == null) AppException.toThrow(MSG_00003);
 		
 		CustomerJobBean customerJobBeanResult = null;

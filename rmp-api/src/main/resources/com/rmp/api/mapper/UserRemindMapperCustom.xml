@@ -80,7 +80,7 @@
 		
 		select 
 			advance_date, advance_day, remind_date, c_id, c_real_name, c_sex, c_head_pic, cr_relationship, 
-			GROUP_CONCAT(content ORDER BY content DESC ) content
+			GROUP_CONCAT(DISTINCT content ORDER BY content DESC ) content
 			
 		from (
 		

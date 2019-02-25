@@ -113,6 +113,7 @@
 				cr.relationship cr_relationship,
 				CONCAT(
 					(CASE 
+						<!-- 
 						WHEN cf.relationship = 1 THEN '家人'
 						WHEN cf.relationship = 2 THEN '亲戚' 
 						WHEN cf.relationship = 3 THEN '朋友' 
@@ -121,6 +122,13 @@
 						WHEN cf.relationship = 6 THEN '客户'
 						WHEN cf.relationship = 7 THEN '熟人'
 						WHEN cf.relationship = 8 THEN '陌生人'
+						 -->
+						WHEN cf.relationship = 1 THEN '父亲'
+						WHEN cf.relationship = 2 THEN '母亲'
+						WHEN cf.relationship = 3 THEN '老公'
+						WHEN cf.relationship = 4 THEN '老婆'
+						WHEN cf.relationship = 5 THEN '儿子'
+						WHEN cf.relationship = 6 THEN '女儿'
 						ELSE '其他'
 					END), '生日') content
 			FROM t_user_remind ur

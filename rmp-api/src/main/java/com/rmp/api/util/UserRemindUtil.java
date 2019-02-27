@@ -24,7 +24,7 @@ public class UserRemindUtil {
 				bean.setAdvanceDayStr(advanceDayStr);
 			}
 			if (bean.getRemindDate() != null) {
-				bean.setRemindDateStr(DateUtil.formatDate(DateUtil.parseDate(bean.getRemindDate().toString(), DateUtil.yyyyMMdd)));
+				bean.setRemindDateStr(DateUtil.formatDate(DateUtil.parseDate(bean.getRemindDate().toString(), DateUtil.YYYY_MM_DD)));
 			}
 			CustomerUtil.assembly(bean.getCustomerBean());
 		}

@@ -60,6 +60,7 @@ public class UserRemindController extends BaseApiController {
 	 * @apiSuccess (data) {Integer} userRemindBeanList.advanceDay 提前 天 
 	 * @apiSuccess (data) {Integer} userRemindBeanList.advanceDayStr 提前 天
 	 * @apiSuccess (data) {Integer} userRemindBeanList.remindDate 提醒 时间 yyyyMMdd
+	 * @apiSuccess (data) {String} userRemindBeanList.remindDateStr 提醒 时间 yyyy-MM-dd
 	 * @apiSuccess (data) {String} userRemindBeanList.content 内容
 	 * @apiSuccess (data) {Object} userRemindBeanList.customerBean 客户 bean
 	 * @apiSuccess (data) {String} userRemindBeanList.customerRelationBean 客户关系 bean

@@ -23,6 +23,7 @@ import com.rmp.api.base.util.RespUtil;
 import com.rmp.api.model.UserRemindBean;
 import com.rmp.api.service.user.UserRemindService;
 import com.rmp.api.util.CustomerRelationUtil;
+import com.rmp.api.util.UserRemindUtil;
 import com.rmp.api.util.UserUtil;
 
 /**
@@ -77,6 +78,7 @@ public class UserRemindController extends BaseApiController {
 		if (!CollectionUtils.isEmpty(userRemindBeanListTmp)) {
 			userRemindBeanListTmp.forEach(bean -> {
 				bean.setAdvanceDate(null);
+				UserRemindUtil.assembly(bean);
 				CustomerRelationUtil.assembly(bean.getCustomerRelationBean());
 			});
 		}

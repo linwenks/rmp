@@ -57,6 +57,16 @@
 	    </if>
 	</sql>
 	
+	<sql id="crAnd">
+		<if test="userRemindBean != null" >
+		    <if test="userRemindBean.customerRelationBean != null" >
+				<if test="userRemindBean.customerRelationBean.importance != null and userRemindBean.customerRelationBean.importance == 1" >
+					and cr.importance in (1, 2)
+			    </if>
+		    </if>
+	    </if>
+	</sql>
+	
 	<sql id="where">
 		<if test="userRemindBean != null" >
 			<if test="userRemindBean.userId != null" >
@@ -67,11 +77,6 @@
 		    </if>
 		    <if test="userRemindBean.advanceDate != null" >
 				and ur.advance_date = #{userRemindBean.advanceDate}
-		    </if>
-		    <if test="userRemindBean.customerRelationBean != null" >
-				<if test="userRemindBean.customerRelationBean.importance != null" >
-					and cr.importance = #{userRemindBean.customerRelationBean.importance}
-			    </if>
 		    </if>
 	    </if>
 	</sql>
@@ -100,6 +105,7 @@
 			AND c.is_delete = 0
 			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
+			<include refid="crWhere" />
 			
 			WHERE ur.is_delete = 0
 			AND ur.type = 1
@@ -140,6 +146,7 @@
 			AND c.is_delete = 0
 			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
+			<include refid="crWhere" />
 			
 			WHERE ur.is_delete = 0 
 			AND ur.type = 2
@@ -160,6 +167,7 @@
 			AND c.is_delete = 0
 			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
+			<include refid="crWhere" />
 			
 			WHERE ur.is_delete = 0
 			AND ur.type = 3

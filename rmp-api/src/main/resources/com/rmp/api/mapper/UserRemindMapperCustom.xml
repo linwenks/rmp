@@ -105,7 +105,7 @@
 			AND c.is_delete = 0
 			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
-			<include refid="crWhere" />
+			<include refid="crAnd" />
 			
 			WHERE ur.is_delete = 0
 			AND ur.type = 1
@@ -146,7 +146,7 @@
 			AND c.is_delete = 0
 			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
-			<include refid="crWhere" />
+			<include refid="crAnd" />
 			
 			WHERE ur.is_delete = 0 
 			AND ur.type = 2
@@ -167,7 +167,7 @@
 			AND c.is_delete = 0
 			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
-			<include refid="crWhere" />
+			<include refid="crAnd" />
 			
 			WHERE ur.is_delete = 0
 			AND ur.type = 3

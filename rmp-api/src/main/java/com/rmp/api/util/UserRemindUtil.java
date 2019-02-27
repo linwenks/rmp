@@ -17,7 +17,7 @@ public class UserRemindUtil {
 				case 1:
 					advanceDayStr = "明天"; break;
 				case 2:
-					advanceDayStr = "后台"; break;
+					advanceDayStr = "后天"; break;
 				default:
 					break;
 				}

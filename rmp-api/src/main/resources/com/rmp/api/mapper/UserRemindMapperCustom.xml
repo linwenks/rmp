@@ -57,16 +57,6 @@
 	    </if>
 	</sql>
 	
-	<sql id="crAnd">
-		<if test="userRemindBean != null" >
-		    <if test="userRemindBean.customerRelationBean != null" >
-				<if test="userRemindBean.customerRelationBean.importance != null and userRemindBean.customerRelationBean.importance == 1" >
-					and cr.importance in (1, 2)
-			    </if>
-		    </if>
-	    </if>
-	</sql>
-	
 	<sql id="where">
 		<if test="userRemindBean != null" >
 			<if test="userRemindBean.userId != null" >
@@ -77,6 +67,11 @@
 		    </if>
 		    <if test="userRemindBean.advanceDate != null" >
 				and ur.advance_date = #{userRemindBean.advanceDate}
+		    </if>
+		    <if test="userRemindBean.customerRelationBean != null" >
+				<if test="userRemindBean.customerRelationBean.importance != null and userRemindBean.customerRelationBean.importance = 1" >
+					and cr.importance in (1, 2)
+			    </if>
 		    </if>
 	    </if>
 	</sql>
@@ -103,9 +98,8 @@
 			AND cmd.is_delete = 0
 			INNER JOIN t_customer c ON cmd.customer_id = c.id 
 			AND c.is_delete = 0
-			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
+			INNER JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
-			<include refid="crAnd" />
 			
 			WHERE ur.is_delete = 0
 			AND ur.type = 1
@@ -119,16 +113,6 @@
 				cr.relationship cr_relationship,
 				CONCAT(
 					(CASE 
-						<!-- 
-						WHEN cf.relationship = 1 THEN '家人'
-						WHEN cf.relationship = 2 THEN '亲戚' 
-						WHEN cf.relationship = 3 THEN '朋友' 
-						WHEN cf.relationship = 4 THEN '同学'
-						WHEN cf.relationship = 5 THEN '同事'
-						WHEN cf.relationship = 6 THEN '客户'
-						WHEN cf.relationship = 7 THEN '熟人'
-						WHEN cf.relationship = 8 THEN '陌生人'
-						 -->
 						WHEN cf.relationship = 1 THEN '父亲'
 						WHEN cf.relationship = 2 THEN '母亲'
 						WHEN cf.relationship = 3 THEN '老公'
@@ -144,9 +128,8 @@
 			AND cf.is_delete = 0
 			INNER JOIN t_customer c ON cf.customer_id = c.id 
 			AND c.is_delete = 0
-			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
+			INNER JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
-			<include refid="crAnd" />
 			
 			WHERE ur.is_delete = 0 
 			AND ur.type = 2
@@ -165,9 +148,8 @@
 			AND u.is_delete = 0
 			INNER JOIN t_customer c ON ur.type_id = c.id 
 			AND c.is_delete = 0
-			LEFT JOIN t_customer_relation cr ON cr.customer_id = c.id 
+			INNER JOIN t_customer_relation cr ON cr.customer_id = c.id 
 			AND cr.is_delete = 0 
-			<include refid="crAnd" />
 			
 			WHERE ur.is_delete = 0
 			AND ur.type = 3

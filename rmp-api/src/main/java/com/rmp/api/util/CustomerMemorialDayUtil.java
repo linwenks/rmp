@@ -66,10 +66,10 @@ public class CustomerMemorialDayUtil {
 					if (occurDate.length() == 3) {
 						occurDate = "0" + occurDate;
 					}
-					bean.setOccurDateStr(DateUtil.formatDate(DateUtil.parseDate(occurDate, DateUtil.MMdd), "MM-dd"));
+					bean.setOccurDateStr("每年" + DateUtil.formatDate(DateUtil.parseDate(occurDate, DateUtil.MMdd), "MM月dd号"));
 					break;
 				case 3:
-					bean.setOccurDateStr(bean.getOccurDate().toString() + "号");
+					bean.setOccurDateStr("每月" + bean.getOccurDate().toString() + "号");
 					break;
 				case 4:
 					String occurDateStr = "";

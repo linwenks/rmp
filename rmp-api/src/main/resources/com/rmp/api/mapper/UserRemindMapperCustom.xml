@@ -154,7 +154,7 @@
 				c.id c_id, c.real_name c_real_name, c.sex c_sex, c.head_pic c_head_pic,
 				cr.relationship cr_relationship,
 				
-				'客户生日' content
+				'生日' content
 			FROM t_user_remind ur
 			INNER JOIN t_user u ON ur.user_id = u.id 
 			AND u.is_delete = 0

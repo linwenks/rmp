@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="rmp-api" />
+        <module name="rmp-info" />
+        <module name="rmp-auto" />
+        <module name="rmp-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rmp" target="1.5" />
+      <module name="rmp-api" target="1.8" />
+      <module name="rmp-auto" target="1.8" />
+      <module name="rmp-common" target="1.8" />
+      <module name="rmp-info" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="rmp-api" options="" />
+      <module name="rmp-auto" options="" />
+      <module name="rmp-common" options="" />
+      <module name="rmp-info" options="" />
+    </option>
+  </component>
+</project>

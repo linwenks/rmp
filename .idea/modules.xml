@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/rmp.iml" filepath="$PROJECT_DIR$/.idea/rmp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rmp-api/rmp-api.iml" filepath="$PROJECT_DIR$/rmp-api/rmp-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rmp-auto/rmp-auto.iml" filepath="$PROJECT_DIR$/rmp-auto/rmp-auto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rmp-common/rmp-common.iml" filepath="$PROJECT_DIR$/rmp-common/rmp-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rmp-info/rmp-info.iml" filepath="$PROJECT_DIR$/rmp-info/rmp-info.iml" />
+    </modules>
+  </component>
+</project>

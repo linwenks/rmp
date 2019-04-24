@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rmp-api:war">
+    <output-path>$PROJECT_DIR$/rmp-api/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>rmp-api</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="rmp-api.war">
+      <element id="artifact" artifact-name="rmp-api:war exploded" />
+    </root>
+  </artifact>
+</component>
